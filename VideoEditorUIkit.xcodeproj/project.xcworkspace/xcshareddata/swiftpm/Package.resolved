@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "alertviewlibrary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mishadovhiy/AlertViewLibrary.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "991da9768c3a8c5fccb804e737fc6e9aaed1bd6e"
+      }
+    }
+  ],
+  "version" : 2
+}
