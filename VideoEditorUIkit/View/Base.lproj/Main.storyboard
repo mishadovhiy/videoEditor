@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1v4-XW-9vK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -23,14 +23,14 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edh-8b-fwE">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="639"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="579"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gE9-Tm-aj5">
-                                        <rect key="frame" x="0.0" y="639" width="393" height="120"/>
+                                        <rect key="frame" x="0.0" y="579" width="393" height="180"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="fFr-yg-xjT"/>
+                                            <constraint firstAttribute="height" constant="180" id="fFr-yg-xjT"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -82,23 +82,22 @@
         <!--Asset Parameters View Controller-->
         <scene sceneID="GGf-ZY-vNf">
             <objects>
-                <viewController id="1v4-XW-9vK" customClass="AssetParametersViewController" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="stC-ce-Uon">
+                <viewController storyboardIdentifier="AssetParametersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1v4-XW-9vK" customClass="AssetParametersViewController" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="stC-ce-Uon">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVM-3e-oMH">
-                                <rect key="frame" x="0.0" y="59" width="393" height="50"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVM-3e-oMH">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="moI-58-shw">
-                                        <rect key="frame" x="0.0" y="0.0" width="3000" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="moI-58-shw">
+                                        <rect key="frame" x="0.0" y="0.0" width="3000" height="759"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-Wo-oGa">
-                                                <rect key="frame" x="0.0" y="0.0" width="3000" height="50"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-Wo-oGa">
+                                                <rect key="frame" x="0.0" y="0.0" width="3000" height="759"/>
                                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="3000" id="BLa-L3-yGK"/>
-                                                    <constraint firstAttribute="height" constant="50" id="DzK-3e-CZc"/>
+                                                    <constraint firstAttribute="width" constant="3000" identifier="collectionWidth" id="BLa-L3-yGK"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h9I-Te-nn5">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -108,7 +107,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TestCollectionCell" id="ITN-L0-hrL" customClass="AssetPreviewCell" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                        <rect key="frame" x="50" y="-39" width="128" height="128"/>
+                                                        <rect key="frame" x="50" y="0.0" width="128" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dMn-as-j26">
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -118,19 +117,16 @@
                                                     </collectionViewCell>
                                                 </cells>
                                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pe8-7F-9ia">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="759"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </collectionReusableView>
                                             </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" name="AccentColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="3000" id="tfZ-MG-Dic"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="moI-58-shw" firstAttribute="top" secondItem="zXy-2S-qFn" secondAttribute="top" id="TKi-nf-see"/>
+                                    <constraint firstItem="moI-58-shw" firstAttribute="top" secondItem="zXy-2S-qFn" secondAttribute="top" id="UIf-co-IAx"/>
                                     <constraint firstAttribute="trailing" secondItem="moI-58-shw" secondAttribute="trailing" id="paa-Qq-w6k"/>
                                     <constraint firstItem="moI-58-shw" firstAttribute="leading" secondItem="bVM-3e-oMH" secondAttribute="leading" id="tQH-jI-xGr"/>
                                 </constraints>
@@ -141,11 +137,9 @@
                         <viewLayoutGuide key="safeArea" id="pYH-p5-GUP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pYH-p5-GUP" firstAttribute="bottom" secondItem="bVM-3e-oMH" secondAttribute="bottom" id="1rp-Px-rh3"/>
-                            <constraint firstItem="bVM-3e-oMH" firstAttribute="top" secondItem="pYH-p5-GUP" secondAttribute="top" id="Ago-Ah-d99"/>
-                            <constraint firstItem="bVM-3e-oMH" firstAttribute="bottom" secondItem="pYH-p5-GUP" secondAttribute="bottom" id="UBH-t6-h7u"/>
-                            <constraint firstItem="pYH-p5-GUP" firstAttribute="bottom" secondItem="moI-58-shw" secondAttribute="bottom" id="bDc-yb-u7B"/>
-                            <constraint firstItem="bVM-3e-oMH" firstAttribute="top" secondItem="pYH-p5-GUP" secondAttribute="top" id="dDN-GU-VGS"/>
+                            <constraint firstItem="pYH-p5-GUP" firstAttribute="bottom" secondItem="moI-58-shw" secondAttribute="bottom" id="4xw-SK-CHx"/>
+                            <constraint firstItem="pYH-p5-GUP" firstAttribute="bottom" secondItem="bVM-3e-oMH" secondAttribute="bottom" id="coH-b2-8pt"/>
+                            <constraint firstItem="bVM-3e-oMH" firstAttribute="top" secondItem="pYH-p5-GUP" secondAttribute="top" id="gh6-XN-r7n"/>
                             <constraint firstItem="bVM-3e-oMH" firstAttribute="leading" secondItem="pYH-p5-GUP" secondAttribute="leading" id="h5b-n1-prX"/>
                             <constraint firstItem="pYH-p5-GUP" firstAttribute="trailing" secondItem="bVM-3e-oMH" secondAttribute="trailing" id="qdj-zh-8np"/>
                         </constraints>
@@ -157,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggo-CO-laL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2307" y="-744"/>
+            <point key="canvasLocation" x="2306.1068702290077" y="-744.36619718309862"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="x7M-ml-Ra7">

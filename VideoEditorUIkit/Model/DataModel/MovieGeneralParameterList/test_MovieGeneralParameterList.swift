@@ -16,9 +16,9 @@ extension MovieGeneralParameterList {
 
 extension [MovieGeneralParameterList.AssetsData] {
     static var test:Self {
-        let mins: [CGFloat] = [2.5, 1.15, 5.54]
+        let mins: [CGFloat] = [2.5, 1.15, 5.54, 5.19, 10.04, 2.90]
         return mins.compactMap({
-            return .init(duration: $0 * 60)
+            return .init(duration: $0 * 60, previews: .init(repeating: .init(), count: .random(in: 15..<50)))
         })
     }
 }
@@ -26,7 +26,7 @@ extension [MovieGeneralParameterList.AssetsData] {
 extension [MovieGeneralParameterList.RegularRow] {
     static var test: Self {
         let data:[(start:CGFloat, duration:CGFloat)] = [
-            (2.40, 100)
+            (2.40, 100), (140, 50), (400, 20)
         ]
         return data.compactMap({
             .init(inMovieStart: $0.start, duration: $0.duration)
@@ -37,7 +37,7 @@ extension [MovieGeneralParameterList.RegularRow] {
 extension [MovieGeneralParameterList.MediaRow] {
     static var test:Self {
         let data:[(start:CGFloat, duration:CGFloat)] = [
-            (20.40, 200.50)
+            (20.40, 200.50), (300.2, 15.2), (400, 100)
         ]
         return data.compactMap({
             .init(inMovieStart: $0.start, duration: $0.duration, type: .random)
@@ -48,7 +48,7 @@ extension [MovieGeneralParameterList.MediaRow] {
 extension [MovieGeneralParameterList.SongRow] {
     static var test: Self {
         let data:[(start:CGFloat, duration:CGFloat)] = [
-            (50, 300.50)
+            (50, 300.50), (500.04, 90), (600, 12.9)
         ]
         return data.compactMap({
             .init(inMovieStart: $0.start, duration: $0.duration)

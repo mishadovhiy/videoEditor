@@ -11,9 +11,9 @@ class AssetParametersViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var assetStackView: UIStackView!
-    @IBOutlet weak var testRowView: UIView!
 
     var assetData:MovieGeneralParameterList = .test
+    static var rowsHeight:CGFloat = 20
     var tableData:[MovieGeneralParameterList.AssetsData] {
         return assetData.asstes
     }
@@ -22,7 +22,16 @@ class AssetParametersViewController: UIViewController {
         super.viewDidLoad()
         loadUI()
     }
+}
+
+extension AssetParametersViewController:AssetAttachmentViewDelegate {
+    func attachmentSelected(_ data: MovieAttachmentProtocol?) {
+        
+    }
     
+    var vc: UIViewController {
+        return self
+    }
 }
 
 

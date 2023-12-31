@@ -29,8 +29,7 @@ extension AssetAttachmentView {
         if let data {
             self.data = data
         }
-        guard let stack = layerStack,
-                let firstView = stack.arrangedSubviews.first else {
+        guard let stack = layerStack else {
             return
         }
         self.data.forEach({
@@ -81,6 +80,6 @@ extension AssetAttachmentView {
         new.data = data
         new.delegate = delegate
         view.addArrangedSubview(new)
-        new.addConstaits([.height:50], superView: view)
+        new.addConstaits([.height:AssetParametersViewController.rowsHeight], superView: view)
     }
 }

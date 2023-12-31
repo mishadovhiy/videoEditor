@@ -105,9 +105,8 @@ fileprivate extension EditorViewController {
 
 
     private func addTracksView() {
-//        let vc = TrackListView(model:viewModel.model ?? .init(), presenter: self)
-//        vc.addToParent(parent: self, toView: trackContainerView)
-//        trackView = vc
+        let vc = AssetParametersViewController.configure()
+        addChild(child: vc, toView: self.trackContainerView)
     }
 }
 

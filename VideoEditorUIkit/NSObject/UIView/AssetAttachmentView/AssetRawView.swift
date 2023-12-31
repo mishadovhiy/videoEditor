@@ -41,17 +41,20 @@ extension AssetRawView {
         new.layer.name = data?.id.uuidString
         superView?.addSubview(new)
         new.addConstaits([.left:data?.inMovieStart ?? 10, .top:0, .bottom:0, .width:data?.duration ?? 10], superView: superView!)
-        
+        new.createHeader(vcSuperView: vcSuperView)
+        new.updateView(data: data, updateConstraints: false)
+    }
+    
+    private func createHeader(vcSuperView:UIView) {
         let headerView = UIView()
         headerView.layer.name = "Header"
-        new.addSubview(headerView)
-        headerView.addConstaits([.left:10, .top:0, .bottom:0, .right:0], superView: new)
+        self.addSubview(headerView)
+        headerView.addConstaits([.left:10, .top:0, .bottom:0, .right:0], superView: self)
         headerView.leadingAnchor.constraint(greaterThanOrEqualTo: vcSuperView.safeAreaLayoutGuide.leadingAnchor).isActive = true
         
         let label:UILabel = .init()
+        label.adjustsFontSizeToFitWidth = true
         headerView.addSubview(label)
         label.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superView: headerView)
-        
-        new.updateView(data: data, updateConstraints: false)
     }
 }

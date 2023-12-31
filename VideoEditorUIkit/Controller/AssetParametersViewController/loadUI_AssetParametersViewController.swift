@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: loadUI
-fileprivate extension AssetParametersViewController {
+extension AssetParametersViewController {
     func loadUI() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -19,12 +19,14 @@ fileprivate extension AssetParametersViewController {
             layout.minimumInteritemSpacing = 0
             layout.sectionInset = UIEdgeInsets.zero
         }
-        collectionView.addConstaits([.width:2000], superView: self.view)
+        collectionView.constraints.first(where: {
+            $0.firstAttribute == .width
+        })!.constant = self.assetData.duration
         view.layer.layoutIfNeeded()
         loadAttachmentsSceletView()
     }
     
-    func loadAttachmentsSceletView() {
+    private func loadAttachmentsSceletView() {
         let data:[[MovieAttachmentProtocol]] = [assetData.media, assetData.text, assetData.songs]
         assetStackView.backgroundColor = .black
         data.forEach({
@@ -33,13 +35,3 @@ fileprivate extension AssetParametersViewController {
     }
 }
 
-extension AssetParametersViewController:AssetAttachmentViewDelegate {
-    func attachmentSelected(_ data: MovieAttachmentProtocol?) {
-        
-    }
-    
-    var vc: UIViewController {
-        return self
-    }
-    
-}
