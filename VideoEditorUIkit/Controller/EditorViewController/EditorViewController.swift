@@ -34,9 +34,7 @@ class EditorViewController: SuperVC {
         let value = Double((sender as? UISlider)?.value ?? 0)
         self.playerVC?.seek(seconds: value * movie.duration.seconds)
     }
-    
-    private var trackView:TrackListView?
-    
+        
     private var playerVC:PlayerViewController? {
         return self.children.first(where: {$0 is PlayerViewController}) as? PlayerViewController
     }
@@ -46,7 +44,7 @@ class EditorViewController: SuperVC {
 extension EditorViewController:PlayerViewControllerPresenter {
     func playTimeChanged(_ percent: CGFloat) {
         print("EditorViewControllerpercent")
-        trackView?.performScroll(percent: percent)
+      //  trackView?.performScroll(percent: percent)
         self.progressSlider.value = Float(percent)
     }
     
@@ -107,9 +105,9 @@ fileprivate extension EditorViewController {
 
 
     private func addTracksView() {
-        let vc = TrackListView(model:viewModel.model ?? .init(), presenter: self)
-        vc.addToParent(parent: self, toView: trackContainerView)
-        trackView = vc
+//        let vc = TrackListView(model:viewModel.model ?? .init(), presenter: self)
+//        vc.addToParent(parent: self, toView: trackContainerView)
+//        trackView = vc
     }
 }
 
