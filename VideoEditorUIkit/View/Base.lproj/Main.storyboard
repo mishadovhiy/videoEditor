@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -90,7 +89,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVM-3e-oMH">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="moI-58-shw">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="moI-58-shw">
                                         <rect key="frame" x="0.0" y="0.0" width="3000" height="759"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-Wo-oGa">
@@ -98,6 +97,7 @@
                                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="3000" identifier="collectionWidth" id="BLa-L3-yGK"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="qly-ZY-2Xo"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h9I-Te-nn5">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -122,9 +122,9 @@
                                                 </collectionReusableView>
                                             </collectionView>
                                         </subviews>
-                                        <color key="backgroundColor" name="AccentColor"/>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="moI-58-shw" firstAttribute="top" secondItem="zXy-2S-qFn" secondAttribute="top" id="UIf-co-IAx"/>
                                     <constraint firstAttribute="trailing" secondItem="moI-58-shw" secondAttribute="trailing" id="paa-Qq-w6k"/>
@@ -135,7 +135,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pYH-p5-GUP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pYH-p5-GUP" firstAttribute="bottom" secondItem="moI-58-shw" secondAttribute="bottom" id="4xw-SK-CHx"/>
                             <constraint firstItem="pYH-p5-GUP" firstAttribute="bottom" secondItem="bVM-3e-oMH" secondAttribute="bottom" id="coH-b2-8pt"/>
@@ -213,9 +213,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

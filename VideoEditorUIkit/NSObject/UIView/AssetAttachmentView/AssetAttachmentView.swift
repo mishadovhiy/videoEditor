@@ -41,11 +41,11 @@ extension AssetAttachmentView {
                 (view as! AssetRawView).updateView(data: $0)
                 //check layer
             } else {
-                let toView = stack.arrangedSubviews.first
+                let layer = self.data.layerNumber(item: $0)
+                let toView = stack.arrangedSubviews[layer]
                 AssetRawView.create(superView: toView, data: $0, vcSuperView: delegate!.vc.view)
-                toView?.isHidden = false
+                toView.isHidden = false
             }
-            
         })
     }
 }
@@ -65,6 +65,7 @@ fileprivate extension AssetAttachmentView {
             let view = UIView()
             view.isHidden = true
             layerStack.addArrangedSubview(view)
+            view.addConstaits([.height:AssetParametersViewController.rowsHeight], superView: layerStack)
         }
         self.updateView()
     }
@@ -76,10 +77,10 @@ extension AssetAttachmentView {
     static func create(_ data:[MovieAttachmentProtocol], delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
         print("tgerfwedw")
         let new = AssetAttachmentView.init(frame: .zero)
-        new.backgroundColor = .orange
+        new.backgroundColor = .white.withAlphaComponent(0.1)
         new.data = data
         new.delegate = delegate
         view.addArrangedSubview(new)
-        new.addConstaits([.height:AssetParametersViewController.rowsHeight], superView: view)
+        new.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
     }
 }

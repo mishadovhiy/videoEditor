@@ -49,7 +49,7 @@ extension AssetRawView {
         let headerView = UIView()
         headerView.layer.name = "Header"
         self.addSubview(headerView)
-        headerView.addConstaits([.left:10, .top:0, .bottom:0, .right:0], superView: self)
+        headerView.addConstaits([.left:0, .top:0, .bottom:0, .right:0], superView: self)
         headerView.leadingAnchor.constraint(greaterThanOrEqualTo: vcSuperView.safeAreaLayoutGuide.leadingAnchor).isActive = true
         
         let label:UILabel = .init()

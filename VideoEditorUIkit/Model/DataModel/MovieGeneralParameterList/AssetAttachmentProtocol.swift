@@ -20,6 +20,22 @@ protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
     var id:UUID { get }
 }
 
+extension [MovieAttachmentProtocol] {
+    func layerNumber(item:MovieAttachmentProtocol) -> Int {
+        var at:Int = 0
+        self.forEach {
+            let mainRange = $0.inMovieStart..<($0.duration + $0.inMovieStart)
+            let subRange = item.inMovieStart..<(item.duration + item.inMovieStart)
+            
+            if mainRange.contains(subRange.lowerBound) && mainRange.contains(subRange.upperBound) {
+                at += 1
+            }
+        }
+        print(at, " tregrfwed")
+        return at
+    }
+}
+
 
 //MARK: List
 extension MovieGeneralParameterList {

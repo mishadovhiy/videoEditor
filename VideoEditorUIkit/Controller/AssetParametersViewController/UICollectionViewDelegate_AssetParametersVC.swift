@@ -14,7 +14,11 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("fads count", tableData[section].previews.count)
+        print("erfd dur ", tableData[section].duration)
         return tableData[section].previews.count
+        //Int(tableData[section].duration / 15)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -40,12 +44,14 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
 
 extension AssetParametersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 50, height: 50)
+        let value = tableData[section].duration / 15
+        let width = value - CGFloat(Int(value))
+        return CGSize(width: 1, height: 10)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: tableData[indexPath.section].duration, height: 50)
+        let width = tableData[indexPath.section].duration / CGFloat(tableData[indexPath.section].previews.count)
+        return CGSize(width: width, height: collectionView.frame.height)
     }
     
 }
