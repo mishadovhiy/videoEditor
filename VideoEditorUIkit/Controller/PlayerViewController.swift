@@ -12,7 +12,17 @@ class PlayerViewController: PlayerSuperVC {
     
     override func loadView() {
         super.loadView()
-        addMovieButton()
+        self.loadUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        preseter = nil
+    }
+    
+    override func timeChanged(_ percent: CGFloat) {
+        super.timeChanged(percent)
+        preseter?.playTimeChanged(percent)
     }
     
     @objc fileprivate func addTrackPressed(_ sender:UIButton) {
@@ -21,17 +31,12 @@ class PlayerViewController: PlayerSuperVC {
 }
 
 
-extension PlayerViewController {
-    static func configure(_ presenter:PlayerViewControllerPresenter) -> PlayerViewController {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlayerViewController") as? PlayerViewController ?? .init()
-        vc.preseter = presenter
-        return vc
-    }
-}
-
-
 // MARK: loadUI
 fileprivate extension PlayerViewController {
+    func loadUI() {
+        addMovieButton()
+    }
+    
     private func addMovieButton() {
         if let _ = view.subviews.first(where: {$0.layer.name == "addButton"}) {
             return
@@ -44,5 +49,15 @@ fileprivate extension PlayerViewController {
         button.addConstaits([
             .bottom:10, .left:10
         ], superView: view)
+    }
+}
+
+
+
+extension PlayerViewController {
+    static func configure(_ presenter:PlayerViewControllerPresenter) -> PlayerViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlayerViewController") as? PlayerViewController ?? .init()
+        vc.preseter = presenter
+        return vc
     }
 }

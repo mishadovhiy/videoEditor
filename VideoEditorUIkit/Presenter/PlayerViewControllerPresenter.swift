@@ -9,4 +9,5 @@ import Foundation
 
 protocol PlayerViewControllerPresenter {
     func addTrackPressed()
+    func playTimeChanged(_ percent:CGFloat)
 }

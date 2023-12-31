@@ -9,21 +9,62 @@ import UIKit
 import AVFoundation
 
 class PlayerSuperVC: SuperVC {
-    var movie = AVMutableComposition()
+    var movie:AVMutableComposition! = AVMutableComposition()
+    fileprivate var timeChangeObserver:Any?
+    var isPlaying:Bool = false
     
     override func loadView() {
         super.loadView()
         self.loadUI()
     }
     
-    func play() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        removeAllObservers(delete: true)
+        super.viewDidDisappear(animated)
+        movie = nil
+    }
+    
+    override func applicationDidHide() {
+        super.applicationDidHide()
+        self.pause()
+        removeAllObservers()
+    }
+    
+    override func applicationDidAppeare() {
+        super.applicationDidAppeare()
+        addObservers()
+    }
+    
+    func timeChanged(_ percent:CGFloat) {
+        
+    }
+    
+    
+    func pause() {
+        playerLayer?.player?.pause()
+    }
+    
+    func seek(seconds:TimeInterval) {
+        print(#function)
+        let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        playerLayer?.player?.seek(to: desiredCMTime)
+    }
+    
+    func play(replacing:Bool = true) {
         print(#function)
         let item = AVPlayerItem(asset: movie)
-        if let playerLayer = self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer,
+        if let playerLayer = self.playerLayer,
            let player = playerLayer.player
         {
             print(#function, " start")
-            player.replaceCurrentItem(with: item)
+            if replacing {
+                player.replaceCurrentItem(with: item)
+            }
             player.play()
         } else {
             self.addPlayerView()
@@ -32,7 +73,57 @@ class PlayerSuperVC: SuperVC {
     }
     
     @objc fileprivate func playPressed(_ sender:UIButton) {
-        self.play()
+        if playerLayer == nil {
+            return
+        }
+        if isPlaying {
+            self.pause()
+        } else {
+            self.play(replacing: false)
+        }
+    }
+    
+    private func playerPauseChanged(_ pause:Bool) {
+        let button = view.subviews.first(where: {$0.layer.name == "playButton"}) as? UIButton
+        button?.setTitle(pause ? "resume" : "pause", for: .normal)
+        isPlaying = !pause
+    }
+    
+    private func playTimeChanged(_ sendond:TimeInterval) {
+        print("Current Time: \(sendond)")
+        if sendond == movie.duration.seconds {
+            let playing = self.playerLayer?.player?.rate != 0
+            print("completed ", playing)
+            self.pause()
+            self.seek(seconds: 0)
+        }
+        
+        let percent = sendond / movie.duration.seconds
+        if let line = self.view.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
+            line.strokeEnd = percent
+        }
+        timeChanged(percent)
+    }
+    
+    var playerLayer:AVPlayerLayer? {
+        return self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer
+    }
+
+    
+    func addObservers() {
+        let timeInterval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        self.timeChangeObserver = self.playerLayer?.player?.addPeriodicTimeObserver(forInterval: timeInterval, queue: DispatchQueue.main) { [weak self] time in
+            self?.playTimeChanged(CMTimeGetSeconds(time))
+        }
+    }
+    
+    func removeAllObservers(delete:Bool = true) {
+        if let timeChangeObserver {
+            playerLayer?.player?.removeTimeObserver(timeChangeObserver)
+           // if delete {
+                self.timeChangeObserver = nil
+           // }
+        }
     }
 }
 
@@ -56,9 +147,8 @@ fileprivate extension PlayerSuperVC {
         button.addConstaits([
             .bottom:10, .left:10, .right:10
         ], superView: view)
+        
     }
-    
-    
     
     private func addPlayerView() {
         if let playerLayer = view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer,
@@ -67,11 +157,22 @@ fileprivate extension PlayerSuperVC {
             return
         }
         print(#function)
-        let player = AVPlayer(playerItem: AVPlayerItem(asset: movie))
+        let player = Player(playerItem: AVPlayerItem(asset: movie))
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = view.layer.bounds
         playerLayer.videoGravity = .resizeAspect
         playerLayer.name = "PrimaryPlayer"
+        player.pauseChanged = playerPauseChanged(_:)
         view.layer.addSublayer(playerLayer)
+        
+        view.layer.drawLine([
+            .init(x: 0, y: 0),
+            .init(x: view.frame.width, y: 0)
+        ], color: .red, width: 5, opacity: 1, name: "PlayerViewControllerline")
+        
+        addObservers()
     }
 }
+
+
+

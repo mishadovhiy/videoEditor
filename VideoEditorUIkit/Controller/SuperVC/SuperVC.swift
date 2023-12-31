@@ -6,19 +6,39 @@
 //
 
 import UIKit
-import SwiftUI
 
-class SuperVC:LoaderVC {
-    func addSwiftUIView(_ swiftUIView:some View, height:CGFloat? = nil, toView:UIView? = nil) {
-        let hostingController = UIHostingController(rootView: swiftUIView)
-        self.addChild(child: hostingController, constants: [
-            .left:0, .bottom:0, .right:0, .top:0
-        ], name: "addSwiftUIView", toView: toView)
+class BaseVC:UIViewController {
+    
+    func applicationDidAppeare() {
+        children.forEach({
+            $0.setApplicationState(active: true)
+        })
+        if let vc = presentedViewController {
+            vc.setApplicationState(active: true)
+        }
+    }
+    
+    func applicationDidHide() {
+        children.forEach({
+            $0.setApplicationState(active: false)
+        })
+        if let vc = presentedViewController {
+            vc.setApplicationState(active: false)
+        }
     }
 }
 
-class LoaderVC:UIViewController {
+class SuperVC:LoaderVC {
+    
+}
+
+class LoaderVC:BaseVC {
+    var initialAnimation:Bool {
+        return true
+    }
+    
     override func loadView() {
+        print(#function, " loadViewvcc:", self.classForCoder.description())
         super.loadView()
         self.addLoaderView()
     }
@@ -64,7 +84,9 @@ fileprivate extension LoaderVC {
         let view = UIActivityIndicatorView(style: .medium)
         view.layer.name = "loaderView"
         self.view.addSubview(view)
-        view.startAnimating()
+        if initialAnimation {
+            view.startAnimating()
+        }
         view.addConstaits([.centerX:0, .centerY:0], superView: self.view)
     }
 }

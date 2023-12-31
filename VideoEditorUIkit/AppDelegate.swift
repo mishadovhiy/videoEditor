@@ -26,7 +26,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print(#function, " egrfewdfe")
+        guard let vc = UIApplication.shared.sceneKeyWindow?.rootViewController else {
+            return
+        }
+        vc.setApplicationState(active: true)
+    }
 
+    func applicationWillResignActive(_ application: UIApplication) {
+        print(#function, " egrfewdfe")
+        guard let vc = UIApplication.shared.sceneKeyWindow?.rootViewController else {
+            return
+        }
+        vc.setApplicationState(active: false)
+    }
+    
+    
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
