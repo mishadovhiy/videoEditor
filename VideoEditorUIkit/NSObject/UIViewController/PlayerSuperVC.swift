@@ -12,6 +12,7 @@ class PlayerSuperVC: SuperVC {
     var movie:AVMutableComposition! = AVMutableComposition()
     fileprivate var timeChangeObserver:Any?
     var isPlaying:Bool = false
+    var movieURL:URL?
     
     override func loadView() {
         super.loadView()
@@ -55,9 +56,16 @@ class PlayerSuperVC: SuperVC {
         playerLayer?.player?.seek(to: desiredCMTime)
     }
     
+    fileprivate var playerIterm:AVPlayerItem? {
+        guard let movieURL else {
+            return nil
+        }
+        return AVPlayerItem(url: movieURL)
+    }
+    
     func play(replacing:Bool = true) {
         print(#function)
-        let item = AVPlayerItem(asset: movie)
+        guard let item = playerIterm else { return}
         if let playerLayer = self.playerLayer,
            let player = playerLayer.player
         {
@@ -65,11 +73,16 @@ class PlayerSuperVC: SuperVC {
             if replacing {
                 player.replaceCurrentItem(with: item)
             }
+            preparePlayer()
             player.play()
         } else {
             self.addPlayerView()
             play()
         }
+    }
+    
+    func preparePlayer() {
+        
     }
     
     @objc fileprivate func playPressed(_ sender:UIButton) {
@@ -151,13 +164,16 @@ fileprivate extension PlayerSuperVC {
     }
     
     private func addPlayerView() {
-        if let playerLayer = view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer,
+        if let playerLayer = self.playerLayer,
            let _ = playerLayer.player
         {
             return
         }
+        guard let playerIterm else {
+            return
+        }
         print(#function)
-        let player = Player(playerItem: AVPlayerItem(asset: movie))
+        let player = Player(playerItem:playerIterm)
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = view.layer.bounds
         playerLayer.videoGravity = .resizeAspect

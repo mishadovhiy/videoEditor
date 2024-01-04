@@ -13,7 +13,7 @@ struct TrackAppearence {
 }
 
 class TrackAppearenceModel: ObservableObject {
-
+//for swiftui
     @Published var movieData:[TrackAppearence] = [
         .init(width: 300, title: "some title"),
         .init(width: 600, title: "some title"),

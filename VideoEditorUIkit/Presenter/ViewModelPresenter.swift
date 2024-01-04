@@ -12,4 +12,5 @@ protocol ViewModelPresenter {
      @MainActor func videoAdded()
      @MainActor func errorAddingVideo()
      var movie:AVMutableComposition{get}
+    var movieURL:URL?{set get}
 }

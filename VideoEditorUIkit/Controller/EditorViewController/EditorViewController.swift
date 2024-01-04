@@ -14,7 +14,7 @@ class EditorViewController: SuperVC {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
-    private var viewModel:EditorViewModel!
+    var viewModel:EditorViewModel!
 
     override func loadView() {
         super.loadView()
@@ -55,6 +55,15 @@ extension EditorViewController:PlayerViewControllerPresenter {
 
 
 extension EditorViewController:ViewModelPresenter {
+    var movieURL: URL? {
+        get {
+            self.playerVC?.movieURL
+        }
+        set {
+            playerVC?.movieURL = newValue
+        }
+    }
+    
     @MainActor var movie: AVMutableComposition {
         return playerVC?.movie ?? .init()
     }

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import AVFoundation
+import Photos
 class PlayerViewController: PlayerSuperVC {
     fileprivate var preseter:PlayerViewControllerPresenter?
     
@@ -23,6 +24,11 @@ class PlayerViewController: PlayerSuperVC {
     override func timeChanged(_ percent: CGFloat) {
         super.timeChanged(percent)
         preseter?.playTimeChanged(percent)
+    }
+    
+    override func preparePlayer() {
+        super.preparePlayer()
+
     }
     
     @objc fileprivate func addTrackPressed(_ sender:UIButton) {
