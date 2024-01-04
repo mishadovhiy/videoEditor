@@ -26,6 +26,24 @@ class BaseVC:UIViewController {
             vc.setApplicationState(active: false)
         }
     }
+    
+    func clearTemporaryDirectory(exept:URL? = nil) {
+        let fileManager = FileManager.default
+        let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+
+        do {
+            let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
+
+            try contents.forEach({
+                if $0 != exept {
+                    try fileManager.removeItem(at: $0)
+                    print("Removed: \($0.lastPathComponent)")
+                }
+            })
+        } catch {
+            print("Error: \(error)")
+        }
+    }
 }
 
 class SuperVC:LoaderVC {

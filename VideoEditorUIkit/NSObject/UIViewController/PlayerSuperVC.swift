@@ -60,7 +60,8 @@ class PlayerSuperVC: SuperVC {
         guard let movieURL else {
             return nil
         }
-        return AVPlayerItem(url: movieURL)
+        return .init(url: movieURL)
+       // return .init(asset: movie)
     }
     
     func play(replacing:Bool = true) {
@@ -69,7 +70,10 @@ class PlayerSuperVC: SuperVC {
         if let playerLayer = self.playerLayer,
            let player = playerLayer.player
         {
-            print(#function, " start")
+            print(item.duration, " grefwd")
+            print(item.asset, " btgrvf")
+
+            print(#function, " ffstart ", replacing)
             if replacing {
                 player.replaceCurrentItem(with: item)
             }
@@ -115,6 +119,7 @@ class PlayerSuperVC: SuperVC {
         if let line = self.view.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
             line.strokeEnd = percent
         }
+        durationLabel?.text = "\(Int(sendond))/\(movie.duration.seconds)"
         timeChanged(percent)
     }
     
@@ -138,6 +143,10 @@ class PlayerSuperVC: SuperVC {
            // }
         }
     }
+    
+    var durationLabel:UILabel? {
+        return view.subviews.first(where: {$0.layer.name == "durationLabel"}) as? UILabel
+    }
 }
 
 
@@ -146,6 +155,28 @@ fileprivate extension PlayerSuperVC {
     func loadUI() {
         addPlayerView()
         addPlayButton()
+        addLabel()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(playTap(_:)))
+        view.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func playTap(_ sender:UITapGestureRecognizer) {
+        if isPlaying {
+            pause()
+        } else {
+            play(replacing: false)
+        }
+    }
+    private func addLabel() {
+        if let _ = durationLabel {
+            return
+        }
+        let label = UILabel()
+        label.layer.name = "durationLabel"
+        label.isUserInteractionEnabled = false
+        label.textColor = .white
+        self.view.addSubview(label)
+        label.addConstaits([.right:0, .bottom:0], superView: self.view)
     }
     
     private func addPlayButton() {

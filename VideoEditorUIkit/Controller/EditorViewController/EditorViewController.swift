@@ -18,6 +18,7 @@ class EditorViewController: SuperVC {
 
     override func loadView() {
         super.loadView()
+        clearTemporaryDirectory()
         loadUI()
     }
     
@@ -49,7 +50,8 @@ extension EditorViewController:PlayerViewControllerPresenter {
     }
     
     func addTrackPressed() {
-        self.viewModel.addVideo()
+       // self.clearTemporaryDirectory()
+        self.viewModel.addVideo(text: false)
     }
 }
 
@@ -60,23 +62,34 @@ extension EditorViewController:ViewModelPresenter {
             self.playerVC?.movieURL
         }
         set {
+            clearTemporaryDirectory(exept: newValue)
             playerVC?.movieURL = newValue
         }
     }
     
     @MainActor var movie: AVMutableComposition {
-        return playerVC?.movie ?? .init()
+        get {
+            playerVC?.movie ?? .init()
+        }
+        set {
+            playerVC?.movie = newValue
+        }
     }
     
     @MainActor func videoAdded() {
+        self.playerVC?.seek(seconds: .zero)
+        playerVC?.durationLabel?.text = "\(movie.duration.seconds)"
         self.playerVC?.endRefreshing {
             self.playerVC?.play()
         }
+        
     }
     
     @MainActor func errorAddingVideo() {
         AppDelegate.shared.ai.showAlert(title: "Error", appearence: .type(.error))
         self.playerVC?.endRefreshing()
+        self.playerVC?.pause()
+        self.clearTemporaryDirectory(exept: movieURL)
     }
 }
 
@@ -98,7 +111,7 @@ fileprivate extension EditorViewController {
         if viewModel == nil {
             viewModel = .init(presenter:self)
             playerVC?.startRefreshing {
-                self.viewModel.addVideo()
+                self.viewModel.addVideo(text: true)
             }
         }
         addTracksView()
