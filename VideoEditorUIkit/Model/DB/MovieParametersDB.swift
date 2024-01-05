@@ -13,6 +13,14 @@ extension DB.DataBase {
         init(dict: [String : Any]) {
             self.dict = dict
         }
+        
+        public static func with(
+          _ populator: (inout Self) throws -> ()
+        ) rethrows -> Self {
+            var message = Self(dict: [:])
+          try populator(&message)
+          return message
+        }
     }
     
     

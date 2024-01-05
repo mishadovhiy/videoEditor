@@ -8,8 +8,13 @@
 import UIKit
 import AVFoundation
 import Photos
+
 class PlayerViewController: PlayerSuperVC {
+    
     fileprivate var preseter:PlayerViewControllerPresenter?
+    var parentVC: EditorViewController? {
+        return self.parent as? EditorViewController
+    }
     
     override func loadView() {
         super.loadView()
@@ -26,13 +31,15 @@ class PlayerViewController: PlayerSuperVC {
         preseter?.playTimeChanged(percent)
     }
     
-    override func preparePlayer() {
-        super.preparePlayer()
-
+    @IBAction func addTextPressed(_ sender: Any) {
+        parentVC?.viewModel.addText()
     }
     
     @objc fileprivate func addTrackPressed(_ sender:UIButton) {
-        preseter?.addTrackPressed()
+        startRefreshing {
+            self.pause()
+            self.preseter?.addTrackPressed()
+        }
     }
 }
 

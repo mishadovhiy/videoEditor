@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D23CA602B4769FD00FC94B1 /* PrepareEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23CA5F2B4769FD00FC94B1 /* PrepareEditorModel.swift */; };
+		8D23CA622B476C4700FC94B1 /* EditorVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23CA612B476C4700FC94B1 /* EditorVideoLayer.swift */; };
+		8D23CA642B47716600FC94B1 /* AVAssetExportSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */; };
 		8D2B57772B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B57762B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift */; };
 		8D2B57792B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B57782B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift */; };
 		8D2B577C2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B577B2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift */; };
@@ -23,7 +26,7 @@
 		8D4C17342B3C21C600953143 /* SuperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C17332B3C21C600953143 /* SuperVC.swift */; };
 		8D4C17362B3C21E100953143 /* Extensions_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */; };
 		8D4C173D2B3C255200953143 /* PlayerSuperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */; };
-		8D4C17402B3C96BF00953143 /* EditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173F2B3C96BF00953143 /* EditorViewModel.swift */; };
+		8D4C17402B3C96BF00953143 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173F2B3C96BF00953143 /* EditorModel.swift */; };
 		8D8BF29C2B3FFFB7008AFC62 /* AssetParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */; };
 		8D9F32EC2B3DACEB00697F76 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32EB2B3DACEB00697F76 /* PlayerViewController.swift */; };
 		8D9F32EE2B3DDF9300697F76 /* PlayerViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32ED2B3DDF9300697F76 /* PlayerViewControllerPresenter.swift */; };
@@ -43,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D23CA5F2B4769FD00FC94B1 /* PrepareEditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareEditorModel.swift; sourceTree = "<group>"; };
+		8D23CA612B476C4700FC94B1 /* EditorVideoLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorVideoLayer.swift; sourceTree = "<group>"; };
+		8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAssetExportSession.swift; sourceTree = "<group>"; };
 		8D2B57762B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewDelegate_AssetParametersVC.swift; sourceTree = "<group>"; };
 		8D2B57782B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUI_AssetParametersViewController.swift; sourceTree = "<group>"; };
 		8D2B577B2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_MovieGeneralParameterList.swift; sourceTree = "<group>"; };
@@ -60,7 +66,7 @@
 		8D4C17332B3C21C600953143 /* SuperVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperVC.swift; sourceTree = "<group>"; };
 		8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIKit.swift; sourceTree = "<group>"; };
 		8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSuperVC.swift; sourceTree = "<group>"; };
-		8D4C173F2B3C96BF00953143 /* EditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewModel.swift; sourceTree = "<group>"; };
+		8D4C173F2B3C96BF00953143 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
 		8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetParametersViewController.swift; sourceTree = "<group>"; };
 		8D9F32EB2B3DACEB00697F76 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		8D9F32ED2B3DDF9300697F76 /* PlayerViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewControllerPresenter.swift; sourceTree = "<group>"; };
@@ -91,6 +97,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D23CA5E2B47650600FC94B1 /* EditorModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D4C173F2B3C96BF00953143 /* EditorModel.swift */,
+				8D23CA5F2B4769FD00FC94B1 /* PrepareEditorModel.swift */,
+				8D23CA612B476C4700FC94B1 /* EditorVideoLayer.swift */,
+			);
+			path = EditorModel;
+			sourceTree = "<group>";
+		};
+		8D23CA652B47716E00FC94B1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */,
+				8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		8D2B57732B41A18200C2B3F5 /* AVPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				8D4C173A2B3C243A00953143 /* video */,
-				8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */,
+				8D23CA652B47716E00FC94B1 /* Extension */,
 				8D4C17212B3B2DF600953143 /* Assets.xcassets */,
 			);
 			path = Mics;
@@ -219,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				8D9F32F02B3DDFE700697F76 /* TrackAppearenceModel.swift */,
+				8D23CA5E2B47650600FC94B1 /* EditorModel */,
 				8DEF7B552B415083007B8737 /* DB */,
 				8DEF7B522B414C18007B8737 /* DataModel */,
 			);
@@ -228,7 +254,6 @@
 		8D9F32F72B3DE15800697F76 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8D4C173F2B3C96BF00953143 /* EditorViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -378,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D23CA642B47716600FC94B1 /* AVAssetExportSession.swift in Sources */,
 				8DEF7B5B2B41711F007B8737 /* AssetAttachmentView.swift in Sources */,
 				8DEF7B572B41509A007B8737 /* MovieParametersDB.swift in Sources */,
 				8DEF7B512B414BE4007B8737 /* MovieParameters.swift in Sources */,
@@ -395,15 +421,17 @@
 				8D9F32EC2B3DACEB00697F76 /* PlayerViewController.swift in Sources */,
 				8DEF7B4E2B414B6A007B8737 /* AssetHeaderCell.swift in Sources */,
 				8D9F32EE2B3DDF9300697F76 /* PlayerViewControllerPresenter.swift in Sources */,
-				8D4C17402B3C96BF00953143 /* EditorViewModel.swift in Sources */,
+				8D4C17402B3C96BF00953143 /* EditorModel.swift in Sources */,
 				8DEF7B4C2B414B41007B8737 /* AssetPreviewCell.swift in Sources */,
 				8D2B577E2B41A37000C2B3F5 /* AssetAttachmentProtocol.swift in Sources */,
 				8D2B57792B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift in Sources */,
 				8D8BF29C2B3FFFB7008AFC62 /* AssetParametersViewController.swift in Sources */,
+				8D23CA602B4769FD00FC94B1 /* PrepareEditorModel.swift in Sources */,
 				8D9F32F12B3DDFE700697F76 /* TrackAppearenceModel.swift in Sources */,
 				8DEF7B5F2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift in Sources */,
 				8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */,
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
+				8D23CA622B476C4700FC94B1 /* EditorVideoLayer.swift in Sources */,
 				8DEF7B542B414E78007B8737 /* DB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -95,6 +95,10 @@ extension CALayer {
         } 
         
     }
+    
+    func zoom(value:CGFloat) {
+        self.transform = CATransform3DMakeScale(value, value, 1)
+    }
 }
 
 

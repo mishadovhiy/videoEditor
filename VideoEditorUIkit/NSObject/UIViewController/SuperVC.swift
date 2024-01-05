@@ -70,14 +70,12 @@ class LoaderVC:BaseVC {
     }
     
     private func toggleAnimating(_ animating:Bool, completion:(()->())? = nil) {
-        guard let view = self.view.subviews.first(where: {$0.layer.name == "loaderView"}) as? UIActivityIndicatorView,
-              view.isAnimating == animating
+        guard let view = self.view.subviews.first(where: {$0.layer.name == "loaderView"}) as? UIActivityIndicatorView
         else {
             completion?()
             return
         }
         UIView.animate(withDuration: 0.3, animations: {
-            view.backgroundColor = animating ? .clear : .red
             view.alpha = animating ? 1 : 0
         }, completion: { _ in
             if animating {
@@ -101,6 +99,8 @@ fileprivate extension LoaderVC {
         }
         let view = UIActivityIndicatorView(style: .medium)
         view.layer.name = "loaderView"
+        view.layer.zPosition = 9999
+        view.hidesWhenStopped = true
         self.view.addSubview(view)
         if initialAnimation {
             view.startAnimating()

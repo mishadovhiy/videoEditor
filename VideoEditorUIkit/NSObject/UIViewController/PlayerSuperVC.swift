@@ -9,7 +9,6 @@ import UIKit
 import AVFoundation
 
 class PlayerSuperVC: SuperVC {
-    var movie:AVMutableComposition! = AVMutableComposition()
     fileprivate var timeChangeObserver:Any?
     var isPlaying:Bool = false
     var movieURL:URL?
@@ -17,17 +16,6 @@ class PlayerSuperVC: SuperVC {
     override func loadView() {
         super.loadView()
         self.loadUI()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        removeAllObservers(delete: true)
-        super.viewDidDisappear(animated)
-        movie = nil
     }
     
     override func applicationDidHide() {
@@ -44,7 +32,6 @@ class PlayerSuperVC: SuperVC {
     func timeChanged(_ percent:CGFloat) {
         
     }
-    
     
     func pause() {
         playerLayer?.player?.pause()
@@ -119,7 +106,7 @@ class PlayerSuperVC: SuperVC {
         if let line = self.view.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
             line.strokeEnd = percent
         }
-        durationLabel?.text = "\(Int(sendond))/\(movie.duration.seconds)"
+        durationLabel?.text = "\(Int(sendond))/\(Int(movie.duration.seconds))"
         timeChanged(percent)
     }
     
@@ -127,6 +114,9 @@ class PlayerSuperVC: SuperVC {
         return self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer
     }
 
+    var movie:AVAsset {
+        return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : .init())
+    }
     
     func addObservers() {
         let timeInterval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
@@ -167,6 +157,7 @@ fileprivate extension PlayerSuperVC {
             play(replacing: false)
         }
     }
+    
     private func addLabel() {
         if let _ = durationLabel {
             return
@@ -191,7 +182,6 @@ fileprivate extension PlayerSuperVC {
         button.addConstaits([
             .bottom:10, .left:10, .right:10
         ], superView: view)
-        
     }
     
     private func addPlayerView() {

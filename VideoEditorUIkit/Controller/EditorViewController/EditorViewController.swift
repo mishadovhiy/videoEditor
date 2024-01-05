@@ -14,8 +14,11 @@ class EditorViewController: SuperVC {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
-    var viewModel:EditorViewModel!
+    var viewModel:EditorModel!
 
+    override var initialAnimation: Bool {
+        return false
+    }
     override func loadView() {
         super.loadView()
         clearTemporaryDirectory()
@@ -27,13 +30,9 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
-    override var initialAnimation: Bool {
-        return false
-    }
-    
     @IBAction private func progressChanged(_ sender: Any) {
         let value = Double((sender as? UISlider)?.value ?? 0)
-        self.playerVC?.seek(seconds: value * movie.duration.seconds)
+        self.playerVC?.seek(seconds: value * (playerVC?.movie.duration.seconds ?? 0))
     }
         
     private var playerVC:PlayerViewController? {
@@ -62,27 +61,17 @@ extension EditorViewController:ViewModelPresenter {
             self.playerVC?.movieURL
         }
         set {
-            clearTemporaryDirectory(exept: newValue)
+         //   clearTemporaryDirectory(exept: newValue)
             playerVC?.movieURL = newValue
-        }
-    }
-    
-    @MainActor var movie: AVMutableComposition {
-        get {
-            playerVC?.movie ?? .init()
-        }
-        set {
-            playerVC?.movie = newValue
         }
     }
     
     @MainActor func videoAdded() {
         self.playerVC?.seek(seconds: .zero)
-        playerVC?.durationLabel?.text = "\(movie.duration.seconds)"
+        playerVC?.durationLabel?.text = "\(playerVC?.movie.duration.seconds ?? 0)"
         self.playerVC?.endRefreshing {
-            self.playerVC?.play()
+            self.playerVC?.play(replacing: true)
         }
-        
     }
     
     @MainActor func errorAddingVideo() {

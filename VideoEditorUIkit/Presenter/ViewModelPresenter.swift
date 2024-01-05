@@ -11,6 +11,5 @@ import AVFoundation
 protocol ViewModelPresenter {
      @MainActor func videoAdded()
      @MainActor func errorAddingVideo()
-     var movie:AVMutableComposition{get set}
     var movieURL:URL?{set get}
 }
