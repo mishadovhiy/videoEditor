@@ -34,27 +34,17 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-DP-OAk">
-                                <rect key="frame" x="18" y="69" width="357" height="31"/>
-                                <connections>
-                                    <action selector="progressChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Yr7-tw-RIc"/>
-                                </connections>
-                            </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HP9-kM-eDU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gjq-tU-1df"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aYc-DP-OAk" secondAttribute="trailing" constant="20" id="X2c-cD-CEq"/>
                             <constraint firstItem="HP9-kM-eDU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dbB-f0-Rj1"/>
-                            <constraint firstItem="aYc-DP-OAk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="qiu-28-9uF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="HP9-kM-eDU" secondAttribute="bottom" id="sF3-V2-AKP"/>
-                            <constraint firstItem="aYc-DP-OAk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vvb-id-VOK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HP9-kM-eDU" secondAttribute="trailing" id="wCE-C9-y5c"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="progressSlider" destination="aYc-DP-OAk" id="piZ-KB-RnK"/>
                         <outlet property="trackContainerView" destination="gE9-Tm-aj5" id="MZN-K2-i7m"/>
                         <outlet property="videoContainerView" destination="edh-8b-fwE" id="hqh-Kp-JMS"/>
                     </connections>
@@ -161,6 +151,7 @@
                     <connections>
                         <outlet property="assetStackView" destination="moI-58-shw" id="aoJ-oe-k9h"/>
                         <outlet property="collectionView" destination="pWW-Wo-oGa" id="YOx-Rk-iBc"/>
+                        <outlet property="scrollView" destination="bVM-3e-oMH" id="ipg-0A-OL2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggo-CO-laL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

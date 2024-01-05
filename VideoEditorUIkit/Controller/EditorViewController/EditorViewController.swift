@@ -11,7 +11,6 @@ import SwiftUI
 
 class EditorViewController: SuperVC {
 
-    @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
     var viewModel:EditorModel!
@@ -21,8 +20,15 @@ class EditorViewController: SuperVC {
     }
     override func loadView() {
         super.loadView()
-        clearTemporaryDirectory()
-        loadUI()
+//        DispatchQueue(label: "db", qos: .userInitiated).async {
+//            let url = self.lastEditedVideoURL()
+//            DispatchQueue.main.async {
+//                self.loadUI()
+//                self.playerVC?.movieURL = url
+//                self.playerVC?.play(replacing: true)
+//            }
+//        }
+        self.loadUI()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -30,13 +36,17 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
-    @IBAction private func progressChanged(_ sender: Any) {
-        let value = Double((sender as? UISlider)?.value ?? 0)
-        self.playerVC?.seek(seconds: value * (playerVC?.movie.duration.seconds ?? 0))
+    func seek(percent:CGFloat) {
+       
+        self.playerVC?.seek(seconds: percent * (playerVC?.movie.duration.seconds ?? 0))
     }
         
-    private var playerVC:PlayerViewController? {
+    var playerVC:PlayerViewController? {
         return self.children.first(where: {$0 is PlayerViewController}) as? PlayerViewController
+    }
+    
+    private var assetParametersVC:AssetParametersViewController? {
+        return self.children.first(where: {$0 is AssetParametersViewController}) as? AssetParametersViewController
     }
 }
 
@@ -44,12 +54,10 @@ class EditorViewController: SuperVC {
 extension EditorViewController:PlayerViewControllerPresenter {
     func playTimeChanged(_ percent: CGFloat) {
         print("EditorViewControllerpercent")
-      //  trackView?.performScroll(percent: percent)
-        self.progressSlider.value = Float(percent)
+        assetParametersVC?.scrollPercent(percent)
     }
     
     func addTrackPressed() {
-       // self.clearTemporaryDirectory()
         self.viewModel.addVideo(text: false)
     }
 }
@@ -61,7 +69,7 @@ extension EditorViewController:ViewModelPresenter {
             self.playerVC?.movieURL
         }
         set {
-         //   clearTemporaryDirectory(exept: newValue)
+            clearTemporaryDirectory(exept: newValue)
             playerVC?.movieURL = newValue
         }
     }
@@ -83,14 +91,6 @@ extension EditorViewController:ViewModelPresenter {
 }
 
 
-extension EditorViewController:TrackListViewPresenter {
-    func scrollChanged(_ percent: CGFloat) {
-        print(percent, " efrwewledn")
-        
-    }
-}
-
-
 
 //MARK: loadUI
 fileprivate extension EditorViewController {
@@ -99,9 +99,12 @@ fileprivate extension EditorViewController {
         addPlayerView()
         if viewModel == nil {
             viewModel = .init(presenter:self)
-            playerVC?.startRefreshing {
-                self.viewModel.addVideo(text: true)
+            if self.movieURL == nil {
+                playerVC?.startRefreshing {
+                    self.viewModel.addVideo(text: true)
+                }
             }
+            
         }
         addTracksView()
     }

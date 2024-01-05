@@ -44,6 +44,20 @@ class BaseVC:UIViewController {
             print("Error: \(error)")
         }
     }
+    
+    func lastEditedVideoURL() -> URL? {
+        let fileManager = FileManager.default
+        let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+
+        do {
+            let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
+
+            return contents.last
+        } catch {
+            print("Error: \(error)")
+            return nil
+        }
+    }
 }
 
 class SuperVC:LoaderVC {

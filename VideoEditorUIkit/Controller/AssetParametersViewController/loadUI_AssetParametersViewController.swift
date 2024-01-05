@@ -10,6 +10,7 @@ import UIKit
 //MARK: loadUI
 extension AssetParametersViewController {
     func loadUI() {
+        scrollView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(AssetHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AssetHeaderCell.reuseIdentifier)

@@ -39,6 +39,7 @@ class PlayerSuperVC: SuperVC {
     
     func seek(seconds:TimeInterval) {
         print(#function)
+        self.pause()
         let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         playerLayer?.player?.seek(to: desiredCMTime)
     }
@@ -119,7 +120,7 @@ class PlayerSuperVC: SuperVC {
     }
     
     func addObservers() {
-        let timeInterval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        let timeInterval = CMTime(seconds: 0.01, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         self.timeChangeObserver = self.playerLayer?.player?.addPeriodicTimeObserver(forInterval: timeInterval, queue: DispatchQueue.main) { [weak self] time in
             self?.playTimeChanged(CMTimeGetSeconds(time))
         }

@@ -32,7 +32,10 @@ class PlayerViewController: PlayerSuperVC {
     }
     
     @IBAction func addTextPressed(_ sender: Any) {
-        parentVC?.viewModel.addText()
+        startRefreshing {
+            self.pause()
+            self.parentVC?.viewModel.addText()
+        }
     }
     
     @objc fileprivate func addTrackPressed(_ sender:UIButton) {

@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: collationView
-extension AssetParametersViewController:UICollectionViewDelegate, UICollectionViewDataSource {
+extension AssetParametersViewController:UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return tableData.count
     }
