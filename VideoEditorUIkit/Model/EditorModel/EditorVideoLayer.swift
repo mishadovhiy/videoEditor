@@ -134,9 +134,7 @@ fileprivate extension EditorVideoLayer {
         print(videoSize, " videoSizevideoSizevideoSize")
         let videoLayer = CALayer()
         videoLayer.frame = CGRect(origin: .init(x: 20, y: 20), size: .init(width: videoSize.width - 40, height: videoSize.height - 40))
-        videoLayer.backgroundColor = UIColor.red.cgColor
         let outputLayer = CALayer()
-        outputLayer.backgroundColor = UIColor.red.cgColor
         outputLayer.frame = CGRect(origin: .zero, size: videoSize)
         
         outputLayer.addSublayer(videoLayer)

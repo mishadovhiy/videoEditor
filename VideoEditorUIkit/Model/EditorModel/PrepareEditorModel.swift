@@ -75,7 +75,6 @@ fileprivate extension PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: assetTrack.first!)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
-        overlayLayer.backgroundColor = UIColor.orange.cgColor
         layerEditor.addLayer(
             text: "Happy Birthday,\n-",
             to: overlayLayer,

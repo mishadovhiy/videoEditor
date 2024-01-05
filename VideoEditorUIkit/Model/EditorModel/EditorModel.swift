@@ -26,9 +26,7 @@ class EditorModel {
     func addVideo(text:Bool) {
         Task {
             if await addTestVideos() {
-                if await self.prepare.addText() {
-                    await presenter?.videoAdded()
-                }
+                await presenter?.videoAdded()
                 
             } else {
                 await presenter?.errorAddingVideo()
