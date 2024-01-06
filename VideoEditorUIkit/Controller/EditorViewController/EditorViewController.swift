@@ -20,15 +20,7 @@ class EditorViewController: SuperVC {
     }
     override func loadView() {
         super.loadView()
-//        DispatchQueue(label: "db", qos: .userInitiated).async {
-//            let url = self.lastEditedVideoURL()
-//            DispatchQueue.main.async {
-//                self.loadUI()
-//                self.playerVC?.movieURL = url
-//                self.playerVC?.play(replacing: true)
-//            }
-//        }
-        self.loadUI()
+        loadUI(movieUrl: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -94,15 +86,21 @@ extension EditorViewController:ViewModelPresenter {
 
 //MARK: loadUI
 fileprivate extension EditorViewController {
-    func loadUI() {
+    func loadUI(movieUrl:URL?) {
         view.backgroundColor = .black
         addPlayerView()
         if viewModel == nil {
             viewModel = .init(presenter:self)
-            if self.movieURL == nil {
+            self.movieURL = movieUrl
+            if movieUrl == nil {
                 playerVC?.startRefreshing {
                     self.viewModel.addVideo(text: true)
                 }
+            } else {
+                if let movieUrl {
+                    self.viewModel.movie = .init(url: movieUrl)
+                }
+                self.playerVC?.play(replacing: true)
             }
             
         }

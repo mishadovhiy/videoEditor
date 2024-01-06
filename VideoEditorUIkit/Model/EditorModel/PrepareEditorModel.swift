@@ -78,7 +78,7 @@ fileprivate extension PrepareEditorModel {
         layerEditor.addLayer(
             text: "Happy Birthday,\n-",
             to: overlayLayer,
-            videoSize: videoSize)
+            videoSize: videoSize, videoDuration: asset.duration.seconds)
         let videoComposition = layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition) {
             self.delegate.movieURL = localUrl
@@ -95,7 +95,7 @@ fileprivate extension PrepareEditorModel {
     private func toComposition(asset:AVAsset) -> AVMutableComposition? {
         let composition = AVMutableComposition()
         let compositionAudioTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: CMPersistentTrackID(kCMPersistentTrackID_Invalid))
-        let duration = CMTime(seconds: asset.duration.seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        let duration = CMTime(seconds: asset.duration.seconds, preferredTimescale: EditorModel.timeScale)
         asset.tracks(withMediaType: .video).forEach( {
             let sourceAudioTrack = $0
             do {

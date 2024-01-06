@@ -43,6 +43,7 @@
 		8DEF7B5B2B41711F007B8737 /* AssetAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B5A2B41711F007B8737 /* AssetAttachmentView.swift */; };
 		8DEF7B5F2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B5E2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift */; };
 		8DEF7B612B41838C007B8737 /* AssetRawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B602B41838C007B8737 /* AssetRawView.swift */; };
+		8DF7C3872B49E623007EFFB1 /* AnimateVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7C3862B49E623007EFFB1 /* AnimateVideoLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		8DEF7B5A2B41711F007B8737 /* AssetAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAttachmentView.swift; sourceTree = "<group>"; };
 		8DEF7B5E2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delegate_AssetAttachmentViewDelegate.swift; sourceTree = "<group>"; };
 		8DEF7B602B41838C007B8737 /* AssetRawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetRawView.swift; sourceTree = "<group>"; };
+		8DF7C3862B49E623007EFFB1 /* AnimateVideoLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateVideoLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		8D4C170C2B3B2DF400953143 = {
 			isa = PBXGroup;
 			children = (
+				8DF7C3862B49E623007EFFB1 /* AnimateVideoLayer.swift */,
 				8D4C17172B3B2DF400953143 /* VideoEditorUIkit */,
 				8D4C17162B3B2DF400953143 /* Products */,
 			);
@@ -424,6 +427,7 @@
 				8D4C17402B3C96BF00953143 /* EditorModel.swift in Sources */,
 				8DEF7B4C2B414B41007B8737 /* AssetPreviewCell.swift in Sources */,
 				8D2B577E2B41A37000C2B3F5 /* AssetAttachmentProtocol.swift in Sources */,
+				8DF7C3872B49E623007EFFB1 /* AnimateVideoLayer.swift in Sources */,
 				8D2B57792B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift in Sources */,
 				8D8BF29C2B3FFFB7008AFC62 /* AssetParametersViewController.swift in Sources */,
 				8D23CA602B4769FD00FC94B1 /* PrepareEditorModel.swift in Sources */,

@@ -19,6 +19,7 @@ struct AttachentVideoLayerModel {
             ])
         
         let textLayer = CATextLayer()
+        textLayer.name = "CATextLayer"
         textLayer.string = attributedText
         textLayer.shouldRasterize = true
         textLayer.rasterizationScale = UIScreen.main.scale

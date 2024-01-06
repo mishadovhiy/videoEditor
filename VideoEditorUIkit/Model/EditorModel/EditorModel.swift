@@ -23,6 +23,9 @@ class EditorModel {
     }
     
     
+    static let timeScale = CMTimeScale(NSEC_PER_SEC)
+    
+    
     func addVideo(text:Bool) {
         Task {
             if await addTestVideos() {

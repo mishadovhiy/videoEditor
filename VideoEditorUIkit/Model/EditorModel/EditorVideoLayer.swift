@@ -30,9 +30,9 @@ struct EditorVideoLayer {
         }
     }
     
-    func addLayer(text: String, to layer: CALayer, videoSize: CGSize) {
+    func addLayer(text: String, to layer: CALayer, videoSize: CGSize, videoDuration:CGFloat) {
         let newValue = attachmentLayer.add(text: text, to: layer, videoSize: videoSize)
-        self.add(newLayer: newValue, to: layer)
+        self.add(newLayer: newValue, to: layer, duration: videoDuration)
     }
 }
 
@@ -62,8 +62,8 @@ fileprivate extension EditorVideoLayer {
         
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = CMTimeRange(
-            start: .zero,
-            duration: composition.duration)
+            start: .init(seconds: 0, preferredTimescale: EditorModel.timeScale),
+            duration: .init(seconds: composition.duration.seconds, preferredTimescale: EditorModel.timeScale))
         videoComposition.instructions = [instruction]
         return .init(instractions: instruction, composition: videoComposition)
     }
@@ -82,6 +82,7 @@ fileprivate extension EditorVideoLayer {
             
         })
         
+        let layer = overlayLayer!.sublayers!.first(where: {$0.name == "CATextLayer"})!
         let instraction = videoInstractions(composition: composition, track: tracks.first!, overlayLayer: overlayLayer)
         var i = 0
         assetTrack.forEach({
@@ -101,7 +102,8 @@ fileprivate extension EditorVideoLayer {
     private func compositionLayerInstruction(for track: AVCompositionTrack, assetTrack: AVAssetTrack) -> AVMutableVideoCompositionLayerInstruction {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         let transform = assetTrack.preferredTransform
-        instruction.setTransform(transform, at: .zero)
+        instruction.setTransform(transform, at:.zero)
+      //  instruction.setTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 4), at: .init(value: 2, timescale: EditorModel.timeScale))
         return instruction
     }
     
@@ -129,18 +131,34 @@ fileprivate extension EditorVideoLayer {
 
 fileprivate extension EditorVideoLayer {
     
-    func add(newLayer:CALayer, to layer: CALayer) {
-        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnimation.fromValue = 0.8
-        scaleAnimation.toValue = 1.2
-        scaleAnimation.duration = 0.5
-        scaleAnimation.repeatCount = .greatestFiniteMagnitude
-        scaleAnimation.autoreverses = true
-        scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+    func add(newLayer:CALayer, to layer: CALayer, duration:CGFloat) {
+        newLayer.opacity = 0
+
+        let show = CABasicAnimation(keyPath: "opacity")
+        show.fromValue = 0
+        show.toValue = 1
+        show.duration = 0.8
+        show.beginTime = duration * 0.2
+        show.isRemovedOnCompletion = false
+        newLayer.add(show, forKey: "show")
+
+        let hide = CABasicAnimation(keyPath: "opacity")
+        hide.fromValue = 1
+        hide.toValue = 0
+        hide.duration = 0.8
+        hide.beginTime = duration * 0.8
+        hide.isRemovedOnCompletion = false
+        newLayer.add(hide, forKey: "hide")
+
+        let vidible = CABasicAnimation(keyPath: "opacity")
+        vidible.fromValue = 1
+        vidible.toValue = 1
+        vidible.duration = 0.1
+        vidible.repeatCount = .greatestFiniteMagnitude
+        vidible.beginTime = show.beginTime + show.duration
+        vidible.repeatDuration = (hide.beginTime) - (vidible.duration + show.duration + show.beginTime + -0.1)
+        newLayer.add(vidible, forKey: "vidible")
         
-        scaleAnimation.beginTime = AVCoreAnimationBeginTimeAtZero
-        scaleAnimation.isRemovedOnCompletion = false
-        newLayer.add(scaleAnimation, forKey: "scale")
         layer.addSublayer(newLayer)
     }
 }
