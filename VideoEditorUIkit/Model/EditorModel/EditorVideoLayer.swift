@@ -19,7 +19,27 @@ struct EditorVideoLayer {
     }
     
     func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) -> AVMutableVideoComposition? {
-        return videoLayer(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
+        var tracks:[AVMutableCompositionTrack] = []
+        assetTrack.forEach({
+            if let compositionTrack = composition.addMutableTrack(
+                withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) {
+                tracks.append(compositionTrack)
+                do {
+                    try compositionTrack.insertTimeRange(.init(start: .zero, duration: $0.asset!.duration), of: $0, at: .zero)
+                } catch {  }
+            }
+            
+        })
+        let instraction = videoInstractions(composition: composition, track: tracks.first!, overlayLayer: overlayLayer)
+        var i = 0
+        assetTrack.forEach({
+            let layerInstruction = compositionLayerInstruction(
+                for: tracks[i],
+                assetTrack: $0)
+            i += 1
+            instraction.instractions.layerInstructions.append(layerInstruction)
+        })
+        return instraction.composition
     }
     
     func videoSize(assetTrack:AVAssetTrack) -> CGSize {
@@ -74,30 +94,10 @@ fileprivate extension EditorVideoLayer {
         videoComposition.instructions = [instruction]
         return .init(instractions: instruction, composition: videoComposition)
     }
-    
-    
-    private func videoLayer(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) -> AVMutableVideoComposition? {
-        var tracks:[AVMutableCompositionTrack] = []
-        assetTrack.forEach({
-            if let compositionTrack = composition.addMutableTrack(
-                withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) {
-                tracks.append(compositionTrack)
-                do {
-                    try compositionTrack.insertTimeRange(.init(start: .zero, duration: $0.asset!.duration), of: $0, at: .zero)
-                } catch {  }
-            }
-            
-        })
-        let instraction = videoInstractions(composition: composition, track: tracks.first!, overlayLayer: overlayLayer)
-        var i = 0
-        assetTrack.forEach({
-            let layerInstruction = compositionLayerInstruction(
-                for: tracks[i],
-                assetTrack: $0)
-            i += 1
-            instraction.instractions.layerInstructions.append(layerInstruction)
-        })
-        return instraction.composition
+
+    struct InstractionsResult {
+        let instractions:AVMutableVideoCompositionInstruction
+        let composition:AVMutableVideoComposition
     }
 }
 
@@ -129,11 +129,3 @@ fileprivate extension EditorVideoLayer {
     }
 }
 
-
-
-fileprivate extension EditorVideoLayer {
-    struct InstractionsResult {
-        let instractions:AVMutableVideoCompositionInstruction
-        let composition:AVMutableVideoComposition
-    }
-}
