@@ -22,14 +22,14 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edh-8b-fwE">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="579"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="619"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gE9-Tm-aj5">
-                                        <rect key="frame" x="0.0" y="579" width="393" height="180"/>
+                                        <rect key="frame" x="0.0" y="619" width="393" height="140"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="fFr-yg-xjT"/>
+                                            <constraint firstAttribute="height" constant="140" id="fFr-yg-xjT"/>
                                         </constraints>
                                     </view>
                                 </subviews>

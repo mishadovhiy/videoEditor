@@ -26,7 +26,7 @@ struct AttachentVideoLayerModel {
         textLayer.backgroundColor = UIColor.clear.cgColor
         textLayer.alignmentMode = .center
         
-        textLayer.frame = .init(origin: .init(x: 0, y: 200), size: .init(width: videoSize.width, height: 150))
+        textLayer.frame = .init(origin: .init(x: 0, y: videoSize.height * 0.1), size: .init(width: videoSize.width, height: 150))
         textLayer.displayIfNeeded()
         return textLayer
     }

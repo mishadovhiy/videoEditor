@@ -115,10 +115,16 @@ fileprivate extension LoaderVC {
         view.layer.name = "loaderView"
         view.layer.zPosition = 9999
         view.hidesWhenStopped = true
+        view.tintColor = .white
+        view.backgroundColor = .white.withAlphaComponent(0.6)
+        view.layer.shadowColor = UIColor.white.cgColor
         self.view.addSubview(view)
         if initialAnimation {
             view.startAnimating()
         }
-        view.addConstaits([.centerX:0, .centerY:0], superView: self.view)
+        view.addConstaits([.centerX:0, .centerY:0, .width:35, .height:35], superView: self.view)
+        view.layer.cornerRadius = view.bounds.size.width / 2
+        view.layer.shadowRadius = view.layer.cornerRadius
+
     }
 }

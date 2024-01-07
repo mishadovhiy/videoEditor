@@ -11,9 +11,11 @@ import UIKit
 struct EditorVideoLayer {
     
     let attachmentLayer:AttachentVideoLayerModel
+    let animation:AnimateVideoLayer
     
     init() {
         self.attachmentLayer = .init()
+        self.animation = .init()
     }
     
     func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) -> AVMutableVideoComposition? {
@@ -32,7 +34,7 @@ struct EditorVideoLayer {
     
     func addLayer(text: String, to layer: CALayer, videoSize: CGSize, videoDuration:CGFloat) {
         let newValue = attachmentLayer.add(text: text, to: layer, videoSize: videoSize)
-        self.add(newLayer: newValue, to: layer, duration: videoDuration)
+        animation.add(newValue, to: layer, duration: videoDuration)
     }
 }
 
@@ -122,44 +124,6 @@ fileprivate extension EditorVideoLayer {
             assetOrientation = .down
         }
         return (assetOrientation, isPortrait)
-    }
-}
-
-
-
-//MARK: Animations
-
-fileprivate extension EditorVideoLayer {
-    
-    func add(newLayer:CALayer, to layer: CALayer, duration:CGFloat) {
-        newLayer.opacity = 0
-
-        let show = CABasicAnimation(keyPath: "opacity")
-        show.fromValue = 0
-        show.toValue = 1
-        show.duration = 0.8
-        show.beginTime = duration * 0.2
-        show.isRemovedOnCompletion = false
-        newLayer.add(show, forKey: "show")
-
-        let hide = CABasicAnimation(keyPath: "opacity")
-        hide.fromValue = 1
-        hide.toValue = 0
-        hide.duration = 0.8
-        hide.beginTime = duration * 0.8
-        hide.isRemovedOnCompletion = false
-        newLayer.add(hide, forKey: "hide")
-
-        let vidible = CABasicAnimation(keyPath: "opacity")
-        vidible.fromValue = 1
-        vidible.toValue = 1
-        vidible.duration = 0.1
-        vidible.repeatCount = .greatestFiniteMagnitude
-        vidible.beginTime = show.beginTime + show.duration
-        vidible.repeatDuration = (hide.beginTime) - (vidible.duration + show.duration + show.beginTime + -0.1)
-        newLayer.add(vidible, forKey: "vidible")
-        
-        layer.addSublayer(newLayer)
     }
 }
 
