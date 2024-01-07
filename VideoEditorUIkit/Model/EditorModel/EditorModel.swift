@@ -24,7 +24,7 @@ class EditorModel {
     
     
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
-    
+    static let fmp30 = CMTime(value: 1, timescale: 30)
     
     func addVideo(text:Bool) {
         Task {
@@ -56,7 +56,7 @@ fileprivate extension EditorModel {
     private func addTestVideos() async -> Bool {
         let urls:[String] = ["1", "2"]
         for url in urls {
-            let ok = await prepare.addVideo(url)
+            let ok = await prepare.createVideo(url)
             if ok {
                 if url == urls.last {
                     return true

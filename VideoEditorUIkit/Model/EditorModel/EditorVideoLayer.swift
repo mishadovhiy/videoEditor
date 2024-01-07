@@ -34,7 +34,12 @@ struct EditorVideoLayer {
     
     func addLayer(text: String, to layer: CALayer, videoSize: CGSize, videoDuration:CGFloat) {
         let newValue = attachmentLayer.add(text: text, to: layer, videoSize: videoSize)
-        animation.add(newValue, to: layer, duration: videoDuration)
+        animation.add(newValue, to: layer, duration: videoDuration, properties: .init())
+    }
+    
+    func addLayer(video: String, to layer: CALayer, videoSize: CGSize, videoDuration:CGFloat) {
+        let newValue = attachmentLayer.add(video: video, to: layer, videoSize: videoSize)
+        animation.add(newValue, to: layer, duration: videoDuration, properties: .init(needScale: false))
     }
 }
 
@@ -42,7 +47,7 @@ struct EditorVideoLayer {
 //MARK: add layers
 fileprivate extension EditorVideoLayer {
     
-    func videoInstractions(composition:AVMutableComposition, track:AVAssetTrack, overlayLayer: CALayer?) -> InstractionsResult {
+    private func videoInstractions(composition:AVMutableComposition, track:AVAssetTrack, overlayLayer: CALayer?) -> InstractionsResult {
         let videoSize = videoSize(assetTrack: track)
         print(videoSize, " videoSizevideoSizevideoSize")
         let videoLayer = CALayer()
@@ -57,21 +62,21 @@ fileprivate extension EditorVideoLayer {
         
         let videoComposition = AVMutableVideoComposition()
         videoComposition.renderSize = videoSize
-        videoComposition.frameDuration = CMTime(value: 1, timescale: 30)
+        videoComposition.frameDuration = EditorModel.fmp30
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(
             postProcessingAsVideoLayer: videoLayer,
             in: outputLayer)
         
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = CMTimeRange(
-            start: .init(seconds: 0, preferredTimescale: EditorModel.timeScale),
-            duration: .init(seconds: composition.duration.seconds, preferredTimescale: EditorModel.timeScale))
+            start: .zero,
+            duration: composition.duration)
         videoComposition.instructions = [instruction]
         return .init(instractions: instruction, composition: videoComposition)
     }
     
     
-    func videoLayer(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) -> AVMutableVideoComposition? {
+    private func videoLayer(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) -> AVMutableVideoComposition? {
         var tracks:[AVMutableCompositionTrack] = []
         assetTrack.forEach({
             if let compositionTrack = composition.addMutableTrack(
@@ -83,8 +88,6 @@ fileprivate extension EditorVideoLayer {
             }
             
         })
-        
-        let layer = overlayLayer!.sublayers!.first(where: {$0.name == "CATextLayer"})!
         let instraction = videoInstractions(composition: composition, track: tracks.first!, overlayLayer: overlayLayer)
         var i = 0
         assetTrack.forEach({
@@ -105,7 +108,6 @@ fileprivate extension EditorVideoLayer {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         let transform = assetTrack.preferredTransform
         instruction.setTransform(transform, at:.zero)
-      //  instruction.setTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 4), at: .init(value: 2, timescale: EditorModel.timeScale))
         return instruction
     }
     

@@ -34,15 +34,15 @@ struct PrepareEditorModel {
     }
     
     
-    mutating func addVideo(_ url:String) async -> Bool {
-        return await performAddVideo(url:url)
+    mutating func createVideo(_ url:String) async -> Bool {
+        return await performCreateVideo(url:url)
     }
 }
 
 
 fileprivate extension PrepareEditorModel {
     
-    mutating func performAddVideo(url:String) async -> Bool {
+    mutating func performCreateVideo(url:String) async -> Bool {
         let movie = delegate.movie ?? .init()
         guard let url = Bundle.main.url(forResource: url, withExtension: "mov") else {
             fatalError()
@@ -75,8 +75,12 @@ fileprivate extension PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: assetTrack.first!)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
+//        layerEditor.addLayer(
+//            text: "Happy Birthday,\n-",
+//            to: overlayLayer,
+//            videoSize: videoSize, videoDuration: asset.duration.seconds)
         layerEditor.addLayer(
-            text: "Happy Birthday,\n-",
+            video: "Happy Birthday,\n-",
             to: overlayLayer,
             videoSize: videoSize, videoDuration: asset.duration.seconds)
         let videoComposition = layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)

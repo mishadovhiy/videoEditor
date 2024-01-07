@@ -30,4 +30,19 @@ struct AttachentVideoLayerModel {
         textLayer.displayIfNeeded()
         return textLayer
     }
+    
+    func add(video: String, to layer: CALayer, videoSize: CGSize) -> CALayer {
+
+        let textLayer = CATextLayer()
+        textLayer.name = "CATextLayer"
+        textLayer.string = "nbg"
+        textLayer.shouldRasterize = true
+        textLayer.rasterizationScale = UIScreen.main.scale
+        textLayer.backgroundColor = UIColor.clear.cgColor
+        textLayer.alignmentMode = .center
+        
+        textLayer.frame = .init(origin: .zero, size: .init(width: videoSize.width, height: 150))
+        textLayer.displayIfNeeded()
+        return textLayer
+    }
 }
