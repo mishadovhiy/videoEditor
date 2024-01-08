@@ -30,7 +30,15 @@ struct EditorVideoLayer {
             }
             
         })
-        let instraction = videoInstractions(composition: composition, track: tracks.first!, overlayLayer: overlayLayer)
+        let instraction = videoInstractions(track: tracks.first!, overlayLayer: overlayLayer)
+        let secondLayer = CALayer()
+        secondLayer.frame = .init(origin: .zero, size: .init(width: (overlayLayer?.bounds.width ?? 0) / 2, height: (overlayLayer?.bounds.height ?? 0) / 2))
+        secondLayer.backgroundColor = UIColor.red.cgColor
+        secondLayer.borderWidth = 5
+        secondLayer.borderColor = UIColor.green.cgColor
+        overlayLayer?.addSublayer(secondLayer)
+        let instraction2 = videoInstractions(track: tracks.first!, overlayLayer: secondLayer)
+
         var i = 0
         assetTrack.forEach({
             let layerInstruction = compositionLayerInstruction(
@@ -38,6 +46,7 @@ struct EditorVideoLayer {
                 assetTrack: $0)
             i += 1
             instraction.instractions.layerInstructions.append(layerInstruction)
+            instraction2.instractions.layerInstructions.append(layerInstruction)
         })
         return instraction.composition
     }
@@ -67,11 +76,13 @@ struct EditorVideoLayer {
 //MARK: add layers
 fileprivate extension EditorVideoLayer {
     
-    private func videoInstractions(composition:AVMutableComposition, track:AVAssetTrack, overlayLayer: CALayer?) -> InstractionsResult {
+    private func videoInstractions(track:AVAssetTrack, overlayLayer: CALayer?) -> InstractionsResult {
         let videoSize = videoSize(assetTrack: track)
         print(videoSize, " videoSizevideoSizevideoSize")
         let videoLayer = CALayer()
-        videoLayer.frame = CGRect(origin: .init(x: 20, y: 20), size: .init(width: videoSize.width - 40, height: videoSize.height - 40))
+        let size:CGSize = overlayLayer?.frame.size ?? .init(width: 10, height: 10)
+        videoLayer.frame = .init(origin: .zero, size: .init(width: size.width - 10, height: size.height - 10))
+        //CGRect(origin: .init(x: 20, y: 20), size: .init(width: videoSize.width - 40, height: videoSize.height - 40))
         let outputLayer = CALayer()
         outputLayer.frame = CGRect(origin: .zero, size: videoSize)
         
@@ -90,7 +101,7 @@ fileprivate extension EditorVideoLayer {
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = CMTimeRange(
             start: .zero,
-            duration: composition.duration)
+            duration: track.asset?.duration ?? .zero)
         videoComposition.instructions = [instruction]
         return .init(instractions: instruction, composition: videoComposition)
     }

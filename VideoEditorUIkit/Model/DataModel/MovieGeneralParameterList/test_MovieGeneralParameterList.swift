@@ -17,6 +17,7 @@ extension MovieGeneralParameterList {
 extension [MovieGeneralParameterList.AssetsData] {
     static var test:Self {
         let mins: [CGFloat] = [2.5, 1.15, 5.54, 5.19, 10.04, 2.90]
+       // let mins: [CGFloat] = [1.12, 1.12]
         return mins.compactMap({
             return .init(duration: $0 * 60, previews: .init(repeating: .init(), count: (Int($0) * 60) / 15))
         })

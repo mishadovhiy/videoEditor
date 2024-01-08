@@ -38,14 +38,14 @@ struct PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: assetTrack.first!)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
-//        layerEditor.addLayer(
-//            text: "Happy Birthday,\n-",
-//            to: overlayLayer,
-//            videoSize: videoSize, videoDuration: asset.duration.seconds)
         layerEditor.addLayer(
-            video: "Happy Birthday,\n-",
+            text: "Happy Birthday,\n-",
             to: overlayLayer,
             videoSize: videoSize, videoDuration: asset.duration.seconds)
+//        layerEditor.addLayer(
+//            video: "Happy Birthday,\n-",
+//            to: overlayLayer,
+//            videoSize: videoSize, videoDuration: asset.duration.seconds)
         let videoComposition = layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition) {
             self.delegate.movieURL = localUrl

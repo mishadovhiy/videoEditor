@@ -9,4 +9,5 @@ import UIKit
 
 class AssetPreviewCell:UICollectionViewCell {
     
+    @IBOutlet weak var secondLabel: UILabel!
 }

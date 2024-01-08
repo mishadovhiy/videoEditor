@@ -204,9 +204,9 @@ fileprivate extension PlayerSuperVC {
         view.layer.addSublayer(playerLayer)
         
         view.layer.drawLine([
-            .init(x: 0, y: 0),
-            .init(x: view.frame.width, y: 0)
-        ], color: .red, width: 5, opacity: 1, name: "PlayerViewControllerline")
+            .init(x: 0, y: view.frame.height),
+            .init(x: view.frame.width, y: view.frame.height)
+        ], color: .red, width: 3, opacity: 1, name: "PlayerViewControllerline")
         
         addObservers()
     }

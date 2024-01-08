@@ -22,7 +22,7 @@ extension AssetParametersViewController {
         }
         collectionView.constraints.first(where: {
             $0.firstAttribute == .width
-        })!.constant = self.assetData.duration
+        })!.constant = assetData.duration// * AssetParametersViewController.durationWidthMultiplier
         view.layer.layoutIfNeeded()
         loadAttachmentsSceletView()
     }

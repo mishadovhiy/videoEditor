@@ -15,6 +15,7 @@ class AssetParametersViewController: UIViewController {
 
     var assetData:MovieGeneralParameterList = .test
     static var rowsHeight:CGFloat = 20
+    static let durationWidthMultiplier:CGFloat = 15
     var tableData:[MovieGeneralParameterList.AssetsData] {
         return assetData.asstes
     }
