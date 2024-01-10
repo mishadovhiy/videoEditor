@@ -17,4 +17,5 @@ struct AssetParametersViewControllerViewModel {
         return assetData.asstes
     }
     var ignoreScroll:Bool = false
+    var manualScroll = false
 }
