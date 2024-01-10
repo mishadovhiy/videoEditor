@@ -13,27 +13,19 @@ class AssetParametersViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var assetStackView: UIStackView!
     
-    var assetData:MovieGeneralParameterList = .test
-    static var rowsHeight:CGFloat = 20
-    static let durationWidthMultiplier:CGFloat = 15
-    var scrollViewDeclaring = false
-    
-    var tableData:[MovieGeneralParameterList.AssetsData] {
-        return assetData.asstes
-    }
-    private var ignoreScroll:Bool = false
-    
-    var parentVC: EditorViewController? {
-        return parent as? EditorViewController
-    }
+    var viewModel:AssetParametersViewControllerViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUI()
     }
     
+    var parentVC: EditorViewController? {
+        return parent as? EditorViewController
+    }
+    
     func scrollPercent(_ percent:CGFloat) {
-        if !ignoreScroll {
+        if !viewModel.ignoreScroll {
             scrollView.contentOffset.x = (scrollView.contentSize.width - self.view.frame.width) * percent
             
         }
@@ -43,20 +35,20 @@ class AssetParametersViewController: UIViewController {
 
 extension AssetParametersViewController {
     func scrollingEnded() {
-        scrollViewDeclaring = false
-        ignoreScroll = false
+        viewModel.scrollViewDeclaring = false
+        viewModel.ignoreScroll = false
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        ignoreScroll = true
+        viewModel.ignoreScroll = true
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        scrollViewDeclaring = true
+        viewModel.scrollViewDeclaring = true
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !scrollViewDeclaring {
+        if !viewModel.scrollViewDeclaring {
             scrollingEnded()
         }
     }
@@ -66,7 +58,7 @@ extension AssetParametersViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if !ignoreScroll {
+        if !viewModel.ignoreScroll {
             return
         }
         let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)

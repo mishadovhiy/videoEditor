@@ -10,6 +10,7 @@ import UIKit
 //MARK: loadUI
 extension AssetParametersViewController {
     func loadUI() {
+        viewModel = .init()
         scrollView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -22,13 +23,13 @@ extension AssetParametersViewController {
         }
         collectionView.constraints.first(where: {
             $0.firstAttribute == .width
-        })!.constant = assetData.duration// * AssetParametersViewController.durationWidthMultiplier
+        })!.constant = viewModel.assetData.duration// * AssetParametersViewController.durationWidthMultiplier
         view.layer.layoutIfNeeded()
         loadAttachmentsSceletView()
     }
     
     private func loadAttachmentsSceletView() {
-        let data:[[MovieAttachmentProtocol]] = [assetData.media, assetData.text, assetData.songs]
+        let data:[[MovieAttachmentProtocol]] = [viewModel.assetData.media, viewModel.assetData.text, viewModel.assetData.songs]
         assetStackView.backgroundColor = .black
         data.forEach({
             AssetAttachmentView.create($0, delegate: self, to: assetStackView)

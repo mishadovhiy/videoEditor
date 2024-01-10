@@ -65,7 +65,7 @@ fileprivate extension AssetAttachmentView {
             let view = UIView()
             view.isHidden = true
             layerStack.addArrangedSubview(view)
-            view.addConstaits([.height:AssetParametersViewController.rowsHeight], superView: layerStack)
+            view.addConstaits([.height:AssetParametersViewControllerViewModel.rowsHeight], superView: layerStack)
         }
         self.updateView()
     }

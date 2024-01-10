@@ -34,6 +34,7 @@
 		8D9F32F12B3DDFE700697F76 /* TrackAppearenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32F02B3DDFE700697F76 /* TrackAppearenceModel.swift */; };
 		8D9F32F42B3DE0E300697F76 /* ViewModelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32F32B3DE0E300697F76 /* ViewModelPresenter.swift */; };
 		8D9F32F92B3E081500697F76 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32F82B3E081500697F76 /* Player.swift */; };
+		8DBFCB912B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBFCB902B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift */; };
 		8DEF7B4C2B414B41007B8737 /* AssetPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B4B2B414B41007B8737 /* AssetPreviewCell.swift */; };
 		8DEF7B4E2B414B6A007B8737 /* AssetHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B4D2B414B6A007B8737 /* AssetHeaderCell.swift */; };
 		8DEF7B512B414BE4007B8737 /* MovieParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B502B414BE4007B8737 /* MovieParameters.swift */; };
@@ -75,6 +76,7 @@
 		8D9F32F02B3DDFE700697F76 /* TrackAppearenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackAppearenceModel.swift; sourceTree = "<group>"; };
 		8D9F32F32B3DE0E300697F76 /* ViewModelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelPresenter.swift; sourceTree = "<group>"; };
 		8D9F32F82B3E081500697F76 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		8DBFCB902B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetParametersViewControllerViewModel.swift; sourceTree = "<group>"; };
 		8DEF7B4B2B414B41007B8737 /* AssetPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPreviewCell.swift; sourceTree = "<group>"; };
 		8DEF7B4D2B414B6A007B8737 /* AssetHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetHeaderCell.swift; sourceTree = "<group>"; };
 		8DEF7B502B414BE4007B8737 /* MovieParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieParameters.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		8D9F32F72B3DE15800697F76 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8DBFCB902B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				8DEF7B512B414BE4007B8737 /* MovieParameters.swift in Sources */,
 				8D4C17342B3C21C600953143 /* SuperVC.swift in Sources */,
 				8D4C173D2B3C255200953143 /* PlayerSuperVC.swift in Sources */,
+				8DBFCB912B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift in Sources */,
 				8D4C171D2B3B2DF400953143 /* EditorViewController.swift in Sources */,
 				8D9F32F42B3DE0E300697F76 /* ViewModelPresenter.swift in Sources */,
 				8D2B57772B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift in Sources */,

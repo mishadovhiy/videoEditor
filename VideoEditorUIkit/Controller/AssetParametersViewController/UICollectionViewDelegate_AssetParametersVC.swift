@@ -10,13 +10,13 @@ import UIKit
 //MARK: collationView
 extension AssetParametersViewController:UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return tableData.count
+        return viewModel.tableData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("fads count", tableData[section].previews.count)
-        print("erfd dur ", tableData[section].duration)
-        return tableData[section].previews.count
+        print("fads count", viewModel.tableData[section].previews.count)
+        print("erfd dur ", viewModel.tableData[section].duration)
+        return viewModel.tableData[section].previews.count
         //Int(tableData[section].duration / 15)
         
     }
@@ -25,7 +25,7 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCollectionCell", for: indexPath) as! AssetPreviewCell
         var i = -1
         var data:[MovieGeneralParameterList.AssetsData] = []
-        tableData.forEach {
+        viewModel.tableData.forEach {
             i += 1
             if i <= (indexPath.section - 1) {
                 data.append($0)
@@ -34,7 +34,7 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
         let count = data.reduce(0) { partialResult, data in
             return partialResult + data.previews.count
         }
-        let secs = (CGFloat(count + (indexPath.row + 1))) / AssetParametersViewController.durationWidthMultiplier
+        let secs = (CGFloat(count + (indexPath.row + 1))) / AssetParametersViewControllerViewModel.durationWidthMultiplier
 //        if secs == CGFloat(Int(secs)) {
             //     cell.secondLabel.text = "\(secs)"
 //
@@ -63,14 +63,15 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
 }
 
 extension AssetParametersViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let value = tableData[section].duration / 15
+        let value = viewModel.tableData[section].duration / 15
         let width = value - CGFloat(Int(value))
         return CGSize(width: 1, height: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = tableData[indexPath.section].duration / CGFloat(tableData[indexPath.section].previews.count)
+        let width = viewModel.tableData[indexPath.section].duration / CGFloat(viewModel.tableData[indexPath.section].previews.count)
   //      let width = (tableData[indexPath.section].duration * AssetParametersViewController.durationWidthMultiplier) / CGFloat(tableData[indexPath.section].previews.count)
         return CGSize(width: width, height: collectionView.frame.height)
     }
