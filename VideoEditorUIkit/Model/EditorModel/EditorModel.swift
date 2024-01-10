@@ -26,7 +26,7 @@ class EditorModel {
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     
-    func addVideo(text:Bool) {
+    func addVideo() {
         Task {
             if await addTestVideos() {
                 await presenter?.videoAdded()
@@ -44,6 +44,20 @@ class EditorModel {
                 await presenter?.videoAdded()
             } else {
                 await presenter?.errorAddingVideo()
+            }
+        }
+    }
+    
+    func loadVideo(_ url:URL?, canShowError:Bool = true) {
+        Task {
+            if await prepare.createVideo(url) {
+                await presenter?.videoAdded()
+            } else {
+                if canShowError {
+                    await presenter?.errorAddingVideo()
+                } else {
+                    self.addVideo()
+                }
             }
         }
     }

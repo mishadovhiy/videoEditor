@@ -48,36 +48,18 @@ struct PrepareEditorModel {
 //            videoSize: videoSize, videoDuration: asset.duration.seconds)
         let videoComposition = layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition) {
-            self.delegate.movieURL = localUrl
+            await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
             return true
         } else {
             return false
         }
     }
     
-    
     mutating func createVideo(_ url:String) async -> Bool {
-        let movie = delegate.movie ?? .init()
-        guard let url = Bundle.main.url(forResource: url, withExtension: "mov") else {
-            fatalError()
-        }
-        let newMovie = AVURLAsset(url: url)
-        do {
-            let duration = try await newMovie.load(.duration)
-            let range = CMTimeRangeMake(start: CMTime.zero, duration: duration)
-            try movie.insertTimeRange(range, of: newMovie, at: .zero)
-            
-            print(movie, " movie performAddVideo")
-            if let localUrl = await export(asset: movie, videoComposition: nil) {
-                self.delegate.movie = movie
-                self.delegate.movieURL = localUrl
-                return true
-            }
-            return false
-        } catch let error {
-            print(error.localizedDescription, " parformAddVideoparformAddVideo")
+        guard let url = Bundle.main.url(forResource: url, withExtension: "mov") ?? Bundle.main.url(forResource: url, withExtension: "mp4") else {
             return false
         }
+        return await self.createVideo(url)
     }
 }
 
@@ -120,6 +102,44 @@ fileprivate extension PrepareEditorModel {
     }
 }
 
+
+extension PrepareEditorModel {
+    mutating func createVideo(_ url:URL?) async -> Bool {
+        let movie = delegate.movie ?? .init()
+        guard let url else {
+            return false
+        }
+        let newMovie = AVURLAsset(url: url)
+        do {
+            let duration = try await newMovie.load(.duration)
+            let range = CMTimeRangeMake(start: CMTime.zero, duration: duration)
+            try movie.insertTimeRange(range, of: newMovie, at: .zero)
+            
+            print(movie, " movie performAddVideo")
+            if let localUrl = await export(asset: movie, videoComposition: nil) {
+                await self.movieUpdated(movie: movie, movieURL: localUrl)
+                return true
+            }
+            return false
+        } catch let error {
+            print(error.localizedDescription, " parformAddVideoparformAddVideo")
+            return false
+        }
+    }
+
+}
+
+extension PrepareEditorModel {
+    @MainActor mutating func movieUpdated(movie:AVMutableComposition?,
+                                          movieURL:URL?,
+                                          canSetNil:Bool = true
+    ) {
+        if !(!canSetNil && movie == nil) {
+            self.delegate.movie = movie
+        }
+        self.delegate.movieURL = movieURL
+    }
+}
 
 protocol PrepareEditorModelDelegate {
     var movie:AVMutableComposition? { get set }

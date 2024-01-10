@@ -14,11 +14,9 @@ class EditorViewController: SuperVC {
     @IBOutlet private weak var videoContainerView: UIView!
     var viewModel:EditorModel!
 
-    override var initialAnimation: Bool {
-        return false
-    }
     override func loadView() {
         super.loadView()
+        print(lastEditedVideoURL())
         loadUI(movieUrl: nil)
     }
     
@@ -27,12 +25,18 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
+    override var initialAnimation: Bool {
+        return false
+    }
+    
     func seek(percent:CGFloat) {
-       
         self.playerVC?.seek(seconds: percent * (playerVC?.movie.duration.seconds ?? 0))
     }
         
     var playerVC:PlayerViewController? {
+        if !Thread.isMainThread {
+            fatalError()
+        }
         return self.children.first(where: {$0 is PlayerViewController}) as? PlayerViewController
     }
     
@@ -49,7 +53,7 @@ extension EditorViewController:PlayerViewControllerPresenter {
     }
     
     func addTrackPressed() {
-        self.viewModel.addVideo(text: false)
+        self.viewModel.addVideo()
     }
 }
 
@@ -93,13 +97,12 @@ fileprivate extension EditorViewController {
             self.movieURL = movieUrl
             if movieUrl == nil {
                 playerVC?.startRefreshing {
-                    self.viewModel.addVideo(text: true)
+                    self.viewModel.addVideo()
                 }
             } else {
                 if let movieUrl {
-                    self.viewModel.movie = .init(url: movieUrl)
+                    self.viewModel.loadVideo(movieUrl, canShowError: false)
                 }
-                self.playerVC?.play(replacing: true)
             }
             
         }
