@@ -30,6 +30,11 @@ class AssetParametersViewController: UIViewController {
             
         }
     }
+    
+    func updateParenScroll() {
+        let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)
+        parentVC?.seek(percent: percent)
+    }
 }
 
 
@@ -37,6 +42,7 @@ extension AssetParametersViewController {
     func scrollingEnded() {
         viewModel.scrollViewDeclaring = false
         viewModel.ignoreScroll = false
+        updateParenScroll()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -61,8 +67,7 @@ extension AssetParametersViewController {
         if !viewModel.ignoreScroll {
             return
         }
-        let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)
-        parentVC?.seek(percent: percent)
+        updateParenScroll()
     }
 }
 
