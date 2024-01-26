@@ -1,5 +1,9 @@
 project state: not completed
 
+## Technical overview of current features
+- Combine videos with AVMutableComposition 
+- add CaLayer to AVAsset with animation with CABasicAnimation
+
 
 # Auto scroll assets when video is playing
 https://github.com/mishadovhiy/videoEditor/assets/44978117/5879c05a-5ada-4658-89ba-ebf832989ce7
