@@ -12,12 +12,21 @@ class EditorViewController: SuperVC {
 
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
+    var playerVC:PlayerViewController? {
+        return self.children.first(where: {$0 is PlayerViewController
+        }) as? PlayerViewController
+    }
+    
+    private var assetParametersVC:AssetParametersViewController? {
+        return self.children.first(where: {$0 is AssetParametersViewController
+        }) as? AssetParametersViewController
+    }
     var viewModel:EditorModel!
 
     override func loadView() {
         super.loadView()
         print(lastEditedVideoURL())
-        loadUI(movieUrl: nil)
+        loadUI(movieUrl: lastEditedVideoURL())
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -32,21 +41,26 @@ class EditorViewController: SuperVC {
     func seek(percent:CGFloat) {
         self.playerVC?.seek(seconds: percent * (playerVC?.movie.duration.seconds ?? 0))
     }
-        
-    var playerVC:PlayerViewController? {
-        if !Thread.isMainThread {
-            fatalError()
-        }
-        return self.children.first(where: {$0 is PlayerViewController}) as? PlayerViewController
-    }
     
-    private var assetParametersVC:AssetParametersViewController? {
-        return self.children.first(where: {$0 is AssetParametersViewController}) as? AssetParametersViewController
+    func addTextPressed(data:MovieAttachmentProtocol? = nil) {
+        viewModel.addText(data ?? TextAttachmentDB.demo)
     }
 }
 
 
 extension EditorViewController:PlayerViewControllerPresenter {
+    func deleteAllPressed() {
+        movieURL = nil
+        Task {
+            DB.db.movieParameters = .init(dict: [:])
+            await MainActor.run {
+                self.viewModel = nil
+                self.viewModel = .init(presenter: self)
+                self.addTrackPressed()
+            }
+        }
+    }
+    
     func playTimeChanged(_ percent: CGFloat) {
         print("EditorViewControllerpercent")
         assetParametersVC?.scrollPercent(percent)
@@ -59,13 +73,23 @@ extension EditorViewController:PlayerViewControllerPresenter {
 
 
 extension EditorViewController:ViewModelPresenter {
+    @MainActor func deleteAllData() {
+        UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
+        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        self.view.removeFromSuperview()
+        self.viewModel = nil
+        self.removeFromParent()
+    }
+    
     var movieURL: URL? {
         get {
             self.playerVC?.movieURL
         }
         set {
-            clearTemporaryDirectory(exept: newValue)
             playerVC?.movieURL = newValue
+            Task {
+                DB.db.movieParameters.clearTemporaryDirectory(exept: newValue)
+            }
         }
     }
     
@@ -81,7 +105,9 @@ extension EditorViewController:ViewModelPresenter {
         AppDelegate.shared.ai.showAlert(title: "Error", appearence: .type(.error))
         self.playerVC?.endRefreshing()
         self.playerVC?.pause()
-        self.clearTemporaryDirectory(exept: movieURL)
+        Task {
+            DB.db.movieParameters.clearTemporaryDirectory(exept: movieURL)
+        }
     }
 }
 
@@ -94,21 +120,24 @@ fileprivate extension EditorViewController {
         addPlayerView()
         if viewModel == nil {
             viewModel = .init(presenter:self)
-            self.movieURL = movieUrl
-            if movieUrl == nil {
-                playerVC?.startRefreshing {
-                    self.viewModel.addVideo()
-                }
-            } else {
-                if let movieUrl {
-                    self.viewModel.loadVideo(movieUrl, canShowError: false)
-                }
-            }
-            
+            loadVideo(movieUrl: movieUrl)
         }
         addTracksView()
     }
     
+    private func loadVideo(movieUrl:URL? = nil) {
+        if movieURL == nil {
+            self.movieURL = movieUrl ?? lastEditedVideoURL()
+        }
+        playerVC?.startRefreshing {
+            if let movie = movieUrl ?? self.movieURL {
+                self.viewModel.loadVideo(movie, canShowError: false)
+            } else {
+                self.viewModel.addVideo()
+            }
+        }
+    }
+        
     private func addPlayerView() {
         if playerVC != nil {
             return
@@ -129,5 +158,17 @@ extension EditorViewController {
     static func configure() -> EditorViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditorViewController") as? EditorViewController ?? .init()
         return vc
+    }
+}
+
+
+extension UIApplication {
+    var keyWindow: UIWindow? {
+        UIApplication
+            .shared
+            .connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .last { $0.isKeyWindow }
     }
 }

@@ -22,7 +22,7 @@ extension AVAssetExportSession {
             self.videoComposition = videoComposition
         }
         self.metadata = []
-        self.shouldOptimizeForNetworkUse = true
+        self.shouldOptimizeForNetworkUse = false
         self.timeRange = .init(start: .zero, duration: asset.duration)
         self.outputFileType = .mp4
         self.outputURL = exportURL
@@ -32,7 +32,8 @@ extension AVAssetExportSession {
             return exportURL
         } else {
             print("exporterror: \(self.error?.localizedDescription ?? "")")
-            return nil
+            print(status.rawValue, " tyhrgtvgr")
+            return self.status == .failed ? nil : exportURL
         }
     }
 }

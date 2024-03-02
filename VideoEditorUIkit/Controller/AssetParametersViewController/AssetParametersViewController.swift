@@ -27,7 +27,8 @@ class AssetParametersViewController: UIViewController {
     func scrollPercent(_ percent:CGFloat) {
         if !viewModel.ignoreScroll {
             viewModel.manualScroll = true
-            scrollView.contentOffset.x = (scrollView.contentSize.width - self.view.frame.width) * percent
+            let scrollOffset = (scrollView.contentSize.width - self.view.frame.width) * percent
+            scrollView.contentOffset.x = scrollOffset.isNormal ? scrollOffset : 0
         }
     }
     

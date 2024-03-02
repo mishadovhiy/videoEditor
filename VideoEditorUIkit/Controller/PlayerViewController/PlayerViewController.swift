@@ -9,6 +9,12 @@ import UIKit
 import AVFoundation
 import Photos
 
+protocol PlayerViewControllerPresenter {
+    func addTrackPressed()
+    func deleteAllPressed()
+    func playTimeChanged(_ percent:CGFloat)
+}
+
 class PlayerViewController: PlayerSuperVC {
     
     fileprivate var preseter:PlayerViewControllerPresenter?
@@ -19,6 +25,13 @@ class PlayerViewController: PlayerSuperVC {
     override func loadView() {
         super.loadView()
         self.loadUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.subviews.forEach {
+            $0.layer.zPosition = 999
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -34,7 +47,7 @@ class PlayerViewController: PlayerSuperVC {
     @IBAction func addTextPressed(_ sender: Any) {
         startRefreshing {
             self.pause()
-            self.parentVC?.viewModel.addText()
+            self.parentVC?.addTextPressed()
         }
     }
     
@@ -44,6 +57,13 @@ class PlayerViewController: PlayerSuperVC {
             self.preseter?.addTrackPressed()
         }
     }
+    
+    @objc fileprivate func deletePressed(_ sender:UIButton) {
+        startRefreshing {
+            self.pause()
+            self.preseter?.deleteAllPressed()
+        }
+    }
 }
 
 
@@ -51,6 +71,7 @@ class PlayerViewController: PlayerSuperVC {
 fileprivate extension PlayerViewController {
     func loadUI() {
         addMovieButton()
+        addDeleteAllButton()
     }
     
     private func addMovieButton() {
@@ -66,8 +87,21 @@ fileprivate extension PlayerViewController {
             .bottom:10, .left:10
         ], superView: view)
     }
+    
+    private func addDeleteAllButton() {
+        if let _ = view.subviews.first(where: {$0.layer.name == "deleteButton"}) {
+            return
+        }
+        let button = UIButton()
+        button.setTitle("deleteAll", for: .normal)
+        button.addTarget(self, action: #selector(self.deletePressed(_:)), for: .touchUpInside)
+        button.layer.name = "deleteButton"
+        view.addSubview(button)
+        button.addConstaits([
+            .top:10, .left:10
+        ], superView: view)
+    }
 }
-
 
 
 extension PlayerViewController {
