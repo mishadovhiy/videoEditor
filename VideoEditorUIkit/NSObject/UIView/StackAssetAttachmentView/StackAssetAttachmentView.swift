@@ -7,7 +7,7 @@
 
 import UIKit
 protocol AssetAttachmentViewDelegate {
-    func attachmentSelected(_ data:MovieAttachmentProtocol?)
+    func attachmentSelected(_ data:MovieAttachmentProtocol?, view:StackAssetAttachmentView?)
     var vc:UIViewController { get }
 }
 
@@ -36,7 +36,7 @@ class StackAssetAttachmentView:UIView {
     }
     
     private func editRowPressed(_ data:MovieAttachmentProtocol?) {
-        delegate?.attachmentSelected(data)
+        delegate?.attachmentSelected(data, view: self)
     }
     
     @objc private func emptyRowPressed(_ sender:UITapGestureRecognizer) {

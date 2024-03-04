@@ -252,8 +252,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "clearDataPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -268,8 +268,8 @@
             filePath = "VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "deletePressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -284,8 +284,8 @@
             filePath = "VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "addTrackPressed(_:)"
             landmarkType = "7">
             <Locations>
@@ -332,8 +332,8 @@
             filePath = "VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "deletePressed(_:)"
             landmarkType = "7">
             <Locations>
@@ -412,8 +412,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "addVideo()"
             landmarkType = "7">
             <Locations>
@@ -490,8 +490,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "loadVideo(movieUrl:)"
             landmarkType = "7">
             <Locations>
@@ -538,8 +538,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "loadVideo(movieUrl:)"
             landmarkType = "7">
             <Locations>
@@ -586,8 +586,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "loadVideo(movieUrl:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -618,8 +618,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "loadVideo(_:canShowError:)"
             landmarkType = "7">
             <Locations>
@@ -1050,69 +1050,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F093322C-F5E3-4A2C-A2EA-FFEC698C9095"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "addText(_:canAddToDB:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F093322C-F5E3-4A2C-A2EA-FFEC698C9095 - b920fe816283e317"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorModel.addText(_: VideoEditorUIkit.MovieAttachmentProtocol, canAddToDB: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "F093322C-F5E3-4A2C-A2EA-FFEC698C9095 - 2efbda13c1ce0e39"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.addText(_: VideoEditorUIkit.MovieAttachmentProtocol, canAddToDB: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "F093322C-F5E3-4A2C-A2EA-FFEC698C9095 - f906a912e86bb02d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.addText(_: VideoEditorUIkit.MovieAttachmentProtocol, canAddToDB: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "144">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D4BF4663-8EF7-4451-990C-F22EE76CDFF8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1136,8 +1073,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "addVideo()"
             landmarkType = "7">
             <Locations>
@@ -1184,8 +1121,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "addTrackPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1216,8 +1153,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "loadVideo(_:canShowError:)"
             landmarkType = "7">
             <Locations>
@@ -1264,8 +1201,8 @@
             filePath = "VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "loadVideo(_:canShowError:)"
             landmarkType = "7">
             <Locations>
@@ -1489,6 +1426,22 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "editRowPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0AFC511B-8175-4EEB-995D-E531BC77F8C6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoEditorUIkit/NSObject/UIView/BaseButton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "setupUI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

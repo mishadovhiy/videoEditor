@@ -45,7 +45,10 @@ fileprivate extension BaseButton {
         }
         backgroundColor = style == .smallGray ? .lightGray : .link
         titleLabel?.font = .systemFont(ofSize: style == .primary ? 16 : 12, weight: style == .primary ? .bold : .medium)
-        titleLabel?.tintColor = style == .smallGray ? .link : .white
+        let tint:UIColor = style != .smallGray ? .link : .white
+        titleLabel?.tintColor = tint
+        titleLabel?.textColor = tint
+        tintColor = tint
         if defaultConstraints {
             self.addConstaits(style == .primary ? [.height:53] : [.width:40, .height:40])
         }

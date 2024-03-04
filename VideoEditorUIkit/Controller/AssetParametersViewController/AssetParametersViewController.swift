@@ -57,7 +57,6 @@ class AssetParametersViewController: UIViewController {
     }
 }
 
-
 extension AssetParametersViewController {
     func scrollingEnded() {
         viewModel?.scrollViewDeclaring = false
@@ -92,10 +91,24 @@ extension AssetParametersViewController {
     }
 }
 
+extension AssetParametersViewController:EditorOverlayVCDelegate {
+    func overlayRemoved() {
+        //chnage background colors
+    }
+    
+    func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
+        parentVC?.addAttachmentPressed(attachmentData)
+    }
+}
 
 extension AssetParametersViewController:AssetAttachmentViewDelegate {
-    func attachmentSelected(_ data: MovieAttachmentProtocol?) {
-        print(data, " rgterfreg")
+    func attachmentSelected(_ data: MovieAttachmentProtocol?, view:StackAssetAttachmentView?) {
+        children.forEach {
+            if $0 is EditorOverlayVC {
+                $0.removeFromParent()
+            }
+        }
+        EditorOverlayVC.addToParent(self, bottomView: view ?? self.view, data: data, delegate: self)
     }
     
     var vc: UIViewController {

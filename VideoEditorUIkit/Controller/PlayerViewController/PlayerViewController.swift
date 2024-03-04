@@ -45,13 +45,6 @@ class PlayerViewController: PlayerSuperVC {
         preseter?.playTimeChanged(percent)
     }
     
-    @IBAction func addTextPressed(_ sender: Any) {
-        startRefreshing {
-            self.pause()
-            self.parentVC?.addTextPressed()
-        }
-    }
-    
     @objc fileprivate func addTrackPressed(_ sender:UIButton) {
         startRefreshing {
             self.pause()

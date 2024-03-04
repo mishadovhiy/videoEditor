@@ -27,6 +27,7 @@ class EditorViewController: SuperVC {
     }
     var viewModel:EditorModel!
     
+    // MARK: - Life-cycle
     override func loadView() {
         super.loadView()
         loadUI(movieUrl: lastEditedVideoURL())
@@ -37,6 +38,13 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
+    
+    // MARK: - public
+    public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
+        viewModel.addAttachmentPressed(data)
+    }
+    
+    // MARK: - receive
     private func newVideoAdded() {
         self.playerVC?.seek(seconds: .zero)
         playerVC?.durationLabel?.text = "\(playerVC?.movie.duration.seconds ?? 0)"
@@ -46,12 +54,9 @@ class EditorViewController: SuperVC {
         self.assetParametersVC?.assetChanged()
     }
     
+    // MARK: - IBAction
     func seek(percent:CGFloat) {
         self.playerVC?.seek(seconds: percent * (playerVC?.movie.duration.seconds ?? 0))
-    }
-    
-    func addTextPressed(data:MovieAttachmentProtocol? = nil) {
-        viewModel.addText(data ?? TextAttachmentDB.demo)
     }
 }
 
@@ -115,8 +120,6 @@ extension EditorViewController:ViewModelPresenter {
         }
     }
 }
-
-
 
 //MARK: loadUI
 fileprivate extension EditorViewController {

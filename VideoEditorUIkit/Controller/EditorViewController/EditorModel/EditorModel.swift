@@ -36,22 +36,6 @@ class EditorModel {
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     
-    func addText(_ data:MovieAttachmentProtocol, canAddToDB:Bool = true) {
-        Task {
-            if let dbData = data as? TextAttachmentDB,
-               canAddToDB
-            {
-                DB.db.movieParameters.editingMovie?.texts.append(dbData)
-            }
-            if await self.prepare.addText(data: data) {
-                await videoAdded()
-            } else {
-               // await presenter?.errorAddingVideo()
-                await videoAdded()
-            }
-        }
-    }
-    
     func loadVideo(_ url:URL?, canShowError:Bool = true) {
         Task {
             dbParametersHolder = DB.db.movieParameters.editingMovie
@@ -97,6 +81,32 @@ fileprivate extension EditorModel {
             return await addDBTexts()
         } else {
             return
+        }
+    }
+}
+
+extension EditorModel {
+    func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
+        if let text = data as? MovieAttachmentProtocol {
+            addText(text)
+        } else {
+            print("error adding data: nothing to add ", data)
+        }
+    }
+    
+    private func addText(_ data:MovieAttachmentProtocol, canAddToDB:Bool = true) {
+        Task {
+            if let dbData = data as? TextAttachmentDB,
+               canAddToDB
+            {
+                DB.db.movieParameters.editingMovie?.texts.append(dbData)
+            }
+            if await self.prepare.addText(data: data) {
+                await videoAdded()
+            } else {
+               // await presenter?.errorAddingVideo()
+                await videoAdded()
+            }
         }
     }
 }
