@@ -28,6 +28,14 @@
 		8D4C17362B3C21E100953143 /* Extensions_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */; };
 		8D4C173D2B3C255200953143 /* PlayerSuperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */; };
 		8D4C17402B3C96BF00953143 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173F2B3C96BF00953143 /* EditorModel.swift */; };
+		8D5A32922B95C8CD00ACA8C8 /* EditorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A32912B95C8CD00ACA8C8 /* EditorOverlayVC.swift */; };
+		8D5A32942B964AB800ACA8C8 /* Reusable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5A32932B964AB800ACA8C8 /* Reusable.storyboard */; };
+		8D5A32992B96524200ACA8C8 /* EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A32982B96524200ACA8C8 /* EditorOverlayContainerVC.swift */; };
+		8D5A329C2B9653EF00ACA8C8 /* EditorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A329B2B9653EF00ACA8C8 /* EditorCollectionCell.swift */; };
+		8D5A329E2B96568A00ACA8C8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A329D2B96568A00ACA8C8 /* BaseView.swift */; };
+		8D5A32A02B9656D200ACA8C8 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A329F2B9656D200ACA8C8 /* BaseButton.swift */; };
+		8D5A32A22B965B5C00ACA8C8 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A32A12B965B5C00ACA8C8 /* K.swift */; };
+		8D5A32A42B965DDD00ACA8C8 /* UICollectionView_EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A32A32B965DDD00ACA8C8 /* UICollectionView_EditorOverlayContainerVC.swift */; };
 		8D5FAE9F2B9553A700380CA4 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */; };
 		8D8BF29C2B3FFFB7008AFC62 /* AssetParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */; };
 		8D9F32EC2B3DACEB00697F76 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32EB2B3DACEB00697F76 /* PlayerViewController.swift */; };
@@ -73,6 +81,14 @@
 		8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIKit.swift; sourceTree = "<group>"; };
 		8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSuperVC.swift; sourceTree = "<group>"; };
 		8D4C173F2B3C96BF00953143 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
+		8D5A32912B95C8CD00ACA8C8 /* EditorOverlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorOverlayVC.swift; sourceTree = "<group>"; };
+		8D5A32932B964AB800ACA8C8 /* Reusable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reusable.storyboard; sourceTree = "<group>"; };
+		8D5A32982B96524200ACA8C8 /* EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
+		8D5A329B2B9653EF00ACA8C8 /* EditorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCollectionCell.swift; sourceTree = "<group>"; };
+		8D5A329D2B96568A00ACA8C8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		8D5A329F2B9656D200ACA8C8 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		8D5A32A12B965B5C00ACA8C8 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		8D5A32A32B965DDD00ACA8C8 /* UICollectionView_EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView_EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
 		8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAsset.swift; sourceTree = "<group>"; };
 		8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetParametersViewController.swift; sourceTree = "<group>"; };
 		8D9F32EB2B3DACEB00697F76 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +229,7 @@
 				8D2B57742B41A1A600C2B3F5 /* EditorViewController */,
 				8DEF7B4A2B414B13007B8737 /* AssetParametersViewController */,
 				8D2B57752B41A1B200C2B3F5 /* PlayerViewController */,
+				8D5A32952B964B9100ACA8C8 /* Reusable */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -220,6 +237,7 @@
 		8D4C17382B3C23D100953143 /* Mics */ = {
 			isa = PBXGroup;
 			children = (
+				8D5A32A12B965B5C00ACA8C8 /* K.swift */,
 				8D4C173A2B3C243A00953143 /* video */,
 				8D23CA652B47716E00FC94B1 /* Extension */,
 				8D4C17212B3B2DF600953143 /* Assets.xcassets */,
@@ -231,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				8D4C171E2B3B2DF400953143 /* Main.storyboard */,
+				8D5A32932B964AB800ACA8C8 /* Reusable.storyboard */,
 				8D4C17232B3B2DF600953143 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -252,6 +271,41 @@
 				8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */,
 			);
 			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		8D5A32902B95C88C00ACA8C8 /* EditorOverlayVC */ = {
+			isa = PBXGroup;
+			children = (
+				8D5A32912B95C8CD00ACA8C8 /* EditorOverlayVC.swift */,
+				8D5A329A2B9653C100ACA8C8 /* EditorOverlayContainerVC */,
+			);
+			path = EditorOverlayVC;
+			sourceTree = "<group>";
+		};
+		8D5A32952B964B9100ACA8C8 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				8D5A32902B95C88C00ACA8C8 /* EditorOverlayVC */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		8D5A329A2B9653C100ACA8C8 /* EditorOverlayContainerVC */ = {
+			isa = PBXGroup;
+			children = (
+				8D5A32982B96524200ACA8C8 /* EditorOverlayContainerVC.swift */,
+				8D5A32A32B965DDD00ACA8C8 /* UICollectionView_EditorOverlayContainerVC.swift */,
+				8D5A32A52B965DEC00ACA8C8 /* Cell */,
+			);
+			path = EditorOverlayContainerVC;
+			sourceTree = "<group>";
+		};
+		8D5A32A52B965DEC00ACA8C8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8D5A329B2B9653EF00ACA8C8 /* EditorCollectionCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8D9F32F22B3DDFFF00697F76 /* Model */ = {
@@ -316,6 +370,8 @@
 		8DEF7B5C2B41712E007B8737 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				8D5A329D2B96568A00ACA8C8 /* BaseView.swift */,
+				8D5A329F2B9656D200ACA8C8 /* BaseButton.swift */,
 				8DEF7B5D2B4174F9007B8737 /* AssetAttachmentView */,
 			);
 			path = UIView;
@@ -400,6 +456,7 @@
 				8D4C172F2B3B32CF00953143 /* 2.mov in Resources */,
 				8D4C17202B3B2DF400953143 /* Main.storyboard in Resources */,
 				8DE412FD2B92650600705E52 /* 1.mov in Resources */,
+				8D5A32942B964AB800ACA8C8 /* Reusable.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,9 +480,11 @@
 				8D2B57772B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift in Sources */,
 				8D4C17192B3B2DF400953143 /* AppDelegate.swift in Sources */,
 				8DEF7B612B41838C007B8737 /* AssetRawView.swift in Sources */,
+				8D5A32922B95C8CD00ACA8C8 /* EditorOverlayVC.swift in Sources */,
 				8D9F32F92B3E081500697F76 /* Player.swift in Sources */,
 				8D2B577C2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift in Sources */,
 				8DEA29332B8ECA6100FDF952 /* String.swift in Sources */,
+				8D5A32A42B965DDD00ACA8C8 /* UICollectionView_EditorOverlayContainerVC.swift in Sources */,
 				8D4C17362B3C21E100953143 /* Extensions_UIKit.swift in Sources */,
 				8D9F32EC2B3DACEB00697F76 /* PlayerViewController.swift in Sources */,
 				8DEF7B4E2B414B6A007B8737 /* AssetHeaderCell.swift in Sources */,
@@ -435,8 +494,12 @@
 				8D2B577E2B41A37000C2B3F5 /* AssetAttachmentProtocol.swift in Sources */,
 				8DF7C3872B49E623007EFFB1 /* AnimateVideoLayerCA.swift in Sources */,
 				8D2B57792B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift in Sources */,
+				8D5A32A02B9656D200ACA8C8 /* BaseButton.swift in Sources */,
 				8DEA29312B8EC95B00FDF952 /* CGFloat.swift in Sources */,
+				8D5A329E2B96568A00ACA8C8 /* BaseView.swift in Sources */,
 				8D8BF29C2B3FFFB7008AFC62 /* AssetParametersViewController.swift in Sources */,
+				8D5A32A22B965B5C00ACA8C8 /* K.swift in Sources */,
+				8D5A329C2B9653EF00ACA8C8 /* EditorCollectionCell.swift in Sources */,
 				8D23CA602B4769FD00FC94B1 /* PrepareEditorModel.swift in Sources */,
 				8DEA29352B8ECC1900FDF952 /* UIColor.swift in Sources */,
 				8DEF7B5F2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift in Sources */,
@@ -445,6 +508,7 @@
 				8D23CA622B476C4700FC94B1 /* EditorVideoLayer.swift in Sources */,
 				8DEF7B542B414E78007B8737 /* DB.swift in Sources */,
 				8D5FAE9F2B9553A700380CA4 /* AVAsset.swift in Sources */,
+				8D5A32992B96524200ACA8C8 /* EditorOverlayContainerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

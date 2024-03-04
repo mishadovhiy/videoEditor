@@ -32,8 +32,6 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
         }
         cell.previewImageView.constraints.first(where: {$0.firstAttribute == .width})?.constant = MovieGeneralParameterList.AssetsData.cellWidth
         cell.previewImageView.layoutIfNeeded()
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.green.cgColor
         return cell
     }
     

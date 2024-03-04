@@ -50,6 +50,38 @@
             endingLineNumber = "47"
             landmarkName = "applicationWillResignActive(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "03F4A170-3288-4DE0-9583-1455DBCC3061 - 532aea65cbc6b449"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VideoEditorUIkit.AppDelegate.applicationWillResignActive(__C.UIApplication) -&gt; ()"
+                  moduleName = "VideoEditorUIkit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "472">
+               </Location>
+               <Location
+                  uuid = "03F4A170-3288-4DE0-9583-1455DBCC3061 - 532aea65cbc6b48b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VideoEditorUIkit.AppDelegate.applicationWillResignActive(__C.UIApplication) -&gt; ()"
+                  moduleName = "VideoEditorUIkit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "236">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -111,6 +143,21 @@
                   startingLineNumber = "41"
                   endingLineNumber = "41"
                   offsetFromSymbolStart = "472">
+               </Location>
+               <Location
+                  uuid = "999E00FD-C0E8-44A5-8A42-37A61A5D5951 - 20427221f9829cdf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VideoEditorUIkit.AppDelegate.applicationDidBecomeActive(__C.UIApplication) -&gt; ()"
+                  moduleName = "VideoEditorUIkit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "236">
                </Location>
             </Locations>
          </BreakpointContent>
