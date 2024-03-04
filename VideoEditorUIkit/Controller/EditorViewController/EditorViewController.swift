@@ -21,8 +21,12 @@ class EditorViewController: SuperVC {
         return self.children.first(where: {$0 is AssetParametersViewController
         }) as? AssetParametersViewController
     }
+    
+    override var initialAnimation: Bool {
+        return false
+    }
     var viewModel:EditorModel!
-
+    
     override func loadView() {
         super.loadView()
         loadUI(movieUrl: lastEditedVideoURL())
@@ -33,8 +37,13 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
-    override var initialAnimation: Bool {
-        return false
+    private func newVideoAdded() {
+        self.playerVC?.seek(seconds: .zero)
+        playerVC?.durationLabel?.text = "\(playerVC?.movie.duration.seconds ?? 0)"
+        self.playerVC?.endRefreshing {
+            self.playerVC?.play(replacing: true)
+        }
+        self.assetParametersVC?.assetChanged()
     }
     
     func seek(percent:CGFloat) {
@@ -95,11 +104,7 @@ extension EditorViewController:ViewModelPresenter {
     }
     
     @MainActor func videoAdded() {
-        self.playerVC?.seek(seconds: .zero)
-        playerVC?.durationLabel?.text = "\(playerVC?.movie.duration.seconds ?? 0)"
-        self.playerVC?.endRefreshing {
-            self.playerVC?.play(replacing: true)
-        }
+        newVideoAdded()
     }
     
     @MainActor func errorAddingVideo() {

@@ -10,14 +10,14 @@ import UIKit
 struct MovieGeneralParameterList {
     
     var songs:[SongRow]
-    var text:[RegularRow]
+    var text:[MovieAttachmentProtocol]
     var media:[MediaRow]
-    var asstes:[AssetsData]
+    var previewAssets:[AssetsData]
     /**
      - total duration of all assets
      */
     var duration:CGFloat {
-        return asstes.reduce(0) { partialResult, data in
+        return previewAssets.reduce(0) { partialResult, data in
             return partialResult + data.duration
         }
     }

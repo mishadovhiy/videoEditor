@@ -114,6 +114,16 @@ extension PrepareEditorModel {
                 print("tracks: ", mut?.asset?.tracks)
                 print(vids, " tregfewert")
             }
+            movie.tracks(withMediaType: .video).forEach {
+                print($0.segments.count, " rtehytbrt")
+                $0.segments.forEach {
+                    let time = $0.timeMapping.source
+                    print("startFromsd: ", time.start)
+                    print("startDuration: ", time.duration.seconds)
+                    
+                    print($0.description, " rtgerfegtr")
+                }
+            }
             print(vids, " rhtgefwergth")
             print(movie, " movie performAddVideo")
             print(duration, " duration createVideoaasdqw")

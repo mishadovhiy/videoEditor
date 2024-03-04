@@ -10,7 +10,8 @@ import Foundation
 //MARK: test
 extension MovieGeneralParameterList {
     static var test:Self {
-        return .init(songs: .test, text: .test, media: .test, asstes: .test)
+        let texts:[RegularRow] = .test
+        return .init(songs: .test, text: texts, media: .test, previewAssets: .test)
     }
 }
 

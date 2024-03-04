@@ -11,6 +11,9 @@ import UIKit
 extension AssetParametersViewController {
     func loadUI() {
         viewModel = .init()
+        viewModel.reloadData = {
+            self.collectionView.reloadData()
+        }
         scrollView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AssetParametersViewController: UIViewController {
     
@@ -14,14 +15,19 @@ class AssetParametersViewController: UIViewController {
     @IBOutlet weak var assetStackView: UIStackView!
     
     var viewModel:AssetParametersViewControllerViewModel!
+    private var parentVC: EditorViewController? {
+        return parent as? EditorViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUI()
     }
     
-    var parentVC: EditorViewController? {
-        return parent as? EditorViewController
+    func assetChanged() {
+        Task {
+            await viewModel.assetChanged(parentVC?.viewModel.movie)
+        }
     }
     
     func scrollPercent(_ percent:CGFloat) {

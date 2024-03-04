@@ -130,6 +130,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		8D25E8272B95707D00CC1AF4 /* AssetParametersViewControllerViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8DBFCB902B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift */,
+			);
+			path = AssetParametersViewControllerViewModel;
+			sourceTree = "<group>";
+		};
 		8D2B57732B41A18200C2B3F5 /* AVPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +264,6 @@
 		8D9F32F72B3DE15800697F76 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8DBFCB902B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -275,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */,
+				8D25E8272B95707D00CC1AF4 /* AssetParametersViewControllerViewModel */,
 				8D2B57782B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift */,
 				8D2B57762B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift */,
 				8DEF7B4F2B414B81007B8737 /* Cells */,
