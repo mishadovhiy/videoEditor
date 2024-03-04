@@ -27,6 +27,7 @@
 		8D4C17362B3C21E100953143 /* Extensions_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */; };
 		8D4C173D2B3C255200953143 /* PlayerSuperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */; };
 		8D4C17402B3C96BF00953143 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C173F2B3C96BF00953143 /* EditorModel.swift */; };
+		8D5FAE9F2B9553A700380CA4 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */; };
 		8D8BF29C2B3FFFB7008AFC62 /* AssetParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */; };
 		8D9F32EC2B3DACEB00697F76 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32EB2B3DACEB00697F76 /* PlayerViewController.swift */; };
 		8D9F32F92B3E081500697F76 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F32F82B3E081500697F76 /* Player.swift */; };
@@ -70,6 +71,7 @@
 		8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIKit.swift; sourceTree = "<group>"; };
 		8D4C173C2B3C255200953143 /* PlayerSuperVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSuperVC.swift; sourceTree = "<group>"; };
 		8D4C173F2B3C96BF00953143 /* EditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
+		8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAsset.swift; sourceTree = "<group>"; };
 		8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetParametersViewController.swift; sourceTree = "<group>"; };
 		8D9F32EB2B3DACEB00697F76 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		8D9F32F82B3E081500697F76 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */,
 				8DEA29302B8EC95B00FDF952 /* CGFloat.swift */,
+				8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */,
 				8DEA29322B8ECA6100FDF952 /* String.swift */,
 				8DEA29342B8ECC1900FDF952 /* UIColor.swift */,
 				8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */,
@@ -437,6 +440,7 @@
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
 				8D23CA622B476C4700FC94B1 /* EditorVideoLayer.swift in Sources */,
 				8DEF7B542B414E78007B8737 /* DB.swift in Sources */,
+				8D5FAE9F2B9553A700380CA4 /* AVAsset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

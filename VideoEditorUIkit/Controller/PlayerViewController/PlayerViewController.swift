@@ -11,7 +11,8 @@ import Photos
 
 protocol PlayerViewControllerPresenter {
     func addTrackPressed()
-    func deleteAllPressed()
+    func clearDataPressed()
+    func reloadUI()
     func playTimeChanged(_ percent:CGFloat)
 }
 
@@ -61,7 +62,14 @@ class PlayerViewController: PlayerSuperVC {
     @objc fileprivate func deletePressed(_ sender:UIButton) {
         startRefreshing {
             self.pause()
-            self.preseter?.deleteAllPressed()
+            self.preseter?.clearDataPressed()
+        }
+    }
+    
+    @objc fileprivate func reloadUIPressed(_ sender:UIButton) {
+        startRefreshing {
+            self.pause()
+            self.preseter?.reloadUI()
         }
     }
 }
@@ -85,21 +93,33 @@ fileprivate extension PlayerViewController {
         view.addSubview(button)
         button.addConstaits([
             .bottom:10, .left:10
-        ], superView: view)
+        ])
     }
     
     private func addDeleteAllButton() {
+        
         if let _ = view.subviews.first(where: {$0.layer.name == "deleteButton"}) {
             return
         }
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 20
+        stack.layer.name = "deleteButton"
+        view.addSubview(stack)
+        
         let button = UIButton()
         button.setTitle("deleteAll", for: .normal)
         button.addTarget(self, action: #selector(self.deletePressed(_:)), for: .touchUpInside)
-        button.layer.name = "deleteButton"
-        view.addSubview(button)
-        button.addConstaits([
+        stack.addArrangedSubview(button)
+        
+        let clearButton = UIButton()
+        clearButton.setTitle("reload all", for: .normal)
+        clearButton.addTarget(self, action: #selector(self.reloadUIPressed(_:)), for: .touchUpInside)
+        stack.addArrangedSubview(clearButton)
+        
+        stack.addConstaits([
             .top:10, .left:10
-        ], superView: view)
+        ])
     }
 }
 

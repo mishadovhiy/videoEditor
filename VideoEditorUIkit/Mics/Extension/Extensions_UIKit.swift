@@ -24,7 +24,7 @@ extension UIViewController {
         self.addChild(child)
         
         (toView ?? self.view).addSubview(child.view)
-        child.view.addConstaits(constaits ?? [.left:0, .right:0, .top:0, .bottom:0], superView: toView ?? self.view)
+        child.view.addConstaits(constaits ?? [.left:0, .right:0, .top:0, .bottom:0])
         child.didMove(toParent: self)
         if let name {
             child.view.layer.name = name
@@ -46,11 +46,14 @@ extension UIViewController {
 
 
 extension UIView {
-    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], superView:UIView, safeArea:Bool = true) {
+    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], safeArea:Bool = true) {
+        guard let superview else {
+            return
+        }
         constants.forEach { (key, value) in
             let keyNil = key == .height || key == .width
-            let item:Any? = keyNil ? nil : (safeArea ? superView.safeAreaLayoutGuide : superView)
-            superView.addConstraint(.init(item: self, attribute: key, relatedBy: .equal, toItem: item, attribute: key, multiplier: 1, constant: value))
+            let item:Any? = keyNil ? nil : (safeArea ? superview.safeAreaLayoutGuide : superview)
+            superview.addConstraint(.init(item: self, attribute: key, relatedBy: .equal, toItem: item, attribute: key, multiplier: 1, constant: value))
         }
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -108,5 +111,16 @@ extension UIColor {
         let all:[UIColor] = [.green.withAlphaComponent(0.3), .blue.withAlphaComponent(0.3), .orange, .green, .blue, .black, .purple]
         return all.randomElement() ?? .red
         
+    }
+}
+
+extension UIApplication {
+    var keyWindow: UIWindow? {
+        UIApplication
+            .shared
+            .connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .last { $0.isKeyWindow }
     }
 }

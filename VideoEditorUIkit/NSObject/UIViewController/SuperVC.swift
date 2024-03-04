@@ -95,7 +95,7 @@ fileprivate extension LoaderVC {
         if initialAnimation {
             view.startAnimating()
         }
-        view.addConstaits([.centerX:0, .centerY:0, .width:35, .height:35], superView: self.view)
+        view.addConstaits([.centerX:0, .centerY:0, .width:35, .height:35])
         view.layer.cornerRadius = view.bounds.size.width / 2
         view.layer.shadowRadius = view.layer.cornerRadius
 

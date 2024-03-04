@@ -25,7 +25,6 @@ class EditorViewController: SuperVC {
 
     override func loadView() {
         super.loadView()
-        print(lastEditedVideoURL())
         loadUI(movieUrl: lastEditedVideoURL())
     }
     
@@ -49,14 +48,20 @@ class EditorViewController: SuperVC {
 
 
 extension EditorViewController:PlayerViewControllerPresenter {
-    func deleteAllPressed() {
+    func reloadUI() {
+        UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
+        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        self.view.removeFromSuperview()
+        self.viewModel = nil
+        self.removeFromParent()
+    }
+    
+    func clearDataPressed() {
         movieURL = nil
         Task {
             DB.db.movieParameters = .init(dict: [:])
             await MainActor.run {
-                self.viewModel = nil
-                self.viewModel = .init(presenter: self)
-                self.addTrackPressed()
+                self.reloadUI()
             }
         }
     }
@@ -74,11 +79,7 @@ extension EditorViewController:PlayerViewControllerPresenter {
 
 extension EditorViewController:ViewModelPresenter {
     @MainActor func deleteAllData() {
-        UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
-        UIApplication.shared.keyWindow?.makeKeyAndVisible()
-        self.view.removeFromSuperview()
-        self.viewModel = nil
-        self.removeFromParent()
+        self.reloadUI()
     }
     
     var movieURL: URL? {
@@ -161,14 +162,3 @@ extension EditorViewController {
     }
 }
 
-
-extension UIApplication {
-    var keyWindow: UIWindow? {
-        UIApplication
-            .shared
-            .connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .flatMap { $0.windows }
-            .last { $0.isKeyWindow }
-    }
-}

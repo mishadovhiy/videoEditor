@@ -12,7 +12,6 @@ struct PrepareEditorModel {
     
     var delegate:PrepareEditorModelDelegate!
     private let layerEditor:EditorVideoLayer
-    private var compositionHolder:AVMutableComposition?
     
     init(delegate: PrepareEditorModelDelegate) {
         self.delegate = delegate
@@ -21,23 +20,21 @@ struct PrepareEditorModel {
     
     mutating func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> URL? {
         print("exportexporting ", asset.duration)
-        guard let composition = toComposition(asset: asset, addingVideo: isVideo)
+        guard let composition = await isVideo ? toComposition(asset: asset, addingVideo: isVideo) : delegate.movieHolder//
         else {
             print("Cannot create export session.")
             return nil
         }
         let export = AVAssetExportSession(composition: composition)
         let results = await export?.exportVideo(videoComposition: videoComposition)
-        if isVideo {
-            compositionHolder = composition
-        }
         return results
     }
     
     
     mutating func addText(data:MovieAttachmentProtocol) async -> Bool {
         let asset = delegate.movie ?? .init()
-        guard let composition = addTextComposition(asset: asset)
+        print("start tefrgtref ", asset.duration)
+        guard let composition = delegate.movieHolder//addTextComposition(asset: asset)
         else { return false }
         let assetTrack = asset.tracks(withMediaType: .video)
         let videoSize = layerEditor.videoSize(assetTrack: assetTrack.first!)
@@ -46,11 +43,7 @@ struct PrepareEditorModel {
         layerEditor.addLayer(to: overlayLayer,
             videoSize: videoSize, 
                              text: data as? TextAttachmentDB ?? .demo)
-//        layerEditor.addLayer(
-//            video: "Happy Birthday,\n-",
-//            to: overlayLayer,
-//            videoSize: videoSize, videoDuration: asset.duration.seconds)
-        let videoComposition = layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
+        let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false) {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
             return true
@@ -71,16 +64,16 @@ struct PrepareEditorModel {
 
 fileprivate extension PrepareEditorModel {
     
-    private func toComposition(asset:AVAsset, addingVideo:Bool) -> AVMutableComposition? {
+    private func toComposition(asset:AVAsset, addingVideo:Bool) async -> AVMutableComposition? {
         let composition = AVMutableComposition()
         let compositionAudioTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: CMPersistentTrackID(kCMPersistentTrackID_Invalid))
-        let duration = CMTime(seconds: asset.duration.seconds, preferredTimescale: EditorModel.timeScale)
+        let duration = await asset.duration()
         asset.tracks(withMediaType: .video).forEach( {
-            let sourceAudioTrack = $0
             do {
-                try compositionAudioTrack?.insertTimeRange(CMTimeRange(start: CMTime.zero, duration: duration), of: sourceAudioTrack, at: CMTime.zero)
+                try compositionAudioTrack?.insertTimeRange(CMTimeRange(start: CMTime.zero, duration: duration), of: $0, at: CMTime.zero)
             } catch { }
         })
+        /// add audio from the video
         if addingVideo {
             let audio = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID(kCMPersistentTrackID_Invalid))
             let audioDuration = CMTimeRangeMake(start: CMTime.zero, duration: duration)
@@ -97,28 +90,6 @@ fileprivate extension PrepareEditorModel {
         return composition
     }
     
-    
-    private func addTextComposition(asset:AVAsset) -> AVMutableComposition? {
-      //  return toComposition(asset: asset, addingVideo: true)
-        let composition = AVMutableComposition()
-        let duration = CMTime(seconds: asset.duration.seconds, preferredTimescale: EditorModel.timeScale)
-        let timeRange = CMTimeRange(start: .zero, duration: duration)
-        asset.tracks(withMediaType: .audio).forEach {
-            let audioAssetTrack = $0
-            do {
-                if let compositionAudioTrack = composition.addMutableTrack(
-                    withMediaType: audioAssetTrack.mediaType,
-                    preferredTrackID: kCMPersistentTrackID_Invalid) {
-                    try compositionAudioTrack.insertTimeRange(
-                        timeRange,
-                        of: audioAssetTrack,
-                        at: .zero)
-                }
-            }
-            catch {}
-        }
-        return composition
-    }
 }
 
 
@@ -130,12 +101,14 @@ extension PrepareEditorModel {
         }
         let newMovie = AVURLAsset(url: url)
         do {
-            let duration = try await newMovie.load(.duration)
+            let duration = await newMovie.duration()
             let range = CMTimeRangeMake(start: CMTime.zero, duration: duration)
             try movie.insertTimeRange(range, of: newMovie, at: .zero)
-            
+            print(movie.tracks.count, " ")
             print(movie, " movie performAddVideo")
+            print(duration, " duration createVideoaasdqw")
             if let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true) {
+                delegate.movieHolder = movie
                 await self.movieUpdated(movie: movie, movieURL: localUrl)
                 return true
             }
@@ -162,5 +135,6 @@ extension PrepareEditorModel {
 
 protocol PrepareEditorModelDelegate {
     var movie:AVMutableComposition? { get set }
+    var movieHolder:AVMutableComposition?{ get set}
     var movieURL:URL? {get set}
 }

@@ -18,8 +18,13 @@ extension AVAssetExportSession {
         let exportURL = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent(videoName)
             .appendingPathExtension("mp4")
-        if let videoComposition {
+        if let videoComposition,
+           (videoComposition.renderSize.width > 0 && videoComposition.renderSize.height > 0)
+        {
+            print(videoComposition.renderSize, " grerfewet")
             self.videoComposition = videoComposition
+        } else if let videoComposition {
+            print(videoComposition.renderSize, " grerfewet error adding videoComposition")
         }
         self.metadata = []
         self.shouldOptimizeForNetworkUse = false

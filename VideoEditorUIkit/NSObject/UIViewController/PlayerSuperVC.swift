@@ -168,7 +168,7 @@ fileprivate extension PlayerSuperVC {
         label.isUserInteractionEnabled = false
         label.textColor = .white
         self.view.addSubview(label)
-        label.addConstaits([.right:0, .bottom:0], superView: self.view)
+        label.addConstaits([.right:0, .bottom:0])
     }
     
     private func addPlayButton() {
@@ -182,7 +182,7 @@ fileprivate extension PlayerSuperVC {
         button.layer.name = "playButton"
         button.addConstaits([
             .bottom:10, .left:10, .right:10
-        ], superView: view)
+        ])
     }
     
     private func addPlayerView() {

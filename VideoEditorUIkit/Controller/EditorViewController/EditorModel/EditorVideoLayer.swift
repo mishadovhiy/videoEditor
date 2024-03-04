@@ -18,27 +18,11 @@ struct EditorVideoLayer {
         self.animation = .init()
     }
     
-    func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) -> AVMutableVideoComposition? {
-        var tracks:[AVMutableCompositionTrack] = []
-        assetTrack.forEach({
-            if let compositionTrack = composition.addMutableTrack(
-                withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) {
-                tracks.append(compositionTrack)
-                do {
-                    try compositionTrack.insertTimeRange(.init(start: .zero, duration: $0.asset!.duration), of: $0, at: .zero)
-                } catch {  }
-            }
-            
-        })
-        let instraction = videoInstractions(track: tracks.first!, overlayLayer: overlayLayer)
-        let secondLayer = CALayer()
-        secondLayer.frame = .init(origin: .zero, size: .init(width: (overlayLayer?.bounds.width ?? 0) / 2, height: (overlayLayer?.bounds.height ?? 0) / 2))
-        secondLayer.backgroundColor = UIColor.red.cgColor
-        secondLayer.borderWidth = 5
-        secondLayer.borderColor = UIColor.green.cgColor
-        overlayLayer?.addSublayer(secondLayer)
-        let instraction2 = videoInstractions(track: tracks.first!, overlayLayer: secondLayer)
+    func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) async -> AVMutableVideoComposition? {
+        let tracks:[AVMutableCompositionTrack] = composition.tracks
 
+        overlayLayer?.isGeometryFlipped = true
+        let instraction = await videoInstractions(track: tracks.first(where: {$0.naturalSize.width != 0})!, overlayLayer: overlayLayer, composition: composition)
         var i = 0
         assetTrack.forEach({
             let layerInstruction = compositionLayerInstruction(
@@ -46,7 +30,6 @@ struct EditorVideoLayer {
                 assetTrack: $0)
             i += 1
             instraction.instractions.layerInstructions.append(layerInstruction)
-            instraction2.instractions.layerInstructions.append(layerInstruction)
         })
         return instraction.composition
     }
@@ -76,7 +59,7 @@ struct EditorVideoLayer {
 //MARK: add layers
 fileprivate extension EditorVideoLayer {
     
-    private func videoInstractions(track:AVAssetTrack, overlayLayer: CALayer?) -> InstractionsResult {
+    private func videoInstractions(track:AVAssetTrack, overlayLayer: CALayer?, composition:AVMutableComposition) async -> InstractionsResult {
         let videoSize = videoSize(assetTrack: track)
         let videoLayer = CALayer()
         let size:CGSize = overlayLayer?.frame.size ?? .init(width: 10, height: 10)
@@ -97,9 +80,11 @@ fileprivate extension EditorVideoLayer {
             in: outputLayer)
         
         let instruction = AVMutableVideoCompositionInstruction()
-        instruction.timeRange = CMTimeRange(
+        print("instractions dusration: tefrgtref ", track.asset?.duration ?? .zero)
+        print("sizeeeaea ", videoSize)
+        instruction.timeRange = await CMTimeRange(
             start: .zero,
-            duration: track.asset?.duration ?? .zero)
+            duration: composition.duration())
         videoComposition.instructions = [instruction]
         return .init(instractions: instruction, composition: videoComposition)
     }

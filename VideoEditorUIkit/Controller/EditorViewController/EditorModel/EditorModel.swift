@@ -20,7 +20,8 @@ class EditorModel {
     var prepare:PrepareEditorModel!
     var _movie:AVMutableComposition?
     private var dbParametersHolder:DB.DataBase.MovieParametersDB.MovieDB?
-    
+    var movieHolder:AVMutableComposition?
+
     init(presenter:ViewModelPresenter) {
         self.presenter = presenter
         self.prepare = .init(delegate: self)
@@ -45,7 +46,7 @@ class EditorModel {
             if await self.prepare.addText(data: data) {
                 await videoAdded()
             } else {
-                //await presenter?.errorAddingVideo()
+               // await presenter?.errorAddingVideo()
                 await videoAdded()
             }
         }
@@ -53,8 +54,9 @@ class EditorModel {
     
     func loadVideo(_ url:URL?, canShowError:Bool = true) {
         Task {
+            dbParametersHolder = DB.db.movieParameters.editingMovie
             if await prepare.createVideo(url) {
-                await addAllDB()
+                await addDBTexts()
                 await presenter?.videoAdded()
             } else {
                 if canShowError {
@@ -86,17 +88,7 @@ fileprivate extension EditorModel {
             await presenter?.videoAdded()
         }
     }
-    func addAllDB() async {
-        self.dbParametersHolder = DB.db.movieParameters.editingMovie
-        await addDBTexts()
-//        if let first = DB.db.movieParameters.editingMovie?.texts.first {
-//            if await self.prepare.addText(data: first) {
-//                await presenter?.videoAdded()
-//            } else {
-//                await presenter?.videoAdded()
-//            }
-//        }
-    }
+
     
     private func addDBTexts() async {
         if let first = dbParametersHolder?.texts.first {
@@ -138,7 +130,7 @@ extension EditorModel:PrepareEditorModelDelegate {
             _movie = newValue
         }
     }
-    
+        
     var movieURL: URL? {
         get {
             presenter?.movieURL

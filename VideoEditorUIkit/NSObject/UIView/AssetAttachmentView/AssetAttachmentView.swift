@@ -60,12 +60,12 @@ fileprivate extension AssetAttachmentView {
         layerStack.axis = .vertical
         layerStack.distribution = .fillEqually
         addSubview(layerStack)
-        layerStack.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superView: self)
+        layerStack.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
         for i in 0..<5 {
             let view = UIView()
             view.isHidden = true
             layerStack.addArrangedSubview(view)
-            view.addConstaits([.height:AssetParametersViewControllerViewModel.rowsHeight], superView: layerStack)
+            view.addConstaits([.height:AssetParametersViewControllerViewModel.rowsHeight])
         }
         self.updateView()
     }
