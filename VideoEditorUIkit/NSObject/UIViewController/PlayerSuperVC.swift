@@ -49,7 +49,6 @@ class PlayerSuperVC: SuperVC {
             return nil
         }
         return .init(url: movieURL)
-       // return .init(asset: movie)
     }
     
     func play(replacing:Bool = true) {
@@ -124,9 +123,7 @@ class PlayerSuperVC: SuperVC {
     func removeAllObservers(delete:Bool = true) {
         if let timeChangeObserver {
             playerLayer?.player?.removeTimeObserver(timeChangeObserver)
-           // if delete {
-                self.timeChangeObserver = nil
-           // }
+            self.timeChangeObserver = nil
         }
     }
     
