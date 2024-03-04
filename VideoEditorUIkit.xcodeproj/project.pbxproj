@@ -52,8 +52,7 @@
 		8DEF7B542B414E78007B8737 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B532B414E78007B8737 /* DB.swift */; };
 		8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B562B41509A007B8737 /* MovieDB.swift */; };
 		8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B582B4150BB007B8737 /* DataBase.swift */; };
-		8DEF7B5B2B41711F007B8737 /* AssetAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B5A2B41711F007B8737 /* AssetAttachmentView.swift */; };
-		8DEF7B5F2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B5E2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift */; };
+		8DEF7B5B2B41711F007B8737 /* StackAssetAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B5A2B41711F007B8737 /* StackAssetAttachmentView.swift */; };
 		8DEF7B612B41838C007B8737 /* AssetRawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B602B41838C007B8737 /* AssetRawView.swift */; };
 		8DF7C3872B49E623007EFFB1 /* AnimateVideoLayerCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7C3862B49E623007EFFB1 /* AnimateVideoLayerCA.swift */; };
 /* End PBXBuildFile section */
@@ -105,8 +104,7 @@
 		8DEF7B532B414E78007B8737 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		8DEF7B562B41509A007B8737 /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
 		8DEF7B582B4150BB007B8737 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
-		8DEF7B5A2B41711F007B8737 /* AssetAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAttachmentView.swift; sourceTree = "<group>"; };
-		8DEF7B5E2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delegate_AssetAttachmentViewDelegate.swift; sourceTree = "<group>"; };
+		8DEF7B5A2B41711F007B8737 /* StackAssetAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackAssetAttachmentView.swift; sourceTree = "<group>"; };
 		8DEF7B602B41838C007B8737 /* AssetRawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetRawView.swift; sourceTree = "<group>"; };
 		8DF7C3862B49E623007EFFB1 /* AnimateVideoLayerCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateVideoLayerCA.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -331,9 +329,9 @@
 			isa = PBXGroup;
 			children = (
 				8D8BF29B2B3FFFB7008AFC62 /* AssetParametersViewController.swift */,
-				8D25E8272B95707D00CC1AF4 /* AssetParametersViewControllerViewModel */,
 				8D2B57782B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift */,
 				8D2B57762B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift */,
+				8D25E8272B95707D00CC1AF4 /* AssetParametersViewControllerViewModel */,
 				8DEF7B4F2B414B81007B8737 /* Cells */,
 			);
 			path = AssetParametersViewController;
@@ -372,19 +370,18 @@
 			children = (
 				8D5A329D2B96568A00ACA8C8 /* BaseView.swift */,
 				8D5A329F2B9656D200ACA8C8 /* BaseButton.swift */,
-				8DEF7B5D2B4174F9007B8737 /* AssetAttachmentView */,
+				8DEF7B5D2B4174F9007B8737 /* StackAssetAttachmentView */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
 		};
-		8DEF7B5D2B4174F9007B8737 /* AssetAttachmentView */ = {
+		8DEF7B5D2B4174F9007B8737 /* StackAssetAttachmentView */ = {
 			isa = PBXGroup;
 			children = (
-				8DEF7B5A2B41711F007B8737 /* AssetAttachmentView.swift */,
+				8DEF7B5A2B41711F007B8737 /* StackAssetAttachmentView.swift */,
 				8DEF7B602B41838C007B8737 /* AssetRawView.swift */,
-				8DEF7B5E2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift */,
 			);
-			path = AssetAttachmentView;
+			path = StackAssetAttachmentView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,7 +466,7 @@
 			files = (
 				8D23CA642B47716600FC94B1 /* AVAssetExportSession.swift in Sources */,
 				8DEA29392B8ED9D000FDF952 /* TextAttachmentDB.swift in Sources */,
-				8DEF7B5B2B41711F007B8737 /* AssetAttachmentView.swift in Sources */,
+				8DEF7B5B2B41711F007B8737 /* StackAssetAttachmentView.swift in Sources */,
 				8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */,
 				8DEF7B512B414BE4007B8737 /* MovieParameters.swift in Sources */,
 				8D4C17342B3C21C600953143 /* SuperVC.swift in Sources */,
@@ -502,7 +499,6 @@
 				8D5A329C2B9653EF00ACA8C8 /* EditorCollectionCell.swift in Sources */,
 				8D23CA602B4769FD00FC94B1 /* PrepareEditorModel.swift in Sources */,
 				8DEA29352B8ECC1900FDF952 /* UIColor.swift in Sources */,
-				8DEF7B5F2B417505007B8737 /* delegate_AssetAttachmentViewDelegate.swift in Sources */,
 				8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */,
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
 				8D23CA622B476C4700FC94B1 /* EditorVideoLayer.swift in Sources */,

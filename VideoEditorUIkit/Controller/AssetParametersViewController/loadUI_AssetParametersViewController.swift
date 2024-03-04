@@ -33,7 +33,6 @@ extension AssetParametersViewController {
             $0.identifier == "collectionWidth"
         })!.constant = CGFloat(constraint ?? 0) >= view.frame.width ? CGFloat(constraint ?? 0) : view.frame.width
         collectionView.layoutIfNeeded()
-        // * AssetParametersViewController.durationWidthMultiplier
         view.layer.layoutIfNeeded()
         loadAttachmentsStacks()
     }
@@ -48,7 +47,7 @@ extension AssetParametersViewController {
         let data:[[MovieAttachmentProtocol]] = [viewModel.assetData.media, viewModel.assetData.text, viewModel.assetData.songs]
         assetStackView.backgroundColor = .black
         data.forEach({
-            AssetAttachmentView.create($0, delegate: self, to: assetStackView)
+            StackAssetAttachmentView.create($0, delegate: self, to: assetStackView)
         })
     }
 }

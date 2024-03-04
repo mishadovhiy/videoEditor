@@ -6,12 +6,16 @@
 //
 
 import UIKit
+protocol AssetAttachmentViewDelegate {
+    func attachmentSelected(_ data:MovieAttachmentProtocol?)
+    var vc:UIViewController { get }
+}
 
-class AssetAttachmentView:UIView {
-    var data:[MovieAttachmentProtocol] = []
-    var delegate:AssetAttachmentViewDelegate?
+class StackAssetAttachmentView:UIView {
+    private var data:[MovieAttachmentProtocol] = []
+    private var delegate:AssetAttachmentViewDelegate?
     
-    var layerStack:UIStackView? {
+    private var layerStack:UIStackView? {
         return self.subviews.first(where: {$0 is UIStackView}) as? UIStackView
     }
     
@@ -30,9 +34,17 @@ class AssetAttachmentView:UIView {
     deinit {
         delegate = nil
     }
+    
+    private func editRowPressed(_ data:MovieAttachmentProtocol?) {
+        delegate?.attachmentSelected(data)
+    }
+    
+    @objc private func emptyRowPressed(_ sender:UITapGestureRecognizer) {
+        editRowPressed(nil)
+    }
 }
 
-extension AssetAttachmentView {
+extension StackAssetAttachmentView {
     public func updateView(_ data:[MovieAttachmentProtocol]? = nil) {
         if let data {
             self.data = data
@@ -45,12 +57,12 @@ extension AssetAttachmentView {
             if let view = stack.arrangedSubviews.first(where: {$0.subviews.first(where: {$0.layer.name == id}) != nil}) {
                 view.superview?.isHidden = false
                 
-                (view as! AssetRawView).updateView(data: $0)
+                (view as! AssetRawView).updateView(data: $0, editRowPressed: editRowPressed(_:))
                 //check layer
             } else {
                 let layer = self.data.layerNumber(item: $0)
                 let toView = stack.arrangedSubviews[layer]
-                AssetRawView.create(superView: toView, data: $0, vcSuperView: delegate!.vc.view)
+                AssetRawView.create(superView: toView, data: $0, vcSuperView: delegate!.vc.view, editRowPressed: editRowPressed(_:))
                 toView.isHidden = false
             }
         })
@@ -58,7 +70,7 @@ extension AssetAttachmentView {
 }
 
 
-fileprivate extension AssetAttachmentView {
+fileprivate extension StackAssetAttachmentView {
     func loadUI() {
         if layerStack != nil {
             return
@@ -75,14 +87,15 @@ fileprivate extension AssetAttachmentView {
             view.addConstaits([.height:AssetParametersViewControllerViewModel.rowsHeight])
         }
         self.updateView()
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emptyRowPressed(_:))))
     }
     
 }
 
 
-extension AssetAttachmentView {
+extension StackAssetAttachmentView {
     static func create(_ data:[MovieAttachmentProtocol], delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
-        let new = AssetAttachmentView.init(frame: .zero)
+        let new = StackAssetAttachmentView.init(frame: .zero)
         new.backgroundColor = .white.withAlphaComponent(0.1)
         new.data = data
         new.delegate = delegate

@@ -8,15 +8,20 @@
 import UIKit
 
 class AssetRawView:UIView {
-    var headerView:UIView? {
+    private var headerView:UIView? {
         self.subviews.first(where: {$0.layer.name == "Header" })
     }
-    var titleLabel:UILabel? {
+    private var titleLabel:UILabel? {
         headerView?.subviews.first(where: {$0 is UILabel}) as? UILabel
     }
-    var data:MovieAttachmentProtocol?
+    private var data:MovieAttachmentProtocol?
+    private var editRowPressed:((_ row: MovieAttachmentProtocol?)->())?
     
-    func updateView(data:MovieAttachmentProtocol?, updateConstraints:Bool = true) {
+    func updateView(data:MovieAttachmentProtocol?,
+                    updateConstraints:Bool = true,
+                    editRowPressed:@escaping(_ row: MovieAttachmentProtocol?)->()) {
+        self.data = data
+        self.editRowPressed = editRowPressed
         titleLabel?.text = data?.assetName ?? data?.defaultName
         self.backgroundColor = data?.color
         
@@ -35,17 +40,24 @@ class AssetRawView:UIView {
     deinit {
         data = nil
     }
+    
+    @objc private func editRowPressed(_ sender:UITapGestureRecognizer) {
+        editRowPressed?(data)
+    }
 }
 
 extension AssetRawView {
-    static func create(superView:UIView?, data:MovieAttachmentProtocol?, vcSuperView:UIView) {
+    static func create(superView:UIView?, 
+                       data:MovieAttachmentProtocol?,
+                       vcSuperView:UIView,
+                       editRowPressed:@escaping(_ row: MovieAttachmentProtocol?)->() ) {
         let new = AssetRawView()
         new.backgroundColor = data?.color
         new.layer.name = data?.id.uuidString
         superView?.addSubview(new)
         new.addConstaits([.left:data?.inMovieStart ?? 10, .top:0, .bottom:0, .width:data?.duration ?? 10])
         new.createHeader(vcSuperView: vcSuperView)
-        new.updateView(data: data, updateConstraints: false)
+        new.updateView(data: data, updateConstraints: false, editRowPressed: editRowPressed)
     }
     
     private func createHeader(vcSuperView:UIView) {
@@ -59,5 +71,6 @@ extension AssetRawView {
         label.adjustsFontSizeToFitWidth = true
         headerView.addSubview(label)
         label.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editRowPressed(_:))))
     }
 }

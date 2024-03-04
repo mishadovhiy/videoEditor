@@ -95,7 +95,7 @@ extension AssetParametersViewController {
 
 extension AssetParametersViewController:AssetAttachmentViewDelegate {
     func attachmentSelected(_ data: MovieAttachmentProtocol?) {
-        
+        print(data, " rgterfreg")
     }
     
     var vc: UIViewController {
