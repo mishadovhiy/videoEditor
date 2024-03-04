@@ -76,7 +76,6 @@ extension EditorViewController:PlayerViewControllerPresenter {
     }
     
     func playTimeChanged(_ percent: CGFloat) {
-        print("EditorViewControllerpercent")
         assetParametersVC?.scrollPercent(percent)
     }
     

@@ -53,15 +53,10 @@ class PlayerSuperVC: SuperVC {
     }
     
     func play(replacing:Bool = true) {
-        print(#function)
         guard let item = playerIterm else { return}
         if let playerLayer = self.playerLayer,
            let player = playerLayer.player
         {
-            print(item.duration, " grefwd")
-            print(item.asset, " btgrvf")
-
-            print(#function, " ffstart ", replacing)
             if replacing {
                 player.replaceCurrentItem(with: item)
             }
@@ -194,7 +189,6 @@ fileprivate extension PlayerSuperVC {
         guard let playerIterm else {
             return
         }
-        print(#function)
         let player = Player(playerItem:playerIterm)
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = view.layer.bounds

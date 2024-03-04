@@ -14,8 +14,6 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("fads count", viewModel?.tableData[section].previews.count)
-        print("erfd dur ", viewModel?.tableData[section].duration)
         return viewModel?.tableData[section].previews.count ?? 0
         //Int(tableData[section].duration / 15)
         

@@ -29,7 +29,6 @@ extension AssetParametersViewController {
     
     func updateAttachmantsStack() {
         let constraint = viewModel?.assetData.collectionWidth
-        print(constraint, " rtgerfwed")
         collectionView.constraints.first(where: {
             $0.identifier == "collectionWidth"
         })!.constant = CGFloat(constraint ?? 0) >= view.frame.width ? CGFloat(constraint ?? 0) : view.frame.width

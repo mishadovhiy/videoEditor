@@ -32,7 +32,6 @@ extension [MovieAttachmentProtocol] {
                 at += 1
             }
         }
-        print(at, " tregrfwed")
         return at
     }
 }

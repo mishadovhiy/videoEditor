@@ -43,7 +43,6 @@ class LoaderVC:BaseVC {
     }
     
     override func loadView() {
-        print(#function, " loadViewvcc:", self.classForCoder.description())
         super.loadView()
         self.addLoaderView()
     }

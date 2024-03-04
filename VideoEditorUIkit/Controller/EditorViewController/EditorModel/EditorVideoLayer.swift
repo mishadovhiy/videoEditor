@@ -82,7 +82,6 @@ fileprivate extension EditorVideoLayer {
         
         let instruction = AVMutableVideoCompositionInstruction()
         print("instractions dusration: tefrgtref ", track.asset?.duration ?? .zero)
-        print("sizeeeaea ", videoSize)
         instruction.timeRange = await CMTimeRange(
             start: .zero,
             duration: composition.duration())

@@ -24,12 +24,10 @@ class AssetAttachmentView:UIView {
 
     override func removeFromSuperview() {
         super.removeFromSuperview()
-        print("AssetAttachmentViewAssetAttachmentViewAssetAttachmentView removeFromSuperviewremoveFromSuperview")
         delegate = nil
     }
     
     deinit {
-        print("AssetAttachmentViewAssetAttachmentViewAssetAttachmentView deinit")
         delegate = nil
     }
 }
@@ -43,7 +41,6 @@ extension AssetAttachmentView {
             return
         }
         self.data.forEach({
-            print("egrfsed ", $0)
             let id = $0.id.uuidString
             if let view = stack.arrangedSubviews.first(where: {$0.subviews.first(where: {$0.layer.name == id}) != nil}) {
                 view.superview?.isHidden = false
@@ -85,7 +82,6 @@ fileprivate extension AssetAttachmentView {
 
 extension AssetAttachmentView {
     static func create(_ data:[MovieAttachmentProtocol], delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
-        print("tgerfwedw")
         let new = AssetAttachmentView.init(frame: .zero)
         new.backgroundColor = .white.withAlphaComponent(0.1)
         new.data = data

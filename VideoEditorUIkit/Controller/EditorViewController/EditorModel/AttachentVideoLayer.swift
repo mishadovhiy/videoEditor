@@ -25,7 +25,6 @@ struct AttachentVideoLayerModel {
         textLayer.rasterizationScale = UIScreen.main.scale
         textLayer.backgroundColor = UIColor.clear.cgColor
         textLayer.alignmentMode = .center
-        print(videoSize.width, " egrfwrgt")
         textLayer.frame = .init(origin: .init(x: 0, y: videoSize.height * text.percentPositionY), size: .init(width: videoSize.width, height: 500))
         textLayer.displayIfNeeded()
         return textLayer

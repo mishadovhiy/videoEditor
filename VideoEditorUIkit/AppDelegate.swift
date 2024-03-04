@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        print(#function, " egrfewdfe")
         guard let vc = UIApplication.shared.sceneKeyWindow?.rootViewController else {
             return
         }
@@ -42,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        print(#function, " egrfewdfe")
         guard let vc = UIApplication.shared.sceneKeyWindow?.rootViewController else {
             return
         }

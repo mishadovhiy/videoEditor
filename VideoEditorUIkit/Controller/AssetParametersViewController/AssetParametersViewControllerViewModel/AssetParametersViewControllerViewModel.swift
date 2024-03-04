@@ -27,8 +27,6 @@ class AssetParametersViewControllerViewModel {
             assetData.previewAssets = tracks?.first?.segments.compactMap({
                 return .create($0, composition: asset)
             }) ?? []
-            print(assetData.previewAssets.count, " rgtefrsr")
-            print(assetData.duration, " tyrefdw")
             await MainActor.run {
                 self.reloadData?()
             }

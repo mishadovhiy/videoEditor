@@ -17,7 +17,6 @@ class AssetRawView:UIView {
     var data:MovieAttachmentProtocol?
     
     func updateView(data:MovieAttachmentProtocol?, updateConstraints:Bool = true) {
-        print("AssetRawViewAssetRawViewAssetRawView")
         titleLabel?.text = data?.assetName ?? data?.defaultName
         self.backgroundColor = data?.color
         
