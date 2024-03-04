@@ -122,10 +122,10 @@
 			children = (
 				8D4C17352B3C21E100953143 /* Extensions_UIKit.swift */,
 				8DEA29302B8EC95B00FDF952 /* CGFloat.swift */,
-				8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */,
 				8DEA29322B8ECA6100FDF952 /* String.swift */,
 				8DEA29342B8ECC1900FDF952 /* UIColor.swift */,
 				8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */,
+				8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

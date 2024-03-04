@@ -22,15 +22,16 @@ struct EditorVideoLayer {
         let tracks:[AVMutableCompositionTrack] = composition.tracks
 
         overlayLayer?.isGeometryFlipped = true
-        let instraction = await videoInstractions(track: tracks.first(where: {$0.naturalSize.width != 0})!, overlayLayer: overlayLayer, composition: composition)
+        let firstTrack = tracks.first(where: {$0.naturalSize.width != 0})
+        let instraction = await videoInstractions(track: firstTrack!, overlayLayer: overlayLayer, composition: composition)
         var i = 0
-        assetTrack.forEach({
+        if let first = firstTrack {
             let layerInstruction = compositionLayerInstruction(
-                for: tracks[i],
-                assetTrack: $0)
+                for: first,
+                assetTrack: first)
             i += 1
             instraction.instractions.layerInstructions.append(layerInstruction)
-        })
+        }
         return instraction.composition
     }
     
