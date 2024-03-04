@@ -9,14 +9,24 @@ import UIKit
 
 class EditorOverlayContainerVC: UIViewController {
 
-    @IBOutlet weak var textField:UITextField!
-    @IBOutlet weak var collectionView:UICollectionView!
+    @IBOutlet private weak var textField:UITextField!
+    @IBOutlet private weak var collectionView:UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        setupUI()
     }
 }
 
+fileprivate extension EditorOverlayContainerVC {
+    func setupUI() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        textField.delegate = self
+    }
+}
+
+extension EditorOverlayContainerVC:UITextFieldDelegate {
+    
+}
 
