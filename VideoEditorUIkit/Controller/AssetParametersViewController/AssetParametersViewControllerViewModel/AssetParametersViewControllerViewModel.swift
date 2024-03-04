@@ -23,6 +23,12 @@ class AssetParametersViewControllerViewModel {
     func assetChanged(_ asset:AVMutableComposition?) async  {
         Task {
             assetData.text = DB.db.movieParameters.editingMovie?.texts ?? []
+            let tracks = asset?.tracks(withMediaType: .video)
+            assetData.previewAssets = tracks?.first?.segments.compactMap({
+                return .create($0, composition: asset)
+            }) ?? []
+            print(assetData.previewAssets.count, " rgtefrsr")
+            print(assetData.duration, " tyrefdw")
             await MainActor.run {
                 self.reloadData?()
             }

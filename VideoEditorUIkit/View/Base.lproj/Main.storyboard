@@ -111,26 +111,38 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TestCollectionCell" id="ITN-L0-hrL" customClass="AssetPreviewCell" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                        <rect key="frame" x="50" y="0.0" width="128" height="128"/>
+                                                        <rect key="frame" x="50" y="0.0" width="80" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dMn-as-j26">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="128"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tmy-4w-e86">
-                                                                    <rect key="frame" x="43.333333333333329" y="0.0" width="41.333333333333329" height="20.333333333333332"/>
+                                                                    <rect key="frame" x="19.333333333333332" y="0.0" width="41.333333333333343" height="20.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZRs-OD-Zei">
+                                                                    <rect key="frame" x="0.0" y="24" width="80" height="80"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="ZRs-OD-Zei" secondAttribute="height" multiplier="1:1" id="8hi-ji-bnC"/>
+                                                                        <constraint firstAttribute="width" constant="80" id="V9p-AE-r8C"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstItem="Tmy-4w-e86" firstAttribute="width" relation="lessThanOrEqual" secondItem="dMn-as-j26" secondAttribute="width" id="54b-dA-pPC"/>
                                                                 <constraint firstItem="Tmy-4w-e86" firstAttribute="centerX" secondItem="dMn-as-j26" secondAttribute="centerX" id="CaM-Wu-zHB"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ZRs-OD-Zei" secondAttribute="trailing" id="FAG-Iw-rg7"/>
+                                                                <constraint firstItem="ZRs-OD-Zei" firstAttribute="centerY" secondItem="dMn-as-j26" secondAttribute="centerY" id="Gme-Kl-KU6"/>
                                                                 <constraint firstItem="Tmy-4w-e86" firstAttribute="top" secondItem="dMn-as-j26" secondAttribute="top" id="PCv-G3-uC6"/>
+                                                                <constraint firstItem="ZRs-OD-Zei" firstAttribute="leading" secondItem="dMn-as-j26" secondAttribute="leading" id="dgv-KX-R7g"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
                                                         <color key="backgroundColor" systemColor="linkColor"/>
                                                         <connections>
+                                                            <outlet property="previewImageView" destination="ZRs-OD-Zei" id="f6K-4G-xlm"/>
                                                             <outlet property="secondLabel" destination="Tmy-4w-e86" id="77F-Vn-YbT"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -234,13 +246,13 @@
     </scenes>
     <resources>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

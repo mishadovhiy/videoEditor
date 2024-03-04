@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 //MARK: Protocol
 protocol AssetAttachmentProtocol {
@@ -51,6 +52,26 @@ extension MovieGeneralParameterList {
 
         var defaultName: String {
             return "Movie"
+        }
+        
+        static var cellWidth:CGFloat {
+            return 10 * cellWidthMultiplier
+        }
+        fileprivate static let cellWidthMultiplier:CGFloat = 4
+        var sectionWidth:CGFloat {
+            return CGFloat(previews.count) * MovieGeneralParameterList.AssetsData.cellWidth
+        }
+        
+        static func create(_ asset:AVCompositionTrackSegment, composition:AVMutableComposition?) -> AssetsData {
+            let count = Int(asset.timeMapping.source.duration.seconds * (cellWidth / (2 * cellWidthMultiplier)))
+            var array:[Int] = []
+            for i in 0..<Int(count) {
+                array.append(i)
+            }
+            return .init(duration: asset.timeMapping.source.duration.seconds, assetName: asset.description, previews: array.compactMap({
+                let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
+                return .init(composition?.preview(time: .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: EditorModel.timeScale))?.pngData())
+            }))
         }
     }
 }

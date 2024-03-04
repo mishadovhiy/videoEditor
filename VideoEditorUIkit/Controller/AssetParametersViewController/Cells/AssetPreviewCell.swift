@@ -9,5 +9,6 @@ import UIKit
 
 class AssetPreviewCell:UICollectionViewCell {
     
+    @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var secondLabel: UILabel!
 }

@@ -11,6 +11,7 @@
 		8D23CA622B476C4700FC94B1 /* EditorVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23CA612B476C4700FC94B1 /* EditorVideoLayer.swift */; };
 		8D23CA642B47716600FC94B1 /* AVAssetExportSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */; };
 		8D23CA672B4792BD00FC94B1 /* AttachentVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23CA662B4792BD00FC94B1 /* AttachentVideoLayer.swift */; };
+		8D25E8292B95994C00CC1AF4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25E8282B95994C00CC1AF4 /* UIImage.swift */; };
 		8D2B57772B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B57762B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift */; };
 		8D2B57792B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B57782B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift */; };
 		8D2B577C2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B577B2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift */; };
@@ -54,6 +55,7 @@
 		8D23CA612B476C4700FC94B1 /* EditorVideoLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorVideoLayer.swift; sourceTree = "<group>"; };
 		8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAssetExportSession.swift; sourceTree = "<group>"; };
 		8D23CA662B4792BD00FC94B1 /* AttachentVideoLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachentVideoLayer.swift; sourceTree = "<group>"; };
+		8D25E8282B95994C00CC1AF4 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8D2B57762B41A21200C2B3F5 /* UICollectionViewDelegate_AssetParametersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewDelegate_AssetParametersVC.swift; sourceTree = "<group>"; };
 		8D2B57782B41A23F00C2B3F5 /* loadUI_AssetParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUI_AssetParametersViewController.swift; sourceTree = "<group>"; };
 		8D2B577B2B41A30000C2B3F5 /* test_MovieGeneralParameterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_MovieGeneralParameterList.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				8DEA29342B8ECC1900FDF952 /* UIColor.swift */,
 				8D23CA632B47716600FC94B1 /* AVAssetExportSession.swift */,
 				8D5FAE9E2B9553A600380CA4 /* AVAsset.swift */,
+				8D25E8282B95994C00CC1AF4 /* UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -194,7 +197,6 @@
 			children = (
 				8D4C17182B3B2DF400953143 /* AppDelegate.swift */,
 				8D4C171A2B3B2DF400953143 /* SceneDelegate.swift */,
-				8D9F32F72B3DE15800697F76 /* ViewModel */,
 				8D9F32F22B3DDFFF00697F76 /* Model */,
 				8D4C17372B3C23C100953143 /* Controller */,
 				8D4C17392B3C23DE00953143 /* View */,
@@ -259,13 +261,6 @@
 				8DEF7B522B414C18007B8737 /* DataModel */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		8D9F32F72B3DE15800697F76 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8D9F32FA2B3E082400697F76 /* NSObject */ = {
@@ -421,6 +416,7 @@
 				8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */,
 				8DEF7B512B414BE4007B8737 /* MovieParameters.swift in Sources */,
 				8D4C17342B3C21C600953143 /* SuperVC.swift in Sources */,
+				8D25E8292B95994C00CC1AF4 /* UIImage.swift in Sources */,
 				8D4C173D2B3C255200953143 /* PlayerSuperVC.swift in Sources */,
 				8DBFCB912B4F4FB20050C8E3 /* AssetParametersViewControllerViewModel.swift in Sources */,
 				8D4C171D2B3B2DF400953143 /* EditorViewController.swift in Sources */,

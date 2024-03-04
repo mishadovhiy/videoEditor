@@ -10,39 +10,30 @@ import UIKit
 //MARK: collationView
 extension AssetParametersViewController:UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.tableData.count
+        return viewModel?.tableData.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("fads count", viewModel.tableData[section].previews.count)
-        print("erfd dur ", viewModel.tableData[section].duration)
-        return viewModel.tableData[section].previews.count
+        print("fads count", viewModel?.tableData[section].previews.count)
+        print("erfd dur ", viewModel?.tableData[section].duration)
+        return viewModel?.tableData[section].previews.count ?? 0
         //Int(tableData[section].duration / 15)
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCollectionCell", for: indexPath) as! AssetPreviewCell
-        var i = -1
-        var data:[MovieGeneralParameterList.AssetsData] = []
-        viewModel.tableData.forEach {
-            i += 1
-            if i <= (indexPath.section - 1) {
-                data.append($0)
-            }
-        }
-        let count = data.reduce(0) { partialResult, data in
-            return partialResult + data.previews.count
-        }
-        let secs = (CGFloat(count + (indexPath.row + 1))) / AssetParametersViewControllerViewModel.durationWidthMultiplier
-//        if secs == CGFloat(Int(secs)) {
-            //     cell.secondLabel.text = "\(secs)"
-//
-//        } else {
-//            cell.secondLabel.text = ""
-//
-//        }
+
+
         cell.secondLabel.text = ""
+       // cell.secondLabel.text = indexPath.row != 0 ? "" : "\(viewModel?.tableData[indexPath.section].duration ?? 0)"
+        if let data = viewModel?.tableData[indexPath.section].previews[indexPath.row].image {
+            cell.previewImageView.image = .init(data: data)
+        } else {
+            cell.previewImageView.image = nil
+        }
+        cell.previewImageView.constraints.first(where: {$0.firstAttribute == .width})?.constant = MovieGeneralParameterList.AssetsData.cellWidth
+        cell.previewImageView.layoutIfNeeded()
         cell.layer.borderWidth = 0.5
         cell.layer.borderColor = UIColor.green.cgColor
         return cell
@@ -65,15 +56,11 @@ extension AssetParametersViewController:UICollectionViewDelegate, UICollectionVi
 extension AssetParametersViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let value = viewModel.tableData[section].duration / 15
-        let width = value - CGFloat(Int(value))
         return CGSize(width: 1, height: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = viewModel.tableData[indexPath.section].duration / CGFloat(viewModel.tableData[indexPath.section].previews.count)
-  //      let width = (tableData[indexPath.section].duration * AssetParametersViewController.durationWidthMultiplier) / CGFloat(tableData[indexPath.section].previews.count)
-        return CGSize(width: width, height: collectionView.frame.height)
+        return CGSize(width: MovieGeneralParameterList.AssetsData.cellWidth, height: collectionView.frame.height)
     }
     
 }

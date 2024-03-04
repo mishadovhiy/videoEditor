@@ -32,6 +32,10 @@ class AssetRawView:UIView {
         super.removeFromSuperview()
         data = nil
     }
+    
+    deinit {
+        data = nil
+    }
 }
 
 extension AssetRawView {

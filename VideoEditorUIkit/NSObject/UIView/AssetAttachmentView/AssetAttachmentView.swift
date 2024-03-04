@@ -22,6 +22,16 @@ class AssetAttachmentView:UIView {
         }
     }
 
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        print("AssetAttachmentViewAssetAttachmentViewAssetAttachmentView removeFromSuperviewremoveFromSuperview")
+        delegate = nil
+    }
+    
+    deinit {
+        print("AssetAttachmentViewAssetAttachmentViewAssetAttachmentView deinit")
+        delegate = nil
+    }
 }
 
 extension AssetAttachmentView {

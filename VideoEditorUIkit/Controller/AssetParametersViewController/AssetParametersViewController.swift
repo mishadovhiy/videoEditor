@@ -14,7 +14,7 @@ class AssetParametersViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var assetStackView: UIStackView!
     
-    var viewModel:AssetParametersViewControllerViewModel!
+    var viewModel:AssetParametersViewControllerViewModel?
     private var parentVC: EditorViewController? {
         return parent as? EditorViewController
     }
@@ -24,15 +24,28 @@ class AssetParametersViewController: UIViewController {
         loadUI()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel = nil
+    }
+    
     func assetChanged() {
+        guard let viewModel else { return}
         Task {
             await viewModel.assetChanged(parentVC?.viewModel.movie)
         }
     }
     
+    func dataChanged() {
+        if view.superview != nil {
+            updateAttachmantsStack()
+            collectionView.reloadData()
+        }
+    }
+    
     func scrollPercent(_ percent:CGFloat) {
-        if !viewModel.ignoreScroll {
-            viewModel.manualScroll = true
+        if !(viewModel?.ignoreScroll ?? false) {
+            viewModel?.manualScroll = true
             let scrollOffset = (scrollView.contentSize.width - self.view.frame.width) * percent
             scrollView.contentOffset.x = scrollOffset.isNormal ? scrollOffset : 0
         }
@@ -47,21 +60,21 @@ class AssetParametersViewController: UIViewController {
 
 extension AssetParametersViewController {
     func scrollingEnded() {
-        viewModel.scrollViewDeclaring = false
-        viewModel.ignoreScroll = false
+        viewModel?.scrollViewDeclaring = false
+        viewModel?.ignoreScroll = false
         updateParentScroll()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        viewModel.ignoreScroll = true
+        viewModel?.ignoreScroll = true
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        viewModel.scrollViewDeclaring = true
+        viewModel?.scrollViewDeclaring = true
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !viewModel.scrollViewDeclaring {
+        if !(viewModel?.scrollViewDeclaring ?? false) {
             scrollingEnded()
         }
     }
@@ -71,8 +84,8 @@ extension AssetParametersViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if viewModel.manualScroll {
-            viewModel.manualScroll = false
+        if viewModel?.manualScroll ?? false {
+            viewModel?.manualScroll = false
         } else {
             updateParentScroll()
         }

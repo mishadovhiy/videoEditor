@@ -21,6 +21,12 @@ struct MovieGeneralParameterList {
             return partialResult + data.duration
         }
     }
+    
+    var collectionWidth:CGFloat {
+        previewAssets.reduce(0, { partialResult,data in
+            return partialResult + data.sectionWidth
+        })
+    }
 }
 
 

@@ -11,8 +11,8 @@ import UIKit
 extension AssetParametersViewController {
     func loadUI() {
         viewModel = .init()
-        viewModel.reloadData = {
-            self.collectionView.reloadData()
+        viewModel?.reloadData = { [weak self] in
+            self?.dataChanged()
         }
         scrollView.delegate = self
         collectionView.delegate = self
@@ -24,14 +24,29 @@ extension AssetParametersViewController {
             layout.minimumInteritemSpacing = 0
             layout.sectionInset = UIEdgeInsets.zero
         }
-        collectionView.constraints.first(where: {
-            $0.firstAttribute == .width
-        })!.constant = viewModel.assetData.duration// * AssetParametersViewController.durationWidthMultiplier
-        view.layer.layoutIfNeeded()
-        loadAttachmentsSceletView()
+        updateAttachmantsStack()
     }
     
-    private func loadAttachmentsSceletView() {
+    func updateAttachmantsStack() {
+        let constraint = viewModel?.assetData.collectionWidth
+        print(constraint, " rtgerfwed")
+        collectionView.constraints.first(where: {
+            $0.identifier == "collectionWidth"
+        })!.constant = CGFloat(constraint ?? 0) >= view.frame.width ? CGFloat(constraint ?? 0) : view.frame.width
+        collectionView.backgroundColor = .red
+        collectionView.layoutIfNeeded()
+        // * AssetParametersViewController.durationWidthMultiplier
+        view.layer.layoutIfNeeded()
+        loadAttachmentsStacks()
+    }
+    
+    private func loadAttachmentsStacks() {
+        assetStackView.arrangedSubviews.forEach {
+            if !($0 is UICollectionView) {
+                $0.removeFromSuperview()
+            }
+        }
+        guard let viewModel else { return}
         let data:[[MovieAttachmentProtocol]] = [viewModel.assetData.media, viewModel.assetData.text, viewModel.assetData.songs]
         assetStackView.backgroundColor = .black
         data.forEach({
