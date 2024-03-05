@@ -57,6 +57,14 @@ extension UIView {
         }
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func textFieldBottomConstraint(stickyView:UIView) {
+        stickyView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        if #available(iOS 17.0, *) {
+            self.keyboardLayoutGuide.usesBottomSafeArea = false
+        }
+        stickyView.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor).isActive = true
+    }
 }
 
 

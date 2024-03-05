@@ -91,6 +91,9 @@ extension EditorModel {
             addText(text)
         } else {
             print("error adding data: nothing to add ", data)
+            Task {
+                await presenter?.videoAdded()
+            }
         }
     }
     

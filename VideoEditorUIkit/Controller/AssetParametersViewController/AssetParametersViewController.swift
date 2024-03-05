@@ -29,6 +29,7 @@ class AssetParametersViewController: UIViewController {
         viewModel = nil
     }
     
+    // MARK: receive
     func assetChanged() {
         guard let viewModel else { return}
         Task {
@@ -40,20 +41,31 @@ class AssetParametersViewController: UIViewController {
         if view.superview != nil {
             updateAttachmantsStack()
             collectionView.reloadData()
+            removeOverlays()
         }
     }
     
+    // MARK: private
+    private func updateParentScroll() {
+        let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)
+        parentVC?.seek(percent: percent)
+    }
+    
+    private func removeOverlays() {
+        parentVC?.children.forEach {
+            if $0 is EditorOverlayVC {
+                $0.removeFromParent()
+            }
+        }
+    }
+    
+    // MARK: IBAction
     func scrollPercent(_ percent:CGFloat) {
         if !(viewModel?.ignoreScroll ?? false) {
             viewModel?.manualScroll = true
             let scrollOffset = (scrollView.contentSize.width - self.view.frame.width) * percent
             scrollView.contentOffset.x = scrollOffset.isNormal ? scrollOffset : 0
         }
-    }
-    
-    func updateParentScroll() {
-        let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)
-        parentVC?.seek(percent: percent)
     }
 }
 
@@ -103,12 +115,11 @@ extension AssetParametersViewController:EditorOverlayVCDelegate {
 
 extension AssetParametersViewController:AssetAttachmentViewDelegate {
     func attachmentSelected(_ data: MovieAttachmentProtocol?, view:StackAssetAttachmentView?) {
-        children.forEach {
-            if $0 is EditorOverlayVC {
-                $0.removeFromParent()
-            }
+        guard let parent = parentVC else {
+            return
         }
-        EditorOverlayVC.addToParent(self, bottomView: view ?? self.view, data: data, delegate: self)
+        removeOverlays()
+        EditorOverlayVC.addToParent(parent, bottomView: view ?? self.view, data: data, delegate: self)
     }
     
     var vc: UIViewController {

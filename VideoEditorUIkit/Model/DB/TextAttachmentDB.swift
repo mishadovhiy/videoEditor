@@ -13,6 +13,20 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
         self.dict = dict
     }
     
+    init(attachment:MovieAttachmentProtocol?) {
+        self.dict = [:]
+        guard let attachment else {
+            self = .demo
+            return
+        }
+        inMovieStart = attachment.inMovieStart
+        duration = attachment.duration
+        assetName = attachment.assetName
+        color = attachment.color
+        defaultName = attachment.defaultName
+        print(assetName, " rgetrfwedwfrg")
+    }
+    
     /// seconds
     var inMovieStart: CGFloat {
         get {

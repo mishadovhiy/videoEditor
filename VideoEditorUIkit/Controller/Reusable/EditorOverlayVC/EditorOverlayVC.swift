@@ -14,11 +14,11 @@ protocol EditorOverlayVCDelegate {
 
 class EditorOverlayVC: UIViewController {
 
-    private var attachmentData:AssetAttachmentProtocol?
-    private var addAttachmentPressed:(()->())?
+    var attachmentData:AssetAttachmentProtocol?
     private var delegate:EditorOverlayVCDelegate?
     
     override func removeFromParent() {
+        view.endEditing(true)
         animateShow(show: false) {
             self.delegate?.overlayRemoved()
             self.delegate = nil
@@ -31,7 +31,7 @@ class EditorOverlayVC: UIViewController {
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
-        addAttachmentPressed?()
+        delegate?.addAttachmentPressed(attachmentData)
         removeFromParent()
     }
     
@@ -60,7 +60,7 @@ extension EditorOverlayVC {
                           delegate:EditorOverlayVCDelegate) -> EditorOverlayVC {
         let vc = UIStoryboard(name: "Reusable", bundle: nil).instantiateViewController(withIdentifier: "EditorOverlayVC") as? EditorOverlayVC ?? .init()
         vc.view.layer.name = String(describing: EditorOverlayVC.self)
-        vc.attachmentData = data
+        vc.attachmentData = data ?? TextAttachmentDB.init(dict: [:])
         vc.delegate = delegate
         return vc
     }
@@ -70,10 +70,13 @@ extension EditorOverlayVC {
                             data:AssetAttachmentProtocol?,
                             delegate:EditorOverlayVCDelegate
     ) {
+        print(parent.classForCoder.description(), " fcgvyhugcvgyu")
+        print(parent, " jkhjgy")
+
         let vc = EditorOverlayVC.configure(data: data, delegate: delegate)
         vc.view.alpha = 0
-        parent.addChild(child: vc, constaits: [.left:0, .right:0])
-        vc.view.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -20).isActive = true
+        parent.addChild(child: vc, constaits: [.left:0, .right:0, .height:75])
+        vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.topAnchor, constant: -2).isActive = true
         vc.animateShow(show: true)
     }
 }

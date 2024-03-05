@@ -38,10 +38,11 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
-    
     // MARK: - public
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        viewModel.addAttachmentPressed(data)
+        startRefreshing {
+            self.viewModel.addAttachmentPressed(data)
+        }
     }
     
     // MARK: - receive
@@ -52,6 +53,11 @@ class EditorViewController: SuperVC {
             self.playerVC?.play(replacing: true)
         }
         self.assetParametersVC?.assetChanged()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        UIApplication.shared.keyWindow?.endEditing(true)
     }
     
     // MARK: - IBAction

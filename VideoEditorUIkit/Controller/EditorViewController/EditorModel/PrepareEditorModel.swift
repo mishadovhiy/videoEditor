@@ -45,7 +45,7 @@ struct PrepareEditorModel {
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
         layerEditor.addLayer(to: overlayLayer,
             videoSize: videoSize, 
-                             text: data as? TextAttachmentDB ?? .demo)
+                             text: .init(attachment: data))
         let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false) {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)

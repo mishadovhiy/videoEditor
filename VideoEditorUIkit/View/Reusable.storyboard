@@ -18,14 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-yC-Se8">
-                                <rect key="frame" x="10" y="69" width="373" height="739"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-yC-Se8">
+                                <rect key="frame" x="2" y="61" width="389" height="755"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPn-xq-bBL">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="739"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="755"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50U-4E-6VM" customClass="BaseButton" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="358.66666666666669" width="40" height="22"/>
+                                                <rect key="frame" x="0.0" y="366.66666666666669" width="46" height="22"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="cancel"/>
@@ -39,7 +39,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="50U-4E-6VM" firstAttribute="leading" secondItem="xPn-xq-bBL" secondAttribute="leading" id="02U-uH-9RJ"/>
                                             <constraint firstAttribute="trailing" secondItem="50U-4E-6VM" secondAttribute="trailing" id="sN1-lX-9Yo"/>
@@ -47,17 +47,17 @@
                                         </constraints>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-tu-eJt">
-                                        <rect key="frame" x="45" y="0.0" width="273" height="739"/>
+                                        <rect key="frame" x="48" y="0.0" width="289" height="755"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <segue destination="rg5-Sk-3P9" kind="embed" id="jYu-wd-Xpu"/>
                                         </connections>
                                     </containerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLE-xo-OYx">
-                                        <rect key="frame" x="323" y="0.0" width="50" height="739"/>
+                                        <rect key="frame" x="339" y="0.0" width="50" height="755"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5v-Fj-XEo" customClass="BaseButton" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="354.66666666666669" width="50" height="30"/>
+                                                <rect key="frame" x="0.0" y="362.66666666666669" width="50" height="30"/>
                                                 <color key="backgroundColor" systemColor="linkColor"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -72,7 +72,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="p5v-Fj-XEo" secondAttribute="trailing" id="7KR-be-M0z"/>
                                             <constraint firstItem="p5v-Fj-XEo" firstAttribute="centerY" secondItem="rLE-xo-OYx" secondAttribute="centerY" id="VJF-Dg-4xx"/>
@@ -85,10 +85,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iN0-yC-Se8" secondAttribute="trailing" constant="10" id="88t-F6-Vut"/>
-                            <constraint firstItem="iN0-yC-Se8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="LlH-GG-wVj"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="iN0-yC-Se8" secondAttribute="bottom" constant="10" id="Tf9-Om-CWS"/>
-                            <constraint firstItem="iN0-yC-Se8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="XrD-8D-KlC"/>
+                            <constraint firstAttribute="trailing" secondItem="iN0-yC-Se8" secondAttribute="trailing" constant="2" id="88t-F6-Vut"/>
+                            <constraint firstItem="iN0-yC-Se8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="2" id="LlH-GG-wVj"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="iN0-yC-Se8" secondAttribute="bottom" constant="2" id="Tf9-Om-CWS"/>
+                            <constraint firstItem="iN0-yC-Se8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="2" id="XrD-8D-KlC"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -101,17 +101,17 @@
             <objects>
                 <viewController id="wQi-eT-BCi" customClass="EditorOverlayContainerVC" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mQU-rw-fCE">
-                        <rect key="frame" x="0.0" y="0.0" width="273" height="739"/>
+                        <rect key="frame" x="0.0" y="0.0" width="289" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Y2l-qv-eUr">
-                                <rect key="frame" x="0.0" y="0.0" width="273" height="739"/>
+                                <rect key="frame" x="0.0" y="0.0" width="289" height="755"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="31K-P7-hpR">
-                                        <rect key="frame" x="0.0" y="0.0" width="273" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="289" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="ifj-kb-yFZ"/>
+                                            <constraint firstAttribute="height" constant="40" id="ifj-kb-yFZ"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lzb-bR-iib">
                                             <size key="itemSize" width="150" height="70"/>
@@ -182,10 +182,10 @@
                                         </cells>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rU-AN-k9X">
-                                        <rect key="frame" x="0.0" y="70" width="273" height="669"/>
+                                        <rect key="frame" x="0.0" y="40" width="289" height="715"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMW-XF-BeM">
-                                                <rect key="frame" x="10" y="10" width="253" height="649"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter value" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMW-XF-BeM">
+                                                <rect key="frame" x="5" y="0.0" width="284" height="715"/>
                                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -193,16 +193,16 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="lMW-XF-BeM" secondAttribute="trailing" constant="10" id="Jgl-Un-9o4"/>
-                                            <constraint firstAttribute="bottom" secondItem="lMW-XF-BeM" secondAttribute="bottom" constant="10" id="OVr-8t-yLb"/>
-                                            <constraint firstItem="lMW-XF-BeM" firstAttribute="top" secondItem="1rU-AN-k9X" secondAttribute="top" constant="10" id="Rso-Vt-JIC"/>
-                                            <constraint firstItem="lMW-XF-BeM" firstAttribute="leading" secondItem="1rU-AN-k9X" secondAttribute="leading" constant="10" id="mmy-07-hHo"/>
+                                            <constraint firstAttribute="trailing" secondItem="lMW-XF-BeM" secondAttribute="trailing" id="Jgl-Un-9o4"/>
+                                            <constraint firstAttribute="bottom" secondItem="lMW-XF-BeM" secondAttribute="bottom" id="OVr-8t-yLb"/>
+                                            <constraint firstItem="lMW-XF-BeM" firstAttribute="top" secondItem="1rU-AN-k9X" secondAttribute="top" id="Rso-Vt-JIC"/>
+                                            <constraint firstItem="lMW-XF-BeM" firstAttribute="leading" secondItem="1rU-AN-k9X" secondAttribute="leading" constant="5" id="mmy-07-hHo"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Y2l-qv-eUr" secondAttribute="trailing" id="ITK-60-g71"/>
                             <constraint firstItem="Y2l-qv-eUr" firstAttribute="top" secondItem="mQU-rw-fCE" secondAttribute="top" id="IZ8-m1-ZVY"/>
@@ -226,7 +226,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rg5-Sk-3P9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YQv-Va-wNL">
-                        <rect key="frame" x="0.0" y="59" width="273" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="289" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -246,9 +246,6 @@
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
