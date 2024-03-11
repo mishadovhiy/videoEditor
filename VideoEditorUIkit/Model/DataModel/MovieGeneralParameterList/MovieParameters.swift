@@ -21,7 +21,7 @@ enum InstuctionAttachmentType:String {
         if self == .media {
             return "Image"
         }
-        return rawValue.uppercased()
+        return rawValue.capitalized
     }
 }
 

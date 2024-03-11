@@ -107,7 +107,7 @@ extension MovieGeneralParameterList {
         }
         
         var defaultName: String {
-            return attachmentType?.rawValue.uppercased() ?? "-"
+            return attachmentType?.rawValue.capitalized ?? "-"
         }
     }
     
@@ -123,7 +123,7 @@ extension MovieGeneralParameterList {
         }
         
         var defaultName: String {
-            return attachmentType?.rawValue.uppercased() ?? "-"
+            return attachmentType?.rawValue.capitalized ?? "-"
         }
 
     }

@@ -24,7 +24,7 @@ class EditorOverlayContainerVC: SuperVC {
     var screenSize:OverlaySize? {
         switch screenType?.type {
         case .color(_):
-            return .big
+            return .middle
         default:
             return nil
         }
@@ -38,6 +38,7 @@ class EditorOverlayContainerVC: SuperVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.title = screenType?.screenTitle
         setupUI()
     }
     
@@ -72,11 +73,14 @@ fileprivate extension EditorOverlayContainerVC {
         switch screenType?.type {
         case .floatRange(_):
             sliderView.superview?.isHidden = false
-        case .color(_):
+        case .color(let colorAction):
             containerView.isHidden = false
-            let colorVC =  ColorPickerViewController()
-            colorVC.delegate = self
-            addChild(child: colorVC, toView: containerView)
+            viewModel = .init()
+            collectionData = (viewModel?.colorCollectionData ?? []).compactMap({ color in
+                return .init(title: color.title, didSelect: {
+                    colorAction.didSelect(color.backgroundColor ?? .red)
+                }, backgroundColor:color.backgroundColor ?? .red)
+            })
         default:
             viewModel = .init(type: parentVC?.attachmentData?.attachmentType ?? .media, assetChanged: { didChange in
                 if let value = self.parentVC?.attachmentData  as? TextAttachmentDB {
@@ -128,8 +132,4 @@ extension EditorOverlayContainerVC {
         vc?.collectionData = collectionData
         return vc ?? .init()
     }
-}
-
-class ColorPickerViewController:UIColorPickerViewController {
-    
 }

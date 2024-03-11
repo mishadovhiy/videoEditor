@@ -50,6 +50,15 @@ class EditorOverlayVC: SuperVC {
         view.endEditing(true)
         animateShow(show: false) {
             self.delegate = nil
+            self.view.constraints.forEach {
+                self.view.removeConstraint($0)
+            }
+            self.view.superview?.constraints.forEach({
+                if $0.firstItem as? NSObject == self || $0.secondItem as? NSObject == self {
+                    self.view.superview?.removeConstraint($0)
+                }
+            })
+            self.view.removeFromSuperview()
             super.removeFromParent()
         }
     }
@@ -116,11 +125,11 @@ extension EditorOverlayVC {
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
         switch type {
         case .small:
-            return [.left: (10, "left"), .right:(-10, "right"), .height:(75, "height")]
+            return [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(75, "heightprimaryConstraints")]
         case .middle:
-            return [.left: (0, "left"), .right:(0, "right"), .height:(100, "height")]
+            return [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(100, "heightprimaryConstraints")]
         case .big:
-            return [.left: (0, "left"), .right:(0, "right"), .height:(185, "height")]
+            return [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(185, "heightprimaryConstraints")]
         }
     }
     
@@ -153,39 +162,22 @@ extension EditorOverlayVC {
                 if let constraint = self.view.constraints.first(where: {
                     $0.identifier == typeData.value.1
                 }) {
-                    constraint.shouldBeArchived = true
-                    constraint.isActive = false
-                    constraint.priority = .init(250)
-                    if constraint.firstItem?.constraints?.contains(constraint) ?? false {
-                        constraint.firstItem?.removeConstraint(constraint)
-                    }
-                    if constraint.secondItem?.constraints?.contains(constraint) ?? false {
-                        constraint.secondItem?.superview?.removeConstraint(constraint)
-                    }
+                    constraint.constant = typeData.value.0
                 } else if let constraint = self.view.superview?.constraints.first(where: {
                     $0.identifier == typeData.value.1
                 }) {
-                    constraint.shouldBeArchived = true
-                    constraint.isActive = false
-                    constraint.priority = .init(250)
-                    if constraint.firstItem?.constraints?.contains(constraint) ?? false {
-                        constraint.firstItem?.removeConstraint(constraint)
-                    }
-                    if constraint.secondItem?.constraints?.contains(constraint) ?? false {
-                        constraint.secondItem?.removeConstraint(constraint)
-                    }
+                    constraint.constant = typeData.value.0
                 }
             }
-            view.addConstaits(constraints, safeArea: false)
             let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeIn) {
                 self.view.layoutIfNeeded()
+                self.view.superview?.layoutIfNeeded()
             }
             animation.addAnimations({
                 self.toggleButtons(hidden: textFieldEditing ? true : hidden, animated: false)
             }, delayFactor: 0.05)
             animation.startAnimation()
         }
-        
     }
     
     func toggleButtons(hidden:Bool, animated:Bool = true) {
@@ -208,11 +200,15 @@ extension EditorOverlayVC:UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         UIApplication.shared.keyWindow?.endEditing(true)
         updateMainConstraints(viewController: viewController)
+        let hidden = navigationController.viewControllers.count >= 2
+        navigationController.setNavigationBarHidden(!hidden, animated: true)
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         let hidden = navigationController.viewControllers.count >= 2
-        navigationController.setNavigationBarHidden(!hidden, animated: true)
+        if navigationController.isNavigationBarHidden != !hidden {
+            navigationController.setNavigationBarHidden(!hidden, animated: true)
+        }
     }
 }
 
@@ -222,6 +218,7 @@ extension EditorOverlayVC {
         var image:String? = nil
         var didSelect:(()->())?
         var toOverlay:ToOverlayData? = nil
+        var backgroundColor:UIColor? = nil
     }
     
     struct ToOverlayData {
