@@ -20,6 +20,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-zS-NHa">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cvu-NU-tLm">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="759"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="05S-cT-avb">
                                         <rect key="frame" x="0.0" y="0.0" width="3000" height="759"/>
                                         <subviews>
@@ -87,8 +91,12 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="05S-cT-avb" secondAttribute="trailing" id="0Na-ny-cYn"/>
+                                    <constraint firstItem="Mbf-ys-vma" firstAttribute="bottom" secondItem="cvu-NU-tLm" secondAttribute="bottom" id="9fz-L2-PbR"/>
+                                    <constraint firstItem="cvu-NU-tLm" firstAttribute="leading" secondItem="Mbf-ys-vma" secondAttribute="leading" id="U3U-bH-GSr"/>
+                                    <constraint firstItem="cvu-NU-tLm" firstAttribute="top" secondItem="Mbf-ys-vma" secondAttribute="top" id="U7o-UZ-cWA"/>
                                     <constraint firstItem="05S-cT-avb" firstAttribute="leading" secondItem="cmW-zS-NHa" secondAttribute="leading" id="dAc-ga-7MN"/>
                                     <constraint firstItem="05S-cT-avb" firstAttribute="top" secondItem="Mbf-ys-vma" secondAttribute="top" id="j3E-l5-vVn"/>
+                                    <constraint firstItem="cvu-NU-tLm" firstAttribute="trailing" secondItem="05S-cT-avb" secondAttribute="leading" id="jAZ-UC-yCR"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ow1-Cb-duz"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Mbf-ys-vma"/>
@@ -107,6 +115,7 @@
                     <connections>
                         <outlet property="assetStackView" destination="05S-cT-avb" id="rRT-EZ-xma"/>
                         <outlet property="collectionView" destination="DOC-iC-egj" id="y1h-ad-4sV"/>
+                        <outlet property="headersStack" destination="cvu-NU-tLm" id="Q7B-8S-oja"/>
                         <outlet property="scrollView" destination="cmW-zS-NHa" id="Xdr-m5-I2n"/>
                     </connections>
                 </viewController>

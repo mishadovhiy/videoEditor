@@ -66,7 +66,7 @@ class EditorModel {
         if let text = data as? MovieAttachmentProtocol {
             addText(text)
         } else {
-            print("error adding data: nothing to add ", data.debugDescription, #function, #line)
+            print("error adding data: nothing to add ", data.debugDescription)
             Task {
                 await videoAdded(canReload:false)
             }
@@ -129,7 +129,7 @@ fileprivate extension EditorModel {
 
 extension EditorModel {
     private func addText(_ data:MovieAttachmentProtocol, canAddToDB:Bool = true) {
-        print(movie?.duration ?? -3, #function, #line)
+        print(movie?.duration ?? -3)
         Task {
             if let dbData = data as? TextAttachmentDB,
                canAddToDB
@@ -161,7 +161,7 @@ fileprivate extension EditorModel {
         return false
     }
     private func addVideosDB(urls:String) async -> Bool {
-        print(urls, #function, #line)
+        print(urls)
         if let first = addingUrls.first {
             addingUrls.removeFirst()
             let _ = await prepare.createVideo(.init(string: first))

@@ -23,10 +23,10 @@ class PrepareEditorModel {
     }
     
     func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> URL? {
-        print(asset.duration, #function, #line, " export duration")
+        print(asset.duration, " export duration")
         guard let composition = delegate.movieHolder ?? delegate.movie
         else {
-            print("Cannot create export session.", #function, #line)
+            print("Cannot create export session.")
             return nil
         }
         let export = AVAssetExportSession(composition: composition)
@@ -37,7 +37,7 @@ class PrepareEditorModel {
     
     func addText(data:MovieAttachmentProtocol) async -> Bool {
         let asset = delegate.movie ?? .init()
-        print(asset.duration, #function, #line, " video duration")
+        print(asset.duration, " video duration")
         guard let composition = delegate.movie
         else { return false }
         let assetTrack = asset.tracks(withMediaType: .video)
@@ -66,7 +66,7 @@ class PrepareEditorModel {
             return nil
         }
         let newMovie = AVURLAsset(url: url)
-        print(newMovie.duration, #function, #line, " inserted video duration")
+        print(newMovie.duration, " inserted video duration")
         guard newMovie.duration != .zero,
                 let _ = await insertMovie(movie: newMovie, composition: movie) else {
             
@@ -132,7 +132,7 @@ extension PrepareEditorModel {
             return nil
         }
         let duration = await movie.duration()
-        print(duration, #function, #line, " total coposition duration before insert")
+        print(duration, " total coposition duration before insert")
         movieDescription(movie: composition, duration: duration)
         
         do {
@@ -146,7 +146,7 @@ extension PrepareEditorModel {
             }
             
         } catch {
-            print(error.localizedDescription, #function, #line)
+            print(error.localizedDescription)
             return nil
         }
     }
@@ -170,10 +170,10 @@ extension PrepareEditorModel {
                     }
                 }
             }
-            print("loaded segments count: ", results.count, #function, #line)
+            print("loaded segments count: ", results.count)
             return results
         } catch {
-            print("Failed to insert track 1 into composition: \(error.localizedDescription)", #function, #line)
+            print("Failed to insert track 1 into composition: \(error.localizedDescription)")
             return []
         }
     }
@@ -190,20 +190,20 @@ extension PrepareEditorModel {
                 }
                 let mutt = AVMutableVideoComposition(propertiesOf: composition)
                 
-                print(mutt.instructions, "instractions of the loaded video", #function, #line)
+                print(mutt.instructions, "instractions of the loaded video")
                 mutt.instructions = []
                 composition.tracks.forEach {
                     let bb = AVMutableVideoComposition(propertiesOf: $0.asset!)
-                    print(mutt.instructions, "AVMutableVideoComposition of the loaded video", #function, #line)
+                    print(mutt.instructions, "AVMutableVideoComposition of the loaded video")
 
                     bb.instructions.removeAll()
                 }
                 urlAsset.metadata.forEach {
-                    print($0.value?.description ?? "", " metadata of the loaded video", #function, #line)
+                    print($0.value?.description ?? "", " metadata of the loaded video")
                 }
             }
         } catch {
-            print("error creating composition from url ", error, #function, #line)
+            print("error creating composition from url ", error)
             return nil
         }
         return composition
@@ -213,23 +213,23 @@ extension PrepareEditorModel {
         var vids = 0
         movie.tracks.forEach {
             vids += ($0.asset?.tracks.count ?? 0)
-            print("tracks: ", $0.asset?.tracks ?? [], #function, #line)
-            print(vids, " video count", #function, #line)
-            print($0.asset.debugDescription, " asset", #function, #line)
+            print("tracks: ", $0.asset?.tracks ?? [])
+            print(vids, " video count")
+            print($0.asset.debugDescription, " asset")
         }
         movie.tracks(withMediaType: .video).forEach {
             print($0.segments.count, " rtehytbrt")
             $0.segments.forEach {
                 let time = $0.timeMapping.source
-                print("startFrom: ", time.start, #function, #line)
-                print("startDuration: ", time.duration.seconds, #function, #line)
+                print("startFrom: ", time.start)
+                print("startDuration: ", time.duration.seconds)
                 
-                print($0.description, " video description", #function, #line)
+                print($0.description, " video description")
             }
         }
-        print(vids, " total vids", #function, #line)
-        print(movie, " total movie", #function, #line)
-        print(duration, " total duration ", #function, #line)
+        print(vids, " total vids")
+        print(movie, " total movie")
+        print(duration, " total duration ")
     }
 }
 

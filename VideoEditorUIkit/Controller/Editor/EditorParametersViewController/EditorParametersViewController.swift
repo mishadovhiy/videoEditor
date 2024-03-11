@@ -13,6 +13,7 @@ class EditorParametersViewController: SuperVC {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var assetStackView: UIStackView!
+    @IBOutlet weak var headersStack: UIStackView!
     
     var viewModel:ViewModelEditorParametersViewController?
     private var parentVC: EditorViewController? {
@@ -77,7 +78,7 @@ class EditorParametersViewController: SuperVC {
     
     // MARK: private
     private func updateParentScroll() {
-        let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)
+        let percent = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width - view.frame.width)
         parentVC?.seek(percent: percent)
     }
     
@@ -89,8 +90,8 @@ class EditorParametersViewController: SuperVC {
     func scrollPercent(_ percent:CGFloat) {
         if !(viewModel?.ignoreScroll ?? false) {
             viewModel?.manualScroll = true
-            let scrollOffset = (scrollView.contentSize.width - self.view.frame.width) * percent
-            scrollView.contentOffset.x = scrollOffset.isNormal ? scrollOffset : 0
+            let scrollOffset = ((scrollView.contentSize.width + scrollView.contentInset.left) - self.view.frame.width) * percent
+            scrollView.contentOffset.x = (scrollOffset.isNormal ? scrollOffset : 0) - scrollView.contentInset.left
         }
     }
 }
@@ -157,8 +158,8 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
         let total = view?.superview?.frame ?? .zero
         let startPercent = converted.minX / total.width
         let durationPercent = (view?.frame.width ?? 0) / total.width
-        print(startPercent, "startPercent ", #file, #line, #function)
-        print(durationPercent, " durationPercent", #file, #line, #function)
+        print(startPercent, "startPercent ")
+        print(durationPercent, " durationPercent")
         viewModel?.editingAsset?.inMovieStart = startPercent
         viewModel?.editingAsset?.duration = durationPercent
 

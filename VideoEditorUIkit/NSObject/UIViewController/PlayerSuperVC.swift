@@ -44,7 +44,6 @@ class PlayerSuperVC: SuperVC {
     }
     
     func seek(seconds:TimeInterval) {
-        print(#function)
         if playerLayer?.player?.currentItem == nil {
             return
         }
@@ -99,9 +98,8 @@ class PlayerSuperVC: SuperVC {
         print("Current Time: \(sendond)")
         if sendond == movie?.duration.seconds {
             let playing = self.playerLayer?.player?.rate != 0
-            print("completed ", playing, #file, #line, #function)
+            print("completed ", playing)
             self.pause()
-            self.seek(seconds: 0)
         }
         
         let percent = sendond / (movie?.duration.seconds ?? 0)

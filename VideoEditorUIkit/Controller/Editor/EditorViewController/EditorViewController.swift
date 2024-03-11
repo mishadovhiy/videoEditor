@@ -15,7 +15,7 @@ class EditorViewController: SuperVC {
     
     var playerVC:PlayerViewController? {
         if !Thread.isMainThread {
-            print("error Player called from background thread", #function, #line)
+            print("error Player called from background thread")
         }
         return self.children.first(where: {$0 is PlayerViewController
         }) as? PlayerViewController

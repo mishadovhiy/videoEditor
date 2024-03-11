@@ -21,7 +21,7 @@ extension AVAssetExportSession {
         if let videoComposition,
            (videoComposition.renderSize.width > 0 && videoComposition.renderSize.height > 0)
         {
-            print(videoComposition.renderSize, " reder size", #file, #line, #function)
+            print(videoComposition.renderSize, " reder size")
             self.videoComposition = videoComposition
             //        let metadataItem:AVMutableMetadataItem = .init()
             //        metadataItem.key = AVMetadataKey.commonKeyTitle as any NSCopying & NSObjectProtocol
@@ -29,7 +29,7 @@ extension AVAssetExportSession {
             //        metadataItem.value = "My Custom Metadata Value" as NSString
             //        self.metadata = [metadataItem]
         } else if let videoComposition {
-            print(videoComposition.renderSize, " error adding videoComposition", #file, #line, #function)
+            print(videoComposition.renderSize, " error adding videoComposition")
         }
         self.shouldOptimizeForNetworkUse = false
         self.timeRange = .init(start: .zero, duration: asset.duration)
@@ -40,8 +40,8 @@ extension AVAssetExportSession {
         if self.status == .completed {
             return exportURL
         } else {
-            print("exporterror: \(self.error?.localizedDescription ?? "")", #file, #line, #function)
-            print(status.rawValue, " status ", #file, #line, #function)
+            print("exporterror: \(self.error?.localizedDescription ?? "")")
+            print(status.rawValue, " status ")
             return self.status == .failed ? nil : exportURL
         }
     }

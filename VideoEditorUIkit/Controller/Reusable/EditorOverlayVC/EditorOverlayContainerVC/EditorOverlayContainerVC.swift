@@ -29,11 +29,6 @@ class EditorOverlayContainerVC: SuperVC {
             return nil
         }
     }
-    enum OverlaySize {
-        case small
-        case middle
-        case big
-    }
     
     private var parentVC:EditorOverlayVC? {
         return ((navigationController?.parent as? EditorOverlayVC)?.parent as? EditorViewController)?.children.first(where: {
@@ -53,6 +48,14 @@ class EditorOverlayContainerVC: SuperVC {
     
     @objc private func textFieldDidChanged(_ sender:UITextField) {
         parentVC?.attachmentData?.assetName = sender.text
+    }
+}
+
+extension EditorOverlayContainerVC {
+    enum OverlaySize {
+        case small
+        case middle
+        case big
     }
 }
 

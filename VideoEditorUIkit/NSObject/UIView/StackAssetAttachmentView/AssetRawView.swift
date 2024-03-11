@@ -38,7 +38,7 @@ class AssetRawView:UIView {
     ) {
         self.panEnded = panEnded
         self.data = data
-        print(data.debugDescription, " data ", #file, #line, #function)
+        print(data.debugDescription, " data ")
         self.editRowPressed = editRowPressed
         titleLabel?.text = data?.assetName ?? data?.defaultName
         self.backgroundColor = data?.color
@@ -130,8 +130,12 @@ extension AssetRawView {
         headerView.layer.name = "Header"
         self.addSubview(headerView)
         headerView.addConstaits([.left:0, .top:0, .bottom:0, .right:0])
-        headerView.leadingAnchor.constraint(greaterThanOrEqualTo: vcSuperView.safeAreaLayoutGuide.leadingAnchor).isActive = true
         
+        if let _ = superview?.superview?.subviews.first(where: {$0.layer.name == "LeftHeaderView"}) {
+            headerView.leadingAnchor.constraint(greaterThanOrEqualTo: vcSuperView.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        } else {
+            headerView.leadingAnchor.constraint(greaterThanOrEqualTo: vcSuperView.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        }
         let label:UILabel = .init()
         label.adjustsFontSizeToFitWidth = true
         headerView.addSubview(label)

@@ -24,6 +24,11 @@ class StackAssetAttachmentView:UIView {
         return self.subviews.first(where: {$0 is UIStackView}) as? UIStackView
     }
     
+    private var leftHeaderView:UIView? {
+        layerStack?.subviews.first(where: {$0.layer.name == "LeftHeaderView"})
+    }
+    
+    // MARK: - Life-Cycle
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         if superview != nil {
@@ -32,7 +37,7 @@ class StackAssetAttachmentView:UIView {
             })
         }
     }
-
+    
     override func removeFromSuperview() {
         layerStack?.arrangedSubviews.forEach({
             $0.subviews.forEach {
@@ -42,34 +47,6 @@ class StackAssetAttachmentView:UIView {
         })
         super.removeFromSuperview()
         delegate = nil
-    }
-    
-    func setEmptyViewHidden(_ hidden:Bool, view:UIView, completion:(()->())? = nil) {
-        view.isUserInteractionEnabled = !hidden
-        let animation = UIViewPropertyAnimator(duration: hidden ? 0.5 : 0.25, curve: .easeInOut) {
-            view.alpha = hidden ? 0 : 1
-            view.layer.zoom(value: hidden ? 0.7 : 1)
-        }
-        animation.addCompletion { _ in
-            completion?()
-        }
-        animation.startAnimation()
-    }
-    
-    func setSelected(_ selected:Bool) {
-        layer.animationTransition(0.2)
-        layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
-        layer.borderWidth = selected ? 3 : 0
-        if !selected,
-           let view = layerStack?.arrangedSubviews.first(where: {
-               $0.subviews.contains(where: {$0.layer.name == "isEmptyView"})})?.subviews.first(where: {
-                   $0.layer.name == "isEmptyView"
-               })
-        {
-            setEmptyViewHidden(true, view: view) {
-                view.removeFromSuperview()
-            }
-        }
     }
     
     func deselectAll() {
@@ -83,18 +60,9 @@ class StackAssetAttachmentView:UIView {
         })
     }
     
-    // MARK: @IBAction
-    private func editRowPressed(_ data:MovieAttachmentProtocol?, view:AssetRawView? = nil) {
-        delegate?.attachmentSelected(data, view: view ?? self)
-    }
-    
-    private func assetChangePanEnded(_ view:AssetRawView?) {
-        delegate?.attachmentPanChanged(view:view)
-    }
-    
-    @objc private func emptyRowPressed(_ sender:UITapGestureRecognizer) {
+    func addEmptyPressed() {
         var newData = TextAttachmentDB.demo
-        newData.inMovieStart = 0.2
+        newData.inMovieStart = 0
         newData.duration = 0.2
         if let superView = (delegate as? EditorParametersViewController)?.scrollView {
             let scroll = superView.contentOffset.x / superView.contentSize.width
@@ -110,8 +78,22 @@ class StackAssetAttachmentView:UIView {
             view.setSelected(true)
         }
     }
+    
+    // MARK: @IBAction
+    private func editRowPressed(_ data:MovieAttachmentProtocol?, view:AssetRawView? = nil) {
+        delegate?.attachmentSelected(data, view: view ?? self)
+    }
+    
+    private func assetChangePanEnded(_ view:AssetRawView?) {
+        delegate?.attachmentPanChanged(view:view)
+    }
+    
+    @objc private func emptyRowPressed(_ sender:UITapGestureRecognizer) {
+        addEmptyPressed()
+    }
 }
 
+// MARK: - updateUI
 extension StackAssetAttachmentView {
     public func updateView(_ data:[MovieAttachmentProtocol]? = nil) {
         updateSuperViews()
@@ -132,16 +114,54 @@ extension StackAssetAttachmentView {
     private func addRowView(data:MovieAttachmentProtocol, isEmpty:Bool = false, created:((_ view:AssetRawView)->())? = nil) {
         let layer = isEmpty ? 0 : self.data.layerNumber(item: data)
         if let layer,
-            let toView = layerStack?.arrangedSubviews[layer] {
+           let toView = layerStack?.arrangedSubviews[layer] {
             AssetRawView.create(superView: toView, data: data, vcSuperView: delegate!.vc.view, editRowPressed: editRowPressed(_:view:), panEnded: assetChangePanEnded(_:), created:created)
             toView.isHidden = false
         } else {
-            print("error adding row to the \(String(describing: Self.self))  ", layer ?? -3, #file, #line, #function)
+            print("error adding row to the \(String(describing: Self.self))  ", layer ?? -3)
         }
+    }
+    
+    private func updateSuperViews() {
+        layerStack?.arrangedSubviews.forEach({
+            $0.subviews.forEach {
+                if $0.layer.name != "LeftHeaderView" {
+                    $0.removeFromSuperview()
+                }
+            }
+        })
+    }
+    
+    func setSelected(_ selected:Bool) {
+        layer.animationTransition(0.2)
+        layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
+        layer.borderWidth = selected ? 3 : 0
+        if !selected,
+           let view = layerStack?.arrangedSubviews.first(where: {
+               $0.subviews.contains(where: {$0.layer.name == "isEmptyView"})})?.subviews.first(where: {
+                   $0.layer.name == "isEmptyView"
+               })
+        {
+            setEmptyViewHidden(true, view: view) {
+                view.removeFromSuperview()
+            }
+        }
+    }
+    
+    private func setEmptyViewHidden(_ hidden:Bool, view:UIView, completion:(()->())? = nil) {
+        view.isUserInteractionEnabled = !hidden
+        let animation = UIViewPropertyAnimator(duration: hidden ? 0.5 : 0.25, curve: .easeInOut) {
+            view.alpha = hidden ? 0 : 1
+            view.layer.zoom(value: hidden ? 0.7 : 1)
+        }
+        animation.addCompletion { _ in
+            completion?()
+        }
+        animation.startAnimation()
     }
 }
 
-
+// MARK: - loadUI
 fileprivate extension StackAssetAttachmentView {
     func loadUI() {
         if layerStack != nil {
@@ -161,24 +181,58 @@ fileprivate extension StackAssetAttachmentView {
         layerStack.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
         self.updateView(self.data)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emptyRowPressed(_:))))
+        self.backgroundColor = .white.withAlphaComponent(0.1)
+        loadLeftHeader()
     }
     
-    private func updateSuperViews() {
-        layerStack?.arrangedSubviews.forEach({
-            $0.subviews.forEach {
-                $0.removeFromSuperview()
-            }
-        })
+    func loadLeftHeader() {
+        let newView = UIView()
+        layerStack?.addSubview(newView)
+        
+        newView.tag = 0
+        loadLeftHeaderContent(toView: newView)
+        newView.layer.name = "LeftHeaderView"
+        newView.leadingAnchor.constraint(equalTo: parentScrollView!.superview!.leadingAnchor, constant: 0).isActive = true
+        let right = newView.trailingAnchor.constraint(equalTo: parentScrollView!.leadingAnchor, constant: 0)
+        right.priority = .init(rawValue: 500)
+        right.isActive = true
+        newView.addConstaits([.top:0, .bottom:0])
+    }
+    
+    func loadLeftHeaderContent(toView:UIView) {
+        let stack = UIStackView()
+        toView.addSubview(stack)
+        
+        let label:UILabel = .init()
+        stack.addArrangedSubview(label)
+        
+        stack.distribution = .fillProportionally
+        stack.spacing = 3
+        stack.axis = .horizontal
+        label.textAlignment = .center
+        label.text = mediaType?.title
+        label.minimumScaleFactor = 0.3
+        label.adjustsFontSizeToFitWidth = true
+        label.font = .systemFont(ofSize: 9, weight: .medium)
+        label.textColor = .white
+        stack.addConstaits([.left:2, .right:-2, .bottom:0])
+    }
+    
+    var parentScrollView:UIScrollView? {
+        parentStackView?.superview as? UIScrollView
+    }
+    
+    var parentStackView: UIStackView? {
+        superview as? UIStackView
     }
 }
-
 
 extension StackAssetAttachmentView {
     static func create(_ data:[MovieAttachmentProtocol], type:InstuctionAttachmentType, delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
         let new = StackAssetAttachmentView.init(frame: .zero)
         new.mediaType = type
-        new.backgroundColor = .white.withAlphaComponent(0.1)
         new.data = data
+        new.tag = type.order
         new.delegate = delegate
         view.addArrangedSubview(new)
     }

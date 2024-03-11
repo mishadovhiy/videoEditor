@@ -18,7 +18,7 @@ extension AVAsset {
             let image = UIImage(cgImage: imageRef)
             return image
         } catch let error as NSError {
-            print("\(error.description). error time: \(actualTime)", #file, #line, #function)
+            print("\(error.description). error time: \(actualTime)")
             return nil
         }
     }
