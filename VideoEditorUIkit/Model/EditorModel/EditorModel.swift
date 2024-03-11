@@ -66,7 +66,7 @@ class EditorModel {
         if let text = data as? MovieAttachmentProtocol {
             addText(text)
         } else {
-            print("error adding data: nothing to add ", data)
+            print("error adding data: nothing to add ", data.debugDescription, #function, #line)
             Task {
                 await videoAdded(canReload:false)
             }
@@ -88,8 +88,6 @@ class EditorModel {
     
     private func reloadMovie() async {
         movie = .init()
-      //  _movie = .init()
-      //  movieHolder = .init()
         addingUrls = DB.db.movieParameters.editingMovie?.compositionURLs ?? []
         if let urlString = DB.db.movieParameters.editingMovie?.originalURL,
            let url:URL = .init(string: urlString) {
@@ -131,7 +129,7 @@ fileprivate extension EditorModel {
 
 extension EditorModel {
     private func addText(_ data:MovieAttachmentProtocol, canAddToDB:Bool = true) {
-        print(movie?.duration, " hyrtgerfweregt")
+        print(movie?.duration ?? -3, #function, #line)
         Task {
             if let dbData = data as? TextAttachmentDB,
                canAddToDB
@@ -163,10 +161,10 @@ fileprivate extension EditorModel {
         return false
     }
     private func addVideosDB(urls:String) async -> Bool {
-        print("addVideosDB: ", urls)
+        print(urls, #function, #line)
         if let first = addingUrls.first {
             addingUrls.removeFirst()
-            let resultURL = await prepare.createVideo(.init(string: first))
+            let _ = await prepare.createVideo(.init(string: first))
             sleep(2)
             if let next = addingUrls.first {
                 return await addVideosDB(urls: next)

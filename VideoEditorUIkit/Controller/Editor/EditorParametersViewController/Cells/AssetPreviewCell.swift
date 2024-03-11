@@ -14,7 +14,6 @@ class AssetPreviewCell:UICollectionViewCell {
     
     func set(previewImage:Data?, secondText:String) {
         secondLabel.text = secondText
-       // cell.secondLabel.text = indexPath.row != 0 ? "" : "\(viewModel?.tableData[indexPath.section].duration ?? 0)"
         if let previewImage {
             previewImageView.image = .init(data: previewImage)
         } else {
@@ -26,7 +25,6 @@ class AssetPreviewCell:UICollectionViewCell {
     
     override func removeFromSuperview() {
         super.removeFromSuperview()
-        print("removingsdfasdf cell")
         previewImageView.image = nil
     }
     

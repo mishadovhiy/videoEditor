@@ -38,7 +38,7 @@ class AssetRawView:UIView {
     ) {
         self.panEnded = panEnded
         self.data = data
-        print(data, " etgrfwdawewfrg")
+        print(data.debugDescription, " data ", #file, #line, #function)
         self.editRowPressed = editRowPressed
         titleLabel?.text = data?.assetName ?? data?.defaultName
         self.backgroundColor = data?.color
@@ -48,8 +48,6 @@ class AssetRawView:UIView {
             widthConstraint!.constant = newConstraints.1
             self.layoutIfNeeded()
             self.layer.zPosition = 999
-        } else {
-            print("fvsdcaxz")
         }
     }
     
@@ -57,9 +55,6 @@ class AssetRawView:UIView {
         let total = parentCollectionWidth ?? 100
         let x = total * data!.inMovieStart
         let width = total * data!.duration
-        print(data?.assetName)
-        (print(total * data!.inMovieStart, " evfrdasx ", data!.inMovieStart))
-        print(total * data!.duration, " rtegfwedrgty ", data!.duration)
         return (x, width)
     }
     
@@ -76,7 +71,7 @@ class AssetRawView:UIView {
         pansGetsureView.forEach {
             $0.isHidden = !selected
         }
-       // self.layer.zPosition = selected ? 999 : 100
+        self.layer.zPosition = selected ? 999 : 2
     }
     
     @objc private func editRowPressed(_ sender:UITapGestureRecognizer) {
@@ -87,7 +82,6 @@ class AssetRawView:UIView {
     @objc private func panGesture(_ sender: UIPanGestureRecognizer) {
         let position = sender.translation(in: self)
         sender.setTranslation(.zero, in: self)
-        print(position, " thyrtgerfed")
         if sender.view?.tag == 1 {
             xConstraint?.constant += position.x
             
@@ -121,7 +115,6 @@ extension AssetRawView {
         superView?.addSubview(new)
         new.data = data
         new.alpha = 0.5
-        print("Dataasdsf: ", data)
         new.addConstaits([.left:new.newConstraints.0, .top:0, .width:new.newConstraints.1])
         new.heightAnchor.constraint(lessThanOrEqualToConstant: 30).isActive = true
         new.bottomAnchor.constraint(lessThanOrEqualTo: new.superview!.bottomAnchor).isActive = true
@@ -129,7 +122,6 @@ extension AssetRawView {
         new.updateView(data: data, updateConstraints: false, editRowPressed: editRowPressed, panEnded: panEnded)
         new.createPans()
         new.layer.cornerRadius = 7
-        //new.layer.zPosition = 100
         created?(new)
     }
     

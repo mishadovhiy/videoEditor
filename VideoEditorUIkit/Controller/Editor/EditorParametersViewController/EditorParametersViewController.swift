@@ -48,7 +48,7 @@ class EditorParametersViewController: SuperVC {
     func setUI(type:EditorViewType) {
         assetStackView.arrangedSubviews.forEach {
             if !($0 is UICollectionView) {
-              //  $0.alpha = type == .addingVideos ? 0 : 1
+                $0.alpha = type == .addingVideos ? 0 : 1
             }
         }
     }
@@ -153,16 +153,12 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
 
 extension EditorParametersViewController:AssetAttachmentViewDelegate {
     func attachmentPanChanged(view: AssetRawView?) {
-//        viewModel?.editingAsset?.inMovieStart = x ?? 10
-//        viewModel?.editingAsset?.duration = width ?? 300
         let converted = view?.superview?.convert(view?.frame ?? .zero, from: view ?? .init()) ?? .zero
-        print(converted, " gerfwedw")
         let total = view?.superview?.frame ?? .zero
-        print(total, " fredadsf")
         let startPercent = converted.minX / total.width
         let durationPercent = (view?.frame.width ?? 0) / total.width
-        print(startPercent, " rgefeerfgt")
-        print(durationPercent, " rtegrfwe")
+        print(startPercent, "startPercent ", #file, #line, #function)
+        print(durationPercent, " durationPercent", #file, #line, #function)
         viewModel?.editingAsset?.inMovieStart = startPercent
         viewModel?.editingAsset?.duration = durationPercent
 

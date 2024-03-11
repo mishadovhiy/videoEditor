@@ -15,7 +15,7 @@ class EditorViewController: SuperVC {
     
     var playerVC:PlayerViewController? {
         if !Thread.isMainThread {
-            print("errorr")
+            print("error Player called from background thread", #function, #line)
         }
         return self.children.first(where: {$0 is PlayerViewController
         }) as? PlayerViewController
@@ -167,8 +167,6 @@ fileprivate extension EditorViewController {
             }
         } else {
             setViewType(.addingVideos)
-            //add no data view with add video button (light button, when light - press anywhere)
-            //
         }
     }
         

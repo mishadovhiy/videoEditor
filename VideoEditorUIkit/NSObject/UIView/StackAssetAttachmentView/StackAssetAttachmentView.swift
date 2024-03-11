@@ -118,7 +118,7 @@ extension StackAssetAttachmentView {
         if let data {
             self.data = data
         }
-        guard let stack = self.layerStack else {
+        guard let _ = self.layerStack else {
             return
         }
         data?.forEach({
@@ -134,12 +134,10 @@ extension StackAssetAttachmentView {
         if let layer,
             let toView = layerStack?.arrangedSubviews[layer] {
             AssetRawView.create(superView: toView, data: data, vcSuperView: delegate!.vc.view, editRowPressed: editRowPressed(_:view:), panEnded: assetChangePanEnded(_:), created:created)
-
             toView.isHidden = false
         } else {
-            print("freadwergthf ", layer)
+            print("error adding row to the \(String(describing: Self.self))  ", layer ?? -3, #file, #line, #function)
         }
-        
     }
 }
 
@@ -182,7 +180,6 @@ extension StackAssetAttachmentView {
         new.backgroundColor = .white.withAlphaComponent(0.1)
         new.data = data
         new.delegate = delegate
-    //    new.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
         view.addArrangedSubview(new)
     }
 }

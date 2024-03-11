@@ -69,7 +69,7 @@ fileprivate extension EditorOverlayContainerVC {
         switch screenType?.type {
         case .floatRange(_):
             sliderView.superview?.isHidden = false
-        case .color(let data):
+        case .color(_):
             containerView.isHidden = false
             let colorVC =  ColorPickerViewController()
             colorVC.delegate = self

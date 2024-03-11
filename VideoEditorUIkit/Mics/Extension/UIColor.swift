@@ -46,7 +46,6 @@ extension UIColor {
             lroundf(g * 255),
             lroundf(b * 255)
         )
-        print("toHexthexString:", hexString)
         return hexString
     }
 }

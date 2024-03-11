@@ -22,8 +22,6 @@ protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
     /// percent in movie asset
     var inMovieStart:CGFloat {get set}
     var id:UUID { get }
-//    func movieConstraints(asset:AVAsset, superViewWidth:CGFloat) -> (CGFloat, CGFloat)
-//    func setMovieDurations(x:CGFloat, width:CGFloat, superViewWidth:CGFloat, asset:AVAsset)
 }
 
 extension [MovieAttachmentProtocol] {
@@ -39,12 +37,9 @@ extension [MovieAttachmentProtocol] {
                 at += 1
             } else if subRange.upperBound >= mainRange.lowerBound && subRange.upperBound <= mainRange.upperBound {
                 at += 1
-            } else {
-                print("item: gterfwfr ", subRange)
-                print("erfwderfe: ", mainRange)
             }
         }
-        print(at, " grefredrefg")
+        print(at, #function, #line)
         if at >= 4 {
             return Int.random(in: 0..<3)
         }
@@ -101,14 +96,6 @@ extension MovieGeneralParameterList {
 
 extension MovieGeneralParameterList {
     struct RegularRow:MovieAttachmentProtocol {
-//        func movieConstraints(asset: AVAsset, superViewWidth: CGFloat) -> (CGFloat, CGFloat) {
-//            <#code#>
-//        }
-//        
-//        func setMovieDurations(x: CGFloat, width: CGFloat, superViewWidth: CGFloat, asset: AVAsset) {
-//            <#code#>
-//        }
-        
         let attachmentType: InstuctionAttachmentType? = .text
         var inMovieStart: CGFloat
         var duration: CGFloat
@@ -125,14 +112,6 @@ extension MovieGeneralParameterList {
     }
     
     struct SongRow:MovieAttachmentProtocol {
-//        func movieConstraints(asset: AVAsset, superViewWidth: CGFloat) -> (CGFloat, CGFloat) {
-//            <#code#>
-//        }
-//        
-//        func setMovieDurations(x: CGFloat, width: CGFloat, superViewWidth: CGFloat, asset: AVAsset) {
-//            <#code#>
-//        }
-//        
         let attachmentType: InstuctionAttachmentType? = .song
         var inMovieStart: CGFloat
         var duration: CGFloat
@@ -150,18 +129,9 @@ extension MovieGeneralParameterList {
     }
     
     struct MediaRow:MovieAttachmentProtocol {
-//        func movieConstraints(asset: AVAsset, superViewWidth: CGFloat) -> (CGFloat, CGFloat) {
-//            <#code#>
-//        }
-//        
-//        func setMovieDurations(x: CGFloat, width: CGFloat, superViewWidth: CGFloat, asset: AVAsset) {
-//            <#code#>
-//        }
-//        
         var attachmentType: InstuctionAttachmentType? {
             return .media
         }
-        
         
         var inMovieStart: CGFloat
         var duration: CGFloat

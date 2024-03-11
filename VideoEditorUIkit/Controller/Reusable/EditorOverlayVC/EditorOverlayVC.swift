@@ -133,7 +133,7 @@ extension EditorOverlayVC {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.topAnchor.constraint(equalTo: toView.bottomAnchor).isActive = true
         view.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
-        view.leadingAnchor.constraint(lessThanOrEqualTo: bottomView.trailingAnchor, constant: -10).isActive = true
+        view.leadingAnchor.constraint(lessThanOrEqualTo: bottomView.trailingAnchor, constant: -20).isActive = true
         view.leadingAnchor.constraint(lessThanOrEqualTo: self.view.trailingAnchor, constant: -10).isActive = true
         
         let constraint3 = view.trailingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: -10)

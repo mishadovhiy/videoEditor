@@ -63,7 +63,6 @@ fileprivate extension EditorVideoLayer {
         let videoLayer = CALayer()
         let size:CGSize = overlayLayer?.frame.size ?? .init(width: 10, height: 10)
         videoLayer.frame = .init(origin: .zero, size: size)
-        //CGRect(origin: .init(x: 20, y: 20), size: .init(width: videoSize.width - 40, height: videoSize.height - 40))
         let outputLayer = CALayer()
         outputLayer.frame = CGRect(origin: .zero, size: videoSize)
         
@@ -79,7 +78,7 @@ fileprivate extension EditorVideoLayer {
             in: outputLayer)
         
         let instruction = AVMutableVideoCompositionInstruction()
-        print("instractions dusration: tefrgtref ", track.asset?.duration ?? .zero)
+        print("instractions dusration: ", track.asset?.duration ?? .zero, #function, #line)
         instruction.timeRange = await CMTimeRange(
             start: .zero,
             duration: composition.duration())

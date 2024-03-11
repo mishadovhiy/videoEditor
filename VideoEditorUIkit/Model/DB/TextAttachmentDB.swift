@@ -29,7 +29,6 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
         duration = attachment.duration
         assetName = attachment.assetName
         color = attachment.color
-        print(assetName, " rgetrfwedwfrg")
     }
     
     /// seconds

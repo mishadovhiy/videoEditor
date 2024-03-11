@@ -16,9 +16,4 @@ class EditorCollectionCell: UICollectionViewCell {
         titleLabel.text = item.title
         imageView.setImage(item.image, superView: imageView.superview)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        print(touches, " terfwedw")
-    }
 }

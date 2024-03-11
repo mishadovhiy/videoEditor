@@ -42,7 +42,7 @@ extension EditorParametersViewController {
             (viewModel.assetData.media, .media),
             (viewModel.assetData.text, .text),
             (viewModel.assetData.songs, .song)]
-        print("newDataasdas ", data)
+        print("attachments for editor: ", data, #function, #line, #file)
         assetStackView.backgroundColor = .black
         data.forEach({ dataRow in
             if let stack = assetStackView.arrangedSubviews.first(where: { view in
@@ -57,7 +57,6 @@ extension EditorParametersViewController {
             {
                 stack.updateView(dataRow.0)
             } else {
-                print("StackAssetAttachmentViewStackAssetAttachmentView for ", dataRow.1)
                 StackAssetAttachmentView.create(dataRow.0, type: dataRow.1, delegate: self, to: assetStackView)
             }
         })
