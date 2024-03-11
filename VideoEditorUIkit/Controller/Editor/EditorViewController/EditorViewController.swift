@@ -110,7 +110,9 @@ extension EditorViewController:PlayerViewControllerPresenter {
     }
     
     func addTrackPressed() {
-        self.viewModel?.editorModel.addVideo()
+        if viewModel?.viewType == .addingVideos {
+            viewModel?.editorModel.addVideo()
+        }
     }
 }
 

@@ -211,11 +211,9 @@ fileprivate extension StackAssetAttachmentView {
         stack.axis = .horizontal
         label.textAlignment = .center
         label.text = mediaType?.title
-        label.minimumScaleFactor = 0.3
-        label.adjustsFontSizeToFitWidth = true
         label.font = .systemFont(ofSize: 9, weight: .medium)
-        label.textColor = .white
-        stack.addConstaits([.left:2, .right:-2, .bottom:0])
+        label.textColor = .white.withAlphaComponent(0.3)
+        stack.addConstaits([.left:2, .right:-2, .bottom:-3])
     }
     
     var parentScrollView:UIScrollView? {

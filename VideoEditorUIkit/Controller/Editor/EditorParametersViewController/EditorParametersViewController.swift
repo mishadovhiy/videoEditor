@@ -94,6 +94,18 @@ class EditorParametersViewController: SuperVC {
             scrollView.contentOffset.x = (scrollOffset.isNormal ? scrollOffset : 0) - scrollView.contentInset.left
         }
     }
+    
+    @objc func leftHeaderPressed(_ sender:UITapGestureRecognizer) {
+        assetStackView.arrangedSubviews.forEach {
+            if let view = $0 as? StackAssetAttachmentView,
+               view.tag == sender.view?.tag
+            {
+                view.addEmptyPressed()
+            } else if sender.view?.tag == 0 {
+                parentVC?.addTrackPressed()
+            }
+        }
+    }
 }
 
 extension EditorParametersViewController {

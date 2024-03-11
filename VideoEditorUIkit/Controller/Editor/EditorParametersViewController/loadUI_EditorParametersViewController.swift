@@ -73,15 +73,5 @@ extension EditorParametersViewController {
             superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftHeaderPressed(_:))))
         }
     }
-        
-    @objc private func leftHeaderPressed(_ sender:UITapGestureRecognizer) {
-        assetStackView.arrangedSubviews.forEach {
-            if let view = $0 as? StackAssetAttachmentView,
-               view.tag == sender.view?.tag
-            {
-                view.addEmptyPressed()
-            }
-        }
-    }
 }
 
