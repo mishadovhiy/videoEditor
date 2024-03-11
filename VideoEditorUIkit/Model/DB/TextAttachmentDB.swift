@@ -7,7 +7,12 @@
 
 import UIKit
 
-struct TextAttachmentDB:MovieAttachmentProtocol {
+struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
+    var attachmentType: InstuctionAttachmentType? = .text
+    static func == (lhs: TextAttachmentDB, rhs: TextAttachmentDB) -> Bool {
+        return lhs.assetName == rhs.assetName
+    }
+    
     var dict:[String:Any]
     init(dict: [String : Any]) {
         self.dict = dict
@@ -19,18 +24,19 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
             self = .demo
             return
         }
+        self.attachmentType = .text
         inMovieStart = attachment.inMovieStart
         duration = attachment.duration
         assetName = attachment.assetName
         color = attachment.color
-        defaultName = attachment.defaultName
         print(assetName, " rgetrfwedwfrg")
     }
     
     /// seconds
     var inMovieStart: CGFloat {
         get {
-            .init(string: dict["inMovieStart"] as? String)
+            let value = CGFloat.init(string: dict["inMovieStart"] as? String ?? "0.1")
+            return value >= 1 ? 1 : (value <= 0 ? 0.1 : value)
         }
         set {
             dict.updateValue(String.init(value: newValue), forKey: "inMovieStart")
@@ -40,7 +46,8 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
     /// seconds
     var duration: CGFloat {
         get {
-            .init(string: dict["duration"] as? String)
+            let value = CGFloat.init(string: dict["duration"] as? String ?? "0.5")
+            return value >= 1 ? 1 : (value <= 0 ? 0.3 : value)
         }
         set {
             dict.updateValue(String.init(value: newValue), forKey: "duration")
@@ -49,7 +56,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
     
     var assetName: String? {
         get {
-            dict["assetName"] as? String ?? ""
+            dict["assetName"] as? String ?? "-"
         }
         set {
             if let newValue {
@@ -70,12 +77,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
     }
     
     var defaultName: String {
-        get {
-            dict["defaultName"] as? String ?? ""
-        }
-        set {
-            dict.updateValue(newValue, forKey: "defaultName")
-        }
+        return attachmentType?.rawValue ?? "-"
     }
     
     var id: UUID {
@@ -128,7 +130,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
     
     var needScale:Bool {
         get {
-            (dict["needScale"] as? Int ?? 0) == 1
+            (dict["needScale"] as? Int ?? 1) == 1
         }
         set {
             dict.updateValue(newValue ? 1 : 0, forKey: "needScale")
@@ -158,11 +160,24 @@ struct TextAttachmentDB:MovieAttachmentProtocol {
 extension TextAttachmentDB {
     static var demo:Self {
         return .with({
-            $0.inMovieStart = 1
-            $0.assetName = "some text"
-            $0.duration = 10
+            $0.inMovieStart = 0.1
+            $0.assetName = "New text"
+            $0.duration = 0.4
             $0.needScale = true
         })
+    }
+}
+
+extension [TextAttachmentDB] {
+    static var demo:Self {
+        let values = [(0.1, 0.3), (0.6, 0.3), (0.2, 0.2), (0.7, 0.08), (0.5, 0.3)]
+        return values.compactMap { value in
+            return .with {
+                $0.inMovieStart = value.0
+                $0.duration = value.1
+                $0.assetName = ["some name", "other name"].randomElement() ?? "-"
+            }
+        }
     }
 }
 

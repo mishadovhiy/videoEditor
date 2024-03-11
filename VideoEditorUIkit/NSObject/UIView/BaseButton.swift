@@ -25,7 +25,11 @@ class BaseButton:UIButton {
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        setupUI()
+        if superview != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+                self.setupUI()
+            })
+        }
     }
 }
 

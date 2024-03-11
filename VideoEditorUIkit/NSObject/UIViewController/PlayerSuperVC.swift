@@ -29,9 +29,15 @@ class PlayerSuperVC: SuperVC {
         addObservers()
     }
     
-    func timeChanged(_ percent:CGFloat) {
-        
+    override func removeFromParent() {
+        playerLayer?.player?.pause()
+        playerLayer?.player = nil
+        playerLayer?.removeFromSuperlayer()
+        removeAllObservers()
+        super.removeFromParent()
     }
+    
+    func timeChanged(_ percent:CGFloat) { }
     
     func pause() {
         playerLayer?.player?.pause()
@@ -39,6 +45,9 @@ class PlayerSuperVC: SuperVC {
     
     func seek(seconds:TimeInterval) {
         print(#function)
+        if playerLayer?.player?.currentItem == nil {
+            return
+        }
         self.pause()
         let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: EditorModel.timeScale)
         playerLayer?.player?.seek(to: desiredCMTime)
@@ -67,9 +76,7 @@ class PlayerSuperVC: SuperVC {
         }
     }
     
-    func preparePlayer() {
-        
-    }
+    func preparePlayer() { }
     
     @objc fileprivate func playPressed(_ sender:UIButton) {
         if playerLayer == nil {
@@ -90,18 +97,18 @@ class PlayerSuperVC: SuperVC {
     
     private func playTimeChanged(_ sendond:TimeInterval) {
         print("Current Time: \(sendond)")
-        if sendond == movie.duration.seconds {
+        if sendond == movie?.duration.seconds {
             let playing = self.playerLayer?.player?.rate != 0
             print("completed ", playing)
             self.pause()
             self.seek(seconds: 0)
         }
         
-        let percent = sendond / movie.duration.seconds
+        let percent = sendond / (movie?.duration.seconds ?? 0)
         if let line = self.view.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
             line.strokeEnd = percent
         }
-        durationLabel?.text = "\(Int(sendond))/\(Int(movie.duration.seconds))"
+        durationLabel?.text = "\(Int(sendond))/\(Int(movie?.duration.seconds ?? 0))"
         timeChanged(percent)
     }
     
@@ -109,8 +116,8 @@ class PlayerSuperVC: SuperVC {
         return self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer
     }
 
-    var movie:AVAsset {
-        return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : .init())
+    var movie:AVAsset? {
+        return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
     }
     
     func addObservers() {

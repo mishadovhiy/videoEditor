@@ -23,7 +23,10 @@ extension AVAsset {
         }
     }
     
-    func duration() async -> CMTime {
+    func duration(isAsync:Bool = true) async -> CMTime {
+        if !isAsync {
+            return self.duration
+        }
         do {
             return try await load(.duration)
         } catch {

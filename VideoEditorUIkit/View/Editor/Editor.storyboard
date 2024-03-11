@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rLM-dp-mMF">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Editor View Controller-->
+        <scene sceneID="Y4k-5n-1wW">
+            <objects>
+                <viewController storyboardIdentifier="EditorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rLM-dp-mMF" customClass="EditorViewController" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DK9-lA-R5g">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dn4-TT-YmG">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEO-Ya-Jeo">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="519"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohh-1K-fdl">
+                                        <rect key="frame" x="0.0" y="519" width="393" height="240"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="240" id="iRE-v4-kQm"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fif-AD-WAD"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dn4-TT-YmG" firstAttribute="leading" secondItem="fif-AD-WAD" secondAttribute="leading" id="0c3-wZ-dtz"/>
+                            <constraint firstItem="fif-AD-WAD" firstAttribute="trailing" secondItem="dn4-TT-YmG" secondAttribute="trailing" id="Eg1-aA-Uax"/>
+                            <constraint firstItem="dn4-TT-YmG" firstAttribute="top" secondItem="fif-AD-WAD" secondAttribute="top" id="dZz-x1-3vy"/>
+                            <constraint firstItem="fif-AD-WAD" firstAttribute="bottom" secondItem="dn4-TT-YmG" secondAttribute="bottom" id="jZg-Hw-eTc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="trackContainerView" destination="Ohh-1K-fdl" id="wFW-sI-9nG"/>
+                        <outlet property="videoContainerView" destination="jEO-Ya-Jeo" id="Elb-f9-Nui"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QP0-dd-3m7" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56" y="-2"/>
+        </scene>
+    </scenes>
+</document>

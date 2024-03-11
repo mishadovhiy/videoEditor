@@ -1,0 +1,196 @@
+//
+//  TestCollectionView.swift
+//  VideoEditorUIkit
+//
+//  Created by Misha Dovhiy on 30.12.2023.
+//
+
+import UIKit
+import AVFoundation
+
+class EditorParametersViewController: SuperVC {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var assetStackView: UIStackView!
+    
+    var viewModel:ViewModelEditorParametersViewController?
+    private var parentVC: EditorViewController? {
+        return parent as? EditorViewController
+    }
+    override var initialAnimation: Bool { return false}
+    var viewType:EditorViewType {
+        return parentVC?.viewModel?.viewType ?? .addingVideos
+    }
+    
+    // MARK: - life-cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadUI()
+        setUI(type: viewType)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel = nil
+    }
+    
+    override func removeFromParent() {
+        viewModel = nil
+        collectionView.visibleCells.forEach {
+            $0.removeFromSuperview()
+        }
+        collectionView.removeFromSuperview()
+        super.removeFromParent()
+    }
+    
+    // MARK: - setup ui
+    func setUI(type:EditorViewType) {
+        assetStackView.arrangedSubviews.forEach {
+            if !($0 is UICollectionView) {
+              //  $0.alpha = type == .addingVideos ? 0 : 1
+            }
+        }
+    }
+    
+    // MARK: receive
+    func assetChanged() {
+        guard let viewModel,
+              let editorModel = parentVC?.viewModel?.editorModel
+        else { return}
+        Task {
+            await viewModel.assetChanged(parentVC?.viewModel?.editorModel.movie, editorModel: editorModel)
+        }
+    }
+    
+    func dataChanged(reloadTable:Bool) {
+        if viewModel != nil {
+            if reloadTable {
+                collectionView.reloadData()
+            } else {
+                updateAttachmantsStack()
+                collectionView.reloadData()
+                removeOverlays()
+            }
+        }
+    }
+    
+    // MARK: private
+    private func updateParentScroll() {
+        let percent = scrollView.contentOffset.x / (scrollView.contentSize.width - view.frame.width)
+        parentVC?.seek(percent: percent)
+    }
+    
+    private func removeOverlays() {
+        parentVC?.presentingOverlayVC?.removeFromParent()
+    }
+    
+    // MARK: IBAction
+    func scrollPercent(_ percent:CGFloat) {
+        if !(viewModel?.ignoreScroll ?? false) {
+            viewModel?.manualScroll = true
+            let scrollOffset = (scrollView.contentSize.width - self.view.frame.width) * percent
+            scrollView.contentOffset.x = scrollOffset.isNormal ? scrollOffset : 0
+        }
+    }
+}
+
+extension EditorParametersViewController {
+    func scrollingEnded() {
+        viewModel?.scrollViewDeclaring = false
+        viewModel?.ignoreScroll = false
+        updateParentScroll()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        viewModel?.ignoreScroll = true
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        viewModel?.scrollViewDeclaring = true
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !(viewModel?.scrollViewDeclaring ?? false) {
+            scrollingEnded()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollingEnded()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let editingView = viewModel?.editingView,
+           let editingRowView = editingView as? AssetRawView
+        {
+            let positionInParent = parentVC?.view.convert(editingView.frame, to: editingView) ?? .zero
+            parentVC?.presentingOverlayVC?.positionInScrollChanged(new: positionInParent, editingRawView: editingRowView)
+        }
+        if viewModel?.manualScroll ?? false {
+            viewModel?.manualScroll = false
+        } else {
+            updateParentScroll()
+        }
+    }
+}
+
+extension EditorParametersViewController:EditorOverlayVCDelegate {
+    func overlayRemoved() {
+        parentVC?.playerVC?.editorOverlayRemoved()
+        viewModel?.editingView = nil
+        assetStackView.subviews.forEach {
+            if let view = $0 as? StackAssetAttachmentView {
+                view.deselectAll()
+            }
+        }
+    }
+    
+    func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
+        parentVC?.addAttachmentPressed(viewModel?.attachmentData(attachmentData: attachmentData) ?? attachmentData)
+    }
+}
+
+extension EditorParametersViewController:AssetAttachmentViewDelegate {
+    func attachmentPanChanged(view: AssetRawView?) {
+//        viewModel?.editingAsset?.inMovieStart = x ?? 10
+//        viewModel?.editingAsset?.duration = width ?? 300
+        let converted = view?.superview?.convert(view?.frame ?? .zero, from: view ?? .init()) ?? .zero
+        print(converted, " gerfwedw")
+        let total = view?.superview?.frame ?? .zero
+        print(total, " fredadsf")
+        let startPercent = converted.minX / total.width
+        let durationPercent = (view?.frame.width ?? 0) / total.width
+        print(startPercent, " rgefeerfgt")
+        print(durationPercent, " rtegrfwe")
+        viewModel?.editingAsset?.inMovieStart = startPercent
+        viewModel?.editingAsset?.duration = durationPercent
+
+    }
+    
+    func attachmentSelected(_ data: MovieAttachmentProtocol?, view:UIView?) {
+        guard let parent = parentVC else {
+            return
+        }
+        parent.playerVC?.pause()
+        viewModel?.editingAsset = data
+        viewModel?.editingView = view
+        if let data {
+            parentVC?.playerVC?.editingAttachmentPressed(data)
+        }
+        removeOverlays()
+        EditorOverlayVC.addToParent(parent, bottomView: view ?? self.view, data: data, delegate: self)
+    }
+    
+    var vc: UIViewController {
+        return self
+    }
+}
+
+
+extension EditorParametersViewController {
+    static func configure() -> EditorParametersViewController {
+        let vc = UIStoryboard(name: "EditorParameters", bundle: nil).instantiateViewController(withIdentifier: "AssetParametersViewController") as? EditorParametersViewController ?? .init()
+        return vc
+    }
+}

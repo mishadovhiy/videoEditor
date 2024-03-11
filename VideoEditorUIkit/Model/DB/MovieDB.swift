@@ -25,24 +25,6 @@ extension DB.DataBase {
                     dict.removeValue(forKey: "movies")
                 }
             }
-//            get {
-//                return allMovieParameters.first(where: {$0.url == editingMovieURL})
-//            }
-//            set {
-//                var all = allMovieParameters
-//                if let first = all.first(where: {$0.url == newValue?.url}) {
-//                    var results = first
-//                    results.texts = newValue?.texts ?? []
-//                    all.append(results)
-//                } else if let newValue {
-//                    all.append(newValue)
-//                }
-//                guard let _ = newValue else {
-//                    dict.removeValue(forKey: "movies")
-//                    return
-//                }
-//                dict.updateValue(all, forKey: "movies")
-//            }
         }
         
         private var allMovieParameters:[MovieDB] {
@@ -66,16 +48,17 @@ extension DB.DataBase {
             }
         }
         
-        func clearTemporaryDirectory(exept:URL? = nil) {
+        func clearTemporaryDirectory(exept:URL? = nil, urls:[String]? = nil) {
             print("clearTemporaryDirectory isall: ", exept == nil)
             let fileManager = FileManager.default
             let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-
+            
             do {
                 let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
 
                 try contents.forEach({
-                    if $0 != exept || exept == nil {
+                    let cantRemove = exept == $0 || (editingMovie?.originalURL ?? "-3") == $0.absoluteString
+                    if exept == nil || !cantRemove{
                         try fileManager.removeItem(at: $0)
                         print("Removed: \($0.lastPathComponent)")
                     }
@@ -121,6 +104,24 @@ extension DB.DataBase.MovieParametersDB {
             }
             set {
                 dict.updateValue(newValue, forKey: "url")
+            }
+        }
+        
+        var originalURL:String {
+            get {
+                return dict["originalURL"] as? String ?? ""
+            }
+            set {
+                dict.updateValue(newValue, forKey: "originalURL")
+            }
+        }
+        
+        var compositionURLs:[String] {
+            get {
+                return dict["compositionURLs"] as? [String] ?? []
+            }
+            set {
+                dict.updateValue(newValue, forKey: "compositionURLs")
             }
         }
         

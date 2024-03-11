@@ -17,19 +17,23 @@ extension AVAssetExportSession {
         let videoName = UUID().uuidString
         let exportURL = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent(videoName)
-            .appendingPathExtension("mp4")
+            .appendingPathExtension("mov")
         if let videoComposition,
            (videoComposition.renderSize.width > 0 && videoComposition.renderSize.height > 0)
         {
             print(videoComposition.renderSize, " grerfewet")
             self.videoComposition = videoComposition
+            //        let metadataItem:AVMutableMetadataItem = .init()
+            //        metadataItem.key = AVMetadataKey.commonKeyTitle as any NSCopying & NSObjectProtocol
+            //        metadataItem.keySpace = .common
+            //        metadataItem.value = "My Custom Metadata Value" as NSString
+            //        self.metadata = [metadataItem]
         } else if let videoComposition {
             print(videoComposition.renderSize, " grerfewet error adding videoComposition")
         }
-        self.metadata = []
         self.shouldOptimizeForNetworkUse = false
         self.timeRange = .init(start: .zero, duration: asset.duration)
-        self.outputFileType = .mp4
+        self.outputFileType = .mov
         self.outputURL = exportURL
         
         await self.export()

@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import AlertViewLibrary
 
 class BaseVC:UIViewController {
+    
+    override func removeFromParent() {
+        children.forEach({
+            $0.removeFromParent()
+        })
+        super.removeFromParent()
+    }
     
     func applicationDidAppeare() {
         children.forEach({
@@ -27,9 +35,12 @@ class BaseVC:UIViewController {
         }
     }
     
-    
     func lastEditedVideoURL() -> URL? {
         .init(string: DB.db.movieParameters.editingMovieURL ?? "")
+    }
+    
+    func showAlert(title:String, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
+        AppDelegate.shared.ai.showAlert(title: "Error", appearence: .type(.error))
     }
 }
 

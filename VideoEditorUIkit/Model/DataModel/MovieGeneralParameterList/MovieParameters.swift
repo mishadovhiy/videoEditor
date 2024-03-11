@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum InstuctionAttachmentType:String {
+    case song, text, media
+}
+
 struct MovieGeneralParameterList {
     
     var songs:[SongRow]

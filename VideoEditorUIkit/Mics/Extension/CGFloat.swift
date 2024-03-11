@@ -12,6 +12,8 @@ extension CGFloat {
         if let string,
            let number = NumberFormatter().number(from: string) {
             self.init(truncating: number)
+        } else if let string, string != "" {
+            self.init(Double(string) ?? 0)
         } else {
             self = 0
         }
