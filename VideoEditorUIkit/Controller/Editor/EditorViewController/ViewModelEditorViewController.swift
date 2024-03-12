@@ -17,6 +17,23 @@ struct ViewModelEditorViewController {
     mutating func `deinit`() {
         editorModel = nil
     }
+    
+    
+    
+    func mainEditorCollectionData(filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
+        [
+            .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(filterSelected)))
+        ]
+    }
+    
+    private func filterOptionsCollectionData(_ filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
+        [
+            .init(title: "invert colors", didSelect: {
+                //update db
+                
+            })
+        ]
+    }
 }
 
 enum EditorViewType {

@@ -73,11 +73,14 @@ class EditorModel {
         }
     }
     
-    func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
+    func addFilterPressed() {
         Task {
             await prepare.addFilter()
             await videoAdded()
         }
+    }
+    
+    func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
 //        Task {
 //            var holder = DB.db.movieParameters.editingMovie
 //            if let text = data as? (any MovieAttachmentProtocol),

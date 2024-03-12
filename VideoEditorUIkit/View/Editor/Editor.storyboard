@@ -30,6 +30,13 @@
                                             <constraint firstAttribute="height" constant="240" id="iRE-v4-kQm"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2M-CR-Vaf">
+                                        <rect key="frame" x="0.0" y="759" width="393" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="qpK-jZ-9J5"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -43,6 +50,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mainEditorContainerView" destination="J2M-CR-Vaf" id="blf-ol-r3u"/>
                         <outlet property="trackContainerView" destination="Ohh-1K-fdl" id="wFW-sI-9nG"/>
                         <outlet property="videoContainerView" destination="jEO-Ya-Jeo" id="Elb-f9-Nui"/>
                     </connections>

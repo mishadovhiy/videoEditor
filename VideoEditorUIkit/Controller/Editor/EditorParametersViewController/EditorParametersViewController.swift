@@ -188,7 +188,7 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
             parentVC?.playerVC?.editingAttachmentPressed(data)
         }
         removeOverlays()
-        EditorOverlayVC.addToParent(parent, bottomView: view ?? self.view, data: data, delegate: self)
+        EditorOverlayVC.addOverlayToParent(parent, bottomView: view ?? self.view, attachmentData: data, delegate: self)
     }
     
     var vc: UIViewController {

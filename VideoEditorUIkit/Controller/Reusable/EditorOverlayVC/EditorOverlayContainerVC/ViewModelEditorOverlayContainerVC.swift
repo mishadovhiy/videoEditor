@@ -20,41 +20,41 @@ struct ViewModelEditorOverlayContainerVC {
             return []
         case .text:
             return [
-                .init(title: "Size", toOverlay: .init(screenTitle: "Font size", type: .floatRange({ newValue in
+                .init(title: "Size", toOverlay: .init(screenTitle: "Font size", attachmentType: .floatRange(.init(selected: 0, didSelect: { newValue in
                     assetChanged? { oldValue in
                         var value = oldValue
                         value.fontSize = newValue
                         return value
                     }
-                }))),
-                .init(title: "Text Aligment", toOverlay: .init(screenTitle: "Font size", type: .floatRange({ newValue in
+                })))),
+                .init(title: "Text Aligment", toOverlay: .init(screenTitle: "Font size", attachmentType: .floatRange(.init(selected: 0, didSelect: { newValue in
                     assetChanged? { oldValue in
                         var value = oldValue
                         value.fontSize = newValue
                         return value
                     }
-                }))),
-                .init(title: "Text Color", toOverlay: .init(screenTitle: "Font size", type: .color(.init(selectedColor: nil, didSelect: { newColor in
+                })))),
+                .init(title: "Text Color", toOverlay: .init(screenTitle: "Font size", attachmentType: .color(.init(selectedColor: nil, didSelect: { newColor in
                         assetChanged? { oldValue in
                             var value = oldValue
                             value.color = newColor
                             return value
                         }
                 })))),
-                .init(title: "Border Color", toOverlay: .init(screenTitle: "Font size", type: .color(.init(selectedColor: nil, didSelect: { newColor in
+                .init(title: "Border Color", toOverlay: .init(screenTitle: "Font size", attachmentType: .color(.init(selectedColor: nil, didSelect: { newColor in
                     assetChanged? { oldValue in
                         var value = oldValue
                         value.borderColor = newColor
                         return value
                     }
                 })))),
-                .init(title: "Border Width", toOverlay: .init(screenTitle: "Font size", type: .floatRange({ newValue in
+                .init(title: "Border Width", toOverlay: .init(screenTitle: "Font size", attachmentType: .floatRange(.init(selected: 2, didSelect: { newValue in
                     assetChanged? { oldValue in
                         var value = oldValue
                         value.fontSize = newValue
                         return value
                     }
-                })))
+                }))))
             ]
         case .media:
             return []

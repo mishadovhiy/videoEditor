@@ -22,7 +22,7 @@ class EditorOverlayContainerVC: SuperVC {
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
     
     var screenSize:OverlaySize? {
-        switch screenType?.type {
+        switch screenType?.attachmentType {
         case .color(_):
             return .middle
         default:
@@ -70,7 +70,7 @@ fileprivate extension EditorOverlayContainerVC {
                 $0.superview?.isHidden = true
             }
         })
-        switch screenType?.type {
+        switch screenType?.attachmentType {
         case .floatRange(_):
             sliderView.superview?.isHidden = false
         case .color(let colorAction):
@@ -116,7 +116,7 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
 
 extension EditorOverlayContainerVC:UIColorPickerViewControllerDelegate {
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        switch screenType?.type {
+        switch screenType?.attachmentType {
         case .color(let selected):
             selected.didSelect(color)
         default:

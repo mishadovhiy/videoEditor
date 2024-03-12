@@ -109,7 +109,7 @@
         <scene sceneID="gbv-8Y-316">
             <objects>
                 <viewController storyboardIdentifier="EditorOverlayContainerVC" id="8KU-M3-vVm" customClass="EditorOverlayContainerVC" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kqA-bl-Oyc">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="kqA-bl-Oyc">
                         <rect key="frame" x="0.0" y="0.0" width="289" height="656"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

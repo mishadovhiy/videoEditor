@@ -12,6 +12,7 @@ class EditorViewController: SuperVC {
 
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
+    @IBOutlet weak var mainEditorContainerView: UIView!
     
     var playerVC:PlayerViewController? {
         if !Thread.isMainThread {
@@ -26,8 +27,16 @@ class EditorViewController: SuperVC {
         }) as? EditorParametersViewController
     }
     
+    var mainEditorVC:EditorOverlayVC? {
+        return self.children.first(where: {
+            ($0 is EditorOverlayVC) && $0.view.layer.name == "mainEditorView"
+        }) as? EditorOverlayVC
+    }
+    
     var presentingOverlayVC:EditorOverlayVC? {
-        children.first(where: {$0 is EditorOverlayVC}) as? EditorOverlayVC
+        children.first(where: {
+            $0 is EditorOverlayVC && $0.view.layer.name != "mainEditorView"
+        }) as? EditorOverlayVC
     }
     
     override var initialAnimation: Bool {
@@ -82,6 +91,10 @@ class EditorViewController: SuperVC {
             self.viewModel?.editorModel.addAttachmentPressed(data)
         }
     }
+    
+    func videoFilterSelected() {
+        viewModel?.editorModel.addFilterPressed()
+    }
 }
 
 
@@ -112,6 +125,8 @@ extension EditorViewController:PlayerViewControllerPresenter {
     func addTrackPressed() {
         if viewModel?.viewType == .addingVideos {
             viewModel?.editorModel.addVideo()
+        } else {
+            mainEditorContainerView.isHidden = false
         }
     }
 }
@@ -156,12 +171,25 @@ extension EditorViewController:EditorModelPresenter {
 fileprivate extension EditorViewController {
     func loadUI(movieUrl:URL?) {
         view.backgroundColor = .black
-        addPlayerView()
+        loadChildrens()
         if viewModel == nil {
             viewModel = .init(editorPresenter: self)
             loadVideo(movieUrl: movieUrl)
         }
-        addTracksView()
+    }
+    
+    private func loadChildrens() {
+        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: viewModel?.mainEditorCollectionData(filterSelected:videoFilterSelected) ?? [], needTextField: false, isPopup: false, closePressed: {
+            self.mainEditorContainerView.isHidden = true
+        }))
+        mainEditorView.view.layer.name = "mainEditorView"
+        [
+            PlayerViewController.configure(self): videoContainerView,
+            EditorParametersViewController.configure(): trackContainerView,
+            mainEditorView:mainEditorContainerView
+        ].forEach {
+            self.addChild(child: $0.key, toView: $0.value)
+        }
     }
     
     private func loadVideo(movieUrl:URL? = nil) {
@@ -174,20 +202,6 @@ fileprivate extension EditorViewController {
         } else {
             setViewType(.addingVideos)
         }
-    }
-        
-    private func addPlayerView() {
-        if playerVC != nil {
-            return
-        }
-        let vc = PlayerViewController.configure(self)
-        self.addChild(child: vc, toView: self.videoContainerView)
-    }
-
-
-    private func addTracksView() {
-        let vc = EditorParametersViewController.configure()
-        addChild(child: vc, toView: self.trackContainerView)
     }
 }
 

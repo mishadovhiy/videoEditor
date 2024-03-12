@@ -23,7 +23,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
         if let didSelect = data.didSelect {
             didSelect()
         } else if let type = data.toOverlay {
-            switch type.type {
+            switch type.attachmentType {
             case .color(_):
                 self.navigationController?.pushViewController(EditorOverlayContainerVC.configure(type: type, collectionData: type.collectionData), animated: true)
             default:
