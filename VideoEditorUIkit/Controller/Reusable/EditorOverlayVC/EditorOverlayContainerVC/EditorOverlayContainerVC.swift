@@ -31,9 +31,7 @@ class EditorOverlayContainerVC: SuperVC {
     }
     
     private var parentVC:EditorOverlayVC? {
-        return ((navigationController?.parent as? EditorOverlayVC)?.parent as? EditorViewController)?.children.first(where: {
-            $0 is EditorOverlayVC
-        }) as? EditorOverlayVC
+        return navigationController?.parent as! EditorOverlayVC
     }
     
     override func viewDidLoad() {
@@ -82,14 +80,23 @@ fileprivate extension EditorOverlayContainerVC {
                 }, backgroundColor:color.backgroundColor ?? .red)
             })
         default:
-            viewModel = .init(type: parentVC?.attachmentData?.attachmentType ?? .media, assetChanged: { didChange in
-                if let value = self.parentVC?.attachmentData  as? TextAttachmentDB {
-                    self.parentVC?.attachmentData = didChange(value)
-                }
-            })
-            setupTF()
+            if let attachment = parentVC?.attachmentData?.attachmentType {
+                viewModel = .init(type: attachment, assetChanged: { didChange in
+                    if let value = self.parentVC?.attachmentData  as? TextAttachmentDB {
+                        self.parentVC?.attachmentData = didChange(value)
+                    }
+                })
+            } else {
+                viewModel = .init()
+            }
+            if parentVC?.data?.needTextField ?? true {
+                setupTF()
+            }
+
             if parentVC?.attachmentData?.attachmentType != nil && collectionData.isEmpty {
                 collectionData = viewModel?.getCollectionData ?? []
+            } else if collectionData.isEmpty {
+                collectionData = parentVC?.data?.collectionData ?? []
             }
         }
         collectionView.delegate = self

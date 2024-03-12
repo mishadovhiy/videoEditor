@@ -137,6 +137,15 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
+        var filter:FilterType {
+            get {
+                return .init(rawValue: dict["filter"] as? String ?? "") ?? .none
+            }
+            set {
+                dict.updateValue(newValue.rawValue, forKey: "filter")
+            }
+        }
+        
         public static func with(
             _ populator: (inout Self) throws -> ()
         ) rethrows -> Self {

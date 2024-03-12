@@ -171,9 +171,11 @@ extension EditorViewController:EditorModelPresenter {
 fileprivate extension EditorViewController {
     func loadUI(movieUrl:URL?) {
         view.backgroundColor = .black
-        loadChildrens()
         if viewModel == nil {
             viewModel = .init(editorPresenter: self)
+        }
+        loadChildrens()
+        if let movieUrl {
             loadVideo(movieUrl: movieUrl)
         }
     }

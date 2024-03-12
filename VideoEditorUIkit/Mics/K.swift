@@ -12,3 +12,11 @@ struct Constants {
         case cancel = "cancel"
     }
 }
+
+extension Constants {
+    struct Keys {
+        enum Filter:String {
+        case invert
+        }
+    }
+}

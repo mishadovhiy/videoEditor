@@ -75,8 +75,16 @@ class EditorModel {
     
     func addFilterPressed() {
         Task {
-            await prepare.addFilter()
-            await videoAdded()
+            movie = .init()
+            movieHolder = .init()
+            loadVideo(.init(string: DB.db.movieParameters.editingMovie?.originalURL ?? ""), videoAddedAction: false)
+            if (DB.db.movieParameters.editingMovie?.filter ?? .none) == FilterType.none {
+                await videoAdded()
+            } else {
+                await prepare.addFilter()
+                await videoAdded()
+            }
+            
         }
     }
     
@@ -102,13 +110,6 @@ class EditorModel {
         }
         await addDBTexts()
         await videoAdded()
-    }
-    
-    func loadEditingVideos(db:DB.DataBase.MovieParametersDB.MovieDB?) async {
-        if let urls = addingUrls.first {
-            if await addVideosDB(urls: urls) {
-            }
-        }
     }
 
 }

@@ -27,12 +27,16 @@ struct ViewModelEditorViewController {
     }
     
     private func filterOptionsCollectionData(_ filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
-        [
-            .init(title: "invert colors", didSelect: {
-                //update db
-                
-            })
-        ]
+        FilterType.allCases.compactMap { filterType in
+            .init(title: filterType.rawValue) {
+                Task {
+                    DB.db.movieParameters.editingMovie?.filter = filterType
+                    await MainActor.run {
+                        filterSelected()
+                    }
+                }
+            }
+        }
     }
 }
 

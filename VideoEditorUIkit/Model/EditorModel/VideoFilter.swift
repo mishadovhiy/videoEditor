@@ -14,8 +14,12 @@ struct VideoFilter {
     typealias filterCompletion = (URL?)
     
     static func addFilter(composition:AVMutableComposition,
-                   completion:@escaping(filterCompletion) -> ()) -> AVMutableVideoComposition {
-        let filter = CIFilter(name: "CIColorInvert")
+                   completion:@escaping(filterCompletion) -> ()) -> AVMutableVideoComposition? {
+        let filterDB = DB.db.movieParameters.editingMovie?.filter ?? .none
+        if filterDB == .none {
+            return nil
+        }
+        let filter = CIFilter(type: filterDB)
         let videoComposition = AVMutableVideoComposition(asset: composition) { request in
             let source = request.sourceImage.clampedToExtent()
             filter?.setValue(source, forKey: kCIInputImageKey)

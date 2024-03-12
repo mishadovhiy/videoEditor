@@ -23,6 +23,7 @@ class EditorOverlayVC: SuperVC {
     var attachmentData:AssetAttachmentProtocol?
     private var delegate:EditorOverlayVCDelegate?
     override var initialAnimation: Bool { return false}
+    
     // MARK: - Life-Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,6 @@ class EditorOverlayVC: SuperVC {
         super.viewDidAppear(animated)
         if let navigation = children.first(where: {$0 is UINavigationController}) as? UINavigationController {
             navigation.delegate = self
-            navigation.navigationBar.sizeThatFits(.init(width: self.view.frame.width, height: 20))
         }
     }
     
@@ -192,7 +192,7 @@ extension EditorOverlayVC {
     func toggleButtons(hidden:Bool, animated:Bool = true) {
         actionButtons.forEach { view in
             var hide = hidden
-            if !hide {
+            if !hide && attachmentData == nil {
                 hide = view.style == 2 ? data?.donePressed == nil : data?.closePressed == nil
             }
             if (view.superview?.isHidden ?? true) != hide {
