@@ -101,18 +101,23 @@ class PrepareEditorModel {
     func addFilter() async {
         let movie = delegate.movieHolder ?? delegate.movie!
         let video = VideoFilter.addFilter(composition: movie, completion: { url in
-            Task {
-                await self.filterAddedToComposition(url)
+            if let url {
+                Task {
+                    await self.filterAddedToComposition(url)
+                }
             }
         })
         
         if let localUrl = await export(asset: movie, videoComposition: video, isVideo: false) {
-            await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
+            await self.movieUpdated(movie: movie, movieURL: localUrl, canSetNil: false)
         }
     }
     
     private func filterAddedToComposition(_ url:URL?) async {
-        let movie = AVURLAsset(url: url!)
+        guard let url else {
+            return
+        }
+        let movie = AVURLAsset(url: url)
         if let localUrl = await export(asset: movie, videoComposition: nil, isVideo: false) {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
             filterAddedAction?(true)

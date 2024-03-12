@@ -124,7 +124,11 @@ extension EditorViewController:EditorModelPresenter {
     
     var movieURL: URL? {
         get {
-            self.playerVC?.movieURL
+            if Thread.isMainThread {
+                return self.playerVC?.movieURL
+            } else {
+                return .init(string: DB.db.movieParameters.editingMovieURL ?? "")
+            }
         }
         set {
             playerVC?.movieURL = newValue

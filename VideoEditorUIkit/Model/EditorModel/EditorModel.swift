@@ -75,15 +75,19 @@ class EditorModel {
     
     func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
         Task {
-            var holder = DB.db.movieParameters.editingMovie
-            if let text = data as? (any MovieAttachmentProtocol),
-            let textDBModel = text as? TextAttachmentDB {
-                holder?.texts.removeAll(where: {$0 == textDBModel})
-            }
-            DB.db.movieParameters.editingMovie = holder
-            dbParametersHolder = holder
-            await reloadMovie()
+            await prepare.addFilter()
+            await videoAdded()
         }
+//        Task {
+//            var holder = DB.db.movieParameters.editingMovie
+//            if let text = data as? (any MovieAttachmentProtocol),
+//            let textDBModel = text as? TextAttachmentDB {
+//                holder?.texts.removeAll(where: {$0 == textDBModel})
+//            }
+//            DB.db.movieParameters.editingMovie = holder
+//            dbParametersHolder = holder
+//            await reloadMovie()
+//        }
     }
     
     private func reloadMovie() async {
@@ -132,8 +136,7 @@ extension EditorModel {
         print(movie?.duration ?? -3)
         Task {
             if let dbData = data as? TextAttachmentDB,
-               canAddToDB
-            {
+               canAddToDB {
                 DB.db.movieParameters.editingMovie?.texts.append(dbData)
             }
             if await self.prepare.addText(data: data) {
@@ -165,7 +168,6 @@ fileprivate extension EditorModel {
         if let first = addingUrls.first {
             addingUrls.removeFirst()
             let _ = await prepare.createVideo(.init(string: first))
-            sleep(2)
             if let next = addingUrls.first {
                 return await addVideosDB(urls: next)
 
