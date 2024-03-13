@@ -12,7 +12,7 @@ class EditorViewController: SuperVC {
 
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
-    @IBOutlet weak var mainEditorContainerView: UIView!
+    @IBOutlet private weak var mainEditorContainerView: UIView!
     
     var playerVC:PlayerViewController? {
         if !Thread.isMainThread {
@@ -102,6 +102,14 @@ class EditorViewController: SuperVC {
             self.viewModel?.editorModel.addFilterPressed()
         })
     }
+    
+    func addTrackPressed() {
+        if viewModel?.viewType == .addingVideos {
+            viewModel?.editorModel.addVideo()
+        } else {
+            mainEditorVC?.isHidden = false
+        }
+    }
 }
 
 
@@ -127,14 +135,6 @@ extension EditorViewController:PlayerViewControllerPresenter {
     
     func playTimeChanged(_ percent: CGFloat) {
         assetParametersVC?.scrollPercent(percent)
-    }
-    
-    func addTrackPressed() {
-        if viewModel?.viewType == .addingVideos {
-            viewModel?.editorModel.addVideo()
-        } else {
-            mainEditorContainerView.isHidden = false
-        }
     }
 }
 
@@ -187,8 +187,12 @@ fileprivate extension EditorViewController {
     }
     
     private func loadChildrens() {
-        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: viewModel?.mainEditorCollectionData(filterSelected:videoFilterSelected) ?? [], needTextField: false, isPopup: false, closePressed: {
-            self.mainEditorContainerView.isHidden = true
+        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: viewModel?.mainEditorCollectionData(filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
+            self.viewModel?.editorModel.deleteAttachmentPressed(nil)
+        }, deleteMovie: {
+            self.clearDataPressed()
+        }) ?? [], needTextField: false, isPopup: false, closePressed: {
+            self.mainEditorVC?.isHidden = true
         }))
         mainEditorView.view.layer.name = "mainEditorView"
         [

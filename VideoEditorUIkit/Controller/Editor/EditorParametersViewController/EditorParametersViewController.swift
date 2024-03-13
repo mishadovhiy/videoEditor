@@ -14,6 +14,11 @@ class EditorParametersViewController: SuperVC {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var assetStackView: UIStackView!
     @IBOutlet weak var headersStack: UIStackView!
+    private var addVideoLabel:UILabel? {
+        headersStack.arrangedSubviews.first(where: {
+            $0.tag == 0 })?.subviews.first(where: {
+            $0 is UILabel}) as? UILabel
+    }
     
     var viewModel:ViewModelEditorParametersViewController?
     private var parentVC: EditorViewController? {
@@ -56,6 +61,7 @@ class EditorParametersViewController: SuperVC {
                 $0.alpha = type == .addingVideos ? 0 : 1
             }
         }
+        addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit Video"
     }
     
     // MARK: receive

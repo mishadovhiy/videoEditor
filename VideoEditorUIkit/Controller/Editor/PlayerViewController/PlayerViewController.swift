@@ -10,7 +10,6 @@ import AVFoundation
 import Photos
 
 protocol PlayerViewControllerPresenter {
-    func addTrackPressed()
     func clearDataPressed()
     func reloadUI()
     func playTimeChanged(_ percent:CGFloat)
@@ -22,20 +21,12 @@ class PlayerViewController: PlayerSuperVC {
     private var parentVC: EditorViewController? {
         return self.parent as? EditorViewController
     }
-    private var addVideoButton:UIButton? {
-        view.subviews.first(where: {$0.layer.name == "addButton"}) as? UIButton
-    }
     var editingAttachmentView:PlayerEditingAttachmentView? {
         view.subviews.first(where: {$0.layer.name == PlayerEditingAttachmentView.layerName}) as? PlayerEditingAttachmentView
     }
     override var initialAnimation: Bool { return false}
 
     // MARK: - life-cycle
-    override func loadView() {
-        super.loadView()
-        self.loadUI()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         view.subviews.forEach {
@@ -56,9 +47,7 @@ class PlayerViewController: PlayerSuperVC {
     }
     
     //MARK: - setup ui
-    func setUI(type:EditorViewType) {
-        addVideoButton?.isHidden = type == .editing
-    }
+    func setUI(type:EditorViewType) {  }
     
     private func overlayEdited(_ newData:AssetAttachmentProtocol?) {
         self.parentVC?.playerChangedAttachment(newData)
@@ -80,13 +69,6 @@ class PlayerViewController: PlayerSuperVC {
     override func timeChanged(_ percent: CGFloat) {
         super.timeChanged(percent)
         preseter?.playTimeChanged(percent)
-    }
-    
-    @objc fileprivate func addTrackPressed(_ sender:UIButton) {
-        startRefreshing {
-            self.pause()
-            self.preseter?.addTrackPressed()
-        }
     }
     
     @objc fileprivate func deletePressed(_ sender:UIButton) {
@@ -115,58 +97,6 @@ class PlayerViewController: PlayerSuperVC {
 
 // MARK: loadUI
 fileprivate extension PlayerViewController {
-    func loadUI() {
-        addMovieButton()
-        addDeleteAllButton()
-    }
-    
-    private func addMovieButton() {
-        if let _ = addVideoButton {
-            return
-        }
-        let button = UIButton()
-        button.setTitle("Add", for: .normal)
-        button.addTarget(self, action: #selector(self.addTrackPressed(_:)), for: .touchUpInside)
-        button.layer.name = "addButton"
-        view.addSubview(button)
-        button.addConstaits([
-            .bottom:10, .left:10
-        ])
-    }
-    
-    private func addDeleteAllButton() {
-        
-        if let _ = view.subviews.first(where: {$0.layer.name == "deleteButton"}) {
-            return
-        }
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 20
-        stack.layer.name = "deleteButton"
-        view.addSubview(stack)
-        
-        let button = UIButton()
-        button.setTitle("deleteAll", for: .normal)
-        button.addTarget(self, action: #selector(self.deletePressed(_:)), for: .touchUpInside)
-        stack.addArrangedSubview(button)
-        
-        let clearButton = UIButton()
-        clearButton.setTitle("reload all", for: .normal)
-        clearButton.addTarget(self, action: #selector(self.reloadUIPressed(_:)), for: .touchUpInside)
-        stack.addArrangedSubview(clearButton)
-        
-        
-        let attachmentButton = UIButton()
-        attachmentButton.setTitle("rem attch", for: .normal)
-        attachmentButton.addTarget(self, action: #selector(self.deleteAttachmentPressed(_:)), for: .touchUpInside)
-        attachmentButton.layer.name = "addAttachmentDeleteButton"
-        stack.addArrangedSubview(attachmentButton)
-        
-        stack.addConstaits([
-            .top:10, .left:10, .right:10
-        ])
-    }
-    
     private func loadEditingView(_ textDB:TextAttachmentDB) {
         let newView = PlayerEditingAttachmentView.configure(data: textDB, dataChanged: overlayEdited(_:), videoSize: movie?.tracks.first(where: {$0.naturalSize.width != 0})?.naturalSize ?? .zero)
         view.addSubview(newView)

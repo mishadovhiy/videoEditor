@@ -82,6 +82,15 @@ class EditorOverlayVC: SuperVC {
         delegate?.overlayChangedAttachment(attachmentData)
     }
     
+    var isHidden:Bool = false {
+        didSet {
+            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+                self.view.superview?.isHidden = self.isHidden
+            }
+            animation.startAnimation()
+        }
+    }
+    
     // MARK: - IBAction
     @IBAction func addPressed(_ sender: UIButton) {
         if delegate != nil {

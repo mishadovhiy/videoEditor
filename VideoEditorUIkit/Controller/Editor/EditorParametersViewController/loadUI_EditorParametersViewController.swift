@@ -72,6 +72,13 @@ extension EditorParametersViewController {
             headersStack.addArrangedSubview(superView)
             superView.tag = $0.tag
             superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftHeaderPressed(_:))))
+            if $0.tag == 0 {
+                let label = UILabel()
+                superView.addSubview(label)
+                label.textColor = .white
+                label.textAlignment = .center
+                label.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
+            }
         }
     }
 }

@@ -19,10 +19,17 @@ struct ViewModelEditorViewController {
     }
     
     
-    
-    func mainEditorCollectionData(filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
+    typealias void = ()->()
+    func mainEditorCollectionData(filterSelected:@escaping()->(),
+                                  reloadPressed:@escaping void,
+                                  removeAttachments:@escaping void,
+                                  deleteMovie:@escaping void
+    ) -> [EditorOverlayVC.OverlayCollectionData] {
         [
-            .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(filterSelected)))
+            .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(filterSelected))),
+            .init(title: "Reload data", didSelect: reloadPressed),
+            .init(title: "Remove all attachments", didSelect: removeAttachments),
+            .init(title: "Delete Movie", didSelect: deleteMovie)
         ]
     }
     
