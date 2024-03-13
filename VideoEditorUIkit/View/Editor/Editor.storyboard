@@ -33,6 +33,11 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="240" id="iRE-v4-kQm"/>
                                                 </constraints>
+                                                <variation key="heightClass=compact">
+                                                    <mask key="constraints">
+                                                        <exclude reference="iRE-v4-kQm"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2M-CR-Vaf">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
@@ -41,6 +46,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <variation key="heightClass=compact" axis="horizontal" distribution="fillEqually"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fif-AD-WAD"/>

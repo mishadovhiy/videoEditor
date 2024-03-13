@@ -56,29 +56,6 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        guard let stackView = videoContainerView.superview as? UIStackView else {
-            return
-        }
-        if UIDevice.current.orientation.isPortrait {
-            stackView.axis = .vertical
-            stackView.distribution = .fill
-            if let constraint = trackContainerView.constraints.first(where: {$0.firstAttribute == .height}) {
-                constraint.isActive = true
-            } else {
-                trackContainerView.addConstaits([.height:240])
-            }
-        } else {
-            stackView.axis = .horizontal
-            stackView.distribution = .fillEqually
-            if let constraint = trackContainerView.constraints.first(where: {$0.firstAttribute == .height}) {
-                constraint.isActive = false
-            }
-        }
-        trackContainerView.layoutIfNeeded()
-    }
-    
     // MARK: - setup ui
     func setViewType(_ type:EditorViewType) {
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
