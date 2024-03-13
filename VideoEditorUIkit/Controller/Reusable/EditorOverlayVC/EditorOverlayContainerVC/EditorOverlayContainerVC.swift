@@ -42,7 +42,9 @@ class EditorOverlayContainerVC: SuperVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        parent?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
+        if textField.delegate != nil {
+            parent?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
+        }
     }
     
     @objc private func textFieldDidChanged(_ sender:UITextField) {
@@ -65,6 +67,8 @@ extension EditorOverlayContainerVC {
 // MARK: - setupUI
 fileprivate extension EditorOverlayContainerVC {
     func setupUI() {
+        view.backgroundColor = parentVC?.view.backgroundColor ?? .clear
+        navigationController?.navigationBar.backgroundColor = view.backgroundColor
         primatyViews.forEach({
             if $0 == self.containerView {
                 $0.isHidden = true

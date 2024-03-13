@@ -26,8 +26,8 @@ class EditorOverlayVC: SuperVC {
     override var initialAnimation: Bool { return false}
     
     // MARK: - Life-Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
         setupUI()
     }
         
@@ -131,6 +131,8 @@ extension EditorOverlayVC {
             view.layer.shadowOpacity = 0.5
             view.layer.shadowOffset = .init(width: -1, height: 3)
         } else {
+            view.backgroundColor = view.superview!.backgroundColor ?? .clear
+            print(view.superview!.backgroundColor, " htgrtefrde")
             actionButtons.first(where: {$0.style == 2})?.isHidden = hideDoneButton
             actionButtons.first(where: {$0.style == 1})?.isHidden = hideCloseButton
         }
@@ -147,7 +149,7 @@ extension EditorOverlayVC {
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:(50, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(75, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(60, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(75, "heightprimaryConstraints")]
         case .middle:
             return !(data?.isPopup ?? true) ? [.height:(85, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(100, "heightprimaryConstraints")]
         case .big:

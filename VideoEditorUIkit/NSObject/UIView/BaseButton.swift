@@ -44,12 +44,12 @@ extension BaseButton {
 fileprivate extension BaseButton {
     func setupUI() {
         let style:BaseButtonType = .init(rawValue: self.style) ?? .primary
-        if cornderRadious == 0 {
+        if cornderRadious == 0 && style != .smallGray {
             layer.cornerRadius = style == .primary ? 9 : 5
         }
-        backgroundColor = style == .smallGray ? .lightGray : .link
+        backgroundColor = style == .smallGray ? .clear : .link
         titleLabel?.font = .systemFont(ofSize: style == .primary ? 16 : 12, weight: style == .primary ? .bold : .medium)
-        let tint:UIColor = style != .smallGray ? .link : .white
+        let tint:UIColor = style != .smallGray ? .link : (style == .smallGray ? .white.withAlphaComponent(0.6) : .white)
         titleLabel?.tintColor = tint
         titleLabel?.textColor = tint
         tintColor = tint
