@@ -9,7 +9,6 @@ import UIKit
 
 extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(collectionData.count, " hrtgerfwd")
         return collectionData.count
     }
     

@@ -69,11 +69,11 @@ class EditorOverlayVC: SuperVC {
     }
     
     public func positionInScrollChanged(new position:CGRect, editingRawView:UIView) {
-        let newAlpha:CGFloat = (editingRawView.frame.minX / 2) >= position.minX ? 0 : 1
-        if selectionIndicatorView?.alpha ?? 0 != newAlpha {
-            UIView.animate(withDuration: 0.2) {
-                self.selectionIndicatorView?.alpha = newAlpha
-            }
+        let spaces = EditorParametersViewController.collectionViewSpace
+        let newAlpha:Float = (editingRawView.frame.minX - (spaces.x + spaces.y)) >= position.minX ? 0 : 1
+        if selectionIndicatorView?.layer.opacity ?? 0 != newAlpha {
+            self.selectionIndicatorView?.layer.animationTransition(0.19)
+            self.selectionIndicatorView?.layer.opacity = newAlpha
         }
     }
     

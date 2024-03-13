@@ -16,8 +16,9 @@ extension EditorParametersViewController {
         scrollView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
-        scrollView.contentInset.left = view.frame.width / 2
-        scrollView.contentInset.right = view.frame.width / 2
+        let spaces = EditorParametersViewController.collectionViewSpace
+        scrollView.contentInset.left = spaces.x
+        scrollView.contentInset.right = spaces.y
         collectionView.register(AssetHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AssetHeaderCell.reuseIdentifier)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionHeadersPinToVisibleBounds = true

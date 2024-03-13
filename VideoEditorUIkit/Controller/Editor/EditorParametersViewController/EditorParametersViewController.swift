@@ -23,6 +23,10 @@ class EditorParametersViewController: SuperVC {
     var viewType:EditorViewType {
         return parentVC?.viewModel?.viewType ?? .addingVideos
     }
+    static var collectionViewSpace:CGPoint {
+        let screen = UIApplication.shared.keyWindow?.frame ?? .zero
+        return .init(x: screen.width / 2, y: screen.width / 2)
+    }
     
     // MARK: - life-cycle
     override func viewDidLoad() {

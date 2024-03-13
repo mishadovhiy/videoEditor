@@ -1489,8 +1489,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "leftHeaderPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1852,8 +1852,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/UICollectionView_EditorOverlayContainerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1868,8 +1868,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/UICollectionView_EditorOverlayContainerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3335,8 +3335,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "overlayChangedAttachment(_:)"
             landmarkType = "7">
             <Locations>
