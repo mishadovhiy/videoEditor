@@ -25,8 +25,8 @@ class PlayerViewController: PlayerSuperVC {
     private var addVideoButton:UIButton? {
         view.subviews.first(where: {$0.layer.name == "addButton"}) as? UIButton
     }
-    var editingAttachmentView:UIView? {
-        view.subviews.first(where: {$0.layer.name == "editingAttachmentView"})
+    var editingAttachmentView:PlayerEditingAttachmentView? {
+        view.subviews.first(where: {$0.layer.name == PlayerEditingAttachmentView.layerName}) as? PlayerEditingAttachmentView
     }
     override var initialAnimation: Bool { return false}
 
@@ -58,6 +58,10 @@ class PlayerViewController: PlayerSuperVC {
     //MARK: - setup ui
     func setUI(type:EditorViewType) {
         addVideoButton?.isHidden = type == .editing
+    }
+    
+    private func overlayEdited(_ newData:AssetAttachmentProtocol?) {
+        self.parentVC?.playerChangedAttachment(newData)
     }
     
     // MARK: - IBAction
@@ -164,14 +168,8 @@ fileprivate extension PlayerViewController {
     }
     
     private func loadEditingView(_ textDB:TextAttachmentDB) {
-        let newView = UILabel()
-        newView.layer.name = "editingAttachmentView"
+        let newView = PlayerEditingAttachmentView.configure(data: textDB, dataChanged: overlayEdited(_:), videoSize: movie?.tracks.first(where: {$0.naturalSize.width != 0})?.naturalSize ?? .zero)
         view.addSubview(newView)
-        let model = AttachentVideoLayerModel()
-        let layer = model.add(to: newView.layer, videoSize: movie?.tracks.first(where: {$0.naturalSize.width != 0})?.naturalSize ?? .zero, text: textDB)
-        newView.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
-        newView.layer.addSublayer(layer)
-        newView.appeareAnimation()
     }
 }
 

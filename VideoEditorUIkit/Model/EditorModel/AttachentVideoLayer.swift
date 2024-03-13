@@ -8,7 +8,9 @@
 import UIKit
 
 struct AttachentVideoLayerModel {
-    func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB) -> CALayer {
+    static let textLayerName:String = "CATextLayer"
+    
+    func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false) -> CALayer {
         let attributedText = NSAttributedString(
             string: text.assetName ?? "?",
             attributes: [
@@ -21,11 +23,11 @@ struct AttachentVideoLayerModel {
             ])
         
         let textLayer = CATextLayer()
-        textLayer.name = "CATextLayer"
+        textLayer.name = AttachentVideoLayerModel.textLayerName
         textLayer.string = attributedText
         textLayer.shouldRasterize = true
         textLayer.rasterizationScale = UIScreen.main.scale
-        textLayer.backgroundColor = UIColor.clear.cgColor
+        textLayer.backgroundColor = isPreview ? UIColor.red.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
         textLayer.alignmentMode = .center
         print(videoSize.width, " grerfewdws")
         textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: 500))

@@ -24,11 +24,12 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
             self = .demo
             return
         }
-        self.attachmentType = .text
-        inMovieStart = attachment.inMovieStart
-        duration = attachment.duration
-        assetName = attachment.assetName
-        color = attachment.color
+        self = attachment as? TextAttachmentDB ?? .with({
+            $0.position = attachment.position
+            $0.assetName = attachment.assetName
+            $0.duration = attachment.duration
+            $0.color = attachment.color
+        })
     }
     
     /// seconds
@@ -155,7 +156,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
             dict.updateValue([
                 "x":String.init(value: newValue.x),
                 "y":String.init(value: newValue.y)
-            ], forKey: "percentPositionY")
+            ], forKey: "position")
         }
     }
     

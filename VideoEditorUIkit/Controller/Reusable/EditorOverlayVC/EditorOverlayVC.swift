@@ -9,6 +9,7 @@ import UIKit
 
 protocol EditorOverlayVCDelegate {
     func addAttachmentPressed(_ attachmentData:AssetAttachmentProtocol?)
+    func overlayChangedAttachment(_ newData:AssetAttachmentProtocol?)
     func overlayRemoved()
 }
 
@@ -74,6 +75,11 @@ class EditorOverlayVC: SuperVC {
                 self.selectionIndicatorView?.alpha = newAlpha
             }
         }
+    }
+    
+    func childChangedData(_ attachmentData:AssetAttachmentProtocol) {
+        self.attachmentData = attachmentData
+        delegate?.overlayChangedAttachment(attachmentData)
     }
     
     // MARK: - IBAction

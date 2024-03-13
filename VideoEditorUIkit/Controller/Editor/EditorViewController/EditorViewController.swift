@@ -76,6 +76,11 @@ class EditorViewController: SuperVC {
         self.assetParametersVC?.assetChanged()
     }
     
+    func playerChangedAttachment(_ newData:AssetAttachmentProtocol?) {
+        presentingOverlayVC?.attachmentData = newData
+        self.assetParametersVC?.changeDataWithoutReload(newData)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         UIApplication.shared.keyWindow?.endEditing(true)

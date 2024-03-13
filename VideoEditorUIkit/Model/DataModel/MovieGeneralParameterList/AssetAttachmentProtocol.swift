@@ -22,6 +22,7 @@ protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
     /// percent in movie asset
     var inMovieStart:CGFloat {get set}
     var id:UUID { get }
+    var position:CGPoint {get set}
 }
 
 extension [MovieAttachmentProtocol] {
@@ -96,6 +97,7 @@ extension MovieGeneralParameterList {
 
 extension MovieGeneralParameterList {
     struct RegularRow:MovieAttachmentProtocol {
+        var position: CGPoint = .zero
         let attachmentType: InstuctionAttachmentType? = .text
         var inMovieStart: CGFloat
         var duration: CGFloat
@@ -112,6 +114,7 @@ extension MovieGeneralParameterList {
     }
     
     struct SongRow:MovieAttachmentProtocol {
+        var position: CGPoint = .zero
         let attachmentType: InstuctionAttachmentType? = .song
         var inMovieStart: CGFloat
         var duration: CGFloat
@@ -129,6 +132,7 @@ extension MovieGeneralParameterList {
     }
     
     struct MediaRow:MovieAttachmentProtocol {
+        var position: CGPoint = .zero
         var attachmentType: InstuctionAttachmentType? {
             return .media
         }

@@ -76,6 +76,10 @@ class EditorParametersViewController: SuperVC {
         }
     }
     
+    func changeDataWithoutReload(_ newData:AssetAttachmentProtocol?) {
+        viewModel?.editingAsset = newData as? MovieAttachmentProtocol
+    }
+    
     // MARK: private
     private func updateParentScroll() {
         let percent = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width - view.frame.width)
@@ -149,6 +153,10 @@ extension EditorParametersViewController {
 }
 
 extension EditorParametersViewController:EditorOverlayVCDelegate {
+    func overlayChangedAttachment(_ newData: AssetAttachmentProtocol?) {
+        parentVC?.playerVC?.editingAttachmentView?.data = newData as? MovieAttachmentProtocol
+    }
+    
     func overlayRemoved() {
         parentVC?.playerVC?.editorOverlayRemoved()
         viewModel?.editingView = nil

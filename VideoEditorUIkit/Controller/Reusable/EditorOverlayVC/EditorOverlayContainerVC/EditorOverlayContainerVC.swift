@@ -46,7 +46,11 @@ class EditorOverlayContainerVC: SuperVC {
     }
     
     @objc private func textFieldDidChanged(_ sender:UITextField) {
-        parentVC?.attachmentData?.assetName = sender.text
+        var data = parentVC?.attachmentData
+        data?.assetName = sender.text
+        if let data {
+            parentVC?.childChangedData(data)
+        }
     }
 }
 
@@ -83,7 +87,11 @@ fileprivate extension EditorOverlayContainerVC {
             if let attachment = parentVC?.attachmentData?.attachmentType {
                 viewModel = .init(type: attachment, assetChanged: { didChange in
                     if let value = self.parentVC?.attachmentData  as? TextAttachmentDB {
-                        self.parentVC?.attachmentData = didChange(value)
+                        var oldData = self.parentVC?.attachmentData
+                        oldData = didChange(value)
+                        if let oldData {
+                            self.parentVC?.childChangedData(oldData)
+                        }
                     }
                 })
             } else {
