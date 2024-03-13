@@ -93,7 +93,9 @@ class EditorViewController: SuperVC {
     }
     
     func videoFilterSelected() {
-        viewModel?.editorModel.addFilterPressed()
+        playerVC?.startRefreshing(completion: {
+            self.viewModel?.editorModel.addFilterPressed()
+        })
     }
 }
 

@@ -12,10 +12,12 @@ struct AttachentVideoLayerModel {
         let attributedText = NSAttributedString(
             string: text.assetName ?? "?",
             attributes: [
-                .font: UIFont.systemFont(ofSize: text.fontSize, weight: text.fontWeight) as Any,
+                .font: UIFont.systemFont(ofSize: text.fontSize, weight: text.fontWeight),
                 .foregroundColor: UIColor.green.cgColor,
                 .strokeColor: UIColor.white,
-                .strokeWidth: -text.borderWidth
+//                .foregroundColor: text.color,
+//                .strokeColor: text.borderColor,
+                .strokeWidth: 1
             ])
         
         let textLayer = CATextLayer()
@@ -25,7 +27,8 @@ struct AttachentVideoLayerModel {
         textLayer.rasterizationScale = UIScreen.main.scale
         textLayer.backgroundColor = UIColor.clear.cgColor
         textLayer.alignmentMode = .center
-        textLayer.frame = .init(origin: .init(x: 0, y: videoSize.height * text.percentPositionY), size: .init(width: videoSize.width, height: 500))
+        print(videoSize.width, " grerfewdws")
+        textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: 500))
         textLayer.displayIfNeeded()
         return textLayer
     }

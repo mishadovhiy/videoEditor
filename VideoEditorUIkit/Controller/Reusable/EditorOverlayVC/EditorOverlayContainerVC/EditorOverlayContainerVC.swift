@@ -31,7 +31,7 @@ class EditorOverlayContainerVC: SuperVC {
     }
     
     private var parentVC:EditorOverlayVC? {
-        return navigationController?.parent as! EditorOverlayVC
+        return navigationController?.parent as? EditorOverlayVC
     }
     
     override func viewDidLoad() {
@@ -98,6 +98,7 @@ fileprivate extension EditorOverlayContainerVC {
             } else if collectionData.isEmpty {
                 collectionData = parentVC?.data?.collectionData ?? []
             }
+            print(collectionData, " tgerfrgthju6")
         }
         collectionView.delegate = self
         collectionView.dataSource = self

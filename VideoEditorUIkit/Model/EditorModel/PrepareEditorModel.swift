@@ -22,7 +22,7 @@ class PrepareEditorModel {
         delegate = nil
     }
     
-    func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> URL? {
+    @MainActor func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> URL? {
         print(asset.duration, " export duration")
         guard let composition = delegate.movieHolder ?? delegate.movie
         else {
@@ -38,7 +38,7 @@ class PrepareEditorModel {
     func addText(data:MovieAttachmentProtocol) async -> Bool {
         let asset = delegate.movie ?? .init()
         print(asset.duration, " video duration")
-        guard let composition = delegate.movie
+        guard let composition = delegate.movieHolder
         else { return false }
         let assetTrack = asset.tracks(withMediaType: .video)
         guard let firstTrack = assetTrack.first(where: {$0.naturalSize.width != 0}) else {
@@ -47,11 +47,12 @@ class PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
-        layerEditor.addLayer(to: overlayLayer,
+        await layerEditor.addLayer(to: overlayLayer,
                              videoSize: videoSize,
-                             text: .init(attachment: data), videoTotalTime: asset.duration.seconds)
+                             text: .init(attachment: data), videoTotalTime: asset.duration().seconds)
         let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         delegate.movieHolder = composition
+        print("video size: ", videoSize)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false) {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
             return true
@@ -60,16 +61,15 @@ class PrepareEditorModel {
         }
     }
     
-    func createVideo(_ url:URL?, needExport:Bool = true) async -> URL? {
+    func createVideo(_ url:URL?, needExport:Bool = true, replaceVideo:Bool = false) async -> URL? {
         let movie = delegate.movie ?? .init()
         guard let url else {
             return nil
         }
         let newMovie = AVURLAsset(url: url)
         print(newMovie.duration, " inserted video duration")
-        guard newMovie.duration != .zero,
-                let _ = await insertMovie(movie: newMovie, composition: movie) else {
-            
+        guard await newMovie.duration() != .zero,
+              let _ = await insertMovie(movie: newMovie, composition: movie) else {
             return nil
         }
         delegate.movieHolder = movie
@@ -139,16 +139,11 @@ extension PrepareEditorModel {
         let duration = await movie.duration()
         print(duration, " total coposition duration before insert")
         movieDescription(movie: composition, duration: duration)
-        
         do {
-            if let _ = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) {
-                let range = CMTimeRangeMake(start: .zero, duration: duration)
-                try composition.insertTimeRange(range, of: movie, at: .zero)
-                
-                return composition
-            } else {
-                return nil
-            }
+            let range = CMTimeRangeMake(start: .zero, duration: duration)
+            try composition.insertTimeRange(range, of: movie, at: .zero)
+            
+            return composition
             
         } catch {
             print(error.localizedDescription)
@@ -183,12 +178,12 @@ extension PrepareEditorModel {
         }
     }
     
-    private func createComposition(_ urlAsset:AVURLAsset) async -> AVMutableComposition? {
+    func createComposition(_ urlAsset:AVURLAsset) async -> AVMutableComposition? {
         let composition = AVMutableComposition()
         let segments = await loadSegments(asset: urlAsset)
         do {
             try segments.forEach {
-                if let _ = composition.addMutableTrack(withMediaType: $0.1.mediaType, preferredTrackID: kCMPersistentTrackID_Invalid) {
+                if $0.1.mediaType == .video, let _ = composition.addMutableTrack(withMediaType: $0.1.mediaType, preferredTrackID: kCMPersistentTrackID_Invalid) {
                     let range = CMTimeRangeMake(start: $0.0.timeMapping.target.start, duration: $0.0.timeMapping.target.duration)
                     
                     try composition.insertTimeRange(range, of: $0.1.asset!, at: $0.0.timeMapping.target.start)

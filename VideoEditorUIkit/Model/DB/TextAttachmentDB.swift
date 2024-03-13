@@ -68,7 +68,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
     
     var color: UIColor {
         get {
-            return .init(hex: dict["color"] as? String ?? "") ?? .red
+            return .init(hex: dict["color"] as? String ?? "") ?? .green
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "color")
@@ -94,7 +94,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
     
     var borderColor:UIColor {
         get {
-            return .init(hex: dict["borderColor"] as? String ?? "") ?? .red
+            return .init(hex: dict["borderColor"] as? String ?? "") ?? .white
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "borderColor")
@@ -142,6 +142,20 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
         }
         set {
             dict.updateValue(String.init(value: newValue), forKey: "percentPositionY")
+        }
+    }
+    
+    var position:CGPoint {
+        get {
+            let dict = dict["position"] as? [String:Any] ?? [:]
+            let y:CGFloat = .init(string: dict["y"] as? String)
+            return .init(x: .init(string: dict["x"] as? String), y: y == 0 ? 200 : y)
+        }
+        set {
+            dict.updateValue([
+                "x":String.init(value: newValue.x),
+                "y":String.init(value: newValue.y)
+            ], forKey: "percentPositionY")
         }
     }
     

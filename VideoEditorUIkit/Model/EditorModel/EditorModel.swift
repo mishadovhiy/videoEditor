@@ -75,8 +75,6 @@ class EditorModel {
     
     func addFilterPressed() {
         Task {
-            movie = .init()
-            movieHolder = .init()
             loadVideo(.init(string: DB.db.movieParameters.editingMovie?.originalURL ?? ""), videoAddedAction: false)
             if (DB.db.movieParameters.editingMovie?.filter ?? .none) == FilterType.none {
                 await videoAdded()
@@ -84,11 +82,11 @@ class EditorModel {
                 await prepare.addFilter()
                 await videoAdded()
             }
-            
         }
     }
     
     func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
+        addText(TextAttachmentDB.demo)
 //        Task {
 //            var holder = DB.db.movieParameters.editingMovie
 //            if let text = data as? (any MovieAttachmentProtocol),
@@ -102,14 +100,18 @@ class EditorModel {
     }
     
     private func reloadMovie() async {
-        movie = .init()
         addingUrls = DB.db.movieParameters.editingMovie?.compositionURLs ?? []
         if let urlString = DB.db.movieParameters.editingMovie?.originalURL,
            let url:URL = .init(string: urlString) {
-            self.loadVideo(url, videoAddedAction: true)
+            movie = .init()
+            movieHolder = .init()
+            await MainActor.run {
+                movieURL = url
+            }
+            self.loadVideo(url, videoAddedAction: false)
         }
-        await addDBTexts()
-        await videoAdded()
+      //  await addDBTexts()
+        await self.presenter?.deleteAllData()
     }
 
 }
@@ -156,17 +158,10 @@ extension EditorModel {
 //MARK: test
 fileprivate extension EditorModel {
     private func addTestVideos() async -> Bool {
-        let urls:[String] = ["1"]
-        for url in urls {
-            let ok = await prepare.createVideo(url, addingVideo: true)
-            if ok {
-                if url == urls.last {
-                    return true
-                }
-            }
-        }
-        return false
+        let ok = await prepare.createVideo("1", addingVideo: true)
+        return ok
     }
+    
     private func addVideosDB(urls:String) async -> Bool {
         print(urls)
         if let first = addingUrls.first {

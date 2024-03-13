@@ -37,7 +37,7 @@ struct EditorVideoLayer {
         let videoInfo = orientation(from: assetTrack.preferredTransform)
         let size = assetTrack.naturalSize
         if videoInfo.isPortrait {
-            return .init(width: size.height, height: size.width)
+            return size//.init(width: size.height, height: size.width)
         } else {
             return size
         }

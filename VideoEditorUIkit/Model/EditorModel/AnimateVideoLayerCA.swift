@@ -43,8 +43,8 @@ struct AnimateVideoLayer {
 fileprivate extension AnimateVideoLayer {
     private func repeated(key:String) -> CABasicAnimation {
         let scaleAnimation = CABasicAnimation(keyPath: key)
-        scaleAnimation.fromValue = 0.9
-        scaleAnimation.toValue = 1.1
+        scaleAnimation.fromValue = 0.93
+        scaleAnimation.toValue = 1.05
         scaleAnimation.duration = 0.5
         scaleAnimation.repeatCount = .greatestFiniteMagnitude
         scaleAnimation.autoreverses = true
