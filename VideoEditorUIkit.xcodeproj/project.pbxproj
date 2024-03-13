@@ -62,6 +62,7 @@
 		8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B562B41509A007B8737 /* MovieDB.swift */; };
 		8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B582B4150BB007B8737 /* DataBase.swift */; };
 		8DF171BD2B9F48A700F71D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DF171BC2B9F48A700F71D03 /* LaunchScreen.storyboard */; };
+		8DF1A8962BA219E4004ACFFC /* CGFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1A8952BA219E4004ACFFC /* CGFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		8DEF7B562B41509A007B8737 /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
 		8DEF7B582B4150BB007B8737 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		8DF171BC2B9F48A700F71D03 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8DF1A8952BA219E4004ACFFC /* CGFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +319,7 @@
 				8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */,
 				8D18F18E2B9F466A00194F34 /* CGFloat.swift */,
 				8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */,
+				8DF1A8952BA219E4004ACFFC /* CGFont.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				8D18F1822B9F465300194F34 /* AssetRawView.swift in Sources */,
 				8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */,
 				8D18F1812B9F465300194F34 /* StackAssetAttachmentView.swift in Sources */,
+				8DF1A8962BA219E4004ACFFC /* CGFont.swift in Sources */,
 				8DEF7B542B414E78007B8737 /* DB.swift in Sources */,
 				8D18F13E2B9F458400194F34 /* AssetAttachmentProtocol.swift in Sources */,
 				8D18F1542B9F45EE00194F34 /* loadUI_EditorParametersViewController.swift in Sources */,

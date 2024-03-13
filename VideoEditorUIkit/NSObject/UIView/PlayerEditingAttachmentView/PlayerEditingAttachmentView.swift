@@ -35,7 +35,6 @@ class PlayerEditingAttachmentView: UIView {
         if self.superview == nil { return }
         let model = AttachentVideoLayerModel()
         if let text = data as? TextAttachmentDB {
-            print(data, " yhgrtefrdwes")
             layer.animationTransition(0.17)
             layer.sublayers?.forEach({
                 if $0.name == AttachentVideoLayerModel.textLayerName {
@@ -53,12 +52,9 @@ class PlayerEditingAttachmentView: UIView {
         sender.setTranslation(.zero, in: self)
         let currentPosition = attachmentLayer?.frame ?? .zero
         attachmentLayer?.frame.origin = .init(x: currentPosition.origin.x + position.x, y: currentPosition.minY + position.y)
-        if !sender.state.isEnded {
-            
-        } else {
+        if sender.state.isEnded {
             data?.position = attachmentLayer?.frame.origin ?? .zero
         }
-        print(attachmentLayer?.frame.origin, " htrefd")
     }
 }
 

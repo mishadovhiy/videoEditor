@@ -11,26 +11,33 @@ struct AttachentVideoLayerModel {
     static let textLayerName:String = "CATextLayer"
     
     func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false) -> CALayer {
+        let font = UIFont.systemFont(ofSize: text.fontSize, weight: text.fontWeight)
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font: font,
+            .foregroundColor: text.color,
+            .strokeColor: text.borderColor,
+            .strokeWidth: text.borderWidth
+        ]
         let attributedText = NSAttributedString(
             string: text.assetName ?? "?",
-            attributes: [
-                .font: UIFont.systemFont(ofSize: text.fontSize, weight: text.fontWeight),
-                .foregroundColor: UIColor.green.cgColor,
-                .strokeColor: UIColor.white,
-//                .foregroundColor: text.color,
-//                .strokeColor: text.borderColor,
-                .strokeWidth: 1
-            ])
+            attributes: attributes)
         
         let textLayer = CATextLayer()
         textLayer.name = AttachentVideoLayerModel.textLayerName
         textLayer.string = attributedText
         textLayer.shouldRasterize = true
         textLayer.rasterizationScale = UIScreen.main.scale
-        textLayer.backgroundColor = isPreview ? UIColor.red.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
+        textLayer.backgroundColor = UIColor.clear.cgColor
+        if isPreview {
+            textLayer.borderColor = UIColor.orange.withAlphaComponent(0.6).cgColor
+            textLayer.borderWidth = 0.5
+            textLayer.cornerRadius = 3
+        }
         textLayer.alignmentMode = .center
+        textLayer.isWrapped = true
         print(videoSize.width, " grerfewdws")
-        textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: 500))
+        let size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
+        textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: size.height))
         textLayer.displayIfNeeded()
         return textLayer
     }
