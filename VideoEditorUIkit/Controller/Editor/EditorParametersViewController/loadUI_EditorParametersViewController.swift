@@ -47,7 +47,7 @@ extension EditorParametersViewController {
             (viewModel.assetData.text, .text),
             (viewModel.assetData.songs, .song)]
         print("attachments for editor: ", data)
-        assetStackView.backgroundColor = .black
+        assetStackView.backgroundColor = .init(.primaryBackground)
         data.forEach({ dataRow in
             if let stack = assetStackView.arrangedSubviews.first(where: { view in
                 if let stack = view as? StackAssetAttachmentView,

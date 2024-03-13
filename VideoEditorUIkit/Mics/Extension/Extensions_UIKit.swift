@@ -24,7 +24,7 @@ extension UIViewController {
         self.addChild(child)
         
         (toView ?? self.view).addSubview(child.view)
-        child.view.addConstaits(constaits ?? [.left:(0, ""), .right:(0, ""), .top:(0, ""), .bottom:(0, "")], safeArea: false)
+        child.view.addConstaits(constaits ?? [.left:(0, ""), .right:(0, ""), .top:(0, ""), .bottom:(0, "")], safeArea: true)
         child.didMove(toParent: self)
         if let name {
             child.view.layer.name = name

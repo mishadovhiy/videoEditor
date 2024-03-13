@@ -24,7 +24,7 @@ class EditorParametersViewController: SuperVC {
         return parentVC?.viewModel?.viewType ?? .addingVideos
     }
     static var collectionViewSpace:CGPoint {
-        let screen = UIApplication.shared.keyWindow?.frame ?? .zero
+        let screen = UIScreen.main.bounds
         return .init(x: screen.width / 2, y: screen.width / 2)
     }
     

@@ -177,7 +177,6 @@ extension EditorViewController:EditorModelPresenter {
 //MARK: loadUI
 fileprivate extension EditorViewController {
     func loadUI(movieUrl:URL?) {
-        view.backgroundColor = .black
         if viewModel == nil {
             viewModel = .init(editorPresenter: self)
         }

@@ -11,6 +11,10 @@ struct Constants {
     enum Images:String {
         case cancel = "cancel"
     }
+    enum Color:String {
+        case primaryBackground = "primaryBackground"
+        case black = "black"
+    }
 }
 
 extension Constants {

@@ -8,6 +8,10 @@
 import UIKit
 
 extension UIColor {
+    convenience init?(_ colorConstrant:Constants.Color) {
+        self.init(named: colorConstrant.rawValue)
+    }
+    
     public convenience init?(hex:String) {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
