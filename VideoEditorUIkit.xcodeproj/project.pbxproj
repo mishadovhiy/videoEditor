@@ -63,6 +63,7 @@
 		8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B582B4150BB007B8737 /* DataBase.swift */; };
 		8DF171BD2B9F48A700F71D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DF171BC2B9F48A700F71D03 /* LaunchScreen.storyboard */; };
 		8DF1A8962BA219E4004ACFFC /* CGFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1A8952BA219E4004ACFFC /* CGFont.swift */; };
+		8DF1A8982BA25ABD004ACFFC /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1A8972BA25ABD004ACFFC /* CALayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +124,7 @@
 		8DEF7B582B4150BB007B8737 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		8DF171BC2B9F48A700F71D03 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DF1A8952BA219E4004ACFFC /* CGFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFont.swift; sourceTree = "<group>"; };
+		8DF1A8972BA25ABD004ACFFC /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 				8D18F18E2B9F466A00194F34 /* CGFloat.swift */,
 				8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */,
 				8DF1A8952BA219E4004ACFFC /* CGFont.swift */,
+				8DF1A8972BA25ABD004ACFFC /* CALayer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
 				8D18F1822B9F465300194F34 /* AssetRawView.swift in Sources */,
 				8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */,
+				8DF1A8982BA25ABD004ACFFC /* CALayer.swift in Sources */,
 				8D18F1812B9F465300194F34 /* StackAssetAttachmentView.swift in Sources */,
 				8DF1A8962BA219E4004ACFFC /* CGFont.swift in Sources */,
 				8DEF7B542B414E78007B8737 /* DB.swift in Sources */,

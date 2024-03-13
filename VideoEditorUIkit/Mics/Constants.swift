@@ -5,7 +5,7 @@
 //  Created by Misha Dovhiy on 04.03.2024.
 //
 
-import Foundation
+import UIKit
 
 struct Constants {
     enum Images:String {
@@ -14,6 +14,10 @@ struct Constants {
     enum Color:String {
         case primaryBackground = "primaryBackground"
         case black = "black"
+        
+        static var trackColor:UIColor {
+            return .white.withAlphaComponent(0.1)
+        }
     }
 }
 

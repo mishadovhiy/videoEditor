@@ -181,7 +181,7 @@ fileprivate extension StackAssetAttachmentView {
         layerStack.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
         self.updateView(self.data)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emptyRowPressed(_:))))
-        self.backgroundColor = .white.withAlphaComponent(0.1)
+        self.backgroundColor = Constants.Color.trackColor
         loadLeftHeader()
     }
     

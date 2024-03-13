@@ -28,6 +28,11 @@ extension EditorParametersViewController {
         }
         updateAttachmantsStack()
         loadLeftHeader()
+        view.layer.cornerRadius = 18
+        view.layer.masksToBounds = true
+        collectionView.layer.cornerRadius(at: .top, value: 18)
+        assetStackView.arrangedSubviews.last?.layer.cornerRadius(at: .bottom, value: 18)
+        collectionView.backgroundColor = Constants.Color.trackColor
     }
     
     func updateAttachmantsStack() {

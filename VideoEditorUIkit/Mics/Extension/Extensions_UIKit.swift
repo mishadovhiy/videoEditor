@@ -20,11 +20,11 @@ extension UIApplication {
 
 
 extension UIViewController {
-    func addChild(child:UIViewController, toView:UIView? = nil, constaits:[NSLayoutConstraint.Attribute:(CGFloat, String)]? = nil, name:String? = nil) {
+    func addChild(child:UIViewController, toView:UIView? = nil, constaits:[NSLayoutConstraint.Attribute:(CGFloat, String)]? = nil, name:String? = nil, toSafeArea:Bool = true) {
         self.addChild(child)
         
         (toView ?? self.view).addSubview(child.view)
-        child.view.addConstaits(constaits ?? [.left:(0, ""), .right:(0, ""), .top:(0, ""), .bottom:(0, "")], safeArea: true)
+        child.view.addConstaits(constaits ?? [.left:(0, ""), .right:(0, ""), .top:(0, ""), .bottom:(0, "")], safeArea: toSafeArea)
         child.didMove(toParent: self)
         if let name {
             child.view.layer.name = name
@@ -69,7 +69,11 @@ extension UIView {
             let item:Any? = keyNil ? nil : (safeArea ? superview.safeAreaLayoutGuide : superview)
             let constraint:NSLayoutConstraint = .init(item: self, attribute: key, relatedBy: .equal, toItem: item, attribute: key, multiplier: 1, constant: value.0)
             constraint.identifier = value.1
-            superview.addConstraint(constraint)
+            if keyNil {
+                self.addConstraint(constraint)
+            } else {
+                superview.addConstraint(constraint)
+            }
         }
         self.translatesAutoresizingMaskIntoConstraints = false
     }

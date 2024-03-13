@@ -87,6 +87,15 @@ class EditorOverlayVC: SuperVC {
             let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
                 self.view.superview?.isHidden = self.isHidden
             }
+            if isHidden {
+                animation.addAnimations({
+                    self.view.alpha = 0
+                }, delayFactor: 0.2)
+                animation.addCompletion {_ in
+                    self.view.alpha = 1
+                }
+            }
+            
             animation.startAnimation()
         }
     }
@@ -141,9 +150,8 @@ extension EditorOverlayVC {
             view.layer.shadowOffset = .init(width: -1, height: 3)
         } else {
             view.backgroundColor = view.superview!.backgroundColor ?? .clear
-            print(view.superview!.backgroundColor, " htgrtefrde")
-            actionButtons.first(where: {$0.style == 2})?.isHidden = hideDoneButton
-            actionButtons.first(where: {$0.style == 1})?.isHidden = hideCloseButton
+            actionButtons.first(where: {$0.style == 2})?.superview?.isHidden = hideDoneButton
+            actionButtons.first(where: {$0.style == 1})?.superview?.isHidden = hideCloseButton
         }
     }
     

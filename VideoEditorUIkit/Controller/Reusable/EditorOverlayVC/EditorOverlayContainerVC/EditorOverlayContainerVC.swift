@@ -115,7 +115,7 @@ fileprivate extension EditorOverlayContainerVC {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isHidden = collectionData.isEmpty
-        collectionView.contentInset.left = view.frame.width / 3
+        collectionView.contentInset.left = view.frame.width / 9
     }
     
     func setupTF() {
