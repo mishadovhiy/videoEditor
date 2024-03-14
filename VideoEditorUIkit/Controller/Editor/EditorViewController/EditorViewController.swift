@@ -106,9 +106,7 @@ class EditorViewController: SuperVC {
     }
     
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        playerVC?.startRefreshing {
-            self.viewModel?.editorModel.addAttachmentPressed(data)
-        }
+        viewModel?.editorModel.addAttachmentPressed(data)
     }
     
     func videoFilterSelected() {

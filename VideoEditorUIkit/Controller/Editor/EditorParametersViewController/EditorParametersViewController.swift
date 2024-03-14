@@ -190,8 +190,14 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     }
     
     func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
-        viewModel?.removeEditedAssetDB()
-        parentVC?.addAttachmentPressed(viewModel?.attachmentData(attachmentData: attachmentData) ?? attachmentData)
+        parentVC?.playerVC?.startRefreshing(completion: {
+            Task {
+                self.viewModel?.removeEditedAssetDB()
+                await MainActor.run {
+                    self.parentVC?.addAttachmentPressed(self.viewModel?.attachmentData(attachmentData: attachmentData) ?? attachmentData)
+                }
+            }
+        })
     }
 }
 

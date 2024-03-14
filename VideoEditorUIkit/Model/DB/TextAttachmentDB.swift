@@ -10,7 +10,13 @@ import UIKit
 struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
     var attachmentType: InstuctionAttachmentType? = .text
     static func == (lhs: TextAttachmentDB, rhs: TextAttachmentDB) -> Bool {
-        return lhs.assetName == rhs.assetName
+        return lhs.assetName == rhs.assetName && 
+        lhs.position == rhs.position &&
+        lhs.duration == rhs.duration &&
+        lhs.inMovieStart == rhs.inMovieStart &&
+        lhs.color == rhs.color &&
+        lhs.borderColor == rhs.borderColor &&
+        lhs.borderWidth == rhs.borderWidth
     }
     
     var dict:[String:Any]
@@ -137,6 +143,7 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
         }
     }
     
+    // debrecate
     var percentPositionY:CGFloat {
         get {
             .init(string: dict["percentPositionY"] as? String)

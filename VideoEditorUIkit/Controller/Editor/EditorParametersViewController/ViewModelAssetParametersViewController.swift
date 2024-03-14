@@ -55,9 +55,7 @@ class ViewModelEditorParametersViewController {
     }
     
     func removeEditedAssetDB() {
-        Task {
-            DB.db.movieParameters.editingMovie?.removeEditedAsset(editingAssetHolder)
-            editingAssetHolder = nil
-        }
+        DB.db.movieParameters.editingMovie?.removeEditedAsset(editingAssetHolder)
+        editingAssetHolder = nil
     }
 }
