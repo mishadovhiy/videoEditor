@@ -113,7 +113,6 @@ class EditorParametersViewController: SuperVC {
         if sender.state != .ended {
             return
         }
-        print(sender.state.rawValue, " leftHeaderPressedleftHeaderPressed")
         assetStackView.arrangedSubviews.forEach {
             if let view = $0 as? StackAssetAttachmentView,
                view.tag == sender.view?.tag
