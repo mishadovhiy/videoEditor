@@ -83,7 +83,7 @@ fileprivate extension PlayerViewController {
 
 
 extension PlayerViewController {
-    static func configure(_ presenter:PlayerViewControllerPresenter) -> PlayerViewController {
+    static func configure(_ presenter:PlayerViewControllerPresenter?) -> PlayerViewController {
         let vc = UIStoryboard(name: "Player", bundle: nil).instantiateViewController(withIdentifier: "PlayerViewController") as? PlayerViewController ?? .init()
         vc.preseter = presenter
         return vc

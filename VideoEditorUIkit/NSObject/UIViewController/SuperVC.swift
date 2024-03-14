@@ -35,6 +35,16 @@ class BaseVC:UIViewController {
         }
     }
     
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if let vc = self.presentedViewController {
+            vc.dismiss(animated: true) {
+                super.present(viewControllerToPresent, animated: flag, completion: completion)
+            }
+        } else {
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+    }
+    
     func lastEditedVideoURL() -> URL? {
         .init(string: DB.db.movieParameters.editingMovieURL ?? "")
     }
@@ -49,8 +59,9 @@ class SuperVC:LoaderVC {
 }
 
 class LoaderVC:BaseVC {
+    var initialAnimationSet:Bool = true
     var initialAnimation:Bool {
-        return true
+        return initialAnimationSet
     }
     
     override func loadView() {

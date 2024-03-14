@@ -183,6 +183,7 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     }
     
     func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
+        viewModel?.removeEditedAssetDB()
         parentVC?.addAttachmentPressed(viewModel?.attachmentData(attachmentData: attachmentData) ?? attachmentData)
     }
 }
@@ -205,6 +206,7 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
             return
         }
         parent.playerVC?.pause()
+        viewModel?.editingAssetHolder = data
         viewModel?.editingAsset = data
         viewModel?.editingView = view
         if let data {

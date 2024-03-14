@@ -157,6 +157,20 @@ extension CALayer {
         self.transform = CATransform3DMakeScale(value, value, 1)
     }
     
+    enum MoveDirection {
+        case top
+        case left
+    }
+    
+    func move(_ direction:MoveDirection, value:CGFloat) {
+        switch direction {
+        case .top:
+            self.transform = CATransform3DTranslate(CATransform3DIdentity, 0, value, 0)
+        case .left:
+            self.transform = CATransform3DTranslate(CATransform3DIdentity, value, 0, 0)
+        }
+    }
+    
     func animationTransition(_ duration:CFTimeInterval = 0.3, type:CATransitionType = .fade) {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name:

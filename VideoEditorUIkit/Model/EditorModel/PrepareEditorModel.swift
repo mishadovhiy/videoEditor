@@ -12,6 +12,7 @@ class PrepareEditorModel {
     
     private var delegate:PrepareEditorModelDelegate!
     private let layerEditor:EditorVideoLayer
+    private var filterEndedLoading:((Bool)->())?
     
     init(delegate: PrepareEditorModelDelegate) {
         self.delegate = delegate
@@ -30,16 +31,16 @@ class PrepareEditorModel {
             return nil
         }
         let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
-        let results = await export?.exportVideo(videoComposition: videoComposition)
+        let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo)
         return results
     }
     
-    
-    func addText(data:MovieAttachmentProtocol) async -> Bool {
+    func addText() async -> Bool {
         let asset = delegate.movie ?? .init()
         print(asset.duration, " video duration")
         guard let composition = delegate.movieHolder
-        else { return false }
+        else {
+            return false }
         let assetTrack = asset.tracks(withMediaType: .video)
         guard let firstTrack = assetTrack.first(where: {$0.naturalSize.width != 0}) else {
             return false
@@ -47,12 +48,8 @@ class PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
-        await layerEditor.addLayer(to: overlayLayer,
-                             videoSize: videoSize,
-                             text: .init(attachment: data), videoTotalTime: asset.duration().seconds)
-        let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
+        let videoComposition = await allCombinedInstructions(composition: composition, assetTrack: assetTrack, videoSize: videoSize, overlayLayer: overlayLayer)
         delegate.movieHolder = composition
-        print("video size: ", videoSize)
         if let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false) {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
             return true
@@ -60,15 +57,15 @@ class PrepareEditorModel {
             return false
         }
     }
-    
+
     func createVideo(_ url:URL?, needExport:Bool = true, replaceVideo:Bool = false) async -> URL? {
         let movie = delegate.movie ?? .init()
         guard let url else {
             return nil
         }
-        let newMovie = AVURLAsset(url: url)
-        print(newMovie.duration, " inserted video duration")
-        guard await newMovie.duration() != .zero,
+        let newMovie = await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)
+        print(newMovie?.duration, " inserted video duration")
+        guard await newMovie?.duration() != .zero,
               let _ = await insertMovie(movie: newMovie, composition: movie) else {
             return nil
         }
@@ -84,20 +81,6 @@ class PrepareEditorModel {
         }
     }
     
-    func createVideo(_ url:String, addingVideo:Bool = false) async -> Bool {
-        guard let url = Bundle.main.url(forResource: url, withExtension: "mov") ?? Bundle.main.url(forResource: url, withExtension: "mp4") else {
-            return false
-        }
-        let urlResult = await self.createVideo(url)
-        if addingVideo, let stringUrl = urlResult?.absoluteString {
-            DB.db.movieParameters.editingMovie?.compositionURLs.append(stringUrl)
-            DB.db.movieParameters.editingMovie?.originalURL = stringUrl
-        }
-        return urlResult != nil
-    }
-    
-    private var filterAddedAction:((Bool)->())?
-    
     func addFilter() async {
         let movie = delegate.movieHolder ?? delegate.movie!
         let video = VideoFilter.addFilter(composition: movie, completion: { url in
@@ -112,27 +95,11 @@ class PrepareEditorModel {
             await self.movieUpdated(movie: movie, movieURL: localUrl, canSetNil: false)
         }
     }
-    
-    private func filterAddedToComposition(_ url:URL?) async {
-        guard let url else {
-            return
-        }
-        let movie = AVURLAsset(url: url)
-        if let localUrl = await export(asset: movie, videoComposition: nil, isVideo: false) {
-            await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
-            filterAddedAction?(true)
-            filterAddedAction = nil
-        } else {
-            filterAddedAction?(false)
-            filterAddedAction = nil
-        }
-    }
-
 }
 
 
 extension PrepareEditorModel {
-    private func insertMovie(movie:AVURLAsset?, composition:AVMutableComposition) async -> AVMutableComposition? {
+    private func insertMovie(movie:AVMutableComposition?, composition:AVMutableComposition) async -> AVMutableComposition? {
         guard let movie else {
             return nil
         }
@@ -151,6 +118,103 @@ extension PrepareEditorModel {
         }
     }
     
+    func createTestBundleVideo(_ url:String, addingVideo:Bool = false) async -> Bool {
+        guard let url = Bundle.main.url(forResource: url, withExtension: "mov") ?? Bundle.main.url(forResource: url, withExtension: "mp4") else {
+            return false
+        }
+        let urlResult = await self.createVideo(url)
+        if addingVideo, let stringUrl = urlResult?.lastPathComponent {
+            DB.db.movieParameters.editingMovie?.originalURL = stringUrl
+        }
+        return urlResult != nil
+    }
+        
+    private func movieDescription(movie:AVMutableComposition, duration: CMTime) {
+        var vids = 0
+        movie.tracks.forEach {
+            vids += ($0.asset?.tracks.count ?? 0)
+            print("tracks: ", $0.asset?.tracks ?? [])
+            print(vids, " video count")
+            print($0.asset.debugDescription, " asset")
+        }
+        movie.tracks(withMediaType: .video).forEach {
+            print($0.segments.count, " rtehytbrt")
+            $0.segments.forEach {
+                let time = $0.timeMapping.source
+                print("startFrom: ", time.start)
+                print("startDuration: ", time.duration.seconds)
+                
+                print($0.description, " video description")
+            }
+        }
+        print(vids, " total vids")
+        print(movie, " total movie")
+        print(duration, " total duration ")
+    }
+    
+    private func filterAddedToComposition(_ url:URL?) async {
+        guard let url else {
+            return
+        }
+        let movie = AVURLAsset(url: url)
+        if let localUrl = await export(asset: movie, videoComposition: nil, isVideo: false) {
+            await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
+            filterEndedLoading?(true)
+            filterEndedLoading = nil
+        } else {
+            filterEndedLoading?(false)
+            filterEndedLoading = nil
+        }
+    }
+}
+
+extension PrepareEditorModel {
+    @MainActor func movieUpdated(movie:AVMutableComposition?,
+                                 movieURL:URL?,
+                                 canSetNil:Bool = true
+    ) {
+        if canSetNil || movie != nil {
+            self.delegate.movie = movie
+        }
+        if canSetNil || movieURL != nil {
+            self.delegate.movieURL = movieURL
+        }
+    }
+}
+
+// MARK: AVMutableComposition
+extension PrepareEditorModel {
+    final private func createComposition(_ urlAsset:AVURLAsset) async -> AVMutableComposition? {
+        let composition = AVMutableComposition()
+        let segments = await loadSegments(asset: urlAsset)
+        do {
+            try segments.forEach {
+                if ($0.1.mediaType == .video || $0.1.mediaType == .audio), let _ = composition.addMutableTrack(withMediaType: $0.1.mediaType, preferredTrackID: kCMPersistentTrackID_Invalid) {
+                    let range = CMTimeRangeMake(start: $0.0.timeMapping.target.start, duration: $0.0.timeMapping.target.duration)
+                    
+                    try composition.insertTimeRange(range, of: $0.1.asset!, at: $0.0.timeMapping.target.start)
+                }
+                let mutt = AVMutableVideoComposition(propertiesOf: composition)
+                
+                print(mutt.instructions, "instractions of the loaded video")
+                mutt.instructions = []
+                composition.tracks.forEach {
+                    let bb = AVMutableVideoComposition(propertiesOf: $0.asset!)
+                    print(mutt.instructions, "AVMutableVideoComposition of the loaded video")
+                    
+                    bb.instructions.removeAll()
+                }
+                urlAsset.metadata.forEach {
+                    print($0.value?.description ?? "", " metadata of the loaded video")
+                }
+            }
+        } catch {
+            print("error creating composition from url ", error)
+            return nil
+        }
+        return composition
+    }
+
     func loadSegments(asset:AVURLAsset?) async -> [(AVAssetTrackSegment, AVAssetTrack)] {
         guard let asset = asset ?? delegate.movie else {
             return []
@@ -177,75 +241,105 @@ extension PrepareEditorModel {
             return []
         }
     }
-    
-    func createComposition(_ urlAsset:AVURLAsset) async -> AVMutableComposition? {
-        let composition = AVMutableComposition()
-        let segments = await loadSegments(asset: urlAsset)
-        do {
-            try segments.forEach {
-                if $0.1.mediaType == .video, let _ = composition.addMutableTrack(withMediaType: $0.1.mediaType, preferredTrackID: kCMPersistentTrackID_Invalid) {
-                    let range = CMTimeRangeMake(start: $0.0.timeMapping.target.start, duration: $0.0.timeMapping.target.duration)
-                    
-                    try composition.insertTimeRange(range, of: $0.1.asset!, at: $0.0.timeMapping.target.start)
-                }
-                let mutt = AVMutableVideoComposition(propertiesOf: composition)
-                
-                print(mutt.instructions, "instractions of the loaded video")
-                mutt.instructions = []
-                composition.tracks.forEach {
-                    let bb = AVMutableVideoComposition(propertiesOf: $0.asset!)
-                    print(mutt.instructions, "AVMutableVideoComposition of the loaded video")
-
-                    bb.instructions.removeAll()
-                }
-                urlAsset.metadata.forEach {
-                    print($0.value?.description ?? "", " metadata of the loaded video")
-                }
-            }
-        } catch {
-            print("error creating composition from url ", error)
-            return nil
-        }
-        return composition
-    }
-    
-    private func movieDescription(movie:AVMutableComposition, duration: CMTime) {
-        var vids = 0
-        movie.tracks.forEach {
-            vids += ($0.asset?.tracks.count ?? 0)
-            print("tracks: ", $0.asset?.tracks ?? [])
-            print(vids, " video count")
-            print($0.asset.debugDescription, " asset")
-        }
-        movie.tracks(withMediaType: .video).forEach {
-            print($0.segments.count, " rtehytbrt")
-            $0.segments.forEach {
-                let time = $0.timeMapping.source
-                print("startFrom: ", time.start)
-                print("startDuration: ", time.duration.seconds)
-                
-                print($0.description, " video description")
-            }
-        }
-        print(vids, " total vids")
-        print(movie, " total movie")
-        print(duration, " total duration ")
-    }
 }
 
+// MARK: - video instructions
 extension PrepareEditorModel {
-    @MainActor func movieUpdated(movie:AVMutableComposition?,
-                                          movieURL:URL?,
-                                          canSetNil:Bool = true
-    ) {
-        if canSetNil || movie != nil {
-            self.delegate.movie = movie
+    final private func allCombinedInstructions(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], videoSize: CGSize, overlayLayer:CALayer) async -> AVMutableVideoComposition? {
+        ///mask single composition
+        //                await layerEditor.addLayer(to: overlayLayer,
+        //                                     videoSize: videoSize,
+        //                                     text: .init(attachment: data), videoTotalTime: asset.duration().seconds)
+        //                let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
+        
+        let data = DB.db.movieParameters.editingMovie?.texts ?? []
+        var compositions:[AVVideoComposition] =  []
+        var layers:[(CALayer, CALayer)] = []
+        for row in data {
+            let results = await addLayerComposition(composition: composition, assetTrack: assetTrack, layer: overlayLayer, data: row, videoSize: videoSize)
+            if let value = results?.0 {
+                compositions.append(value)
+                layers.append((results!.1, results!.2))
+            }
+            
         }
-        if canSetNil || movieURL != nil {
-            self.delegate.movieURL = movieURL
+        
+        return await combineVideoCompositions(compositions: compositions, size: videoSize, videoDuration: composition.duration(), layers: layers)
+    }
+    
+    private func combineVideoCompositions(compositions: [AVVideoComposition], size:CGSize, videoDuration:CMTime?, layers:[(CALayer, CALayer)]) -> AVMutableVideoComposition? {
+        let res = AVMutableVideoComposition()
+        var layerInstructions: [AVMutableVideoCompositionLayerInstruction] = []
+        
+        for composition in compositions {
+            let animationLayer = CALayer()
+            animationLayer.frame = CGRect(origin: .zero, size: composition.renderSize)
+            animationLayer.isGeometryFlipped = true
+            
+            let animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: animationLayer, in: animationLayer)
+            
+            if res.animationTool == nil {
+                res.animationTool = animationTool
+            } else {
+                res.animationTool = AVVideoCompositionCoreAnimationTool(
+                    additionalLayer: animationLayer,
+                    asTrackID: Int32(layers.count)
+                )
+            }
+            guard let instructions = composition.instructions as? [AVVideoCompositionInstruction] else {
+                continue
+            }
+            
+            for instruction in instructions {
+                res.instructions.append(instruction)
+            }
+            for instruction in composition.instructions as! [AVVideoCompositionInstruction] {
+                for layerInstruction in instruction.layerInstructions as! [AVMutableVideoCompositionLayerInstruction] {
+                    let clonedLayerInstruction = layerInstruction.mutableCopy() as! AVMutableVideoCompositionLayerInstruction
+                    
+                    layerInstructions.append(clonedLayerInstruction)
+                }
+            }
         }
+        
+        let mainInstruction = AVMutableVideoCompositionInstruction()
+        mainInstruction.timeRange = CMTimeRangeMake(start: .zero, duration: videoDuration ?? .zero)
+        mainInstruction.layerInstructions = layerInstructions
+        let vidLayer = CALayer()
+        vidLayer.frame = .init(origin: .zero, size: size)
+        let outputLayer = CALayer()
+        outputLayer.frame = .init(origin: .zero, size: size)
+        outputLayer.addSublayer(vidLayer)
+        layers.forEach {
+            $0.0.frame = .init(origin: .zero, size: size)
+            $0.1.frame = .init(origin: .zero, size: size)
+            vidLayer.addSublayer($0.0)
+            outputLayer.addSublayer($0.1)
+        }
+        res.animationTool = AVVideoCompositionCoreAnimationTool(
+            postProcessingAsVideoLayer: vidLayer,
+            in: outputLayer)/* compositions.last(where: {$0.animationTool != nil && $0.instructions.count != 0})?.animationTool ?? AVVideoCompositionCoreAnimationTool(
+                             postProcessingAsVideoLayer: vidLayer,
+                             in: outputLayer)*/
+        res.renderSize = size
+        res.frameDuration = EditorModel.fmp30
+        print(res.instructions, " terfwd")
+        res.instructions = [mainInstruction]
+        return res
+    }
+    
+
+    private func addLayerComposition(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], layer:CALayer, data:TextAttachmentDB?, videoSize: CGSize) async -> (AVMutableVideoComposition?, CALayer, CALayer)? {
+        
+        await layerEditor.addLayer(to: layer,
+                                   videoSize: videoSize,
+                                   text: .init(attachment: data), videoTotalTime: composition.duration().seconds)
+        let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: layer, composition: composition)
+        print(videoComposition?.0.instructions, " htgefrdwe")
+        return videoComposition
     }
 }
+
 
 protocol PrepareEditorModelDelegate {
     var movie:AVMutableComposition? { get set }

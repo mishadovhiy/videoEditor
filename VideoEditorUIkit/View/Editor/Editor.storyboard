@@ -48,18 +48,35 @@
                                 </subviews>
                                 <variation key="heightClass=compact" axis="horizontal" distribution="fillEqually"/>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-iw-VDI" customClass="BaseButton" customModule="VideoEditorUIkit" customModuleProvider="target">
+                                <rect key="frame" x="20" y="715" width="353" height="34"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Start Editing"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="startEditingPressed:" destination="rLM-dp-mMF" eventType="touchUpInside" id="nxG-ql-ATc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fif-AD-WAD"/>
                         <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
                             <constraint firstItem="dn4-TT-YmG" firstAttribute="leading" secondItem="fif-AD-WAD" secondAttribute="leading" id="0c3-wZ-dtz"/>
+                            <constraint firstItem="8Xk-iw-VDI" firstAttribute="centerY" secondItem="FfG-RN-FMy" secondAttribute="centerY" id="77y-yz-ysV"/>
                             <constraint firstItem="fif-AD-WAD" firstAttribute="trailing" secondItem="dn4-TT-YmG" secondAttribute="trailing" id="Eg1-aA-Uax"/>
                             <constraint firstItem="dn4-TT-YmG" firstAttribute="top" secondItem="fif-AD-WAD" secondAttribute="top" id="dZz-x1-3vy"/>
                             <constraint firstAttribute="bottom" secondItem="dn4-TT-YmG" secondAttribute="bottom" id="jZg-Hw-eTc"/>
+                            <constraint firstItem="fif-AD-WAD" firstAttribute="trailing" secondItem="8Xk-iw-VDI" secondAttribute="trailing" constant="20" id="kv3-DG-xyx"/>
+                            <constraint firstItem="8Xk-iw-VDI" firstAttribute="leading" secondItem="fif-AD-WAD" secondAttribute="leading" constant="20" id="t9Y-cC-U5r"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mainEditorContainerView" destination="J2M-CR-Vaf" id="blf-ol-r3u"/>
+                        <outlet property="startEditingButton" destination="8Xk-iw-VDI" id="Fna-Me-fMp"/>
                         <outlet property="trackContainerView" destination="Ohh-1K-fdl" id="wFW-sI-9nG"/>
                         <outlet property="videoContainerView" destination="jEO-Ya-Jeo" id="Elb-f9-Nui"/>
                     </connections>

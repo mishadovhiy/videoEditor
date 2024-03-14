@@ -14,6 +14,24 @@ extension DB.DataBase {
             self.dict = dict
         }
         
+        var needReloadText:Bool {
+            get {
+                return dict["needReloadText"] as? Bool ?? false
+            }
+            set {
+                dict.updateValue(newValue, forKey: "needReloadText")
+            }
+        }
+        
+        var needReloadFilter:Bool {
+            get {
+                return dict["needReloadFilter"] as? Bool ?? false
+            }
+            set {
+                dict.updateValue(newValue, forKey: "needReloadFilter")
+            }
+        }
+        
         var editingMovie:MovieDB? {
             get {
                 return .init(dict: dict["movies"] as? [String:Any] ?? [:])
@@ -40,8 +58,20 @@ extension DB.DataBase {
             
             do {
                 let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
+                print(editingMovie?.originalURL, " originalUrlGet")
+                if editingMovie?.isOriginalUrl ?? false {
+                    let original = contents.first(where: {
+                        print($0.absoluteString, " stored file url")
+                        return $0.absoluteString.contains(editingMovie?.originalURL ?? "")
+                    })?.absoluteString ??  contents.first?.absoluteString
+                    print(original, " editingMovieURL")
+                    return original
+                } else {
+                    let result = contents.last(where: {!$0.absoluteString.contains(editingMovie?.originalURL ?? "")})?.absoluteString
+                    print(result, " editingMovieURL")
+                    return result
+                }
                 
-                return contents.last?.absoluteString
             } catch {
                 print("Error: \(error)")
                 return nil
@@ -55,10 +85,11 @@ extension DB.DataBase {
             
             do {
                 let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
-
+                let originalUrl = editingMovie?.originalURL ?? ""
+                let editingUrl = self.editingMovieURL ?? ""
                 try contents.forEach({
-                    let cantRemove = exept == $0 || (editingMovie?.originalURL ?? "-3") == $0.absoluteString
-                    if exept == nil || !cantRemove{
+                    let cantRemove = $0.absoluteString.contains(originalUrl) || $0 == exept || ($0.absoluteString.contains(editingUrl) && exept != nil)
+                    if exept == nil || !cantRemove {
                         try fileManager.removeItem(at: $0)
                         print("Removed: \($0.lastPathComponent)")
                     }
@@ -117,6 +148,17 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
+        var isOriginalUrl:Bool {
+            get {
+                let original = dict["isOriginalUrl"] as? Bool ?? false
+                print("isoriginalurl: ", original)
+                return original
+            }
+            set {
+                dict.updateValue(newValue, forKey: "isOriginalUrl")
+            }
+        }
+        
         var compositionURLs:[String] {
             get {
                 return dict["compositionURLs"] as? [String] ?? []
@@ -144,6 +186,21 @@ extension DB.DataBase.MovieParametersDB {
             }
             set {
                 dict.updateValue(newValue.rawValue, forKey: "filter")
+            }
+        }
+        
+        
+        mutating func removeEditedAsset(_ attachment:AssetAttachmentProtocol?) {
+            if let text = attachment as? TextAttachmentDB {
+                var removed = false
+                texts.removeAll(where: {
+                    if !removed {
+                        removed = true
+                        return text == $0
+                    } else {
+                        return false
+                    }
+                })
             }
         }
         

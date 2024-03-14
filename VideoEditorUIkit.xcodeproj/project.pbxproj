@@ -50,6 +50,8 @@
 		8D18F1982B9F466A00194F34 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18E2B9F466A00194F34 /* CGFloat.swift */; };
 		8D18F1992B9F466A00194F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D18F18F2B9F466A00194F34 /* Assets.xcassets */; };
 		8D18F19A2B9F466A00194F34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1902B9F466A00194F34 /* Constants.swift */; };
+		8D26ADC92BA39317009CEEB4 /* SelectionTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */; };
+		8D26ADCB2BA3933C009CEEB4 /* SelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */; };
 		8D3A4AE42BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */; };
 		8D4C17192B3B2DF400953143 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C17182B3B2DF400953143 /* AppDelegate.swift */; };
 		8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C171A2B3B2DF400953143 /* SceneDelegate.swift */; };
@@ -110,6 +112,8 @@
 		8D18F18E2B9F466A00194F34 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		8D18F18F2B9F466A00194F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D18F1902B9F466A00194F34 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionTable.storyboard; sourceTree = "<group>"; };
+		8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewController.swift; sourceTree = "<group>"; };
 		8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEditingAttachmentView.swift; sourceTree = "<group>"; };
 		8D4C17152B3B2DF400953143 /* VideoEditorUIkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoEditorUIkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4C17182B3B2DF400953143 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 			children = (
 				8D18F15F2B9F460000194F34 /* EditorOverlayVC.swift */,
 				8D18F1592B9F460000194F34 /* EditorOverlayContainerVC */,
+				8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */,
 			);
 			path = EditorOverlayVC;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18F16D2B9F462A00194F34 /* EditorOverlay.storyboard */,
+				8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -505,6 +511,7 @@
 				8DF171BD2B9F48A700F71D03 /* LaunchScreen.storyboard in Resources */,
 				8D6CE22A2BA1230800D33A3D /* 1.mov in Resources */,
 				8D18F1702B9F462A00194F34 /* Editor.storyboard in Resources */,
+				8D26ADC92BA39317009CEEB4 /* SelectionTable.storyboard in Resources */,
 				8D18F16F2B9F462A00194F34 /* Player.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +527,7 @@
 				8D18F17F2B9F465300194F34 /* SuperVC.swift in Sources */,
 				8D3A4AE42BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift in Sources */,
 				8D18F1962B9F466A00194F34 /* String.swift in Sources */,
+				8D26ADCB2BA3933C009CEEB4 /* SelectionTableViewController.swift in Sources */,
 				8D18F1922B9F466A00194F34 /* AVAssetExportSession.swift in Sources */,
 				8D18F1562B9F45EE00194F34 /* UICollectionViewDelegate_EditorParametersViewController.swift in Sources */,
 				8D18F1802B9F465300194F34 /* PlayerSuperVC.swift in Sources */,

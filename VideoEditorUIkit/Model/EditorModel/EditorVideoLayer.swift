@@ -18,7 +18,7 @@ struct EditorVideoLayer {
         self.animation = .init()
     }
     
-    func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) async -> AVMutableVideoComposition? {
+    func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) async -> (AVMutableVideoComposition, CALayer, CALayer)? {
         let tracks:[AVMutableCompositionTrack] = composition.tracks(withMediaType: .video)
         
         overlayLayer?.isGeometryFlipped = true
@@ -30,7 +30,7 @@ struct EditorVideoLayer {
             layerInstruction.setTransform(transform, at:.zero)
             instraction.instractions.layerInstructions.append(layerInstruction)
         }
-        return instraction.composition
+        return (instraction.composition, instraction.videoLayer, instraction.outputLayer)
     }
     
     func videoSize(assetTrack:AVAssetTrack) -> CGSize {
@@ -83,12 +83,14 @@ fileprivate extension EditorVideoLayer {
             start: .zero,
             duration: composition.duration())
         videoComposition.instructions = [instruction]
-        return .init(instractions: instruction, composition: videoComposition)
+        return .init(instractions: instruction, composition: videoComposition, videoLayer:videoLayer, outputLayer:outputLayer)
     }
 
     struct InstractionsResult {
         let instractions:AVMutableVideoCompositionInstruction
         let composition:AVMutableVideoComposition
+        var videoLayer:CALayer
+        var outputLayer:CALayer
     }
 }
 

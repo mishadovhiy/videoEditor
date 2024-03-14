@@ -29,6 +29,13 @@ class PlayerSuperVC: SuperVC {
         addObservers()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        if self.navigationController == nil {
+            self.removeFromParent()
+        }
+        super.viewDidDisappear(animated)
+    }
+    
     override func removeFromParent() {
         playerLayer?.player?.pause()
         playerLayer?.player = nil

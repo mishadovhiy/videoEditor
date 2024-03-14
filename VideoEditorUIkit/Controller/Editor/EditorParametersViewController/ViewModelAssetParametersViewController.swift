@@ -11,6 +11,7 @@ import AVFoundation
 class ViewModelEditorParametersViewController {
     var assetData:MovieGeneralParameterList = .test
     var editingAsset:MovieAttachmentProtocol?
+    var editingAssetHolder:MovieAttachmentProtocol?
     var editingView:UIView?
     static var rowsHeight:CGFloat = 20
     static let durationWidthMultiplier:CGFloat = 15
@@ -51,5 +52,12 @@ class ViewModelEditorParametersViewController {
     deinit {
         assetData = .test
         reloadData = nil
+    }
+    
+    func removeEditedAssetDB() {
+        Task {
+            DB.db.movieParameters.editingMovie?.removeEditedAsset(editingAssetHolder)
+            editingAssetHolder = nil
+        }
     }
 }

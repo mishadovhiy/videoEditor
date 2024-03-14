@@ -10,6 +10,7 @@ import AVFoundation
 
 class EditorViewController: SuperVC {
 
+    @IBOutlet weak var startEditingButton: BaseButton!
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
     @IBOutlet private weak var mainEditorContainerView: UIView!
@@ -47,7 +48,7 @@ class EditorViewController: SuperVC {
     // MARK: - Life-cycle
     override func loadView() {
         super.loadView()
-        loadUI(movieUrl: lastEditedVideoURL())
+        loadUI()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,7 +64,20 @@ class EditorViewController: SuperVC {
             self.playerVC?.setUI(type: type)
             self.assetParametersVC?.setUI(type: type)
         }
+        self.hideStartEditing(type == .editing, animation: animation)
         animation.startAnimation()
+    }
+    
+    private func loadVideo(movieUrl:URL? = nil) {
+        let url = movieUrl ?? self.movieURL
+        if let url {
+            setViewType(.editing)
+            playerVC?.startRefreshing {
+                self.viewModel?.editorModel.loadVideo(url, canShowError: false)
+            }
+        } else {
+            setViewType(.addingVideos)
+        }
     }
     
     // MARK: - receive
@@ -111,6 +125,10 @@ class EditorViewController: SuperVC {
             mainEditorVC?.isHidden = false
         }
     }
+    
+    @IBAction func startEditingPressed(_ sender: Any) {
+        reloadUI()
+    }
 }
 
 
@@ -127,7 +145,6 @@ extension EditorViewController:PlayerViewControllerPresenter {
         movieURL = nil
         Task {
             DB.db.movieParameters = .init(dict: [:])
-            DB.db.movieParameters.clearTemporaryDirectory()
             await MainActor.run {
                 self.reloadUI()
             }
@@ -152,7 +169,7 @@ extension EditorViewController:EditorModelPresenter {
         set {
             playerVC?.movieURL = newValue
             Task {
-                DB.db.movieParameters.clearTemporaryDirectory(exept: newValue, urls: DB.db.movieParameters.editingMovie?.compositionURLs)
+                DB.db.movieParameters.clearTemporaryDirectory(exept: newValue)
             }
         }
     }
@@ -165,27 +182,22 @@ extension EditorViewController:EditorModelPresenter {
         showAlert(title: "Error", appearence: .type(.error))
         self.playerVC?.endRefreshing()
         self.playerVC?.pause()
-        Task {
-            DB.db.movieParameters.clearTemporaryDirectory(exept: movieURL, urls: DB.db.movieParameters.editingMovie?.compositionURLs)
-        }
     }
 }
 
 //MARK: loadUI
 fileprivate extension EditorViewController {
-    func loadUI(movieUrl:URL?) {
+    func loadUI() {
         if viewModel == nil {
             viewModel = .init(editorPresenter: self)
         }
         loadChildrens()
-        if let movieUrl {
-            loadVideo(movieUrl: movieUrl)
-        }
+        loadVideo(movieUrl: lastEditedVideoURL())
         trackContainerView.layer.zPosition = 2
     }
     
     private func loadChildrens() {
-        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: viewModel?.mainEditorCollectionData(filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
+        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: viewModel?.mainEditorCollectionData(vc:self,filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
             self.viewModel?.editorModel.deleteAttachmentPressed(nil)
         }, deleteMovie: {
             self.clearDataPressed()
@@ -202,16 +214,34 @@ fileprivate extension EditorViewController {
         }
     }
     
-    private func loadVideo(movieUrl:URL? = nil) {
-        let url = movieUrl ?? self.movieURL
-        if let url {
-            setViewType(.editing)
-            playerVC?.startRefreshing {
-                self.viewModel?.editorModel.loadVideo(url, canShowError: false)
-            }
-        } else {
-            setViewType(.addingVideos)
+    private func hideStartEditing(_ hidden:Bool, animation:UIViewPropertyAnimator?) {
+        if startEditingButton.isHidden == hidden {
+            return
         }
+        if !hidden {
+            self.performMoveEditingButton(true)
+            self.startEditingButton.isHidden = false
+        }
+        if animation != nil {
+            animation?.addAnimations {
+                self.performMoveEditingButton(hidden)
+            }
+            animation?.addCompletion({ _ in
+                self.startEditingButton.isHidden = hidden
+            })
+        } else {
+            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+                self.performMoveEditingButton(hidden)
+            }
+            animation.addCompletion({ _ in
+                self.startEditingButton.isHidden = hidden
+            })
+            animation.startAnimation()
+        }
+    }
+    
+    func performMoveEditingButton(_ hidden:Bool) {
+        startEditingButton.layer.move(.top, value: hidden ? trackContainerView.frame.height : 0)
     }
 }
 

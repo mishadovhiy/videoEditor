@@ -13,9 +13,11 @@ extension AVAssetExportSession {
         self.init(asset: composition, presetName: AVAssetExportPresetHighestQuality)
     }
     
-    func exportVideo(videoComposition: AVVideoComposition?) async -> URL? {
+    func exportVideo(videoComposition: AVMutableVideoComposition?, isVideoAdded:Bool = false) async -> URL? {
         let videoName = UUID().uuidString
-        let exportURL = URL(fileURLWithPath: NSTemporaryDirectory())
+        print("newvideoname ", videoName)
+        var directory = NSTemporaryDirectory()
+        let exportURL = URL(fileURLWithPath: directory)
             .appendingPathComponent(videoName)
             .appendingPathExtension("mov")
         if let videoComposition,
@@ -32,7 +34,7 @@ extension AVAssetExportSession {
             print(videoComposition.renderSize, " error adding videoComposition")
         }
         self.shouldOptimizeForNetworkUse = false
-        self.timeRange = .init(start: .zero, duration: asset.duration)
+        self.timeRange = await .init(start: .zero, duration: asset.duration())
         self.outputFileType = .mov
         self.outputURL = exportURL
         

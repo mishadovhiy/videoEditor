@@ -11,18 +11,17 @@ import Photos
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
     static var shared:AppDelegate {
         return UIApplication.shared.delegate as? AppDelegate ?? .init()
     }
+    
     lazy var ai: AlertManager = .init(appearence: .with({
         $0.defaultText = .with({
             $0.loading = "Loading"
         })
     }))
-    
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         PHPhotoLibrary.requestAuthorization { PHAuthorizationStatus in

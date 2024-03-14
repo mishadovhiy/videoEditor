@@ -35,7 +35,6 @@ struct AttachentVideoLayerModel {
         }
         textLayer.alignmentMode = .center
         textLayer.isWrapped = true
-        print(videoSize.width, " grerfewdws")
         let size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
         textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: size.height))
         textLayer.displayIfNeeded()

@@ -39,23 +39,21 @@ class EditorModel {
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     
-    func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false) {
+    func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {
             let _ = await prepare.createVideo(url, needExport: needExport)
-            self.dbParametersHolder = DB.db.movieParameters.editingMovie
+            let db = DB.db.movieParameters
+            self.dbParametersHolder = db.editingMovie
             if let url, videoAddedAction {
                 await prepare.movieUpdated(movie: movieHolder, movieURL: url)
             }
-            if videoAddedAction {
-                await videoAdded(canReload: false)
-            }
+            await checkVideoInstructions(videoAddedAction: videoAddedAction, canReload: canReload)
         }
     }
     
     func addVideo(force:Bool = false) {
         Task {
-            print("addVideoaddVideopressedpressed")
-            if await addTestVideos() {
+            if await prepare.createTestBundleVideo("1", addingVideo: true) {
                 await videoAdded()
             } else {
                 await presenter?.errorAddingVideo()
@@ -64,11 +62,17 @@ class EditorModel {
     }
     
     func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        if let text = data as? MovieAttachmentProtocol {
-            addText(text)
-        } else {
-            print("error adding data: nothing to add ", data.debugDescription)
-            Task {
+        Task {
+            if let text = data as? MovieAttachmentProtocol {
+                DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+                DB.db.movieParameters.needReloadText = true
+                
+                if let textDB = text as? TextAttachmentDB {
+                    DB.db.movieParameters.editingMovie!.texts.append(textDB)
+                }
+                await presenter?.reloadUI()
+            } else {
+                print("error adding data: nothing to add ", data.debugDescription)
                 await videoAdded(canReload:false)
             }
         }
@@ -76,40 +80,33 @@ class EditorModel {
     
     func addFilterPressed() {
         Task {
-            self.movie = nil
-            loadVideo(.init(string: DB.db.movieParameters.editingMovie?.originalURL ?? ""), videoAddedAction: false)
-            if (DB.db.movieParameters.editingMovie?.filter ?? .none) == FilterType.none {
-                await videoAdded()
-            } else {
-                await prepare.addFilter()
-                await videoAdded()
-            }
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+            DB.db.movieParameters.needReloadFilter = true
+            await presenter?.reloadUI()
         }
     }
     
     func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
         Task {
-            dbParametersHolder = DB.db.movieParameters.editingMovie
-            await reloadMovie()
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+            await presenter?.reloadUI()
+        }
+    }
+}
+
+fileprivate extension EditorModel {
+    private func addText() {
+        print(movie?.duration ?? -3, " addText movie duration")
+        Task {
+            movieHolder = movie
+            if await self.prepare.addText() {
+                await videoAdded(canReload: true)
+            } else {
+                await presenter?.errorAddingVideo()
+            }
         }
     }
     
-    private func reloadMovie() async {
-        addingUrls = DB.db.movieParameters.editingMovie?.compositionURLs ?? []
-        if let urlString = DB.db.movieParameters.editingMovie?.originalURL,
-           let url:URL = .init(string: urlString) {
-            self.movie = nil
-            self.loadVideo(url, videoAddedAction: false, needExport: true)
-            await presenter?.reloadUI()
-        } else {
-            await videoAdded()
-        }
-    }
-
-}
-
-//MARK: db
-fileprivate extension EditorModel {
     private func videoAdded(canReload:Bool = true) async {
         if DB.db.movieParameters.editingMovie?.texts.count ?? 0 != 0 && canReload {
             await self.presenter?.reloadUI()
@@ -118,40 +115,19 @@ fileprivate extension EditorModel {
         }
     }
     
-    private func addDBTexts() async {
-        if let first = dbParametersHolder?.texts.first {
-            dbParametersHolder?.texts.removeFirst()
-            let _ = await self.prepare.addText(data: first)
-            return await addDBTexts()
-        } else {
-            return
+    private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false) async {
+        if DB.db.movieParameters.needReloadText {
+            DB.db.movieParameters.needReloadText = false
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = false
+            addText()
+        } else if videoAddedAction {
+            await videoAdded(canReload: canReload)
         }
-    }
-}
-
-extension EditorModel {
-    private func addText(_ data:MovieAttachmentProtocol, canAddToDB:Bool = true) {
-        print(movie?.duration ?? -3)
-        Task {
-            if let dbData = data as? TextAttachmentDB,
-               canAddToDB {
-                DB.db.movieParameters.editingMovie?.texts.append(dbData)
-            }
-            if await self.prepare.addText(data: data) {
-                await videoAdded(canReload: true)
-            } else {
-                await presenter?.errorAddingVideo()
-            }
+        if DB.db.movieParameters.needReloadFilter && (DB.db.movieParameters.editingMovie?.filter ?? .none) != FilterType.none {
+            DB.db.movieParameters.needReloadFilter = false
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = false
+            await prepare.addFilter()
         }
-    }
-}
-
-
-//MARK: test
-fileprivate extension EditorModel {
-    private func addTestVideos() async -> Bool {
-        let ok = await prepare.createVideo("1", addingVideo: true)
-        return ok
     }
 }
 
