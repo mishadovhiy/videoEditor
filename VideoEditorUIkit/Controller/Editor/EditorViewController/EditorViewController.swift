@@ -59,12 +59,12 @@ class EditorViewController: SuperVC {
     
     // MARK: - setup ui
     func setViewType(_ type:EditorViewType) {
+        self.viewModel?.viewType = type
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
-            self.viewModel?.viewType = type
             self.playerVC?.setUI(type: type)
             self.assetParametersVC?.setUI(type: type)
         }
-        self.hideStartEditing(type == .editing, animation: animation)
+        self.hideStartEditing(!(type == .addingVideos && movieURL != nil), animation: animation)
         animation.startAnimation()
     }
     
@@ -119,15 +119,19 @@ class EditorViewController: SuperVC {
     
     func addTrackPressed() {
         if viewModel?.viewType == .addingVideos {
-            print("addTrackPressedaddTrackPressed")
-            viewModel?.editorModel.addVideo()
+            playerVC?.startRefreshing(completion: {
+                self.viewModel?.editorModel.addVideo()
+            })
         } else {
             mainEditorVC?.isHidden = false
         }
     }
     
     @IBAction func startEditingPressed(_ sender: Any) {
-        reloadUI()
+        hideStartEditing(true, animation: nil)
+        playerVC?.startRefreshing(completion: {
+            self.reloadUI()
+        })
     }
 }
 
@@ -167,9 +171,14 @@ extension EditorViewController:EditorModelPresenter {
             }
         }
         set {
-            playerVC?.movieURL = newValue
             Task {
                 DB.db.movieParameters.clearTemporaryDirectory(exept: newValue)
+                await MainActor.run {
+                    playerVC?.movieURL = newValue
+                }
+            }
+            if viewModel?.viewType ?? .addingVideos == .addingVideos {
+                setViewType(viewModel?.viewType ?? .addingVideos)
             }
         }
     }

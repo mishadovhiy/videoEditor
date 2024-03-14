@@ -14,6 +14,7 @@ class BaseVC:UIViewController {
         children.forEach({
             $0.removeFromParent()
         })
+        view.removeFromSuperview()
         super.removeFromParent()
     }
     
@@ -48,9 +49,25 @@ class BaseVC:UIViewController {
     func lastEditedVideoURL() -> URL? {
         .init(string: DB.db.movieParameters.editingMovieURL ?? "")
     }
-    
+}
+
+extension BaseVC {
     func showAlert(title:String, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
         AppDelegate.shared.ai.showAlert(title: "Error", appearence: .type(.error))
+    }
+    
+    func showAlertWithCancel(title:String? = "Are you sure?", description:String? = nil, type:AlertViewLibrary.ViewType = .standard, okPressed:@escaping ()->()) {
+        AppDelegate.shared.ai.showAlert(title: title, description: description, appearence: .with({
+            $0.type = type
+            $0.primaryButton = .with({
+                $0.action = okPressed
+                $0.title = "OK"
+            })
+            $0.secondaryButton = .with({
+                $0.style = .error
+                $0.title = "Cancel"
+            })
+        }))
     }
 }
 

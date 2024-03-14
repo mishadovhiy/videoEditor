@@ -65,7 +65,8 @@ class StackAssetAttachmentView:UIView {
         newData.inMovieStart = 0
         newData.duration = 0.2
         if let superView = (delegate as? EditorParametersViewController)?.scrollView {
-            let scroll = superView.contentOffset.x / superView.contentSize.width
+            let superLeftSpace = EditorParametersViewController.collectionViewSpace
+            let scroll = (superView.contentOffset.x + superLeftSpace.x) / (superView.contentSize.width + (superLeftSpace.x * 2))
             newData.inMovieStart = scroll >= 1 ? 1 : (scroll <= 0 ? 0 : scroll)
         }
         self.setSelected(true)

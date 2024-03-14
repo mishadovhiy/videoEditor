@@ -62,6 +62,13 @@ class EditorParametersViewController: SuperVC {
             }
         }
         addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit Video"
+        if type == .editing {
+            collectionView.layer.cornerRadius(at: .top, value: 18)
+        } else {
+            collectionView.layer.masksToBounds = true
+            collectionView.layer.cornerRadius = 18
+        }
+        
     }
     
     // MARK: receive

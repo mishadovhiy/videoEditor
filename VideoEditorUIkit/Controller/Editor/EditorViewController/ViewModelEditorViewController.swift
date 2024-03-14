@@ -20,9 +20,8 @@ struct ViewModelEditorViewController {
         editorModel = nil
     }
     
-    
     typealias void = ()->()
-    func mainEditorCollectionData(vc:UIViewController, filterSelected:@escaping()->(),
+    func mainEditorCollectionData(vc:BaseVC, filterSelected:@escaping()->(),
                                   reloadPressed:@escaping void,
                                   removeAttachments:@escaping void,
                                   deleteMovie:@escaping void
@@ -30,18 +29,18 @@ struct ViewModelEditorViewController {
         [
             .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(filterSelected))),
             .init(title: "Reload data", didSelect: reloadPressed),
-            .init(title: "Remove all attachments", didSelect: removeAttachments),
-            .init(title: "Delete Movie", didSelect: deleteMovie),
-            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "is original url" : "is edited url", didSelect: {
-                Task {
-                    let value = DB.db.movieParameters.editingMovie?.isOriginalUrl ?? false
-                    DB.db.movieParameters.editingMovie?.isOriginalUrl = !value
-                    await MainActor.run {
-                        reloadPressed()
-                    }
-                }
+            .init(title: "Remove all attachments", didSelect: {
+                vc.showAlertWithCancel(okPressed: removeAttachments)
             }),
-            .init(title: "links list", didSelect: {
+            .init(title: "Delete Movie", didSelect: {
+                vc.showAlertWithCancel(okPressed: deleteMovie)
+            }),
+            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
+                vc.showAlertWithCancel(okPressed: {
+                    self.toggleOriginalURL(reloadPressed: reloadPressed)
+                })
+            }),
+            .init(title: "stored videos", didSelect: {
                 toLinkList(parentVC: vc)
             })
         ]
@@ -85,6 +84,16 @@ struct ViewModelEditorViewController {
                         filterSelected()
                     }
                 }
+            }
+        }
+    }
+    
+    func toggleOriginalURL(reloadPressed:@escaping()->()) {
+        Task {
+            let value = DB.db.movieParameters.editingMovie?.isOriginalUrl ?? false
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = !value
+            await MainActor.run {
+                reloadPressed()
             }
         }
     }
