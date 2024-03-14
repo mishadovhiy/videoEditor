@@ -70,28 +70,6 @@ class PlayerViewController: PlayerSuperVC {
         super.timeChanged(percent)
         preseter?.playTimeChanged(percent)
     }
-    
-    @objc fileprivate func deletePressed(_ sender:UIButton) {
-        startRefreshing {
-            self.pause()
-            self.preseter?.clearDataPressed()
-        }
-    }
-    
-    @objc fileprivate func reloadUIPressed(_ sender:UIButton) {
-        startRefreshing {
-            self.pause()
-            self.preseter?.reloadUI()
-        }
-    }
-    
-    @objc fileprivate func deleteAttachmentPressed(_ sender:UIButton) {
-        startRefreshing {
-            Task {
-                self.parentVC?.viewModel?.editorModel.deleteAttachmentPressed(nil)
-            }
-        }
-    }
 }
 
 

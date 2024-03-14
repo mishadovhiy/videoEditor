@@ -89,6 +89,9 @@ class StackAssetAttachmentView:UIView {
     }
     
     @objc private func emptyRowPressed(_ sender:UITapGestureRecognizer) {
+        if sender.state != .ended {
+            return
+        }
         addEmptyPressed()
     }
 }

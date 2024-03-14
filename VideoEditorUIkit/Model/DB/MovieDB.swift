@@ -112,6 +112,7 @@ extension DB.DataBase.MovieParametersDB {
                 return dict["originalURL"] as? String ?? ""
             }
             set {
+                print("originalURLsettd ", newValue)
                 dict.updateValue(newValue, forKey: "originalURL")
             }
         }

@@ -29,7 +29,7 @@ class PrepareEditorModel {
             print("Cannot create export session.")
             return nil
         }
-        let export = AVAssetExportSession(composition: composition)
+        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
         let results = await export?.exportVideo(videoComposition: videoComposition)
         return results
     }
@@ -238,8 +238,12 @@ extension PrepareEditorModel {
                                           movieURL:URL?,
                                           canSetNil:Bool = true
     ) {
-        self.delegate.movie = movie
-        self.delegate.movieURL = movieURL
+        if canSetNil || movie != nil {
+            self.delegate.movie = movie
+        }
+        if canSetNil || movieURL != nil {
+            self.delegate.movieURL = movieURL
+        }
     }
 }
 

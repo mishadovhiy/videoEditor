@@ -105,6 +105,7 @@ class EditorViewController: SuperVC {
     
     func addTrackPressed() {
         if viewModel?.viewType == .addingVideos {
+            print("addTrackPressedaddTrackPressed")
             viewModel?.editorModel.addVideo()
         } else {
             mainEditorVC?.isHidden = false
@@ -140,10 +141,6 @@ extension EditorViewController:PlayerViewControllerPresenter {
 
 
 extension EditorViewController:EditorModelPresenter {
-    @MainActor func deleteAllData() {
-        self.reloadUI()
-    }
-    
     var movieURL: URL? {
         get {
             if Thread.isMainThread {

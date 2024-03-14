@@ -75,6 +75,9 @@ class AssetRawView:UIView {
     }
     
     @objc private func editRowPressed(_ sender:UITapGestureRecognizer) {
+        if sender.state != .ended {
+            return
+        }
         editRowPressed?(data, self)
         setSelected(true)
     }

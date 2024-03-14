@@ -110,14 +110,20 @@ class EditorParametersViewController: SuperVC {
     }
     
     @objc func leftHeaderPressed(_ sender:UITapGestureRecognizer) {
+        if sender.state != .ended {
+            return
+        }
+        print(sender.state.rawValue, " leftHeaderPressedleftHeaderPressed")
         assetStackView.arrangedSubviews.forEach {
             if let view = $0 as? StackAssetAttachmentView,
                view.tag == sender.view?.tag
             {
                 view.addEmptyPressed()
-            } else if sender.view?.tag == 0 {
-                parentVC?.addTrackPressed()
+                return
             }
+        }
+        if sender.view?.tag == 0 {
+            parentVC?.addTrackPressed()
         }
     }
 }

@@ -12,7 +12,7 @@ protocol EditorModelPresenter {
      @MainActor func videoAdded()
      @MainActor func errorAddingVideo()
     var movieURL:URL?{set get}
-    @MainActor func deleteAllData()
+    @MainActor func reloadUI()
 }
 
 class EditorModel {
@@ -39,11 +39,11 @@ class EditorModel {
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     
-    func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true) {
+    func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false) {
         Task {
-            let _ = await prepare.createVideo(url, needExport: false)
+            let _ = await prepare.createVideo(url, needExport: needExport)
             self.dbParametersHolder = DB.db.movieParameters.editingMovie
-            if let url {
+            if let url, videoAddedAction {
                 await prepare.movieUpdated(movie: movieHolder, movieURL: url)
             }
             if videoAddedAction {
@@ -54,6 +54,7 @@ class EditorModel {
     
     func addVideo(force:Bool = false) {
         Task {
+            print("addVideoaddVideopressedpressed")
             if await addTestVideos() {
                 await videoAdded()
             } else {
@@ -75,6 +76,7 @@ class EditorModel {
     
     func addFilterPressed() {
         Task {
+            self.movie = nil
             loadVideo(.init(string: DB.db.movieParameters.editingMovie?.originalURL ?? ""), videoAddedAction: false)
             if (DB.db.movieParameters.editingMovie?.filter ?? .none) == FilterType.none {
                 await videoAdded()
@@ -86,32 +88,22 @@ class EditorModel {
     }
     
     func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        addText(TextAttachmentDB.demo)
-//        Task {
-//            var holder = DB.db.movieParameters.editingMovie
-//            if let text = data as? (any MovieAttachmentProtocol),
-//            let textDBModel = text as? TextAttachmentDB {
-//                holder?.texts.removeAll(where: {$0 == textDBModel})
-//            }
-//            DB.db.movieParameters.editingMovie = holder
-//            dbParametersHolder = holder
-//            await reloadMovie()
-//        }
+        Task {
+            dbParametersHolder = DB.db.movieParameters.editingMovie
+            await reloadMovie()
+        }
     }
     
     private func reloadMovie() async {
         addingUrls = DB.db.movieParameters.editingMovie?.compositionURLs ?? []
         if let urlString = DB.db.movieParameters.editingMovie?.originalURL,
            let url:URL = .init(string: urlString) {
-            movie = .init()
-            movieHolder = .init()
-            await MainActor.run {
-                movieURL = url
-            }
-            self.loadVideo(url, videoAddedAction: false)
+            self.movie = nil
+            self.loadVideo(url, videoAddedAction: false, needExport: true)
+            await presenter?.reloadUI()
+        } else {
+            await videoAdded()
         }
-      //  await addDBTexts()
-        await self.presenter?.deleteAllData()
     }
 
 }
@@ -120,7 +112,7 @@ class EditorModel {
 fileprivate extension EditorModel {
     private func videoAdded(canReload:Bool = true) async {
         if DB.db.movieParameters.editingMovie?.texts.count ?? 0 != 0 && canReload {
-            await self.presenter?.deleteAllData()
+            await self.presenter?.reloadUI()
         } else {
             await presenter?.videoAdded()
         }
@@ -160,22 +152,6 @@ fileprivate extension EditorModel {
     private func addTestVideos() async -> Bool {
         let ok = await prepare.createVideo("1", addingVideo: true)
         return ok
-    }
-    
-    private func addVideosDB(urls:String) async -> Bool {
-        print(urls)
-        if let first = addingUrls.first {
-            addingUrls.removeFirst()
-            let _ = await prepare.createVideo(.init(string: first))
-            if let next = addingUrls.first {
-                return await addVideosDB(urls: next)
-
-            } else {
-                return true
-            }
-        } else {
-            return true
-        }
     }
 }
 

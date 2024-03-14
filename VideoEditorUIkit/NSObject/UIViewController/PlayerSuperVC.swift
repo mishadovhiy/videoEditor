@@ -150,6 +150,9 @@ fileprivate extension PlayerSuperVC {
     }
     
     @objc private func playTap(_ sender:UITapGestureRecognizer) {
+        if sender.state != .ended {
+            return
+        }
         if isPlaying {
             pause()
         } else {
