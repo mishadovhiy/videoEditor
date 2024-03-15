@@ -159,7 +159,7 @@ extension EditorOverlayVC {
             view.layer.shadowOffset = .init(width: -1, height: 3)
         } else {
             view.backgroundColor = view.superview!.backgroundColor ?? .clear
-            actionButtons.first(where: {$0.style == 2})?.superview?.isHidden = hideDoneButton
+            actionButtons.first(where: {$0.style == 0})?.superview?.isHidden = hideDoneButton
             actionButtons.first(where: {$0.style == 1})?.superview?.isHidden = hideCloseButton
         }
     }
@@ -175,9 +175,9 @@ extension EditorOverlayVC {
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:(70, "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(60, "height")]
+            return !(data?.isPopup ?? true) ? [.height:(70, "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(50, "height")]
         case .middle:
-            return !(data?.isPopup ?? true) ? [.height:(85, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(100, "height")]
+            return !(data?.isPopup ?? true) ? [.height:(85, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(90, "height")]
         case .big:
             return !(data?.isPopup ?? true) ? [.height:(250, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(185, "height")]
         }
@@ -219,7 +219,7 @@ extension EditorOverlayVC {
                     constraint.constant = typeData.value.0
                 }
             }
-            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeIn) {
+            let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
                 self.view.layoutIfNeeded()
                 self.view.superview?.layoutIfNeeded()
             }
@@ -234,7 +234,7 @@ extension EditorOverlayVC {
         actionButtons.forEach { view in
             var hide = hidden
             if !hide && attachmentData == nil {
-                hide = view.style == 2 ? data?.donePressed == nil : data?.closePressed == nil
+                hide = view.style == 0 ? data?.donePressed == nil : data?.closePressed == nil
             }
             if (view.superview?.isHidden ?? true) != hide {
                 if animated {

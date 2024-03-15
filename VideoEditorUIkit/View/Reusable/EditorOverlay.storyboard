@@ -58,7 +58,7 @@
                                         <rect key="frame" x="339" y="0.0" width="50" height="759"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cd-wh-f6Y" customClass="BaseButton" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="759"/>
+                                                <rect key="frame" x="0.0" y="362.66666666666669" width="50" height="34"/>
                                                 <color key="backgroundColor" systemColor="linkColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="4d5-ZZ-oOI"/>
@@ -68,9 +68,9 @@
                                                 <state key="normal" title="+"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                        <integer key="value" value="2"/>
+                                                        <integer key="value" value="0"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="defaultConstraints" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="defaultConstraints" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="addPressed:" destination="bLb-8e-uSV" eventType="touchUpInside" id="rc1-Mn-U1U"/>
@@ -79,17 +79,16 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="7Cd-wh-f6Y" secondAttribute="bottom" id="Ihi-CO-QvU"/>
                                             <constraint firstItem="7Cd-wh-f6Y" firstAttribute="leading" secondItem="H9N-PP-RC3" secondAttribute="leading" id="Op9-Nd-06Q"/>
                                             <constraint firstAttribute="trailing" secondItem="7Cd-wh-f6Y" secondAttribute="trailing" id="PTR-xa-xMn"/>
-                                            <constraint firstItem="7Cd-wh-f6Y" firstAttribute="top" secondItem="H9N-PP-RC3" secondAttribute="top" id="kUW-Xl-CWD"/>
+                                            <constraint firstItem="7Cd-wh-f6Y" firstAttribute="centerY" secondItem="H9N-PP-RC3" secondAttribute="centerY" id="XWH-Xy-Txk"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="faW-J7-E1x"/>
-                        <color key="backgroundColor" name="primaryBackground"/>
+                        <color key="backgroundColor" name="secondaryBackground"/>
                         <constraints>
                             <constraint firstItem="7L2-BQ-y2B" firstAttribute="top" secondItem="faW-J7-E1x" secondAttribute="top" id="fZ6-CN-iz1"/>
                             <constraint firstAttribute="trailing" secondItem="7L2-BQ-y2B" secondAttribute="trailing" constant="2" id="pKB-9d-ZEN"/>
@@ -118,7 +117,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="289" height="622"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xt4-iA-GdT">
-                                        <rect key="frame" x="0.0" y="0.0" width="289" height="50.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="289" height="167.33333333333334"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="3Tn-AO-Xce"/>
@@ -130,15 +129,46 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OverlayTextFieldCell" id="2AH-88-6cH" customClass="OverlayTextFieldCell" customModule="VideoEditorUIkit" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="45"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ekJ-G4-jju">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter value" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KLl-Vk-6ZK" customClass="BaseTextField" customModule="VideoEditorUIkit" customModuleProvider="target">
+                                                            <rect key="frame" x="5" y="5" width="190" height="35"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="26i-wr-HDm"/>
+                                                                <constraint firstAttribute="width" constant="190" id="u6G-wX-asc"/>
+                                                            </constraints>
+                                                            <color key="textColor" name="black"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="KLl-Vk-6ZK" secondAttribute="trailing" constant="5" id="6zD-6q-0Nf"/>
+                                                        <constraint firstAttribute="bottom" secondItem="KLl-Vk-6ZK" secondAttribute="bottom" constant="5" id="hba-Dt-Yvd"/>
+                                                        <constraint firstItem="KLl-Vk-6ZK" firstAttribute="top" secondItem="ekJ-G4-jju" secondAttribute="top" constant="5" id="iMn-OZ-CQh"/>
+                                                        <constraint firstItem="KLl-Vk-6ZK" firstAttribute="leading" secondItem="ekJ-G4-jju" secondAttribute="leading" constant="5" id="pUk-hO-2Cj"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <connections>
+                                                    <outlet property="textField" destination="KLl-Vk-6ZK" id="hzp-n9-Imr"/>
+                                                </connections>
+                                            </collectionViewCell>
                                             <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditorCollectionCell" id="jSU-Ku-cZ8" customClass="EditorCollectionCell" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-9.6666666666666661" width="150" height="70"/>
+                                                <rect key="frame" x="25" y="55" width="150" height="40"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aQj-Pc-wLN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="kCc-8b-Jig">
-                                                            <rect key="frame" x="20" y="0.0" width="110" height="70"/>
+                                                            <rect key="frame" x="20" y="0.0" width="110" height="40"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyv-fV-g7v">
                                                                     <rect key="frame" x="0.0" y="0.0" width="110" height="25"/>
@@ -171,7 +201,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
-                                                                    <rect key="frame" x="0.0" y="20" width="110" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="20" width="110" height="20"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <color key="textColor" name="greyText"/>
                                                                     <nil key="highlightedColor"/>
@@ -200,14 +230,14 @@
                                         </cells>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEn-G9-DTC">
-                                        <rect key="frame" x="0.0" y="50.333333333333336" width="289" height="86.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="167.33333333333334" width="289" height="287.33333333333326"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9Q-iT-Zef">
-                                        <rect key="frame" x="0.0" y="136.66666666666666" width="289" height="50.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="454.66666666666657" width="289" height="167.33333333333331"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aps-GC-1MN">
-                                                <rect key="frame" x="-2" y="0.0" width="293" height="51.333333333333336"/>
+                                                <rect key="frame" x="-2" y="0.0" width="293" height="168.33333333333334"/>
                                             </slider>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -216,25 +246,6 @@
                                             <constraint firstAttribute="bottom" secondItem="aps-GC-1MN" secondAttribute="bottom" id="EEg-K7-Xbh"/>
                                             <constraint firstItem="aps-GC-1MN" firstAttribute="leading" secondItem="v9Q-iT-Zef" secondAttribute="leading" id="W3Q-Ez-O5Y"/>
                                             <constraint firstItem="aps-GC-1MN" firstAttribute="top" secondItem="v9Q-iT-Zef" secondAttribute="top" id="jgd-5F-5XR"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3XX-EG-UdQ">
-                                        <rect key="frame" x="0.0" y="187" width="289" height="435"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter value" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KLl-Vk-6ZK" customClass="BaseTextField" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="-5" width="279" height="440"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="KLl-Vk-6ZK" firstAttribute="top" secondItem="3XX-EG-UdQ" secondAttribute="top" constant="-5" id="3L2-Mf-cbF"/>
-                                            <constraint firstItem="KLl-Vk-6ZK" firstAttribute="leading" secondItem="3XX-EG-UdQ" secondAttribute="leading" constant="10" id="W2B-pL-KdZ"/>
-                                            <constraint firstAttribute="trailing" secondItem="KLl-Vk-6ZK" secondAttribute="trailing" id="tji-Qy-5gp"/>
-                                            <constraint firstAttribute="bottom" secondItem="KLl-Vk-6ZK" secondAttribute="bottom" id="xKA-mV-pTE"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -254,7 +265,6 @@
                         <outlet property="collectionView" destination="Xt4-iA-GdT" id="JwT-S7-Ydj"/>
                         <outlet property="containerView" destination="GEn-G9-DTC" id="zE0-9G-GWN"/>
                         <outlet property="sliderView" destination="aps-GC-1MN" id="PAj-cw-PZo"/>
-                        <outlet property="textField" destination="KLl-Vk-6ZK" id="zSa-gM-QpQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYN-RY-pNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -282,14 +292,14 @@
     </scenes>
     <resources>
         <image name="cancel" width="17" height="17"/>
-        <namedColor name="greyText">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.30300000309944153" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <namedColor name="primaryBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="greyText">
+            <color red="1" green="1" blue="1" alpha="0.30300000309944153" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="secondaryBackground">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.090000003576278687" green="0.090000003576278687" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

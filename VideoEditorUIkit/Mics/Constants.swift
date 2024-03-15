@@ -30,7 +30,7 @@ struct Constants {
         case small = 10
         case smallMedium = 10.1
         case regular = 12
-        case primaryButton = 16
+        case primaryButton = 14
         case secondaryButton = 12.1
         
         var font:UIFont {

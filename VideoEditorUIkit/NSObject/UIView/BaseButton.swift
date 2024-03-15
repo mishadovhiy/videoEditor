@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseButton:UIButton {
+    static let buttonHeight:CGFloat = 40
     /// Description: 0 - .small / 1 - .primary
     @IBInspectable var style:Int = 0 {
         didSet {
@@ -47,14 +48,29 @@ fileprivate extension BaseButton {
         if cornderRadious == 0 && style != .smallGray {
             layer.cornerRadius = style == .primary ? 9 : 5
         }
-        backgroundColor = style == .smallGray ? .clear : .link
-        titleLabel?.font = .systemFont(ofSize: style == .primary ? Constants.Font.primaryButton.rawValue : Constants.Font.secondaryButton.rawValue, weight: style == .primary ? .bold : .medium)
-        let tint:UIColor = style != .smallGray ? .link : (style == .smallGray ? .init(.greyText6) : .init(.white))
+        backgroundColor = style == .smallGray ? .clear : .link.withAlphaComponent(0.45)
+        titleLabel?.font = .systemFont(ofSize: style == .primary ? Constants.Font.primaryButton.rawValue : Constants.Font.secondaryButton.rawValue, weight: style == .primary ? .medium : .medium)
+        let tint:UIColor = style != .smallGray ? .type(.white) : (style == .smallGray ? .init(.greyText6) : .type(.white))
         titleLabel?.tintColor = tint
         titleLabel?.textColor = tint
         tintColor = tint
+        setTitleColor(tint, for: .normal)
+        setTitleColor(tint.withAlphaComponent(0.15), for: .disabled)
         if defaultConstraints {
-            self.addConstaits(style == .primary ? [.height:53] : [.width:40, .height:40])
+            self.addConstaits(style == .primary ? [.height:BaseButton.buttonHeight] : [.width:40, .height:BaseButton.buttonHeight])
+        }
+        if style == .primary {
+            layer.shadowColor = UIColor.init(.black).cgColor
+            layer.shadowOpacity = 0.5
+            layer.shadowOffset = .init(width: -1, height: 3)
+            contentEdgeInsets.left = 15
+            contentEdgeInsets.right = 15
+            configuration?.contentInsets.leading = 15
+            configuration?.contentInsets.trailing = 15
+        }
+        if style != .smallGray {
+            layer.borderWidth = 0.5
+            layer.borderColor = tint.withAlphaComponent(0.05).cgColor
         }
     }
 }

@@ -7,6 +7,11 @@
 
 import UIKit
 
+class OverlayTextFieldCell:UICollectionViewCell {
+    
+    @IBOutlet weak var textField: BaseTextField!
+}
+
 class EditorCollectionCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
@@ -19,10 +24,11 @@ class EditorCollectionCell: UICollectionViewCell {
         if superview == nil {
             return
         }
-        setupUI()
+        
     }
-    
-    func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil) {
+    var textFieldEditing:Bool = false
+    func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool) {
+        self.textFieldEditing = textFieldEditing
         titleLabel.text = item.title
         self.screenHeight = type
         if let imageData = item.imageData,
@@ -33,6 +39,7 @@ class EditorCollectionCell: UICollectionViewCell {
             imageView.setImage(item.image, superView: imageView.superview)
         }
         backgroundColor = item.backgroundColor
+        setupUI()
     }
 }
 
@@ -55,13 +62,17 @@ fileprivate extension EditorCollectionCell {
                $0.firstAttribute == .width
            })
         {
-            switch screenHeight {
+            var type = screenHeight
+            if textFieldEditing {
+                type = .middle
+            }
+            switch type {
             case .big:
                 imageConstant.constant = 180
                 constant.constant = 200
             case .middle:
-                imageConstant.constant = 30
-                constant.constant = 50
+                imageConstant.constant = 60
+                constant.constant = 80
             default:
                 constant.constant = 32
                 imageConstant.constant = 20

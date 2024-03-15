@@ -56,11 +56,18 @@ class EditorParametersViewController: SuperVC {
     
     // MARK: - setup ui
     func setUI(type:EditorViewType) {
-        assetStackView.arrangedSubviews.forEach {
-            if !($0 is UICollectionView) {
-                $0.alpha = type == .addingVideos ? 0 : 1
+        assetStackView.arrangedSubviews.forEach { view in
+            let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+                if !(view is UICollectionView) {
+                    view.isHidden = type == .addingVideos
+                    if let headerView = self.headersStack.arrangedSubviews.first(where: {$0.tag == view.tag}) {
+                        headerView.isHidden = type == .addingVideos
+                    }
+                }
             }
+            animation.startAnimation()
         }
+
         addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit Video"
         if type == .editing {
             collectionView.layer.cornerRadius(at: .top, value: 18)

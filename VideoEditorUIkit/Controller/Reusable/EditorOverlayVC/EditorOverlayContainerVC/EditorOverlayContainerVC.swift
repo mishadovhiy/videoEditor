@@ -11,15 +11,18 @@ class EditorOverlayContainerVC: SuperVC {
     
     @IBOutlet weak var sliderView: UISlider!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet private weak var textField:UITextField!
     @IBOutlet private weak var collectionView:UICollectionView!
     var primatyViews:[UIView] {
-        [sliderView, containerView, textField]
+        [sliderView, containerView]
     }
     override var initialAnimation: Bool { return false}
     var screenType:EditorOverlayVC.ToOverlayData?
     var viewModel:ViewModelEditorOverlayContainerVC?
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
+    
+    var needTextField:Bool {
+        return parentVC?.data?.needTextField ?? (viewModel?.type == .text)
+    }
     
     var screenSize:OverlaySize? {
         switch screenType?.attachmentType {
@@ -36,7 +39,7 @@ class EditorOverlayContainerVC: SuperVC {
         }
     }
     
-    private var parentVC:EditorOverlayVC? {
+    var parentVC:EditorOverlayVC? {
         return navigationController?.parent as? EditorOverlayVC
     }
     
@@ -48,8 +51,9 @@ class EditorOverlayContainerVC: SuperVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if textField.delegate != nil {
+        if needTextField {
             parent?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
+            collectionView.reloadInputViews()
         }
     }
     
@@ -59,7 +63,7 @@ class EditorOverlayContainerVC: SuperVC {
         collectionView.isHidden = collectionData.isEmpty
     }
     
-    @objc private func textFieldDidChanged(_ sender:UITextField) {
+    @objc func textFieldDidChanged(_ sender:UITextField) {
         var data = parentVC?.attachmentData
         data?.assetName = sender.text
         if let data {
@@ -115,10 +119,7 @@ fileprivate extension EditorOverlayContainerVC {
             } else {
                 viewModel = .init()
             }
-            if parentVC?.data?.needTextField ?? true {
-                setupTF()
-            }
-
+            
             if parentVC?.attachmentData?.attachmentType != nil && collectionData.isEmpty {
                 collectionData = viewModel?.getCollectionData ?? []
             } else if collectionData.isEmpty {
@@ -129,13 +130,9 @@ fileprivate extension EditorOverlayContainerVC {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isHidden = collectionData.isEmpty
-        collectionView.contentInset.left = view.frame.width / 9
-    }
-    
-    private func setupTF() {
-        textField.delegate = self
-        textField.superview?.isHidden = false
-        textField.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
+        if !needTextField {
+            collectionView.contentInset.left = view.frame.width / 9
+        }
     }
     
     @objc private func sliderChanged(_ sender:UISlider) {
@@ -149,11 +146,18 @@ fileprivate extension EditorOverlayContainerVC {
 
 extension EditorOverlayContainerVC:UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
+        viewModel?.textfieldEditing = false
         parentVC?.updateMainConstraints(viewController: self)
+        collectionView.reloadSections(.init(integer: 1))
+        collectionView.reloadInputViews()
+        collectionView.reloadData()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        viewModel?.textfieldEditing = true
         parentVC?.updateMainConstraints(viewController: self, textFieldEditing: true)
+        collectionView.reloadSections(.init(integer: 1))
+        collectionView.reloadInputViews()
     }
 }
 

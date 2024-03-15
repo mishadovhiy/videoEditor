@@ -181,10 +181,10 @@ extension EditorViewController:EditorModelPresenter {
                 DB.db.movieParameters.clearTemporaryDirectory(exept: newValue)
                 await MainActor.run {
                     playerVC?.movieURL = newValue
+                    if viewModel?.viewType ?? .addingVideos == .addingVideos {
+                        setViewType(viewModel?.viewType ?? .addingVideos)
+                    }
                 }
-            }
-            if viewModel?.viewType ?? .addingVideos == .addingVideos {
-                setViewType(viewModel?.viewType ?? .addingVideos)
             }
         }
     }
@@ -253,7 +253,7 @@ fileprivate extension EditorViewController {
     }
     
     func performMoveEditingButton(_ hidden:Bool) {
-        startEditingButton.layer.move(.top, value: hidden ? trackContainerView.frame.height : 0)
+        startEditingButton.layer.move(.top, value: hidden ? -startEditingButton.frame.maxY : 0)
     }
 }
 
