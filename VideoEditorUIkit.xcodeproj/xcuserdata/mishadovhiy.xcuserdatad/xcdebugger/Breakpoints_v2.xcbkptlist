@@ -1313,8 +1313,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "createHeader(vcSuperView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1329,8 +1329,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "createHeader(vcSuperView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1339,7 +1339,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6B4EB0C6-D795-4F31-8962-1917C08B6DAD"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
@@ -2664,7 +2664,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1FF0697C-5F99-44FB-A398-582CCD18C811"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoEditorUIkit/Model/DB/TextAttachmentDB.swift"
@@ -2783,7 +2783,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
             endingLineNumber = "35"
-            landmarkName = "dataUpdated()"
+            landmarkName = "dataUpdated(force:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3785,8 +3785,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "configure(data:dataChanged:videoSize:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3801,9 +3801,9 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "dataUpdated()"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "dataUpdated(force:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3817,9 +3817,9 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "dataUpdated()"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "dataUpdated(force:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3827,7 +3827,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "CE9B37CD-6F85-4D2B-B4F1-5E436A348CEB"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoEditorUIkit/Model/DB/TextAttachmentDB.swift"

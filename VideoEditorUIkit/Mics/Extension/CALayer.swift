@@ -9,7 +9,7 @@ import QuartzCore
 import UIKit
 
 extension CALayer {
-    func cornerRadius(at position: RadiusPosition, value:CGFloat? = nil) {
+    func cornerRadius(at position: UIRectEdge, value:CGFloat? = nil) {
         switch position {
         case .left:
             self.cornerRadius = value ?? (self.frame.height / 2)
@@ -23,11 +23,9 @@ extension CALayer {
         case .bottom:
             self.cornerRadius = value ?? (self.frame.height / 2)
             self.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        default:
+            break
         }
-    }
-    
-    enum RadiusPosition {
-        case left, right, top, bottom
     }
     
     private func createPath(_ lines:[CGPoint]) -> UIBezierPath {
@@ -42,10 +40,13 @@ extension CALayer {
         return linePath
     }
     
-    func drawLine(_ lines:[CGPoint], color:UIColor? = .gray, width:CGFloat = 0.8, opacity:Float = 0.1, background:UIColor? = nil, insertAt:UInt32? = nil, name:String? = nil) {
+    func drawLine(_ lines:[CGPoint], color:UIColor? = .type(.separetor), width:CGFloat = 0.8, opacity:Float = 0.1, background:UIColor? = nil, insertAt:UInt32? = nil, name:String? = nil, forceAdd:Bool = false) {
         
         let line = CAShapeLayer()
         let contains = self.sublayers?.contains(where: { $0.name == (name ?? "")} )
+        if (contains ?? false) && forceAdd {
+            sublayers?.removeAll(where: { $0.name == name })
+        }
         let canAdd = name == nil ? true : !(contains ?? false)
         if canAdd {
             line.path = createPath(lines).cgPath
@@ -72,17 +73,15 @@ extension CALayer {
         self.transform = CATransform3DMakeScale(value, value, 1)
     }
     
-    enum MoveDirection {
-        case top
-        case left
-    }
-    
-    func move(_ direction:MoveDirection, value:CGFloat) {
+    /// Implemented: .top & .left
+    func move(_ direction:UIRectEdge, value:CGFloat) {
         switch direction {
         case .top:
             self.transform = CATransform3DTranslate(CATransform3DIdentity, 0, value, 0)
         case .left:
             self.transform = CATransform3DTranslate(CATransform3DIdentity, value, 0, 0)
+        default:
+            break
         }
     }
     

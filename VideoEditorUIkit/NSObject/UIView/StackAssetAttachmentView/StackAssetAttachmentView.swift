@@ -49,6 +49,14 @@ class StackAssetAttachmentView:UIView {
         delegate = nil
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if superview == nil {
+            return
+        }
+        updateLayers()
+    }
+    
     func deselectAll() {
         setSelected(false)
         layerStack?.arrangedSubviews.forEach( {
@@ -218,6 +226,26 @@ fileprivate extension StackAssetAttachmentView {
         label.font = .type(.smallMedium)
         label.textColor = .init(.greyText)
         stack.addConstaits([.left:2, .right:-2, .bottom:-3])
+    }
+    
+    private func updateLayers() {
+        [false, true].forEach {
+            drawSeparetors(isVertical: $0)
+        }
+    }
+    
+    private func drawSeparetors(isVertical:Bool) {
+        let count:CGFloat = isVertical ? (frame.width / 80) : 5
+        let midValue = (isVertical ? frame.width : frame.height) / count
+        Array(0..<Int(count)).forEach {
+            self.layer.drawLine(isVertical ? [
+                .init(x: Int(midValue) * $0, y: 0),
+                .init(x: Int(midValue) * $0, y: Int(frame.height))
+            ] : [
+                .init(x: 0, y: Int(midValue) * $0),
+                .init(x: Int(frame.width), y: Int(midValue) * $0)
+            ], color: .type(.lightSeparetor), width: 0.3, name: isVertical ? "separetorsVerical\($0)" : "separetors\($0)", forceAdd: true)
+        }
     }
     
     var parentScrollView:UIScrollView? {

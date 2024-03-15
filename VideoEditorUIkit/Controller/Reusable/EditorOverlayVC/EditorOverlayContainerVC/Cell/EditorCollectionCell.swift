@@ -39,13 +39,13 @@ class EditorCollectionCell: UICollectionViewCell {
 // MARK: - setupUI
 fileprivate extension EditorCollectionCell {
     private func setupUI() {
-        contentView.layer.drawLine([
-            .init(x: -5, y: 12),
-                .init(x: -5, y: contentView.frame.height - 26)
-        ], color: .init(.separetor), name: "LeftSeparetor")
         titleLabel.textColor = .init(.white)
         titleLabel.font = .type(.small)
         updateConstraint()
+        contentView.layer.drawLine([
+            .init(x: -5, y: 5),
+                .init(x: -5, y: contentView.frame.height - 10)
+        ], color: .init(.separetor), name: "LeftSeparetor")
     }
     
     private func updateConstraint() {
@@ -63,7 +63,7 @@ fileprivate extension EditorCollectionCell {
                 imageConstant.constant = 30
                 constant.constant = 50
             default:
-                constant.constant = 28
+                constant.constant = 32
                 imageConstant.constant = 20
             }
             

@@ -46,6 +46,11 @@ class PlayerViewController: PlayerSuperVC {
         preseter = nil
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        editingAttachmentView?.dataUpdated(force: true)
+    }
+    
     //MARK: - setup ui
     func setUI(type:EditorViewType) {  }
     

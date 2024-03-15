@@ -38,7 +38,6 @@ extension UIViewController {
             } else {
                 baseVC.applicationDidAppeare()
             }
-            
         }
     }
 }
@@ -77,6 +76,7 @@ extension UIView {
         }
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], safeArea:Bool = true) {
         let data = constants
         var dataRes:[NSLayoutConstraint.Attribute: (CGFloat, String)] = [:]

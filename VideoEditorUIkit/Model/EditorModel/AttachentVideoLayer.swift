@@ -25,20 +25,13 @@ struct AttachentVideoLayerModel {
         let textLayer = CATextLayer()
         textLayer.name = AttachentVideoLayerModel.textLayerName
         textLayer.string = attributedText
-        textLayer.zoom(value: text.zoom)
-        textLayer.shouldRasterize = true
-        textLayer.rasterizationScale = UIScreen.main.scale
-        textLayer.backgroundColor = UIColor.clear.cgColor
-        if isPreview {
-            textLayer.borderColor = UIColor.orange.withAlphaComponent(0.6).cgColor
-            textLayer.borderWidth = 0.5
-            textLayer.cornerRadius = 3
-        }
         textLayer.alignmentMode = .center
         textLayer.isWrapped = true
-        let size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
-        textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: size.height))
-        textLayer.displayIfNeeded()
+        
+        var size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
+        size.height *= text.zoom
+        setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: videoSize, layerSize: size)
+        
         return textLayer
     }
     
@@ -55,5 +48,24 @@ struct AttachentVideoLayerModel {
         textLayer.frame = .init(origin: .zero, size: .init(width: videoSize.width, height: 150))
         textLayer.displayIfNeeded()
         return textLayer
+    }
+}
+
+extension AttachentVideoLayerModel {
+    func setupLayer(layer:CALayer, data:MovieAttachmentProtocol, isPreview:Bool, videoSize:CGSize, layerSize:CGSize? = nil) {
+        layer.zoom(value: data.zoom)
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
+        layer.backgroundColor = UIColor.clear.cgColor
+        if isPreview {
+            layer.borderColor = UIColor.orange.withAlphaComponent(0.6).cgColor
+            layer.borderWidth = 0.5
+            layer.cornerRadius = 3
+        }
+        
+        print(videoSize, " hgftyguhkjn")
+        
+        layer.frame = .init(origin: data.position, size: .init(width: videoSize.width, height: layerSize?.height ?? videoSize.height))
+        layer.displayIfNeeded()
     }
 }

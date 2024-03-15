@@ -18,6 +18,7 @@ struct Constants {
         case white = "white"
         case greyText = "greyText"
         case greyText6 = "greyText6"
+        case lightSeparetor = "lightSeparetor"
         
         static var trackColor:UIColor {
             return .white.withAlphaComponent(0.1)

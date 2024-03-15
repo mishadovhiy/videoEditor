@@ -87,10 +87,8 @@ class AssetRawView:UIView {
             return
         }
         let position = sender.translation(in: self)
-        sender.setTranslation(.zero, in: self)
         if sender.view?.tag == 1 {
             xConstraint?.constant += position.x
-            
         } else if sender.view?.tag == 0 {
             widthConstraint?.constant += position.x
         }
@@ -99,6 +97,7 @@ class AssetRawView:UIView {
         subviews.forEach {
             $0.layoutIfNeeded()
         }
+        sender.setTranslation(.zero, in: self)
         if sender.state.isEnded {
             panEnded?(self)
         }
@@ -108,7 +107,9 @@ class AssetRawView:UIView {
     private func gestureBegun(_ begun:Bool, senderView:UIView?) {
         let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
             senderView?.alpha = begun ? 0.5 : self.panNormalAlpha
-            self.layer.move(.top, value: begun ? 30 : 0)
+            if (senderView?.tag ?? 0) != 0 {
+                self.layer.move(.top, value: begun ? -5 : 0)
+            }
         }
         animation.startAnimation()
     }

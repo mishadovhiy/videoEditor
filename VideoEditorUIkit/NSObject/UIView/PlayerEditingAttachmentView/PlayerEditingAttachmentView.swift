@@ -31,11 +31,13 @@ class PlayerEditingAttachmentView: UIView {
         }
     }
     
-    private func dataUpdated() {
+    func dataUpdated(force:Bool = false) {
         if self.superview == nil { return }
         let model = AttachentVideoLayerModel()
         if let text = data as? TextAttachmentDB {
-            layer.animationTransition(0.17)
+            if !force {
+                layer.animationTransition(0.17)
+            }
             layer.sublayers?.forEach({
                 if $0.name == AttachentVideoLayerModel.textLayerName {
                     $0.removeFromSuperlayer()
@@ -43,7 +45,9 @@ class PlayerEditingAttachmentView: UIView {
             })
             let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, text: text, isPreview: true)
             layer.addSublayer(newLayer)
-            dataChanged?(text)
+            if !force {
+                dataChanged?(text)
+            }
         } else {
             print("error unparcing data ", data)
         }

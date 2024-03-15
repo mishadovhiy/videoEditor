@@ -175,11 +175,11 @@ extension EditorOverlayVC {
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:(60, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(60, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(70, "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(60, "height")]
         case .middle:
-            return !(data?.isPopup ?? true) ? [.height:(85, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(100, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(85, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(100, "height")]
         case .big:
-            return !(data?.isPopup ?? true) ? [.height:(250, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(185, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(250, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(185, "height")]
         }
     }
     
