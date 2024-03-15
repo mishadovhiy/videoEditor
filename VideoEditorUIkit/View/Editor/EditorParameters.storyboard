@@ -43,10 +43,10 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TestCollectionCell" id="gYM-dv-9DG" customClass="AssetPreviewCell" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                        <rect key="frame" x="50" y="0.0" width="80" height="128"/>
+                                                        <rect key="frame" x="50" y="0.0" width="80" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Rgx-hi-W1w">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="128"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="LZs-rn-L5l">
@@ -56,7 +56,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JJg-co-y3Y">
-                                                                    <rect key="frame" x="0.0" y="24" width="80" height="80"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="JJg-co-y3Y" secondAttribute="height" multiplier="1:1" id="Rg5-qA-azj"/>
                                                                         <constraint firstAttribute="width" constant="80" id="n4P-iN-qih"/>
@@ -68,7 +68,8 @@
                                                                 <constraint firstAttribute="trailing" secondItem="JJg-co-y3Y" secondAttribute="trailing" id="69l-b4-2mv"/>
                                                                 <constraint firstItem="JJg-co-y3Y" firstAttribute="leading" secondItem="Rgx-hi-W1w" secondAttribute="leading" id="6kz-ew-Utn"/>
                                                                 <constraint firstItem="LZs-rn-L5l" firstAttribute="centerX" secondItem="Rgx-hi-W1w" secondAttribute="centerX" id="GCN-DM-i9T"/>
-                                                                <constraint firstItem="JJg-co-y3Y" firstAttribute="centerY" secondItem="Rgx-hi-W1w" secondAttribute="centerY" id="cOI-uX-G5j"/>
+                                                                <constraint firstItem="JJg-co-y3Y" firstAttribute="top" secondItem="Rgx-hi-W1w" secondAttribute="top" id="cBT-mI-LVN"/>
+                                                                <constraint firstAttribute="bottom" secondItem="JJg-co-y3Y" secondAttribute="bottom" id="mFY-5P-CuO"/>
                                                                 <constraint firstItem="LZs-rn-L5l" firstAttribute="top" secondItem="Rgx-hi-W1w" secondAttribute="top" id="pIz-Bi-VzM"/>
                                                                 <constraint firstItem="LZs-rn-L5l" firstAttribute="width" relation="lessThanOrEqual" secondItem="Rgx-hi-W1w" secondAttribute="width" id="xd0-be-Ppw"/>
                                                             </constraints>
@@ -104,7 +105,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4K3-mj-CHl"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
                             <constraint firstItem="4K3-mj-CHl" firstAttribute="bottom" secondItem="05S-cT-avb" secondAttribute="bottom" id="AeE-ff-chx"/>
                             <constraint firstItem="cmW-zS-NHa" firstAttribute="leading" secondItem="4K3-mj-CHl" secondAttribute="leading" id="Zah-cb-vGR"/>
@@ -126,6 +127,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="primaryBackground">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

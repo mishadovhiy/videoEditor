@@ -28,10 +28,10 @@ extension EditorParametersViewController {
         }
         updateAttachmantsStack()
         loadLeftHeader()
-        view.layer.cornerRadius = 18
-        view.layer.masksToBounds = true
         assetStackView.arrangedSubviews.last?.layer.cornerRadius(at: .bottom, value: 18)
         collectionView.backgroundColor = Constants.Color.trackColor
+        scrollView.layer.masksToBounds = true
+        scrollView.layer.cornerRadius = 18
     }
     
     func updateAttachmantsStack() {
@@ -51,7 +51,7 @@ extension EditorParametersViewController {
             (viewModel.assetData.text, .text),
             (viewModel.assetData.songs, .song)]
         print("attachments for editor: ", data)
-        assetStackView.backgroundColor = .init(.primaryBackground)
+      //  assetStackView.backgroundColor = .init(.secondaryBackground)
         data.forEach({ dataRow in
             if let stack = assetStackView.arrangedSubviews.first(where: { view in
                 if let stack = view as? StackAssetAttachmentView,
@@ -80,9 +80,9 @@ extension EditorParametersViewController {
                 let label = UILabel()
                 superView.addSubview(label)
                 label.textColor = .init(.greyText)
+                label.textAlignment = .center
                 label.font = .type(.smallMedium)
                 label.adjustsFontSizeToFitWidth = true
-                label.textAlignment = .center
                 label.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
             }
         }

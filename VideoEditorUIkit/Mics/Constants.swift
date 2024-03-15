@@ -13,6 +13,7 @@ struct Constants {
     }
     enum Color:String {
         case primaryBackground = "primaryBackground"
+        case secondaryBackground = "secondaryBackground"
         case black = "black"
         case separetor = "separetor"
         case white = "white"
@@ -21,7 +22,7 @@ struct Constants {
         case lightSeparetor = "lightSeparetor"
         
         static var trackColor:UIColor {
-            return .white.withAlphaComponent(0.1)
+            return .type(.secondaryBackground)
         }
     }
     

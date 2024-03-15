@@ -79,7 +79,8 @@ extension EditorOverlayContainerVC {
 // MARK: - setupUI
 fileprivate extension EditorOverlayContainerVC {
     func setupUI() {
-        view.backgroundColor = parentVC?.view.backgroundColor ?? .clear
+        //view.backgroundColor = (navigationController?.viewControllers.count == 1) ? (parentVC?.view.backgroundColor ?? .clear) : .type(.secondaryBackground)
+        view.backgroundColor = (parentVC?.view.backgroundColor ?? .clear)
         navigationController?.navigationBar.backgroundColor = view.backgroundColor
         primatyViews.forEach({
             if $0 == self.containerView {

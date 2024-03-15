@@ -89,7 +89,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="faW-J7-E1x"/>
-                        <color key="backgroundColor" red="0.16526108136616566" green="0.17470184562959271" blue="0.19086313502673802" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
                             <constraint firstItem="7L2-BQ-y2B" firstAttribute="top" secondItem="faW-J7-E1x" secondAttribute="top" id="fZ6-CN-iz1"/>
                             <constraint firstAttribute="trailing" secondItem="7L2-BQ-y2B" secondAttribute="trailing" constant="2" id="pKB-9d-ZEN"/>
@@ -173,7 +173,7 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
                                                                     <rect key="frame" x="0.0" y="20" width="110" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                                    <color key="textColor" name="white"/>
+                                                                    <color key="textColor" name="greyText"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -241,7 +241,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f1i-xy-GEh"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="secondaryBackground"/>
                         <constraints>
                             <constraint firstItem="f1i-xy-GEh" firstAttribute="bottom" secondItem="xxL-zW-0AR" secondAttribute="bottom" id="F12-02-PsF"/>
                             <constraint firstAttribute="trailing" secondItem="xxL-zW-0AR" secondAttribute="trailing" id="VAk-vB-wt4"/>
@@ -282,8 +282,14 @@
     </scenes>
     <resources>
         <image name="cancel" width="17" height="17"/>
-        <namedColor name="white">
+        <namedColor name="greyText">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.30300000309944153" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

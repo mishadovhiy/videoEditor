@@ -39,7 +39,7 @@ class EditorCollectionCell: UICollectionViewCell {
 // MARK: - setupUI
 fileprivate extension EditorCollectionCell {
     private func setupUI() {
-        titleLabel.textColor = .init(.white)
+        titleLabel.textColor = .init(.greyText)
         titleLabel.font = .type(.small)
         updateConstraint()
         contentView.layer.drawLine([
