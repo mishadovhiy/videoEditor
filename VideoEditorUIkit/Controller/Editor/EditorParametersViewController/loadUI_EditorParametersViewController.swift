@@ -79,7 +79,9 @@ extension EditorParametersViewController {
             if $0.tag == 0 {
                 let label = UILabel()
                 superView.addSubview(label)
-                label.textColor = .white
+                label.textColor = .init(.greyText)
+                label.font = .type(.smallMedium)
+                label.adjustsFontSizeToFitWidth = true
                 label.textAlignment = .center
                 label.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
             }

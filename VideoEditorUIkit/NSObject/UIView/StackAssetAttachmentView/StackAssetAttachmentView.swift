@@ -215,8 +215,8 @@ fileprivate extension StackAssetAttachmentView {
         stack.axis = .horizontal
         label.textAlignment = .center
         label.text = mediaType?.title
-        label.font = .systemFont(ofSize: 9, weight: .medium)
-        label.textColor = .white.withAlphaComponent(0.3)
+        label.font = .type(.smallMedium)
+        label.textColor = .init(.greyText)
         stack.addConstaits([.left:2, .right:-2, .bottom:-3])
     }
     

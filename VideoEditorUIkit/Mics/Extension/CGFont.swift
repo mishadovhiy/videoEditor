@@ -8,6 +8,10 @@
 import UIKit
 
 extension UIFont {
+    static func type(_ font:Constants.Font) -> UIFont {
+        return font.font
+    }
+    
     func calculate(inWindth:CGFloat? = nil, attributes:[NSAttributedString.Key: Any]? = nil, string:String, maxSize:CGSize? = nil) -> CGSize {
         let fontSize = self.pointSize
         let defaultWidth = UIApplication.shared.keyWindow?.frame.width ?? 100

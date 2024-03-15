@@ -53,6 +53,7 @@
 		8D26ADC92BA39317009CEEB4 /* SelectionTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */; };
 		8D26ADCB2BA3933C009CEEB4 /* SelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */; };
 		8D3A4AE42BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */; };
+		8D422D842BA3F33800E50E87 /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D422D832BA3F33800E50E87 /* BaseTextField.swift */; };
 		8D4C17192B3B2DF400953143 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C17182B3B2DF400953143 /* AppDelegate.swift */; };
 		8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C171A2B3B2DF400953143 /* SceneDelegate.swift */; };
 		8D4C17322B3C11C000953143 /* AlertViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8D4C17312B3C11C000953143 /* AlertViewLibrary */; };
@@ -115,6 +116,7 @@
 		8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionTable.storyboard; sourceTree = "<group>"; };
 		8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewController.swift; sourceTree = "<group>"; };
 		8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEditingAttachmentView.swift; sourceTree = "<group>"; };
+		8D422D832BA3F33800E50E87 /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		8D4C17152B3B2DF400953143 /* VideoEditorUIkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoEditorUIkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4C17182B3B2DF400953143 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D4C171A2B3B2DF400953143 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				8D18F17C2B9F465300194F34 /* BaseView.swift */,
 				8D3A4AE52BA1EF5200375CC8 /* PlayerEditingAttachmentView */,
 				8D18F17D2B9F465300194F34 /* BaseButton.swift */,
+				8D422D832BA3F33800E50E87 /* BaseTextField.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				8D18F1352B9F455E00194F34 /* AnimateVideoLayerCA.swift in Sources */,
 				8D18F1842B9F465300194F34 /* BaseButton.swift in Sources */,
 				8D18F13F2B9F458400194F34 /* test_MovieGeneralParameterList.swift in Sources */,
+				8D422D842BA3F33800E50E87 /* BaseTextField.swift in Sources */,
 				8D18F1942B9F466A00194F34 /* Extensions_UIKit.swift in Sources */,
 				8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */,
 				8D18F1982B9F466A00194F34 /* CGFloat.swift in Sources */,

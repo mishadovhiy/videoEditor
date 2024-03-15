@@ -84,13 +84,13 @@ class EditorOverlayVC: SuperVC {
     
     var isHidden:Bool = false {
         didSet {
-            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
                 self.view.superview?.isHidden = self.isHidden
             }
             if isHidden {
                 animation.addAnimations({
                     self.view.alpha = 0
-                }, delayFactor: 0.2)
+                }, delayFactor: 0.18)
                 animation.addCompletion {_ in
                     self.view.alpha = 1
                 }
@@ -127,7 +127,7 @@ fileprivate extension EditorOverlayVC {
             view.alpha = 0
             view.layer.zoom(value: 0.7)
         }
-        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+        let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
             self.view.alpha = show ? 1 : 0
             self.view.layer.zoom(value: !show ? 1.2 : 1)
         }
@@ -166,7 +166,7 @@ extension EditorOverlayVC {
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:(60, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(75, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(60, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(70, "heightprimaryConstraints")]
         case .middle:
             return !(data?.isPopup ?? true) ? [.height:(85, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(100, "heightprimaryConstraints")]
         case .big:

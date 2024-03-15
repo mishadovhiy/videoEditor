@@ -8,6 +8,10 @@
 import UIKit
 
 extension UIColor {
+    static func type(_ type:Constants.Color) -> UIColor {
+        return .init(type) ?? UIColor.red
+    }
+    
     convenience init?(_ colorConstrant:Constants.Color) {
         self.init(named: colorConstrant.rawValue)
     }

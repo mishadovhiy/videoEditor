@@ -48,8 +48,8 @@ fileprivate extension BaseButton {
             layer.cornerRadius = style == .primary ? 9 : 5
         }
         backgroundColor = style == .smallGray ? .clear : .link
-        titleLabel?.font = .systemFont(ofSize: style == .primary ? 16 : 12, weight: style == .primary ? .bold : .medium)
-        let tint:UIColor = style != .smallGray ? .link : (style == .smallGray ? .white.withAlphaComponent(0.6) : .white)
+        titleLabel?.font = .systemFont(ofSize: style == .primary ? Constants.Font.primaryButton.rawValue : Constants.Font.secondaryButton.rawValue, weight: style == .primary ? .bold : .medium)
+        let tint:UIColor = style != .smallGray ? .link : (style == .smallGray ? .init(.greyText6) : .init(.white))
         titleLabel?.tintColor = tint
         titleLabel?.textColor = tint
         tintColor = tint

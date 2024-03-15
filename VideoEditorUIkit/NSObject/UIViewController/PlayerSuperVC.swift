@@ -174,7 +174,8 @@ fileprivate extension PlayerSuperVC {
         let label = UILabel()
         label.layer.name = "durationLabel"
         label.isUserInteractionEnabled = false
-        label.textColor = .white
+        label.textColor = .init(.greyText)
+        label.font = .type(.smallMedium)
         self.view.addSubview(label)
         label.addConstaits([.right:0, .bottom:0])
     }
@@ -188,6 +189,8 @@ fileprivate extension PlayerSuperVC {
         button.addTarget(self, action: #selector(self.playPressed(_:)), for: .touchUpInside)
         view.addSubview(button)
         button.layer.name = "playButton"
+        button.tintColor = .init(.greyText)
+        button.titleLabel?.font = .type(.smallMedium)
         button.addConstaits([
             .bottom:10, .left:10, .right:10
         ])
