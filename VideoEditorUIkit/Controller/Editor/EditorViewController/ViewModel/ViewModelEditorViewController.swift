@@ -27,12 +27,12 @@ struct ViewModelEditorViewController {
                                   deleteMovie:@escaping void
     ) -> [EditorOverlayVC.OverlayCollectionData] {
         [
-            .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, filterSelected), screenHeight: .big)),
+            .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, filterSelected), screenHeight: .big)),
             .init(title: "Reload data", didSelect: reloadPressed),
             .init(title: "Remove all attachments", didSelect: {
                 vc.showAlertWithCancel(confirmTitle:"Remove all attachments", okPressed: removeAttachments)
             }),
-            .init(title: "Delete Movie", didSelect: {
+            .init(title: "Delete Movie", image: "trash", didSelect: {
                 vc.showAlertWithCancel(confirmTitle:"Delete Movie", okPressed: deleteMovie)
             }),
             .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="37px" height="25px" viewBox="0 0 37 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>color-palette-svgrepo-com</title>
+    <desc>Created with Sketch.</desc>
+    <g id="video-editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="color-palette-svgrepo-com" transform="translate(1.000000, 1.000000)" stroke="#FFFFFF">
+            <path d="M35,11.5 C35,17.825 27.1532258,23 17.5,23 C3.9516129,23 13.5483871,16.2725 11.8548387,13.455 C9.59677419,9.775 0,20.7575 0,11.5 C0,5.175 7.84677419,0 17.5,0 C27.1532258,0 35,5.175 35,11.5 L35,11.5 Z" id="Shape"></path>
+            <ellipse id="Oval" cx="17.7822581" cy="3.7375" rx="2.54032258" ry="1.4375"></ellipse>
+            <ellipse id="Oval" cx="9.87903226" cy="4.8875" rx="2.54032258" ry="1.4375"></ellipse>
+            <ellipse id="Oval" cx="18.9112903" cy="19.8375" rx="2.54032258" ry="1.4375"></ellipse>
+            <ellipse id="Oval" cx="26.8145161" cy="16.9625" rx="2.54032258" ry="1.4375"></ellipse>
+            <ellipse id="Oval" cx="25.6854839" cy="5.4625" rx="2.54032258" ry="1.4375"></ellipse>
+            <ellipse id="Oval" cx="30.2016129" cy="10.6375" rx="2.54032258" ry="1.4375"></ellipse>
+        </g>
+    </g>
+</svg>

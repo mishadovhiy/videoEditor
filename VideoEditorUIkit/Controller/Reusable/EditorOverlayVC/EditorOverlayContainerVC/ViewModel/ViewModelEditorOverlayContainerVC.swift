@@ -12,6 +12,7 @@ struct ViewModelEditorOverlayContainerVC {
     var textfieldEditing:Bool = false
     var type:InstuctionAttachmentType?
     var assetChanged:((_ didChange:(_ oldValue: TextAttachmentDB)->TextAttachmentDB)->())?
+    
     var getCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         guard let type else {
             return nil
@@ -20,43 +21,7 @@ struct ViewModelEditorOverlayContainerVC {
         case .song:
             return []
         case .text:
-            return [
-                .init(title: "Size", toOverlay: .init(screenTitle: "Font size", attachmentType: .floatRange(.init(selected: 0, didSelect: { newValue in
-                    assetChanged? { oldValue in
-                        var value = oldValue
-                        value.fontSize = newValue
-                        return value
-                    }
-                })))),
-                .init(title: "Text Aligment", toOverlay: .init(screenTitle: "Font size", attachmentType: .floatRange(.init(selected: 0, didSelect: { newValue in
-                    assetChanged? { oldValue in
-                        var value = oldValue
-                        value.fontSize = newValue
-                        return value
-                    }
-                })))),
-                .init(title: "Text Color", toOverlay: .init(screenTitle: "Font size", attachmentType: .color(.init(selectedColor: nil, didSelect: { newColor in
-                        assetChanged? { oldValue in
-                            var value = oldValue
-                            value.color = newColor
-                            return value
-                        }
-                })))),
-                .init(title: "Border Color", toOverlay: .init(screenTitle: "Font size", attachmentType: .color(.init(selectedColor: nil, didSelect: { newColor in
-                    assetChanged? { oldValue in
-                        var value = oldValue
-                        value.borderColor = newColor
-                        return value
-                    }
-                })))),
-                .init(title: "Border Width", toOverlay: .init(screenTitle: "Font size", attachmentType: .floatRange(.init(selected: 2, didSelect: { newValue in
-                    assetChanged? { oldValue in
-                        var value = oldValue
-                        value.fontSize = newValue
-                        return value
-                    }
-                }))))
-            ]
+            return textCollectionData
         case .media:
             return []
         }
@@ -65,5 +30,50 @@ struct ViewModelEditorOverlayContainerVC {
     var colorCollectionData: [EditorOverlayVC.OverlayCollectionData] {
         let colors:[UIColor] = [.red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange]
         return colors.compactMap { .init(title: "            ", backgroundColor: $0)}
+    }
+    
+    private func textAligmentChanged(_ new:NSTextAlignment) {
+        assetChanged? {oldValue in
+            var newData = oldValue
+            newData.textAlighment = new
+            return newData
+        }
+    }
+    
+    private var textCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
+        [
+            .init(title: "Text Aligment", image: "textAligment", toOverlay: .init(screenTitle: "Select text Aligment", collectionData: [
+                .init(title: "left", didSelect: {
+                    self.textAligmentChanged(.left)
+                }),
+                .init(title: "Center", didSelect: {
+                    self.textAligmentChanged(.center)
+                }),
+                .init(title: "Right", didSelect: {
+                    self.textAligmentChanged(.right)
+                })
+            ])),
+            .init(title: "Text Color", image: "colors", toOverlay: .init(screenTitle: "Select text Color", attachmentType: .color(.init(selectedColor: nil, didSelect: { newColor in
+                    assetChanged? { oldValue in
+                        var value = oldValue
+                        value.color = newColor
+                        return value
+                    }
+            })))),
+            .init(title: "Border Color", image: "colors", toOverlay: .init(screenTitle: "Select border Color", attachmentType: .color(.init(selectedColor: nil, didSelect: { newColor in
+                assetChanged? { oldValue in
+                    var value = oldValue
+                    value.borderColor = newColor
+                    return value
+                }
+            })))),
+            .init(title: "Border Width", image: "size", toOverlay: .init(screenTitle: "Set Border Width", attachmentType: .floatRange(.init(selected: 2, didSelect: { newValue in
+                assetChanged? { oldValue in
+                    var value = oldValue
+                    value.borderWidth = newValue
+                    return value
+                }
+            }))))
+        ]
     }
 }

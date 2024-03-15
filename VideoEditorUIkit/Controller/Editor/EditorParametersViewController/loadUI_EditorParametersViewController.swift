@@ -71,10 +71,13 @@ extension EditorParametersViewController {
     }
     
     func loadLeftHeader() {
+        let images = [0:"movies", 1:"addImage", 2:"addText", 3:"addSound"]
         assetStackView.arrangedSubviews.forEach {
             let superView = UIView()
             headersStack.addArrangedSubview(superView)
             superView.tag = $0.tag
+            let imageView = UIImageView(image: .init(named: images[$0.tag] ?? ""))
+            superView.addSubview(imageView)
             superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftHeaderPressed(_:))))
             if $0.tag == 0 {
                 let label = UILabel()
@@ -83,8 +86,11 @@ extension EditorParametersViewController {
                 label.textAlignment = .center
                 label.font = .type(.smallMedium)
                 label.adjustsFontSizeToFitWidth = true
-                label.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
+                label.addConstaits([.left:0, .right:0, .bottom:2])
             }
+            imageView.tintColor = .type(.greyText)
+            imageView.contentMode = .scaleAspectFill
+            imageView.addConstaits([.centerX:0, .centerY:0, .width:13, .height:13])
         }
     }
 }

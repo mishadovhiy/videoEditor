@@ -162,6 +162,15 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
         }
     }
     
+    var textAlighment:NSTextAlignment {
+        get {
+            return .init(rawValue: dict["textAlighment"] as? Int ?? 1) ?? .center
+        }
+        set {
+            dict.updateValue(newValue.rawValue, forKey: "textAlighment")
+        }
+    }
+    
     var position:CGPoint {
         get {
             let dict = dict["position"] as? [String:Any] ?? [:]

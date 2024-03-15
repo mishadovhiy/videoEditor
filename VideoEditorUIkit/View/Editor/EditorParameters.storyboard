@@ -14,26 +14,26 @@
         <scene sceneID="EoO-Bc-BnH">
             <objects>
                 <viewController storyboardIdentifier="AssetParametersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AeR-l6-ATc" customClass="EditorParametersViewController" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Zr3-vH-Zia">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Zr3-vH-Zia">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-zS-NHa">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cvu-NU-tLm">
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cvu-NU-tLm">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="759"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="05S-cT-avb">
-                                        <rect key="frame" x="0.0" y="0.0" width="3000" height="759"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="3000" height="50"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DOC-iC-egj">
-                                                <rect key="frame" x="0.0" y="0.0" width="3000" height="759"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="3000" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="3000" identifier="collectionWidth" id="68o-Z6-cND"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="dRX-sc-JhT"/>
+                                                    <constraint firstAttribute="height" constant="50" id="dRX-sc-JhT"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="esC-3t-ahJ">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -43,7 +43,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TestCollectionCell" id="gYM-dv-9DG" customClass="AssetPreviewCell" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                        <rect key="frame" x="50" y="0.0" width="80" height="80"/>
+                                                        <rect key="frame" x="50" y="-15" width="80" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Rgx-hi-W1w">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -82,7 +82,7 @@
                                                     </collectionViewCell>
                                                 </cells>
                                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="k7T-1S-L2l">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="759"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </collectionReusableView>

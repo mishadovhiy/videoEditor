@@ -225,6 +225,7 @@ extension EditorOverlayVC {
             let animation = UIViewPropertyAnimator(duration:(data?.isPopup ?? false) ? 0.2 : 0.29, curve: .easeIn) {
                 self.view.layoutIfNeeded()
                 self.view.superview?.layoutIfNeeded()
+                viewController.view.layoutIfNeeded()
             }
             animation.addAnimations({
                 self.toggleButtons(hidden: textFieldEditing ? true : hidden, animated: false)
@@ -265,9 +266,9 @@ extension EditorOverlayVC:UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         let hidden = navigationController.viewControllers.count >= 2
-        if navigationController.isNavigationBarHidden != !hidden {
-            navigationController.setNavigationBarHidden(!hidden, animated: true)
-        }
+   //     if navigationController.isNavigationBarHidden != !hidden {
+        //    navigationController.setNavigationBarHidden(!hidden, animated: true)
+   //     }
     }
 }
 

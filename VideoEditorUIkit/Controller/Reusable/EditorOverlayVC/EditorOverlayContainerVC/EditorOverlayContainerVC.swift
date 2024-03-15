@@ -49,12 +49,24 @@ class EditorOverlayContainerVC: SuperVC {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        toggleNavigationHidden()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if needTextField {
             parent?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
             collectionView.reloadInputViews()
         }
+        toggleNavigationHidden(animated: false)
+        self.parentVC?.updateMainConstraints(viewController: self)
+    }
+    
+    private func toggleNavigationHidden(animated:Bool = true) {
+        let hidden = (self.navigationController?.viewControllers.count ?? 0) <= 1
+        self.navigationController?.setNavigationBarHidden(hidden, animated: animated)
     }
     
     func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]) {

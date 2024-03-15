@@ -324,9 +324,9 @@
 		8D18F1872B9F466A00194F34 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				8D18F18A2B9F466A00194F34 /* Extensions_UIKit.swift */,
 				8D18F1882B9F466A00194F34 /* AVAssetExportSession.swift */,
 				8D18F1892B9F466A00194F34 /* UIColor.swift */,
-				8D18F18A2B9F466A00194F34 /* Extensions_UIKit.swift */,
 				8D18F18B2B9F466A00194F34 /* AVAsset.swift */,
 				8D18F18C2B9F466A00194F34 /* String.swift */,
 				8D18F18D2B9F466A00194F34 /* UIImage.swift */,

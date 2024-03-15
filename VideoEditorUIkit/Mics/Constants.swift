@@ -20,6 +20,7 @@ struct Constants {
         case greyText = "greyText"
         case greyText6 = "greyText6"
         case lightSeparetor = "lightSeparetor"
+        case overlay = "overlay"
         
         static var trackColor:UIColor {
             return .type(.secondaryBackground)
@@ -30,6 +31,7 @@ struct Constants {
         case small = 10
         case smallMedium = 10.1
         case regular = 12
+        case regulatMedium = 12.2
         case primaryButton = 14
         case secondaryButton = 12.1
         
@@ -37,8 +39,8 @@ struct Constants {
             switch self {
             case .small, .smallMedium:
                 return .systemFont(ofSize: rawValue, weight: self == .small ? .regular : .medium)
-            case .regular:
-                return .systemFont(ofSize: rawValue, weight: .regular)
+            case .regular, .regulatMedium:
+                return .systemFont(ofSize: rawValue, weight: self == .regulatMedium ? .medium : .regular)
             case .primaryButton, .secondaryButton:
                 return .systemFont(ofSize: rawValue)
             }
