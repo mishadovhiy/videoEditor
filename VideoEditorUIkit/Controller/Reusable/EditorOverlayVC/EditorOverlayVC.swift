@@ -93,7 +93,7 @@ class EditorOverlayVC: SuperVC {
     
     var isHidden:Bool = false {
         didSet {
-            let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
                 self.view.superview?.isHidden = self.isHidden
             }
             if isHidden {
@@ -219,7 +219,7 @@ extension EditorOverlayVC {
                     constraint.constant = typeData.value.0
                 }
             }
-            let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
+            let animation = UIViewPropertyAnimator(duration:(data?.isPopup ?? false) ? 0.2 : 0.29, curve: .easeIn) {
                 self.view.layoutIfNeeded()
                 self.view.superview?.layoutIfNeeded()
             }
