@@ -25,6 +25,11 @@ class EditorOverlayVC: SuperVC {
     private var delegate:EditorOverlayVCDelegate?
     override var initialAnimation: Bool { return false}
     
+    private var childVC:EditorOverlayContainerVC? {
+        return (children.first(where: {
+            $0 is UINavigationController
+        }) as? UINavigationController)?.topViewController as? EditorOverlayContainerVC
+    }
     // MARK: - Life-Cycle
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
@@ -44,6 +49,10 @@ class EditorOverlayVC: SuperVC {
                 }
             }
         }
+    }
+    
+    func updateData(_ data:[OverlayCollectionData]) {
+        childVC?.updateData(data)
     }
     
     override func removeFromParent() {
@@ -261,6 +270,7 @@ extension EditorOverlayVC {
     struct OverlayCollectionData {
         let title:String
         var image:String? = nil
+        var imageData:Data? = nil
         var didSelect:(()->())?
         var toOverlay:ToOverlayData? = nil
         var backgroundColor:UIColor? = nil

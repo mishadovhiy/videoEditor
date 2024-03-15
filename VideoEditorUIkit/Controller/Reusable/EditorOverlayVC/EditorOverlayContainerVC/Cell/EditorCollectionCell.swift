@@ -24,7 +24,13 @@ class EditorCollectionCell: UICollectionViewCell {
     
     func set(_ item: EditorOverlayVC.OverlayCollectionData) {
         titleLabel.text = item.title
-        imageView.setImage(item.image, superView: imageView.superview)
+        if let imageData = item.imageData,
+           let image = UIImage(data: imageData) {
+            imageView.image = image
+            imageView.superview?.isHidden = false
+        } else {
+            imageView.setImage(item.image, superView: imageView.superview)
+        }
         backgroundColor = item.backgroundColor
     }
 }

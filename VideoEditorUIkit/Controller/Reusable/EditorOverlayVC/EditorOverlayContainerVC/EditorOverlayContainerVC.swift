@@ -47,6 +47,12 @@ class EditorOverlayContainerVC: SuperVC {
         }
     }
     
+    func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]) {
+        self.collectionData = collectionData
+        collectionView.reloadData()
+        collectionView.isHidden = collectionData.isEmpty
+    }
+    
     @objc private func textFieldDidChanged(_ sender:UITextField) {
         var data = parentVC?.attachmentData
         data?.assetName = sender.text
@@ -79,6 +85,7 @@ fileprivate extension EditorOverlayContainerVC {
         switch screenType?.attachmentType {
         case .floatRange(_):
             sliderView.superview?.isHidden = false
+            sliderView.addTarget(self, action: #selector(sliderChanged(_:)), for: .touchUpInside)
         case .color(let colorAction):
             containerView.isHidden = false
             viewModel = .init()
@@ -118,10 +125,18 @@ fileprivate extension EditorOverlayContainerVC {
         collectionView.contentInset.left = view.frame.width / 9
     }
     
-    func setupTF() {
+    private func setupTF() {
         textField.delegate = self
         textField.superview?.isHidden = false
         textField.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
+    }
+    
+    @objc private func sliderChanged(_ sender:UISlider) {
+        switch screenType?.attachmentType {
+        case .floatRange(let floatType):
+            floatType.didSelect(CGFloat(sender.value))
+        default: return
+        }
     }
 }
 

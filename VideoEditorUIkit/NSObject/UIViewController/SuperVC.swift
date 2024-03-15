@@ -56,7 +56,11 @@ extension BaseVC {
         AppDelegate.shared.ai.showAlert(title: "Error", appearence: .type(.error))
     }
     
-    func showAlertWithCancel(title:String? = "Are you sure?", description:String? = nil, type:AlertViewLibrary.ViewType = .standard, okPressed:@escaping ()->()) {
+    func showAlertWithCancel(confirmTitle:String, okPressed:@escaping ()->()) {
+        showAlertWithCancel(title: "Are you sure you want to\n" + confirmTitle, description: "This action cannot be undone", type: .error, okPressed: okPressed)
+    }
+    
+    func showAlertWithCancel(title:String? = nil, description:String? = nil, type:AlertViewLibrary.ViewType = .standard, okPressed:@escaping ()->()) {
         AppDelegate.shared.ai.showAlert(title: title, description: description, appearence: .with({
             $0.type = type
             $0.primaryButton = .with({

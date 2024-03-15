@@ -67,7 +67,7 @@ class AssetRawView:UIView {
     func setSelected(_ selected:Bool) {
         layer.animationTransition()
         layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
-        layer.borderWidth = selected ? 5 : 0
+        layer.borderWidth = selected ? 1 : 0
         pansGetsureView.forEach {
             $0.isHidden = !selected
         }
@@ -83,6 +83,9 @@ class AssetRawView:UIView {
     }
     
     @objc private func panGesture(_ sender: UIPanGestureRecognizer) {
+        if layer.borderWidth == 0 {
+            return
+        }
         let position = sender.translation(in: self)
         sender.setTranslation(.zero, in: self)
         if sender.view?.tag == 1 {

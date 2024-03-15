@@ -85,6 +85,7 @@ class EditorParametersViewController: SuperVC {
         if viewModel != nil {
             if reloadTable {
                 collectionView.reloadData()
+                parentVC?.previewImagesUpdated(image:viewModel?.tableData.first?.previews.first?.image)
             } else {
                 updateAttachmantsStack()
                 collectionView.reloadData()

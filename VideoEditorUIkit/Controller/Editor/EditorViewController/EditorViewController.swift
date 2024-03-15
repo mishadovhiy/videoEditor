@@ -90,6 +90,14 @@ class EditorViewController: SuperVC {
         self.assetParametersVC?.assetChanged()
     }
     
+    func previewImagesUpdated(image:Data?) {
+        mainEditorVC?.updateData(viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: image, filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
+            self.viewModel?.editorModel.deleteAttachmentPressed(nil)
+        }, deleteMovie: {
+            self.clearDataPressed()
+        }) ?? [])
+    }
+    
     func playerChangedAttachment(_ newData:AssetAttachmentProtocol?) {
         presentingOverlayVC?.attachmentData = newData
         self.assetParametersVC?.changeDataWithoutReload(newData)
@@ -204,11 +212,8 @@ fileprivate extension EditorViewController {
     }
     
     private func loadChildrens() {
-        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: viewModel?.mainEditorCollectionData(vc:self,filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
-            self.viewModel?.editorModel.deleteAttachmentPressed(nil)
-        }, deleteMovie: {
-            self.clearDataPressed()
-        }) ?? [], needTextField: false, isPopup: false, closePressed: {
+        
+        let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: [], needTextField: false, isPopup: false, closePressed: {
             self.mainEditorVC?.isHidden = true
         }))
         mainEditorView.view.layer.name = "mainEditorView"

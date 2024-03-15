@@ -21,22 +21,23 @@ struct ViewModelEditorViewController {
     }
     
     typealias void = ()->()
-    func mainEditorCollectionData(vc:BaseVC, filterSelected:@escaping()->(),
+    func mainEditorCollectionData(vc:BaseVC, filterPreviewImage:Data?, filterSelected:@escaping()->(),
                                   reloadPressed:@escaping void,
                                   removeAttachments:@escaping void,
                                   deleteMovie:@escaping void
     ) -> [EditorOverlayVC.OverlayCollectionData] {
         [
-            .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(filterSelected))),
+            .init(title: "Filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, filterSelected), screenHeight: .big)),
             .init(title: "Reload data", didSelect: reloadPressed),
             .init(title: "Remove all attachments", didSelect: {
-                vc.showAlertWithCancel(okPressed: removeAttachments)
+                vc.showAlertWithCancel(confirmTitle:"Remove all attachments", okPressed: removeAttachments)
             }),
             .init(title: "Delete Movie", didSelect: {
-                vc.showAlertWithCancel(okPressed: deleteMovie)
+                vc.showAlertWithCancel(confirmTitle:"Delete Movie", okPressed: deleteMovie)
             }),
             .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
-                vc.showAlertWithCancel(okPressed: {
+                let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
+                vc.showAlertWithCancel(confirmTitle:"Change url to: " + title, okPressed: {
                     self.toggleOriginalURL(reloadPressed: reloadPressed)
                 })
             }),
@@ -75,9 +76,11 @@ struct ViewModelEditorViewController {
         parentVC.present(vc, animated: true)
     }
     
-    private func filterOptionsCollectionData(_ filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
-        FilterType.allCases.compactMap { filterType in
-            .init(title: filterType.rawValue) {
+    private func filterOptionsCollectionData(image:Data?, _ filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
+        let defaultImage:UIImage = .init(systemName: "nosign.app.fill")!
+        let image:UIImage = image != nil ? (.init(data: image!) ?? defaultImage) : defaultImage
+        return FilterType.allCases.compactMap { filterType in
+                .init(title: filterType.title, imageData: image.applyFilter(filterName: filterType.rawValue)?.jpegData(compressionQuality: 0.1) ?? image.jpegData(compressionQuality: 0.1)) {
                 Task {
                     DB.db.movieParameters.editingMovie?.filter = filterType
                     await MainActor.run {

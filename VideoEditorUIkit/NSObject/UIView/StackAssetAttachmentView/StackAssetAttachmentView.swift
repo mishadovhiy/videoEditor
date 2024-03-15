@@ -139,7 +139,7 @@ extension StackAssetAttachmentView {
     func setSelected(_ selected:Bool) {
         layer.animationTransition(0.2)
         layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
-        layer.borderWidth = selected ? 3 : 0
+        layer.borderWidth = selected ? 1 : 0
         if !selected,
            let view = layerStack?.arrangedSubviews.first(where: {
                $0.subviews.contains(where: {$0.layer.name == "isEmptyView"})})?.subviews.first(where: {

@@ -13,9 +13,3 @@ extension CIFilter {
     }
 }
 
-enum FilterType:String {
-    case none = "none"
-    case invert = "CIColorInvert"
-    
-    static let allCases:[Self] = [.none, .invert]
-}
