@@ -99,6 +99,15 @@ struct TextAttachmentDB:MovieAttachmentProtocol, Equatable {
         }
     }
     
+    var zoom:CGFloat {
+        get {
+            .init(string: dict["zoom"] as? String ?? "1")
+        }
+        set {
+            dict.updateValue(String.init(value: newValue), forKey: "zoom")
+        }
+    }
+    
     var borderColor:UIColor {
         get {
             return .init(hex: dict["borderColor"] as? String ?? "") ?? .white

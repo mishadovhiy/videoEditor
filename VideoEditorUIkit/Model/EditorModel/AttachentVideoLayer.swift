@@ -25,6 +25,7 @@ struct AttachentVideoLayerModel {
         let textLayer = CATextLayer()
         textLayer.name = AttachentVideoLayerModel.textLayerName
         textLayer.string = attributedText
+        textLayer.zoom(value: text.zoom)
         textLayer.shouldRasterize = true
         textLayer.rasterizationScale = UIScreen.main.scale
         textLayer.backgroundColor = UIColor.clear.cgColor

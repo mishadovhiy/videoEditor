@@ -54,7 +54,7 @@ class PlayerViewController: PlayerSuperVC {
     }
     
     // MARK: - IBAction
-    func editingAttachmentPressed(_ data:MovieAttachmentProtocol) {
+    func editingAttachmentPressed(_ data:AssetAttachmentProtocol) {
         editingAttachmentView?.removeFromSuperview()
         if data.attachmentType == .text, 
             let textDB = data as? TextAttachmentDB {
@@ -75,7 +75,7 @@ class PlayerViewController: PlayerSuperVC {
 
 // MARK: loadUI
 fileprivate extension PlayerViewController {
-    private func loadEditingView(_ textDB:TextAttachmentDB) {
+    private func loadEditingView(_ textDB:MovieAttachmentProtocol) {
         let newView = PlayerEditingAttachmentView.configure(data: textDB, dataChanged: overlayEdited(_:), videoSize: movie?.tracks.first(where: {$0.naturalSize.width != 0})?.naturalSize ?? .zero)
         view.addSubview(newView)
     }

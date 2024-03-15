@@ -46,7 +46,7 @@ extension EditorParametersViewController {
     
     private func loadAttachmentsStacks() {
         guard let viewModel else { return}
-        let data:[([MovieAttachmentProtocol], InstuctionAttachmentType)] = [
+        let data:[([AssetAttachmentProtocol], InstuctionAttachmentType)] = [
             (viewModel.assetData.media, .media),
             (viewModel.assetData.text, .text),
             (viewModel.assetData.songs, .song)]

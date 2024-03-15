@@ -214,7 +214,7 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
 
     }
     
-    func attachmentSelected(_ data: MovieAttachmentProtocol?, view:UIView?) {
+    func attachmentSelected(_ data: AssetAttachmentProtocol?, view:UIView?) {
         guard let parent = parentVC else {
             return
         }

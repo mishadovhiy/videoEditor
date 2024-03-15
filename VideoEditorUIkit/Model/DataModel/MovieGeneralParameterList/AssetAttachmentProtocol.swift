@@ -12,21 +12,22 @@ import AVFoundation
 protocol AssetAttachmentProtocol {
     /// percent in movie asset
     var duration:CGFloat {get set}
+    var inMovieStart:CGFloat {get set}
     var assetName:String? {get set}
     var color:UIColor {get}
     var defaultName:String { get }
     var attachmentType:InstuctionAttachmentType? { get}
+    var id:UUID { get }
 }
 
 protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
     /// percent in movie asset
-    var inMovieStart:CGFloat {get set}
-    var id:UUID { get }
     var position:CGPoint {get set}
+    var zoom:CGFloat { get set }
 }
 
-extension [MovieAttachmentProtocol] {
-    func layerNumber(item:MovieAttachmentProtocol) -> Int? {
+extension [AssetAttachmentProtocol] {
+    func layerNumber(item:AssetAttachmentProtocol) -> Int? {
         var at:Int = 0
         self.forEach {
             let from = $0.inMovieStart * 100
@@ -52,6 +53,8 @@ extension [MovieAttachmentProtocol] {
 //MARK: List
 extension MovieGeneralParameterList {
     struct AssetsData:AssetAttachmentProtocol {
+        var id: UUID = .init()
+        var inMovieStart: CGFloat = 0
         let attachmentType: InstuctionAttachmentType? = nil
         var duration: CGFloat
         var assetName: String? = nil
@@ -97,6 +100,7 @@ extension MovieGeneralParameterList {
 
 extension MovieGeneralParameterList {
     struct RegularRow:MovieAttachmentProtocol {
+        var zoom:CGFloat = 1
         var position: CGPoint = .zero
         let attachmentType: InstuctionAttachmentType? = .text
         var inMovieStart: CGFloat
@@ -113,13 +117,12 @@ extension MovieGeneralParameterList {
         }
     }
     
-    struct SongRow:MovieAttachmentProtocol {
-        var position: CGPoint = .zero
+    struct SongRow:AssetAttachmentProtocol {
+        var id: UUID = .init()
         let attachmentType: InstuctionAttachmentType? = .song
         var inMovieStart: CGFloat
         var duration: CGFloat
         var assetName: String? = nil
-        var id: UUID = .init()
         
         var color: UIColor {
             return .purple
@@ -132,6 +135,7 @@ extension MovieGeneralParameterList {
     }
     
     struct MediaRow:MovieAttachmentProtocol {
+        var zoom:CGFloat = 1
         var position: CGPoint = .zero
         var attachmentType: InstuctionAttachmentType? {
             return .media

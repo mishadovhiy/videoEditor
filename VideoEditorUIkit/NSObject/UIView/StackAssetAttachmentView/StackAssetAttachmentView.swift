@@ -7,14 +7,14 @@
 
 import UIKit
 protocol AssetAttachmentViewDelegate {
-    func attachmentSelected(_ data:MovieAttachmentProtocol?, view:UIView?)
+    func attachmentSelected(_ data:AssetAttachmentProtocol?, view:UIView?)
     func attachmentPanChanged(view:AssetRawView?)
     var vc:UIViewController { get }
 }
 
 class StackAssetAttachmentView:UIView {
     var mediaType:InstuctionAttachmentType?
-    private var data:[MovieAttachmentProtocol] = []
+    private var data:[AssetAttachmentProtocol] = []
     private var delegate:AssetAttachmentViewDelegate?
     var attachmentType:InstuctionAttachmentType? {
         return data.first?.attachmentType ?? mediaType
@@ -81,7 +81,7 @@ class StackAssetAttachmentView:UIView {
     }
     
     // MARK: @IBAction
-    private func editRowPressed(_ data:MovieAttachmentProtocol?, view:AssetRawView? = nil) {
+    private func editRowPressed(_ data:AssetAttachmentProtocol?, view:AssetRawView? = nil) {
         delegate?.attachmentSelected(data, view: view ?? self)
     }
     
@@ -99,7 +99,7 @@ class StackAssetAttachmentView:UIView {
 
 // MARK: - updateUI
 extension StackAssetAttachmentView {
-    public func updateView(_ data:[MovieAttachmentProtocol]? = nil) {
+    public func updateView(_ data:[AssetAttachmentProtocol]? = nil) {
         updateSuperViews()
         if let data {
             self.data = data
@@ -115,7 +115,7 @@ extension StackAssetAttachmentView {
         }
     }
     
-    private func addRowView(data:MovieAttachmentProtocol, isEmpty:Bool = false, created:((_ view:AssetRawView)->())? = nil) {
+    private func addRowView(data:AssetAttachmentProtocol, isEmpty:Bool = false, created:((_ view:AssetRawView)->())? = nil) {
         let layer = isEmpty ? 0 : self.data.layerNumber(item: data)
         if let layer,
            let toView = layerStack?.arrangedSubviews[layer] {
@@ -230,7 +230,7 @@ fileprivate extension StackAssetAttachmentView {
 }
 
 extension StackAssetAttachmentView {
-    static func create(_ data:[MovieAttachmentProtocol], type:InstuctionAttachmentType, delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
+    static func create(_ data:[AssetAttachmentProtocol], type:InstuctionAttachmentType, delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
         let new = StackAssetAttachmentView.init(frame: .zero)
         new.mediaType = type
         new.data = data

@@ -10,8 +10,8 @@ import AVFoundation
 
 class ViewModelEditorParametersViewController {
     var assetData:MovieGeneralParameterList = .test
-    var editingAsset:MovieAttachmentProtocol?
-    var editingAssetHolder:MovieAttachmentProtocol?
+    var editingAsset:AssetAttachmentProtocol?
+    var editingAssetHolder:AssetAttachmentProtocol?
     var editingView:UIView?
     static var rowsHeight:CGFloat = 20
     static let durationWidthMultiplier:CGFloat = 15

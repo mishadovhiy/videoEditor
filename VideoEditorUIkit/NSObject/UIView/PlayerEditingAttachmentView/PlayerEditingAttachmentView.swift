@@ -44,6 +44,8 @@ class PlayerEditingAttachmentView: UIView {
             let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, text: text, isPreview: true)
             layer.addSublayer(newLayer)
             dataChanged?(text)
+        } else {
+            print("error unparcing data ", data)
         }
     }
     
@@ -56,6 +58,17 @@ class PlayerEditingAttachmentView: UIView {
             data?.position = attachmentLayer?.frame.origin ?? .zero
         }
     }
+    
+    @objc private func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+        guard let attachmentLayer, !sender.state.isEnded else {
+            return
+        }
+        let currentScale = attachmentLayer.frame.size.width / attachmentLayer.bounds.size.width
+        let newScale = currentScale*sender.scale
+        attachmentLayer.zoom(value: newScale)
+        sender.scale = 1
+        data?.zoom = newScale
+    }
 }
 
 
@@ -64,6 +77,7 @@ fileprivate extension PlayerEditingAttachmentView {
     func loadUI() {
         layer.name = PlayerEditingAttachmentView.layerName
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
+        addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(pinchGesture(_:))))
         addConstaits([.left:0, .right:0, .top:0, .bottom:0])
         dataUpdated()
         appeareAnimation()

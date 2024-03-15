@@ -27,13 +27,13 @@ class AssetRawView:UIView {
     }
     private let panNormalAlpha:CGFloat = 0.2
 
-    var data:MovieAttachmentProtocol?
-    private var editRowPressed:((_ row: MovieAttachmentProtocol?, _ view:AssetRawView?)->())?
+    var data:AssetAttachmentProtocol?
+    private var editRowPressed:((_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->())?
     private var panEnded:((_ view:AssetRawView) -> ())?
     
-    func updateView(data:MovieAttachmentProtocol?,
+    func updateView(data:AssetAttachmentProtocol?,
                     updateConstraints:Bool = true,
-                    editRowPressed:@escaping(_ row: MovieAttachmentProtocol?, _ view:AssetRawView?)->(),
+                    editRowPressed:@escaping(_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->(),
                     panEnded:@escaping(_ view:AssetRawView)->()
     ) {
         self.panEnded = panEnded
@@ -92,24 +92,30 @@ class AssetRawView:UIView {
             widthConstraint?.constant += position.x
         }
         superview?.layoutIfNeeded()
-        self.layoutIfNeeded()
+        layoutIfNeeded()
         subviews.forEach {
             $0.layoutIfNeeded()
         }
         if sender.state.isEnded {
-            sender.view?.alpha = panNormalAlpha
             panEnded?(self)
-        } else if sender.state == .began {
-            sender.view?.alpha = 0.5
         }
+        gestureBegun(!sender.state.isEnded, senderView: sender.view)
+    }
+    
+    private func gestureBegun(_ begun:Bool, senderView:UIView?) {
+        let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
+            senderView?.alpha = begun ? 0.5 : self.panNormalAlpha
+            self.layer.move(.top, value: begun ? 30 : 0)
+        }
+        animation.startAnimation()
     }
 }
 
 extension AssetRawView {
     static func create(superView:UIView?, 
-                       data:MovieAttachmentProtocol?,
+                       data:AssetAttachmentProtocol?,
                        vcSuperView:UIView,
-                       editRowPressed:@escaping(_ row: MovieAttachmentProtocol?, _ view:AssetRawView?)->(),
+                       editRowPressed:@escaping(_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->(),
                        panEnded:@escaping(_ view:AssetRawView) -> (),
                        created:((_ newView:AssetRawView)->())? = nil
     ) {
