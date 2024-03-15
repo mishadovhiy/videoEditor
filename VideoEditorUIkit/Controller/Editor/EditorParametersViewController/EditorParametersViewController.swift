@@ -55,27 +55,24 @@ class EditorParametersViewController: SuperVC {
     }
     
     // MARK: - setup ui
-    func setUI(type:EditorViewType) {
+    func setUI(type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
+        let isHidden = type == .addingVideos || overlaySize == .big
+        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
         assetStackView.arrangedSubviews.forEach { view in
-            let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
-                if !(view is UICollectionView) {
-                    view.isHidden = type == .addingVideos
-                    if let headerView = self.headersStack.arrangedSubviews.first(where: {$0.tag == view.tag}) {
-                        headerView.isHidden = type == .addingVideos
+            if !(view is UICollectionView) {
+                animation.addAnimations {[weak self] in
+                    view.isHidden = isHidden
+                    if let headerView = self?.headersStack.arrangedSubviews.first(where: {$0.tag == view.tag}) {
+                        headerView.isHidden = isHidden
                     }
                 }
             }
-            animation.startAnimation()
         }
-
         addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit Video"
-        if type == .editing {
-            collectionView.layer.cornerRadius(at: .top, value: 18)
-        } else {
-            collectionView.layer.masksToBounds = true
-            collectionView.layer.cornerRadius = 18
+        animation.addAnimations { [weak self] in
+            self?.collectionView.layer.cornerRadius(at: !isHidden ? .top : .all, value: 18)
         }
-        
+        animation.startAnimation()
     }
     
     // MARK: receive

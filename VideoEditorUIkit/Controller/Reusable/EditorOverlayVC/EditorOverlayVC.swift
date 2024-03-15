@@ -24,7 +24,7 @@ class EditorOverlayVC: SuperVC {
     var attachmentData:AssetAttachmentProtocol?
     private var delegate:EditorOverlayVCDelegate?
     override var initialAnimation: Bool { return false}
-    
+    var overlaySizeChanged:((_ newSize:EditorOverlayContainerVC.OverlaySize)->())?
     private var childVC:EditorOverlayContainerVC? {
         return (children.first(where: {
             $0 is UINavigationController
@@ -155,8 +155,9 @@ extension EditorOverlayVC {
             view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
             view.subviews.first(where: {$0 is UIStackView})?.layer.masksToBounds = true
             view.layer.shadowColor = UIColor.init(.black).cgColor
-            view.layer.shadowOpacity = 0.5
+            view.layer.shadowOpacity = 0.8
             view.layer.shadowOffset = .init(width: -1, height: 3)
+            view.layer.shadowRadius = 5
         } else {
             view.backgroundColor = view.superview!.backgroundColor ?? .clear
             actionButtons.first(where: {$0.style == 0})?.superview?.isHidden = hideDoneButton
@@ -188,13 +189,15 @@ extension EditorOverlayVC {
         let view = UIView()
         toView.addSubview(view)
         view.layer.name = "SelectionIndicatorView"
-        view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
+        let imageView = UIImageView(image: .init(named: "bottomSelectionIndicator"))
+        imageView.tintColor = view.superview?.backgroundColor ?? .red
+        view.addSubview(imageView)
         view.topAnchor.constraint(equalTo: toView.bottomAnchor).isActive = true
         view.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
         view.leadingAnchor.constraint(lessThanOrEqualTo: bottomView.trailingAnchor, constant: -20).isActive = true
         view.leadingAnchor.constraint(lessThanOrEqualTo: self.view.trailingAnchor, constant: -10).isActive = true
-        
+        imageView.addConstaits([.left:-20, .top:0, .bottom:0])
         let constraint3 = view.trailingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: -10)
         constraint3.priority = .init(rawValue: 250)
         constraint3.isActive = true
@@ -227,6 +230,8 @@ extension EditorOverlayVC {
                 self.toggleButtons(hidden: textFieldEditing ? true : hidden, animated: false)
             }, delayFactor: 0.05)
             animation.startAnimation()
+            
+            overlaySizeChanged?(type)
         }
     }
     

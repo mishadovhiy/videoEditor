@@ -58,11 +58,11 @@ class EditorViewController: SuperVC {
     }
     
     // MARK: - setup ui
-    func setViewType(_ type:EditorViewType) {
+    func setViewType(_ type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         self.viewModel?.viewType = type
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
             self.playerVC?.setUI(type: type)
-            self.assetParametersVC?.setUI(type: type)
+            self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
         }
         self.hideStartEditing(!(type == .addingVideos && movieURL != nil), animation: animation)
         animation.startAnimation()
@@ -209,6 +209,9 @@ fileprivate extension EditorViewController {
         loadChildrens()
         loadVideo(movieUrl: lastEditedVideoURL())
         trackContainerView.layer.zPosition = 2
+        mainEditorVC?.overlaySizeChanged = {
+            self.setViewType(self.viewModel?.viewType ?? .editing, overlaySize: $0)
+        }
     }
     
     private func loadChildrens() {

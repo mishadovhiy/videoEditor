@@ -11,6 +11,9 @@ import UIKit
 extension CALayer {
     func cornerRadius(at position: UIRectEdge, value:CGFloat? = nil) {
         switch position {
+        case .all:
+            self.cornerRadius = value ?? (self.frame.height / 2)
+            self.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         case .left:
             self.cornerRadius = value ?? (self.frame.height / 2)
             self.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]

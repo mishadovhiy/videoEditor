@@ -1680,8 +1680,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "addOverlayToParent(_:bottomView:attachmentData:delegate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1696,8 +1696,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "updateMainConstraints(viewController:textFieldEditing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2733,8 +2733,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "overlayChangedAttachment(_:)"
             landmarkType = "7">
             <Locations>
@@ -2813,8 +2813,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "navigationController(_:didShow:animated:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2829,8 +2829,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "navigationController(_:willShow:animated:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2845,8 +2845,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
             landmarkName = "navigationController(_:didShow:animated:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3004,8 +3004,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "leftHeaderPressed(_:)"
             landmarkType = "7">
             <Locations>
@@ -3746,38 +3746,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "872C36DC-0CD8-4B0C-9AAA-3F73E0273DF1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "setUI(type:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E9238243-DAE3-4EAF-824B-DC46500342E9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "setUI(type:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8E8CE132-399E-47FC-A758-E78A93775634"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -3881,8 +3849,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "primaryConstraints(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3897,8 +3865,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "primaryConstraints(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3913,8 +3881,8 @@
             filePath = "VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "primaryConstraints(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4011,7 +3979,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
-            landmarkName = "setViewType(_:)"
+            landmarkName = "setViewType(_:overlaySize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4027,7 +3995,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
-            landmarkName = "setViewType(_:)"
+            landmarkName = "setViewType(_:overlaySize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -88,7 +88,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="faW-J7-E1x"/>
-                        <color key="backgroundColor" name="secondaryBackground"/>
+                        <color key="backgroundColor" name="overlay"/>
                         <constraints>
                             <constraint firstItem="7L2-BQ-y2B" firstAttribute="top" secondItem="faW-J7-E1x" secondAttribute="top" id="fZ6-CN-iz1"/>
                             <constraint firstAttribute="trailing" secondItem="7L2-BQ-y2B" secondAttribute="trailing" constant="2" id="pKB-9d-ZEN"/>
@@ -297,6 +297,9 @@
         </namedColor>
         <namedColor name="greyText">
             <color red="1" green="1" blue="1" alpha="0.30300000309944153" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="overlay">
+            <color red="0.16470588235294117" green="0.20392156862745098" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="secondaryBackground">
             <color red="0.090000003576278687" green="0.090000003576278687" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
