@@ -36,6 +36,12 @@ class PlayerSuperVC: SuperVC {
         super.viewDidDisappear(animated)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateFrames()
+    }
+
+    
     override func removeFromParent() {
         playerLayer?.player?.pause()
         playerLayer?.player = nil
@@ -213,12 +219,17 @@ fileprivate extension PlayerSuperVC {
         player.pauseChanged = playerPauseChanged(_:)
         view.layer.addSublayer(playerLayer)
         
+        
+        
+        addObservers()
+    }
+    
+    private func updateFrames() {
+        playerLayer?.frame = view.layer.bounds
         view.layer.drawLine([
             .init(x: 0, y: view.frame.height),
             .init(x: view.frame.width, y: view.frame.height)
         ], color: .red, width: 3, opacity: 1, name: "PlayerViewControllerline")
-        
-        addObservers()
     }
 }
 

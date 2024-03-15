@@ -12,18 +12,19 @@ class EditorCollectionCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
     
+    private var screenHeight:EditorOverlayContainerVC.OverlaySize?
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        contentView.layer.drawLine([
-            .init(x: -5, y: 12),
-                .init(x: -5, y: contentView.frame.height - 26)
-        ], color: .init(.separetor), name: "LeftSeparetor")
-        titleLabel.textColor = .init(.white)
-        titleLabel.font = .type(.small)
+        if superview == nil {
+            return
+        }
+        setupUI()
     }
     
-    func set(_ item: EditorOverlayVC.OverlayCollectionData) {
+    func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil) {
         titleLabel.text = item.title
+        self.screenHeight = type
         if let imageData = item.imageData,
            let image = UIImage(data: imageData) {
             imageView.image = image
@@ -32,5 +33,43 @@ class EditorCollectionCell: UICollectionViewCell {
             imageView.setImage(item.image, superView: imageView.superview)
         }
         backgroundColor = item.backgroundColor
+    }
+}
+
+// MARK: - setupUI
+fileprivate extension EditorCollectionCell {
+    private func setupUI() {
+        contentView.layer.drawLine([
+            .init(x: -5, y: 12),
+                .init(x: -5, y: contentView.frame.height - 26)
+        ], color: .init(.separetor), name: "LeftSeparetor")
+        titleLabel.textColor = .init(.white)
+        titleLabel.font = .type(.small)
+        updateConstraint()
+    }
+    
+    private func updateConstraint() {
+        if let stack = titleLabel.superview as? UIStackView,
+           let constant = stack.constraints.first(where: {$0.firstAttribute == .height}),
+           let imageConstant = imageView.constraints.first(where: {
+               $0.firstAttribute == .width
+           })
+        {
+            switch screenHeight {
+            case .big:
+                imageConstant.constant = 180
+                constant.constant = 200
+            case .middle:
+                imageConstant.constant = 30
+                constant.constant = 50
+            default:
+                constant.constant = 28
+                imageConstant.constant = 20
+            }
+            
+        }
+        titleLabel.superview?.layoutIfNeeded()
+        titleLabel.superview?.superview?.layoutIfNeeded()
+        imageView.layoutIfNeeded()
     }
 }

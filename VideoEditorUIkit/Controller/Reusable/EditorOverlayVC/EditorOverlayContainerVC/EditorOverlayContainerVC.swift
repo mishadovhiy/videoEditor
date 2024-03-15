@@ -26,6 +26,12 @@ class EditorOverlayContainerVC: SuperVC {
         case .color(_):
             return .middle
         default:
+            if let type = screenType?.screenHeight {
+                return type
+            }
+            if let data = parentVC?.data?.screenHeight {
+                return data
+            }
             return nil
         }
     }
@@ -36,7 +42,7 @@ class EditorOverlayContainerVC: SuperVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.title = screenType?.screenTitle
+        title = screenType?.screenTitle
         setupUI()
     }
     

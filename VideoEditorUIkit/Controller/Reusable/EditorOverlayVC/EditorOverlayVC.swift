@@ -175,11 +175,11 @@ extension EditorOverlayVC {
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:(60, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(70, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(60, "heightprimaryConstraints")] : [.left: (10, "leftprimaryConstraints"), .right:(-10, "rightprimaryConstraints"), .height:(60, "heightprimaryConstraints")]
         case .middle:
             return !(data?.isPopup ?? true) ? [.height:(85, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(100, "heightprimaryConstraints")]
         case .big:
-            return !(data?.isPopup ?? true) ? [.height:(100, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(185, "heightprimaryConstraints")]
+            return !(data?.isPopup ?? true) ? [.height:(250, "heightprimaryConstraints")] : [.left: (0, "leftprimaryConstraints"), .right:(0, "rightprimaryConstraints"), .height:(185, "heightprimaryConstraints")]
         }
     }
     
@@ -274,6 +274,7 @@ extension EditorOverlayVC {
         var didSelect:(()->())?
         var toOverlay:ToOverlayData? = nil
         var backgroundColor:UIColor? = nil
+        
     }
     
     struct ToOverlayData {
@@ -282,7 +283,7 @@ extension EditorOverlayVC {
         var attachmentType:AttachmentOverlayType? = nil
         var needTextField:Bool? = nil
         var isPopup:Bool = true
-        var screenHeight:EditorOverlayContainerVC.OverlaySize = .small
+        var screenHeight:EditorOverlayContainerVC.OverlaySize? = nil
         var closePressed:(()->())? = nil
         var donePressed:(()->())? = nil
         

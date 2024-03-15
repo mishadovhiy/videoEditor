@@ -14,7 +14,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditorCollectionCell", for: indexPath) as! EditorCollectionCell
-        cell.set(collectionData[indexPath.row])
+        cell.set(collectionData[indexPath.row], type: screenSize)
         return cell
     }
 
