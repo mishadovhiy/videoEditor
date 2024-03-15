@@ -201,7 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18F1452B9F45EE00194F34 /* EditorViewController.swift */,
-				8D18F1442B9F45EE00194F34 /* ViewModelEditorViewController.swift */,
+				8DF4A94C2BA4CFCE00D07C67 /* ViewModel */,
 			);
 			path = EditorViewController;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18F14C2B9F45EE00194F34 /* EditorParametersViewController.swift */,
-				8D18F1472B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift */,
+				8DF4A94B2BA4CFC600D07C67 /* ViewModel */,
 				8D18F1482B9F45EE00194F34 /* Cells */,
 				8D18F14B2B9F45EE00194F34 /* loadUI_EditorParametersViewController.swift */,
 				8D18F14D2B9F45EE00194F34 /* UICollectionViewDelegate_EditorParametersViewController.swift */,
@@ -251,7 +251,7 @@
 				8D18F15A2B9F460000194F34 /* EditorOverlayContainerVC.swift */,
 				8D18F15B2B9F460000194F34 /* Cell */,
 				8D18F15D2B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift */,
-				8D18F15E2B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift */,
+				8DF4A94D2BA4CFDD00D07C67 /* ViewModel */,
 			);
 			path = EditorOverlayContainerVC;
 			sourceTree = "<group>";
@@ -445,6 +445,30 @@
 				8DEA29382B8ED9D000FDF952 /* TextAttachmentDB.swift */,
 			);
 			path = DB;
+			sourceTree = "<group>";
+		};
+		8DF4A94B2BA4CFC600D07C67 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D18F1472B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8DF4A94C2BA4CFCE00D07C67 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D18F1442B9F45EE00194F34 /* ViewModelEditorViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8DF4A94D2BA4CFDD00D07C67 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D18F15E2B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
