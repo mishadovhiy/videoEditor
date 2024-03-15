@@ -13,6 +13,10 @@ class PlayerSuperVC: SuperVC {
     var isPlaying:Bool = false
     var movieURL:URL?
     
+    private var playProgressView:UIView? {
+        return view.subviews.first(where: {$0.layer.name == "playProgressView"})
+    }
+    
     override func loadView() {
         super.loadView()
         self.loadUI()
@@ -117,7 +121,7 @@ class PlayerSuperVC: SuperVC {
         }
         
         let percent = sendond / (movie?.duration.seconds ?? 0)
-        if let line = self.view.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
+        if let line = self.playProgressView?.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
             line.strokeEnd = percent
         }
         durationLabel?.text = "\(Int(sendond))/\(Int(movie?.duration.seconds ?? 0))"
@@ -218,17 +222,21 @@ fileprivate extension PlayerSuperVC {
         playerLayer.name = "PrimaryPlayer"
         player.pauseChanged = playerPauseChanged(_:)
         view.layer.addSublayer(playerLayer)
-        
-        
-        
+
         addObservers()
+        
+        let progressView:UIView = .init()
+        progressView.isUserInteractionEnabled = false
+        progressView.layer.name = "playProgressView"
+        view.addSubview(progressView)
+        progressView.addConstaits([.left:0, .right:0, .bottom:0, .height:3], safeArea: true)
     }
     
     private func updateFrames() {
         playerLayer?.frame = view.layer.bounds
-        view.layer.drawLine([
-            .init(x: 0, y: view.frame.height),
-            .init(x: view.frame.width, y: view.frame.height)
+        playProgressView?.layer.drawLine([
+            .init(x: 0, y: 0),
+            .init(x: view.frame.width, y: 0)
         ], color: .red, width: 3, opacity: 1, name: "PlayerViewControllerline")
     }
 }
