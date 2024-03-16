@@ -84,11 +84,9 @@ class PrepareEditorModel {
     func addFilter(completion:@escaping()->()) async {
         let movie = delegate.movieHolder ?? delegate.movie!
         let video = VideoFilter.addFilter(composition: movie, completion: { url in
-            completion()
-            if let url {
-                Task {
-                    await self.filterAddedToComposition(url)
-                    self.filterEndedLoading = nil
+            Task {
+                await self.filterAddedToComposition(url)
+                await MainActor.run {
                     completion()
                 }
             }
@@ -188,6 +186,34 @@ extension PrepareEditorModel {
 
 // MARK: AVMutableComposition
 extension PrepareEditorModel {
+    func addSound(url:URL?) async -> Bool {
+        let composition = delegate.movie ?? .init()
+        guard let url else {
+            return false
+        }
+        let sound = AVURLAsset(url: url)
+
+        guard let newAudio = sound.tracks.first(where: {$0.mediaType == .audio}),
+              let newAsset = newAudio.asset
+        else {
+            print("error inserting audion: audio is empty, or asset is nil sound: \(sound) duration: \(sound.duration)")
+            return false
+        }
+        do {
+            let audioMutable = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
+            try await audioMutable?.insertTimeRange(CMTimeRange(start: .zero, duration: composition.duration()), of: newAudio, at: .zero)
+            if let url = await export(asset: composition, videoComposition: nil, isVideo: false) {
+                await movieUpdated(movie: composition, movieURL: url, canSetNil: false)
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            print(error, " error insering audio into composition")
+            return false
+        }
+    }
+    
     final private func createComposition(_ urlAsset:AVURLAsset) async -> AVMutableComposition? {
         let composition = AVMutableComposition()
         let segments = await loadSegments(asset: urlAsset)
@@ -197,19 +223,6 @@ extension PrepareEditorModel {
                     let range = CMTimeRangeMake(start: $0.0.timeMapping.target.start, duration: $0.0.timeMapping.target.duration)
                     
                     try composition.insertTimeRange(range, of: $0.1.asset!, at: $0.0.timeMapping.target.start)
-                }
-                let mutt = AVMutableVideoComposition(propertiesOf: composition)
-                
-                print(mutt.instructions, "instractions of the loaded video")
-                mutt.instructions = []
-                composition.tracks.forEach {
-                    let bb = AVMutableVideoComposition(propertiesOf: $0.asset!)
-                    print(mutt.instructions, "AVMutableVideoComposition of the loaded video")
-                    
-                    bb.instructions.removeAll()
-                }
-                urlAsset.metadata.forEach {
-                    print($0.value?.description ?? "", " metadata of the loaded video")
                 }
             }
         } catch {

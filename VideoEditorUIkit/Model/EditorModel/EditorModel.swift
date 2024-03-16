@@ -61,11 +61,22 @@ class EditorModel {
         }
     }
     
+    func addSoundPressed() {
+        Task {
+            if await prepare.addSound(url:Bundle.main.url(forResource: "audio1", withExtension: "m4a")) {
+                await videoAdded()
+            } else {
+                await presenter?.errorAddingVideo()
+            }
+            
+        }
+    }
+    
     func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
         Task {
             if let text = data as? MovieAttachmentProtocol {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
-                DB.db.movieParameters.needReloadText = true
+                DB.db.movieParameters.needReloadLayerAttachments = true
                 
                 if let textDB = text as? TextAttachmentDB {
                     DB.db.movieParameters.editingMovie!.texts.append(textDB)
@@ -116,8 +127,8 @@ fileprivate extension EditorModel {
     }
     
     private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false) async {
-        if DB.db.movieParameters.needReloadText {
-            DB.db.movieParameters.needReloadText = false
+        if DB.db.movieParameters.needReloadLayerAttachments {
+            DB.db.movieParameters.needReloadLayerAttachments = false
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
             addText()
         } else if videoAddedAction {
@@ -128,7 +139,6 @@ fileprivate extension EditorModel {
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
             await prepare.addFilter(completion: {
                 Task {
-                   // await self.videoAdded(canReload: canReload)
                     await self.presenter?.reloadUI()
                 }
             })

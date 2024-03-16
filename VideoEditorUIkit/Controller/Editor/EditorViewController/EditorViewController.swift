@@ -92,7 +92,7 @@ class EditorViewController: SuperVC {
     
     func previewImagesUpdated(image:Data?) {
         mainEditorVC?.updateData(viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: image, filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
-            self.viewModel?.editorModel.deleteAttachmentPressed(nil)
+            self.viewModel?.editorModel.addSoundPressed()
         }, deleteMovie: {
             self.clearDataPressed()
         }) ?? [])

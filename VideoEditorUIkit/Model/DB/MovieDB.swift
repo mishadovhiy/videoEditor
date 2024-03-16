@@ -14,7 +14,7 @@ extension DB.DataBase {
             self.dict = dict
         }
         
-        var needReloadText:Bool {
+        var needReloadLayerAttachments:Bool {
             get {
                 return dict["needReloadText"] as? Bool ?? false
             }

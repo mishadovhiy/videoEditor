@@ -29,8 +29,8 @@ struct ViewModelEditorViewController {
         [
             .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, filterSelected), screenHeight: .big)),
             .init(title: "Reload data", didSelect: reloadPressed),
-            .init(title: "Remove all attachments", didSelect: {
-                vc.showAlertWithCancel(confirmTitle:"Remove all attachments", okPressed: removeAttachments)
+            .init(title: "add test sound", didSelect: {
+                removeAttachments()
             }),
             .init(title: "Delete Movie", image: "trash", didSelect: {
                 vc.showAlertWithCancel(confirmTitle:"Delete Movie", okPressed: deleteMovie)

@@ -8,6 +8,7 @@
 import UIKit
 import AlertViewLibrary
 import Photos
+import MediaPlayer
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PHPhotoLibrary.requestAuthorization { PHAuthorizationStatus in
             if PHAuthorizationStatus == .authorized {
                 
+            }
+        }
+        MPMediaLibrary.requestAuthorization { status in
+            print(status.rawValue, " hrtgerfewdaw")
+            switch status {
+            case .authorized:
+                // User granted access to their music library
+                // You can now access their music library using MPMediaLibrary APIs
+                break
+            case .restricted:
+                // User's access to their music library is restricted (e.g., parental controls)
+                break
+            case .denied:
+                // User denied access to their music library
+                break
+            case .notDetermined:
+                // User hasn't yet made a choice
+                break
+            default:
+                break
             }
         }
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.type(.white)]

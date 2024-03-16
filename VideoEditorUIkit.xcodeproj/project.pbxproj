@@ -50,6 +50,7 @@
 		8D18F1982B9F466A00194F34 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18E2B9F466A00194F34 /* CGFloat.swift */; };
 		8D18F1992B9F466A00194F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D18F18F2B9F466A00194F34 /* Assets.xcassets */; };
 		8D18F19A2B9F466A00194F34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1902B9F466A00194F34 /* Constants.swift */; };
+		8D1BEE922BA642F300EB9246 /* audio1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8D1BEE912BA63C9000EB9246 /* audio1.m4a */; };
 		8D26ADC92BA39317009CEEB4 /* SelectionTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */; };
 		8D26ADCB2BA3933C009CEEB4 /* SelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */; };
 		8D3A4AE42BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */; };
@@ -114,6 +115,7 @@
 		8D18F18E2B9F466A00194F34 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		8D18F18F2B9F466A00194F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D18F1902B9F466A00194F34 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8D1BEE912BA63C9000EB9246 /* audio1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio1.m4a; sourceTree = "<group>"; };
 		8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionTable.storyboard; sourceTree = "<group>"; };
 		8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewController.swift; sourceTree = "<group>"; };
 		8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEditingAttachmentView.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 		8D6CE2282BA1230800D33A3D /* video */ = {
 			isa = PBXGroup;
 			children = (
+				8D1BEE912BA63C9000EB9246 /* audio1.m4a */,
 				8D6CE2292BA1230800D33A3D /* 1.mov */,
 			);
 			path = video;
@@ -535,6 +538,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D1BEE922BA642F300EB9246 /* audio1.m4a in Resources */,
 				8D18F1712B9F462A00194F34 /* EditorParameters.storyboard in Resources */,
 				8D18F1722B9F462A00194F34 /* EditorOverlay.storyboard in Resources */,
 				8D18F1992B9F466A00194F34 /* Assets.xcassets in Resources */,
@@ -741,6 +745,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoEditorUIkit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "If you want to add sounds to your videos enuble access to the Media Library";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library so that you can pick the perfect birthday card.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so that you can pick the perfect birthday card.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -772,6 +777,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoEditorUIkit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "If you want to add sounds to your videos enuble access to the Media Library";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library so that you can pick the perfect birthday card.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so that you can pick the perfect birthday card.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
