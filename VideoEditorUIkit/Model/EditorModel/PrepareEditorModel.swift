@@ -81,12 +81,15 @@ class PrepareEditorModel {
         }
     }
     
-    func addFilter() async {
+    func addFilter(completion:@escaping()->()) async {
         let movie = delegate.movieHolder ?? delegate.movie!
         let video = VideoFilter.addFilter(composition: movie, completion: { url in
+            completion()
             if let url {
                 Task {
                     await self.filterAddedToComposition(url)
+                    self.filterEndedLoading = nil
+                    completion()
                 }
             }
         })
@@ -153,6 +156,7 @@ extension PrepareEditorModel {
     }
     
     private func filterAddedToComposition(_ url:URL?) async {
+        print("filterAddedToComposition")
         guard let url else {
             return
         }

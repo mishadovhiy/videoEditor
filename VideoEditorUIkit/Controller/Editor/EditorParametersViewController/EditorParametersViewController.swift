@@ -29,8 +29,8 @@ class EditorParametersViewController: SuperVC {
         return parentVC?.viewModel?.viewType ?? .addingVideos
     }
     static var collectionViewSpace:CGPoint {
-        let screen = UIScreen.main.bounds
-        return .init(x: screen.width / 2, y: screen.width / 2)
+        let frame = UIApplication.shared.keyWindow?.frame ?? UIScreen.main.bounds
+        return .init(x: frame.width / 2, y: frame.width / 2)
     }
     
     // MARK: - life-cycle
@@ -38,6 +38,11 @@ class EditorParametersViewController: SuperVC {
         super.viewDidLoad()
         loadUI()
         setUI(type: viewType)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewAppeared()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

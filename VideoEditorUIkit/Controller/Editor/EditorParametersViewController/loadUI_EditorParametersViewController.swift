@@ -34,6 +34,12 @@ extension EditorParametersViewController {
         scrollView.layer.cornerRadius = 18
     }
     
+    func viewAppeared() {
+        let spaces = EditorParametersViewController.collectionViewSpace
+        scrollView.contentInset.left = spaces.x
+        scrollView.contentInset.right = spaces.y
+    }
+    
     func updateAttachmantsStack() {
         let constraint = viewModel?.assetData.collectionWidth
         collectionView.constraints.first(where: {

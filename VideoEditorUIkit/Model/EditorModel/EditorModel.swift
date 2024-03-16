@@ -126,7 +126,12 @@ fileprivate extension EditorModel {
         if DB.db.movieParameters.needReloadFilter && (DB.db.movieParameters.editingMovie?.filter ?? .none) != FilterType.none {
             DB.db.movieParameters.needReloadFilter = false
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
-            await prepare.addFilter()
+            await prepare.addFilter(completion: {
+                Task {
+                   // await self.videoAdded(canReload: canReload)
+                    await self.presenter?.reloadUI()
+                }
+            })
         }
     }
 }
