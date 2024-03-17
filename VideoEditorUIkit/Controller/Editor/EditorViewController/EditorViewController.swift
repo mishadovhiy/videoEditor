@@ -196,7 +196,7 @@ extension EditorViewController:PlayerViewControllerPresenter {
 }
 
 
-extension EditorViewController:EditorModelPresenter {
+extension EditorViewController:VideoEditorModelPresenter {
     var movieURL: URL? {
         get {
             if Thread.isMainThread {

@@ -338,7 +338,7 @@ extension PrepareEditorModel {
                              postProcessingAsVideoLayer: vidLayer,
                              in: outputLayer)*/
         res.renderSize = size
-        res.frameDuration = EditorModel.fmp30
+        res.frameDuration = VideoEditorModel.fmp30
         print(res.instructions, " terfwd")
         res.instructions = [mainInstruction]
         return res

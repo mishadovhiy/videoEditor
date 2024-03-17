@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12C2B9F455E00194F34 /* VideoFilter.swift */; };
 		8D18F1332B9F455E00194F34 /* AttachentVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */; };
-		8D18F1342B9F455E00194F34 /* EditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12E2B9F455E00194F34 /* EditorModel.swift */; };
+		8D18F1342B9F455E00194F34 /* VideoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12E2B9F455E00194F34 /* VideoEditorModel.swift */; };
 		8D18F1352B9F455E00194F34 /* AnimateVideoLayerCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12F2B9F455E00194F34 /* AnimateVideoLayerCA.swift */; };
 		8D18F1362B9F455E00194F34 /* PrepareEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1302B9F455E00194F34 /* PrepareEditorModel.swift */; };
 		8D18F1372B9F455E00194F34 /* EditorVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1312B9F455E00194F34 /* EditorVideoLayer.swift */; };
@@ -76,7 +76,7 @@
 /* Begin PBXFileReference section */
 		8D18F12C2B9F455E00194F34 /* VideoFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFilter.swift; sourceTree = "<group>"; };
 		8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachentVideoLayer.swift; sourceTree = "<group>"; };
-		8D18F12E2B9F455E00194F34 /* EditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorModel.swift; sourceTree = "<group>"; };
+		8D18F12E2B9F455E00194F34 /* VideoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditorModel.swift; sourceTree = "<group>"; };
 		8D18F12F2B9F455E00194F34 /* AnimateVideoLayerCA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateVideoLayerCA.swift; sourceTree = "<group>"; };
 		8D18F1302B9F455E00194F34 /* PrepareEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareEditorModel.swift; sourceTree = "<group>"; };
 		8D18F1312B9F455E00194F34 /* EditorVideoLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorVideoLayer.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		8D18F12B2B9F455E00194F34 /* EditorModel */ = {
 			isa = PBXGroup;
 			children = (
-				8D18F12E2B9F455E00194F34 /* EditorModel.swift */,
+				8D18F12E2B9F455E00194F34 /* VideoEditorModel.swift */,
 				8D18F1302B9F455E00194F34 /* PrepareEditorModel.swift */,
 				8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */,
 				8D18F1312B9F455E00194F34 /* EditorVideoLayer.swift */,
@@ -583,7 +583,7 @@
 				8D18F1622B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift in Sources */,
 				8D18F1532B9F45EE00194F34 /* AssetHeaderCell.swift in Sources */,
 				8D75E3922BA11E8C00ED75C0 /* CGPoint.swift in Sources */,
-				8D18F1342B9F455E00194F34 /* EditorModel.swift in Sources */,
+				8D18F1342B9F455E00194F34 /* VideoEditorModel.swift in Sources */,
 				8D18F19A2B9F466A00194F34 /* Constants.swift in Sources */,
 				8D18F1372B9F455E00194F34 /* EditorVideoLayer.swift in Sources */,
 				8D4C17192B3B2DF400953143 /* AppDelegate.swift in Sources */,

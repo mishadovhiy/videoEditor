@@ -65,7 +65,7 @@ class PlayerSuperVC: SuperVC {
             return
         }
         self.pause()
-        let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: EditorModel.timeScale)
+        let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: VideoEditorModel.timeScale)
         playerLayer?.player?.seek(to: desiredCMTime)
     }
     
@@ -137,7 +137,7 @@ class PlayerSuperVC: SuperVC {
     }
     
     func addObservers() {
-        let timeInterval = CMTime(seconds: 0.01, preferredTimescale: EditorModel.timeScale)
+        let timeInterval = CMTime(seconds: 0.01, preferredTimescale: VideoEditorModel.timeScale)
         self.timeChangeObserver = self.playerLayer?.player?.addPeriodicTimeObserver(forInterval: timeInterval, queue: DispatchQueue.main) { [weak self] time in
             self?.playTimeChanged(CMTimeGetSeconds(time))
         }

@@ -85,7 +85,7 @@ extension MovieGeneralParameterList {
             if loadPreviews {
                 return .init(duration: asset.timeMapping.source.duration.seconds, assetName: asset.description, previews: array.compactMap({
                     let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
-                    return .init(composition?.preview(time: .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: EditorModel.timeScale))?.jpegData(compressionQuality: 0.1))
+                    return .init(composition?.preview(time: .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: VideoEditorModel.timeScale))?.jpegData(compressionQuality: 0.1))
                 }))
             } else {
                 return .init(duration: asset.timeMapping.source.duration.seconds, assetName: asset.description, previews: array.compactMap({_ in 

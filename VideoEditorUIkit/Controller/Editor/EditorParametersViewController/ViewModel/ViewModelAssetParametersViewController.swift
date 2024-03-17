@@ -23,7 +23,7 @@ class EditorParametersVCViewModel {
     var ignoreScroll:Bool = false
     var manualScroll = false
     var reloadData:((Bool)->())?
-    func assetChanged(_ asset:AVMutableComposition?, editorModel:EditorModel) async  {
+    func assetChanged(_ asset:AVMutableComposition?, editorModel:VideoEditorModel) async  {
         Task {
             assetData.text = DB.db.movieParameters.editingMovie?.texts ?? []
             let segments = await editorModel.prepare.loadSegments(asset: nil)

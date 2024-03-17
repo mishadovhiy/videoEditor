@@ -8,22 +8,22 @@
 import UIKit
 import AVFoundation
 
-protocol EditorModelPresenter {
+protocol VideoEditorModelPresenter {
      @MainActor func videoAdded()
      @MainActor func errorAddingVideo()
     var movieURL:URL?{set get}
     @MainActor func reloadUI()
 }
 
-class EditorModel {
+class VideoEditorModel {
     var addingUrls:[String] = []
-    var presenter:EditorModelPresenter?
+    var presenter:VideoEditorModelPresenter?
     var prepare:PrepareEditorModel!
     var _movie:AVMutableComposition?
     private var dbParametersHolder:DB.DataBase.MovieParametersDB.MovieDB?
     var movieHolder:AVMutableComposition?
 
-    init(presenter:EditorModelPresenter) {
+    init(presenter:VideoEditorModelPresenter) {
         self.presenter = presenter
         self.prepare = .init(delegate: self)
     }
@@ -104,7 +104,7 @@ class EditorModel {
     }
 }
 
-fileprivate extension EditorModel {
+fileprivate extension VideoEditorModel {
     private func addText() {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {
@@ -146,7 +146,7 @@ fileprivate extension EditorModel {
 }
 
 
-extension EditorModel:PrepareEditorModelDelegate {
+extension VideoEditorModel:PrepareEditorModelDelegate {
     var movie: AVMutableComposition? {
         get {
             return _movie

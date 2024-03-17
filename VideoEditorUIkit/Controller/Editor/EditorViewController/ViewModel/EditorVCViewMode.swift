@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 struct EditorVCViewMode {
-    var editorModel:EditorModel!
+    var editorModel:VideoEditorModel!
     var viewType:EditorViewType = .addingVideos
     var firstVideoAdded = false
     
-    init(editorPresenter:EditorModelPresenter) {
+    init(editorPresenter:VideoEditorModelPresenter) {
         editorModel = .init(presenter:editorPresenter)
     }
     
