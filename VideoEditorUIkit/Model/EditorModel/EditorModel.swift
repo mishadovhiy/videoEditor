@@ -61,9 +61,9 @@ class EditorModel {
         }
     }
     
-    func addSoundPressed() {
+    func addSoundPressed(url:URL?) {
         Task {
-            if await prepare.addSound(url:Bundle.main.url(forResource: "audio1", withExtension: "m4a")) {
+            if await prepare.addSound(url:url) {
                 await videoAdded()
             } else {
                 await presenter?.errorAddingVideo()

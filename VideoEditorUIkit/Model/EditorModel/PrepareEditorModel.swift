@@ -193,8 +193,7 @@ extension PrepareEditorModel {
         }
         let sound = AVURLAsset(url: url)
 
-        guard let newAudio = sound.tracks.first(where: {$0.mediaType == .audio}),
-              let newAsset = newAudio.asset
+        guard let newAudio = sound.tracks.first(where: {$0.mediaType == .audio})
         else {
             print("error inserting audion: audio is empty, or asset is nil sound: \(sound) duration: \(sound.duration)")
             return false

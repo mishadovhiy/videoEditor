@@ -17,7 +17,7 @@ class EditorOverlayContainerVC: SuperVC {
     }
     override var initialAnimation: Bool { return false}
     var screenType:EditorOverlayVC.ToOverlayData?
-    var viewModel:ViewModelEditorOverlayContainerVC?
+    var viewModel:EditorOverlayContainerVCViewModel?
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
     
     var needTextField:Bool {

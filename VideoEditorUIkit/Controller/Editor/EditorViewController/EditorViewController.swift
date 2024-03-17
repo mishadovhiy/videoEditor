@@ -7,9 +7,10 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class EditorViewController: SuperVC {
-
+    
     @IBOutlet weak var startEditingButton: BaseButton!
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
@@ -43,7 +44,7 @@ class EditorViewController: SuperVC {
     override var initialAnimation: Bool {
         return false
     }
-    var viewModel:ViewModelEditorViewController?
+    var viewModel:EditorVCViewMode?
     
     // MARK: - Life-cycle
     override func loadView() {
@@ -91,11 +92,7 @@ class EditorViewController: SuperVC {
     }
     
     func previewImagesUpdated(image:Data?) {
-        mainEditorVC?.updateData(viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: image, filterSelected:videoFilterSelected, reloadPressed: reloadUI, removeAttachments: {
-            self.viewModel?.editorModel.addSoundPressed()
-        }, deleteMovie: {
-            self.clearDataPressed()
-        }) ?? [])
+        mainEditorVC?.updateData(viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: image, filterSelected: videoFilterSelected, reloadPressed: reloadUI, removeAttachments: addSoundPressed, deleteMovie: clearDataPressed) ?? [])
     }
     
     func playerChangedAttachment(_ newData:AssetAttachmentProtocol?) {
@@ -139,13 +136,42 @@ class EditorViewController: SuperVC {
             self.reloadUI()
         })
     }
+    
+    func addSoundPressed() {
+        coordinator?.toDocumentPicker(delegate: self)
+    }
+    
 }
 
+extension EditorViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let selectedURL = urls.first else { return }
+        controller.dismiss(animated: true) {
+            print("Selected file URL: \(selectedURL)")
+        }
+    }
+}
+
+extension EditorViewController: MPMediaPickerControllerDelegate {
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        let item = mediaItemCollection.items.first
+        print(item, " gretrfwedaws")
+        guard let url = item?.assetURL else {
+            print("url is nil")
+            item as? AVAsset
+            return
+        }
+        mediaPicker.dismiss(animated: true) {
+            self.playerVC?.startRefreshing(completion: {
+                self.viewModel?.editorModel.addSoundPressed(url: url)
+            })
+        }
+    }
+}
 
 extension EditorViewController:PlayerViewControllerPresenter {
     func reloadUI() {
-        UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
-        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        coordinator?.start()
         self.view.removeFromSuperview()
         self.viewModel?.deinit()
         self.removeFromParent()

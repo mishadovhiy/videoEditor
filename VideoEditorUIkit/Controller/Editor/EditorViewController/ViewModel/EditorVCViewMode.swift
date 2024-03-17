@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ViewModelEditorViewController {
+struct EditorVCViewMode {
     var editorModel:EditorModel!
     var viewType:EditorViewType = .addingVideos
     var firstVideoAdded = false
@@ -42,9 +42,17 @@ struct ViewModelEditorViewController {
                 })
             }),
             .init(title: "stored videos", didSelect: {
-                toLinkList(parentVC: vc)
+                vc.coordinator?.toList(tableData: storedVideosTableData(parentVC: vc))
             })
         ]
+    }
+    
+    private func storedVideosTableData(parentVC:BaseVC) -> [SelectionTableViewController.TableData] {
+        return loadUrls().compactMap({ url in
+                .init(value: url.absoluteString) {
+                    parentVC.coordinator?.toVideoPlayer(movieURL: url)
+                }
+        })
     }
     
     private func loadUrls() -> [URL] {
@@ -59,35 +67,19 @@ struct ViewModelEditorViewController {
         }
     }
     
-    func toLinkList(parentVC:UIViewController) {
-        let vc = SelectionTableViewController.configure()
-        parentVC.present(vc, animated: true)
-        vc.tableData = loadUrls().compactMap({ url in
-            .init(value: url.absoluteString) {
-                self.toPlayerVC(parentVC: parentVC, url: url)
-            }
-        })
-    }
-    
-    func toPlayerVC(parentVC:UIViewController, url:URL) {
-        let vc = PlayerSuperVC.init()
-        vc.movieURL = url
-        vc.initialAnimationSet = false
-        parentVC.present(vc, animated: true)
-    }
     
     private func filterOptionsCollectionData(image:Data?, _ filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
         let defaultImage:UIImage = .init(systemName: "nosign.app.fill")!
         let image:UIImage = image != nil ? (.init(data: image!) ?? defaultImage) : defaultImage
         return FilterType.allCases.compactMap { filterType in
                 .init(title: filterType.title, imageData: image.applyFilter(filterName: filterType.rawValue)?.jpegData(compressionQuality: 0.1) ?? image.jpegData(compressionQuality: 0.1)) {
-                Task {
-                    DB.db.movieParameters.editingMovie?.filter = filterType
-                    await MainActor.run {
-                        filterSelected()
+                    Task {
+                        DB.db.movieParameters.editingMovie?.filter = filterType
+                        await MainActor.run {
+                            filterSelected()
+                        }
                     }
                 }
-            }
         }
     }
     

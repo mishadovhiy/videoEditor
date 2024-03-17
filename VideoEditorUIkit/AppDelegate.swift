@@ -13,8 +13,10 @@ import MediaPlayer
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static var shared:AppDelegate {
-        return UIApplication.shared.delegate as? AppDelegate ?? .init()
+    var coordinator:Coordinator?
+    
+    static var shared:AppDelegate? {
+        return UIApplication.shared.delegate as? AppDelegate
     }
     
     lazy var ai: AlertManager = .init(appearence: .with({
@@ -23,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }))
         
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        coordinator = .init()
+        return true
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         PHPhotoLibrary.requestAuthorization { PHAuthorizationStatus in
             if PHAuthorizationStatus == .authorized {

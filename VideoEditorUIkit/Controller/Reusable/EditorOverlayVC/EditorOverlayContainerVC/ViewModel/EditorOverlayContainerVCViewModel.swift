@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ViewModelEditorOverlayContainerVC {
+struct EditorOverlayContainerVCViewModel {
     var textfieldEditing:Bool = false
     var type:InstuctionAttachmentType?
     var assetChanged:((_ didChange:(_ oldValue: TextAttachmentDB)->TextAttachmentDB)->())?

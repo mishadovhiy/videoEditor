@@ -10,6 +10,10 @@ import AlertViewLibrary
 
 class BaseVC:UIViewController {
     
+    var coordinator:Coordinator? {
+        return AppDelegate.shared?.coordinator
+    }
+    
     override func removeFromParent() {
         children.forEach({
             $0.removeFromParent()
@@ -53,7 +57,7 @@ class BaseVC:UIViewController {
 
 extension BaseVC {
     func showAlert(title:String, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
-        AppDelegate.shared.ai.showAlert(title: "Error", appearence: .type(.error))
+        AppDelegate.shared?.ai.showAlert(title: "Error", appearence: .type(.error))
     }
     
     func showAlertWithCancel(confirmTitle:String, okPressed:@escaping ()->()) {
@@ -61,7 +65,7 @@ extension BaseVC {
     }
     
     func showAlertWithCancel(title:String? = nil, description:String? = nil, type:AlertViewLibrary.ViewType = .standard, okPressed:@escaping ()->()) {
-        AppDelegate.shared.ai.showAlert(title: title, description: description, appearence: .with({
+        AppDelegate.shared?.ai.showAlert(title: title, description: description, appearence: .with({
             $0.type = type
             $0.primaryButton = .with({
                 $0.action = okPressed

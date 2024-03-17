@@ -20,7 +20,7 @@ class EditorParametersViewController: SuperVC {
             $0 is UILabel}) as? UILabel
     }
     
-    var viewModel:ViewModelEditorParametersViewController?
+    var viewModel:EditorParametersVCViewModel?
     private var parentVC: EditorViewController? {
         return parent as? EditorViewController
     }
@@ -236,7 +236,7 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
             parentVC?.playerVC?.editingAttachmentPressed(data)
         }
         removeOverlays()
-        EditorOverlayVC.addOverlayToParent(parent, bottomView: view ?? self.view, attachmentData: data, delegate: self)
+        coordinator?.presentOverlay(parentVC: parent, stickToView: view ?? self.view, attachmentData: data, delegate: self)
     }
     
     var vc: UIViewController {

@@ -17,7 +17,7 @@
 		8D18F13E2B9F458400194F34 /* AssetAttachmentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F13B2B9F458400194F34 /* AssetAttachmentProtocol.swift */; };
 		8D18F13F2B9F458400194F34 /* test_MovieGeneralParameterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F13C2B9F458400194F34 /* test_MovieGeneralParameterList.swift */; };
 		8D18F14E2B9F45EE00194F34 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1422B9F45EE00194F34 /* PlayerViewController.swift */; };
-		8D18F14F2B9F45EE00194F34 /* ViewModelEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1442B9F45EE00194F34 /* ViewModelEditorViewController.swift */; };
+		8D18F14F2B9F45EE00194F34 /* EditorVCViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1442B9F45EE00194F34 /* EditorVCViewMode.swift */; };
 		8D18F1502B9F45EE00194F34 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1452B9F45EE00194F34 /* EditorViewController.swift */; };
 		8D18F1512B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1472B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift */; };
 		8D18F1522B9F45EE00194F34 /* AssetPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1492B9F45EE00194F34 /* AssetPreviewCell.swift */; };
@@ -28,7 +28,7 @@
 		8D18F1602B9F460000194F34 /* EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F15A2B9F460000194F34 /* EditorOverlayContainerVC.swift */; };
 		8D18F1612B9F460000194F34 /* EditorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F15C2B9F460000194F34 /* EditorCollectionCell.swift */; };
 		8D18F1622B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F15D2B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift */; };
-		8D18F1632B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F15E2B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift */; };
+		8D18F1632B9F460000194F34 /* EditorOverlayContainerVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F15E2B9F460000194F34 /* EditorOverlayContainerVCViewModel.swift */; };
 		8D18F1642B9F460000194F34 /* EditorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F15F2B9F460000194F34 /* EditorOverlayVC.swift */; };
 		8D18F16F2B9F462A00194F34 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D18F1692B9F462900194F34 /* Player.storyboard */; };
 		8D18F1702B9F462A00194F34 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D18F16A2B9F462900194F34 /* Editor.storyboard */; };
@@ -51,6 +51,7 @@
 		8D18F1992B9F466A00194F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D18F18F2B9F466A00194F34 /* Assets.xcassets */; };
 		8D18F19A2B9F466A00194F34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1902B9F466A00194F34 /* Constants.swift */; };
 		8D1BEE922BA642F300EB9246 /* audio1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8D1BEE912BA63C9000EB9246 /* audio1.m4a */; };
+		8D1BEE942BA6677800EB9246 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1BEE932BA6677800EB9246 /* Coordinator.swift */; };
 		8D26ADC92BA39317009CEEB4 /* SelectionTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */; };
 		8D26ADCB2BA3933C009CEEB4 /* SelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */; };
 		8D3A4AE42BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */; };
@@ -82,7 +83,7 @@
 		8D18F13B2B9F458400194F34 /* AssetAttachmentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetAttachmentProtocol.swift; sourceTree = "<group>"; };
 		8D18F13C2B9F458400194F34 /* test_MovieGeneralParameterList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = test_MovieGeneralParameterList.swift; sourceTree = "<group>"; };
 		8D18F1422B9F45EE00194F34 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
-		8D18F1442B9F45EE00194F34 /* ViewModelEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelEditorViewController.swift; sourceTree = "<group>"; };
+		8D18F1442B9F45EE00194F34 /* EditorVCViewMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorVCViewMode.swift; sourceTree = "<group>"; };
 		8D18F1452B9F45EE00194F34 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 		8D18F1472B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelAssetParametersViewController.swift; sourceTree = "<group>"; };
 		8D18F1492B9F45EE00194F34 /* AssetPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPreviewCell.swift; sourceTree = "<group>"; };
@@ -93,7 +94,7 @@
 		8D18F15A2B9F460000194F34 /* EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
 		8D18F15C2B9F460000194F34 /* EditorCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCollectionCell.swift; sourceTree = "<group>"; };
 		8D18F15D2B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView_EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
-		8D18F15E2B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelEditorOverlayContainerVC.swift; sourceTree = "<group>"; };
+		8D18F15E2B9F460000194F34 /* EditorOverlayContainerVCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorOverlayContainerVCViewModel.swift; sourceTree = "<group>"; };
 		8D18F15F2B9F460000194F34 /* EditorOverlayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorOverlayVC.swift; sourceTree = "<group>"; };
 		8D18F1692B9F462900194F34 /* Player.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		8D18F16A2B9F462900194F34 /* Editor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Editor.storyboard; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 		8D18F18F2B9F466A00194F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D18F1902B9F466A00194F34 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8D1BEE912BA63C9000EB9246 /* audio1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio1.m4a; sourceTree = "<group>"; };
+		8D1BEE932BA6677800EB9246 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8D26ADC82BA39317009CEEB4 /* SelectionTable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionTable.storyboard; sourceTree = "<group>"; };
 		8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewController.swift; sourceTree = "<group>"; };
 		8D3A4AE32BA1EF4200375CC8 /* PlayerEditingAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEditingAttachmentView.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		8D18F1572B9F460000194F34 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */,
 				8D18F1582B9F460000194F34 /* EditorOverlayVC */,
 			);
 			path = Reusable;
@@ -242,7 +245,6 @@
 			children = (
 				8D18F15F2B9F460000194F34 /* EditorOverlayVC.swift */,
 				8D18F1592B9F460000194F34 /* EditorOverlayContainerVC */,
-				8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */,
 			);
 			path = EditorOverlayVC;
 			sourceTree = "<group>";
@@ -422,6 +424,7 @@
 		8D9F32F22B3DDFFF00697F76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D1BEE932BA6677800EB9246 /* Coordinator.swift */,
 				8DEF7B552B415083007B8737 /* DB */,
 				8D18F1382B9F458400194F34 /* DataModel */,
 				8D18F12B2B9F455E00194F34 /* EditorModel */,
@@ -461,7 +464,7 @@
 		8DF4A94C2BA4CFCE00D07C67 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8D18F1442B9F45EE00194F34 /* ViewModelEditorViewController.swift */,
+				8D18F1442B9F45EE00194F34 /* EditorVCViewMode.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -469,7 +472,7 @@
 		8DF4A94D2BA4CFDD00D07C67 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8D18F15E2B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift */,
+				8D18F15E2B9F460000194F34 /* EditorOverlayContainerVCViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -566,14 +569,14 @@
 				8D18F1562B9F45EE00194F34 /* UICollectionViewDelegate_EditorParametersViewController.swift in Sources */,
 				8D18F1802B9F465300194F34 /* PlayerSuperVC.swift in Sources */,
 				8D18F1612B9F460000194F34 /* EditorCollectionCell.swift in Sources */,
-				8D18F1632B9F460000194F34 /* ViewModelEditorOverlayContainerVC.swift in Sources */,
+				8D18F1632B9F460000194F34 /* EditorOverlayContainerVCViewModel.swift in Sources */,
 				8D18F1512B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift in Sources */,
 				8D18F1502B9F45EE00194F34 /* EditorViewController.swift in Sources */,
 				8D18F1642B9F460000194F34 /* EditorOverlayVC.swift in Sources */,
 				8D18F14E2B9F45EE00194F34 /* PlayerViewController.swift in Sources */,
 				8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */,
 				8D422D862BA3FD5700E50E87 /* FilterType.swift in Sources */,
-				8D18F14F2B9F45EE00194F34 /* ViewModelEditorViewController.swift in Sources */,
+				8D18F14F2B9F45EE00194F34 /* EditorVCViewMode.swift in Sources */,
 				8D18F1622B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift in Sources */,
 				8D18F1532B9F45EE00194F34 /* AssetHeaderCell.swift in Sources */,
 				8D75E3922BA11E8C00ED75C0 /* CGPoint.swift in Sources */,
@@ -586,6 +589,7 @@
 				8D18F1552B9F45EE00194F34 /* EditorParametersViewController.swift in Sources */,
 				8D18F13D2B9F458400194F34 /* MovieParameters.swift in Sources */,
 				8D18F1352B9F455E00194F34 /* AnimateVideoLayerCA.swift in Sources */,
+				8D1BEE942BA6677800EB9246 /* Coordinator.swift in Sources */,
 				8D18F1842B9F465300194F34 /* BaseButton.swift in Sources */,
 				8D18F13F2B9F458400194F34 /* test_MovieGeneralParameterList.swift in Sources */,
 				8D422D842BA3F33800E50E87 /* BaseTextField.swift in Sources */,

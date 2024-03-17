@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class ViewModelEditorParametersViewController {
+class EditorParametersVCViewModel {
     var assetData:MovieGeneralParameterList = .test
     var editingAsset:AssetAttachmentProtocol?
     var editingAssetHolder:AssetAttachmentProtocol?

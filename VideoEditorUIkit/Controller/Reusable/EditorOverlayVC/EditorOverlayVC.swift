@@ -266,9 +266,6 @@ extension EditorOverlayVC:UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         let hidden = navigationController.viewControllers.count >= 2
-   //     if navigationController.isNavigationBarHidden != !hidden {
-        //    navigationController.setNavigationBarHidden(!hidden, animated: true)
-   //     }
     }
 }
 
@@ -280,7 +277,6 @@ extension EditorOverlayVC {
         var didSelect:(()->())?
         var toOverlay:ToOverlayData? = nil
         var backgroundColor:UIColor? = nil
-        
     }
     
     struct ToOverlayData {
@@ -324,7 +320,7 @@ extension EditorOverlayVC {
     }
     
     static func configure(attechemntData:AssetAttachmentProtocol?,
-                          delegate:EditorOverlayVCDelegate) -> EditorOverlayVC {
+                          delegate:EditorOverlayVCDelegate?) -> EditorOverlayVC {
         let vc = EditorOverlayVC.configure()
         vc.view.layer.name = String(describing: EditorOverlayVC.self)
         vc.attachmentData = attechemntData ?? TextAttachmentDB.init(dict: [:])
@@ -336,7 +332,7 @@ extension EditorOverlayVC {
     static func addOverlayToParent(_ parent:UIViewController,
                             bottomView:UIView,
                             attachmentData:AssetAttachmentProtocol?,
-                            delegate:EditorOverlayVCDelegate
+                            delegate:EditorOverlayVCDelegate?
     ) {
         let vc = EditorOverlayVC.configure(attechemntData: attachmentData, delegate: delegate)
         parent.addChild(child: vc, constaits: vc.primaryConstraints(.small))
