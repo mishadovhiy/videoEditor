@@ -240,6 +240,3 @@ fileprivate extension PlayerSuperVC {
         ], color: .red, width: 3, opacity: 1, name: "PlayerViewControllerline")
     }
 }
-
-
-

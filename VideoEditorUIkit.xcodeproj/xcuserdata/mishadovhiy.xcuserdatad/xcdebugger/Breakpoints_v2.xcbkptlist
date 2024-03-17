@@ -2901,8 +2901,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "reloadUI()"
             landmarkType = "7">
             <Locations>
@@ -3072,8 +3072,8 @@
             filePath = "VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "videoAdded(canReload:)"
             landmarkType = "7">
             <Locations>
@@ -3257,6 +3257,51 @@
                   endingLineNumber = "123"
                   offsetFromSymbolStart = "36">
                </Location>
+               <Location
+                  uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - 916b857d2397474a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.EditorModel.videoAdded(canReload: Swift.Bool) async -&gt; ()"
+                  moduleName = "VideoEditorUIkit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "420">
+               </Location>
+               <Location
+                  uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - acf657de468ea945"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) suspend resume partial function for VideoEditorUIkit.EditorModel.videoAdded(canReload: Swift.Bool) async -&gt; ()"
+                  moduleName = "VideoEditorUIkit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - b84119bf69e60b44"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.EditorModel.videoAdded(canReload: Swift.Bool) async -&gt; ()"
+                  moduleName = "VideoEditorUIkit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "36">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -3396,8 +3441,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "clearDataPressed()"
             landmarkType = "7">
          </BreakpointContent>

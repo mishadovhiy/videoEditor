@@ -16,6 +16,11 @@ struct EditorVCViewMode {
     init(editorPresenter:EditorModelPresenter) {
         editorModel = .init(presenter:editorPresenter)
     }
+    
+    private var coordinator:Coordinator? {
+        return AppDelegate.shared?.coordinator
+    }
+    
     mutating func `deinit`() {
         editorModel = nil
     }
@@ -33,11 +38,11 @@ struct EditorVCViewMode {
                 removeAttachments()
             }),
             .init(title: "Delete Movie", image: "trash", didSelect: {
-                vc.showAlertWithCancel(confirmTitle:"Delete Movie", okPressed: deleteMovie)
+                self.coordinator?.showAlertWithCancel(confirmTitle:"Delete Movie", okPressed: deleteMovie)
             }),
             .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
                 let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
-                vc.showAlertWithCancel(confirmTitle:"Change url to: " + title, okPressed: {
+                self.coordinator?.showAlertWithCancel(confirmTitle:"Change url to: " + title, okPressed: {
                     self.toggleOriginalURL(reloadPressed: reloadPressed)
                 })
             }),

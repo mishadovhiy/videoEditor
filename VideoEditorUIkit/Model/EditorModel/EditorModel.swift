@@ -68,7 +68,6 @@ class EditorModel {
             } else {
                 await presenter?.errorAddingVideo()
             }
-            
         }
     }
     

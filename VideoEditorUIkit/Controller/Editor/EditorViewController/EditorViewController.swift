@@ -141,6 +141,11 @@ class EditorViewController: SuperVC {
         coordinator?.toDocumentPicker(delegate: self)
     }
     
+    private func soundToVideoSelected(_ url:URL) {
+        self.playerVC?.startRefreshing(completion: {
+            self.viewModel?.editorModel.addSoundPressed(url: url)
+        })
+    }
 }
 
 extension EditorViewController: UIDocumentPickerDelegate {
@@ -162,9 +167,7 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
             return
         }
         mediaPicker.dismiss(animated: true) {
-            self.playerVC?.startRefreshing(completion: {
-                self.viewModel?.editorModel.addSoundPressed(url: url)
-            })
+            self.soundToVideoSelected(url)
         }
     }
 }
@@ -220,7 +223,7 @@ extension EditorViewController:EditorModelPresenter {
     }
     
     @MainActor func errorAddingVideo() {
-        showAlert(title: "Error", appearence: .type(.error))
+        coordinator?.showAlert(title: "Error", appearence: .type(.error))
         self.playerVC?.endRefreshing()
         self.playerVC?.pause()
     }
@@ -233,7 +236,7 @@ fileprivate extension EditorViewController {
             viewModel = .init(editorPresenter: self)
         }
         loadChildrens()
-        loadVideo(movieUrl: lastEditedVideoURL())
+        loadVideo(movieUrl: lastEditedVideoURL)
         trackContainerView.layer.zPosition = 2
         mainEditorVC?.overlaySizeChanged = {
             self.setViewType(self.viewModel?.viewType ?? .editing, overlaySize: $0)

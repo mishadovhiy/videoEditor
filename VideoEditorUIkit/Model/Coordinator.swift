@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import MediaPlayer
+import AlertViewLibrary
 
 struct Coordinator {
     private var viewController:UIViewController? {
@@ -71,5 +72,30 @@ extension Coordinator {
                         attachmentData:AssetAttachmentProtocol?,
                         delegate:EditorOverlayVCDelegate?) {
         EditorOverlayVC.addOverlayToParent(parentVC, bottomView: stickToView, attachmentData: attachmentData, delegate: delegate)
+    }
+}
+
+// MARK: - AlertView
+extension Coordinator {
+    func showAlert(title:String, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
+        AppDelegate.shared?.ai.showAlert(title: title, appearence: appearence)
+    }
+    
+    func showAlertWithCancel(confirmTitle:String, okPressed:@escaping ()->()) {
+        showAlertWithCancel(title: "Are you sure you want to\n" + confirmTitle, description: "This action cannot be undone", type: .error, okPressed: okPressed)
+    }
+    
+    func showAlertWithCancel(title:String? = nil, description:String? = nil, type:AlertViewLibrary.ViewType = .standard, okPressed:@escaping ()->()) {
+        AppDelegate.shared?.ai.showAlert(title: title, description: description, appearence: .with({
+            $0.type = type
+            $0.primaryButton = .with({
+                $0.action = okPressed
+                $0.title = "OK"
+            })
+            $0.secondaryButton = .with({
+                $0.style = .error
+                $0.title = "Cancel"
+            })
+        }))
     }
 }
