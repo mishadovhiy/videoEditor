@@ -21,7 +21,7 @@ class EditorOverlayContainerVC: SuperVC {
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
     
     var needTextField:Bool {
-        return parentVC?.data?.needTextField ?? (viewModel?.type == .text)
+        return parentVC?.data?.needTextField ?? (viewModel?.type == .text) && ((navigationController?.viewControllers.count ?? 0) == 1)
     }
     
     var screenSize:OverlaySize? {

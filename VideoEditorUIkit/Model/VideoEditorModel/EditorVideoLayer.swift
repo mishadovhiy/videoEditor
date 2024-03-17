@@ -43,14 +43,15 @@ struct EditorVideoLayer {
         }
     }
     
-    func addLayer(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, videoTotalTime:CGFloat) {
-        let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, text: text)
-        animation.add(newValue, to: layer, start: text.inMovieStart, duration: text.duration, totalTime: videoTotalTime, properties: .init(needScale: text.needScale))
-    }
-    
-    func addLayer(video: String, to layer: CALayer, videoSize: CGSize, videoDuration:CGFloat, attachmantStart:CGFloat, attachmantDuration:CGFloat) {
-        let newValue = attachmentLayer.add(video: video, to: layer, videoSize: videoSize)
-        animation.add(newValue, to: layer, start: attachmantStart, duration: attachmantDuration, totalTime: videoDuration, properties: .init(needScale: false))
+    func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol, videoTotalTime:CGFloat) -> Bool {
+        if let text = data as? TextAttachmentDB {
+            let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, text: text)
+            animation.add(newValue, to: layer, data:data, totalTime: videoTotalTime)
+            return true
+        } else {
+            print("video not added \(data) ", #file, #line)
+            return false
+        }
     }
 }
 

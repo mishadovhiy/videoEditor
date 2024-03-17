@@ -92,7 +92,12 @@ class EditorViewController: SuperVC {
     }
     
     func previewImagesUpdated(image:Data?) {
-        mainEditorVC?.updateData(viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: image, filterSelected: videoFilterSelected, reloadPressed: reloadUI, removeAttachments: addSoundPressed, deleteMovie: clearDataPressed) ?? [])
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let data = DB.db.movieParameters.editingMovie?.preview
+            DispatchQueue.main.async {
+                self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: data, filterSelected: self.videoFilterSelected, reloadPressed: self.reloadUI, removeAttachments: self.addSoundPressed, deleteMovie: self.clearDataPressed) ?? [])
+            }
+        }
     }
     
     func playerChangedAttachment(_ newData:AssetAttachmentProtocol?) {
@@ -142,7 +147,7 @@ class EditorViewController: SuperVC {
     }
     
     private func soundToVideoSelected(_ url:URL) {
-        self.playerVC?.startRefreshing(completion: {
+        playerVC?.startRefreshing(completion: {
             self.viewModel?.editorModel.addSoundPressed(url: url)
         })
     }
@@ -151,7 +156,7 @@ class EditorViewController: SuperVC {
 extension EditorViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let selectedURL = urls.first else {
-            self.coordinator?.showErrorAlert(title: "Invalid file URL", description: "Check if file is downloaded")
+            coordinator?.showErrorAlert(title: "Invalid file URL", description: "Check if file is downloaded")
             return
         }
         controller.dismiss(animated: true) { [weak self] in
@@ -166,7 +171,7 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
         let item = mediaItemCollection.items.first
         guard let url = item?.assetURL else {
             print("url is nil")
-            self.coordinator?.showErrorAlert(title: "Selected Song is not downloaded or DRM protected from copying", description: "Try to download the media in the Apple Music app and try again")
+            coordinator?.showErrorAlert(title: "Selected Song is not downloaded or DRM protected from copying", description: "Try to download the media in the Apple Music app and try again")
             return
         }
         mediaPicker.dismiss(animated: true) { [weak self] in
@@ -178,9 +183,9 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
 extension EditorViewController:PlayerViewControllerPresenter {
     func reloadUI() {
         coordinator?.start()
-        self.view.removeFromSuperview()
-        self.viewModel?.deinit()
-        self.removeFromParent()
+        view.removeFromSuperview()
+        viewModel?.deinit()
+        removeFromParent()
     }
     
     func clearDataPressed() {
@@ -209,7 +214,7 @@ extension EditorViewController:VideoEditorModelPresenter {
         }
         set {
             Task {
-                DB.db.movieParameters.clearTemporaryDirectory(exept: newValue)
+                AppDelegate.shared?.fileManager?.clearDirectory(newValue)
                 await MainActor.run {
                     playerVC?.movieURL = newValue
                     if viewModel?.viewType ?? .addingVideos == .addingVideos {
@@ -246,7 +251,6 @@ fileprivate extension EditorViewController {
     }
     
     private func loadChildrens() {
-        
         let mainEditorView = EditorOverlayVC.configure(data: .init(screenTitle: "Choose filter", collectionData: [], needTextField: false, isPopup: false, closePressed: {
             self.mainEditorVC?.isHidden = true
         }))

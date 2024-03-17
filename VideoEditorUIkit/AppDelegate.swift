@@ -7,8 +7,6 @@
 
 import UIKit
 import AlertViewLibrary
-import Photos
-import MediaPlayer
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,37 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }))
         
+    var fileManager:FileManagerServgice?
+    
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         coordinator = .init()
+        fileManager = .init()
         return true
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        PHPhotoLibrary.requestAuthorization { PHAuthorizationStatus in
-            if PHAuthorizationStatus == .authorized {
-                
-            }
-        }
-        MPMediaLibrary.requestAuthorization { status in
-            print(status.rawValue, " hrtgerfewdaw")
-            switch status {
-            case .authorized:
-                // User granted access to their music library
-                // You can now access their music library using MPMediaLibrary APIs
-                break
-            case .restricted:
-                // User's access to their music library is restricted (e.g., parental controls)
-                break
-            case .denied:
-                // User denied access to their music library
-                break
-            case .notDetermined:
-                // User hasn't yet made a choice
-                break
-            default:
-                break
-            }
-        }
+        let appServicesAuthorization = RequestAuthorization()
+        appServicesAuthorization.mediaLibrary()
+        appServicesAuthorization.photoLibrary()
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.type(.white)]
         return true
     }

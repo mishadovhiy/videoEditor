@@ -61,15 +61,7 @@ struct EditorVCViewMode {
     }
     
     private func loadUrls() -> [URL] {
-        let fileManager = FileManager.default
-        let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        
-        do {
-            let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
-            return contents
-        } catch {
-            return []
-        }
+        return AppDelegate.shared?.fileManager?.contents ?? []
     }
     
     

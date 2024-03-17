@@ -28,6 +28,7 @@ class StackAssetAttachmentView:UIView {
         layerStack?.subviews.first(where: {$0.layer.name == "LeftHeaderView"})
     }
     
+    private var isSelected = false
     // MARK: - Life-Cycle
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -62,35 +63,71 @@ class StackAssetAttachmentView:UIView {
         layerStack?.arrangedSubviews.forEach( {
             $0.subviews.forEach {
                 if let rowView = $0 as? AssetRawView {
-                    rowView.setSelected(false)
+                    rowView.setSelected(false, deselectAll: true)
                 }
             }
         })
     }
     
     func addEmptyPressed() {
-        var newData = TextAttachmentDB.demo
-        newData.inMovieStart = 0
-        newData.duration = 0.2
+        var newData:AssetAttachmentProtocol?
+        switch attachmentType {
+        case .text:
+            newData = TextAttachmentDB()
+        case .song:
+            newData = SongAttachmentDB()
+        case .media:
+            newData = ImageAttachmentDB()
+        default:
+            break
+        }
+        newData?.time.start = 0
+        newData?.time.duration = 0.2
         if let superView = (delegate as? EditorParametersViewController)?.scrollView {
             let superLeftSpace = EditorParametersViewController.collectionViewSpace
             let scroll = (superView.contentOffset.x + superLeftSpace.x) / (superView.contentSize.width + (superLeftSpace.x * 2))
-            newData.inMovieStart = scroll >= 1 ? 1 : (scroll <= 0 ? 0 : scroll)
+            newData?.time.start = scroll >= 1 ? 1 : (scroll <= 0 ? 0 : scroll)
+        }
+        guard let newData else {
+            return
         }
         self.setSelected(true)
         addRowView(data: newData, isEmpty: true) { view in
             view.layer.name = "isEmptyView"
             view.alpha = 0
             view.layer.zoom(value: 0.7)
-            self.editRowPressed(newData, view: view)
-            self.setEmptyViewHidden(false, view: view)
+            self.editRowPressed(newData, view: view, force: true)
             view.setSelected(true)
+            self.setEmptyViewHidden(false, view: view)
+        }
+    }
+    
+    override var isUserInteractionEnabled: Bool {
+        get {
+            return super.isUserInteractionEnabled
+        }
+        set {
+            if isSelected {
+                super.isUserInteractionEnabled = true
+                return
+            }
+            super.isUserInteractionEnabled = newValue
+            layerStack?.arrangedSubviews.forEach({
+                $0.subviews.forEach {
+                    $0.isUserInteractionEnabled = newValue
+                }
+            })
         }
     }
     
     // MARK: @IBAction
-    private func editRowPressed(_ data:AssetAttachmentProtocol?, view:AssetRawView? = nil) {
+    private func editRowPressed(_ data:AssetAttachmentProtocol?, view:AssetRawView? = nil, force:Bool = false) {
+        if isSelected && !force {
+            return
+        }
+        print(tag, " grfedretghyytgrfv")
         delegate?.attachmentSelected(data, view: view ?? self)
+        setSelected(true)
     }
     
     private func assetChangePanEnded(_ view:AssetRawView?) {
@@ -101,6 +138,7 @@ class StackAssetAttachmentView:UIView {
         if sender.state != .ended {
             return
         }
+        if isSelected {return}
         addEmptyPressed()
     }
 }
@@ -118,16 +156,15 @@ extension StackAssetAttachmentView {
         data?.forEach({
             self.addRowView(data: $0)
         })
-        if data?.isEmpty ?? true {
-            
-        }
     }
     
     private func addRowView(data:AssetAttachmentProtocol, isEmpty:Bool = false, created:((_ view:AssetRawView)->())? = nil) {
         let layer = isEmpty ? 0 : self.data.layerNumber(item: data)
         if let layer,
            let toView = layerStack?.arrangedSubviews[layer] {
-            AssetRawView.create(superView: toView, data: data, vcSuperView: delegate!.vc.view, editRowPressed: editRowPressed(_:view:), panEnded: assetChangePanEnded(_:), created:created)
+            AssetRawView.create(superView: toView, data: data, vcSuperView: delegate!.vc.view, editRowPressed: {row,view in 
+                self.editRowPressed(row, view:view)
+            }, panEnded: assetChangePanEnded(_:), created:created)
             toView.isHidden = false
         } else {
             print("error adding row to the \(String(describing: Self.self))  ", layer ?? -3)
@@ -145,6 +182,8 @@ extension StackAssetAttachmentView {
     }
     
     func setSelected(_ selected:Bool) {
+        isSelected = selected
+        isUserInteractionEnabled = super.isUserInteractionEnabled
         layer.animationTransition(0.2)
         layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
@@ -191,6 +230,7 @@ fileprivate extension StackAssetAttachmentView {
             layerStack.addArrangedSubview(view)
         }
         layerStack.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
+        print(data, " grefgtyh")
         self.updateView(self.data)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emptyRowPressed(_:))))
         self.backgroundColor = Constants.Color.trackColor

@@ -37,5 +37,6 @@ enum FilterType:String {
     var title:String {
         return rawValue
     }
+    
     static let allCases:[Self] = [.none, .invert, .CIXRay, .CIVignetteEffect, .CIVignette, .CIThermal, .CISepiaTone, .CIPhotoEffect, .CIPalettize, .CIPaletteCentroid, .CIMinimumComponent, .CIMaximumComponent, .CIMaskToAlpha, .CILabDeltaE, .CIFalseColor, .CIDocumentEnhancer, .CIColorPosterize, .CIDither, .CIColorMonochrome, .CIColorMap, .CIColorCurves, .CIColorCubesMixedWithMask, .CIColorCubeWithColorSpace, .CIColorCube, .CIColorCrossPolynomial]
 }

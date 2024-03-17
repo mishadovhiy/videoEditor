@@ -44,8 +44,8 @@ class EditorParametersVCViewModel {
     
     func attachmentData(attachmentData:AssetAttachmentProtocol?) -> MovieAttachmentProtocol? {
         var data = attachmentData as? MovieAttachmentProtocol
-        data?.inMovieStart = editingAsset?.inMovieStart ?? 0.2
-        data?.duration = editingAsset?.duration ?? 0.6
+        data?.time.start = editingAsset?.time.start ?? 0.2
+        data?.time.duration = editingAsset?.time.duration ?? 0.6
         return data
     }
     

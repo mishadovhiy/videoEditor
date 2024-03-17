@@ -7,24 +7,6 @@
 
 import UIKit
 
-enum InstuctionAttachmentType:String {
-    case song, text, media
-    var order:Int {
-        switch self {
-        case .song: return 1
-        case .text: return 2
-        case .media: return 3
-        }
-    }
-    
-    var title:String {
-        if self == .media {
-            return "Image"
-        }
-        return rawValue.capitalized
-    }
-}
-
 struct MovieGeneralParameterList {
     
     var songs:[SongRow]
@@ -36,7 +18,7 @@ struct MovieGeneralParameterList {
      */
     var duration:CGFloat {
         return previewAssets.reduce(0) { partialResult, data in
-            return partialResult + data.duration
+            return partialResult + data.time.duration
         }
     }
     

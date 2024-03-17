@@ -11,29 +11,31 @@ import AVFoundation
 //MARK: Protocol
 protocol AssetAttachmentProtocol {
     /// percent in movie asset
-    var duration:CGFloat {get set}
-    var inMovieStart:CGFloat {get set}
-    var assetName:String? {get set}
-    var color:UIColor {get}
+    var time:DB.DataBase.MovieParametersDB.AssetTime { get set }
+    var assetName:String? { get set }
     var defaultName:String { get }
-    var attachmentType:InstuctionAttachmentType? { get}
+    var attachmentType:InstuctionAttachmentType? { get }
+    var color:UIColor {get }
     var id:UUID { get }
+    
 }
 
 protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
     /// percent in movie asset
-    var position:CGPoint {get set}
+    var position:CGPoint { get set }
     var zoom:CGFloat { get set }
+    var shadows:DB.DataBase.MovieParametersDB.Shadows { get set }
+    var animations:DB.DataBase.MovieParametersDB.AnimationMovieAttachment { get set }
 }
 
 extension [AssetAttachmentProtocol] {
     func layerNumber(item:AssetAttachmentProtocol) -> Int? {
         var at:Int = 0
         self.forEach {
-            let from = $0.inMovieStart * 100
-            let to = ($0.duration * 100) + from
+            let from = $0.time.start * 100
+            let to = ($0.time.duration * 100) + from
             let mainRange = from..<to
-            let subRange = (item.inMovieStart * 100)..<((item.duration + item.inMovieStart) * 100)
+            let subRange = (item.time.start * 100)..<((item.time.duration + item.time.start) * 100)
             
             if mainRange.contains(subRange.lowerBound) || mainRange.contains(subRange.upperBound) || subRange.contains(mainRange.lowerBound) || subRange.contains(mainRange.upperBound) {
                 at += 1
@@ -53,17 +55,18 @@ extension [AssetAttachmentProtocol] {
 //MARK: List
 extension MovieGeneralParameterList {
     struct AssetsData:AssetAttachmentProtocol {
+        
         var id: UUID = .init()
-        var inMovieStart: CGFloat = 0
-        let attachmentType: InstuctionAttachmentType? = nil
-        var duration: CGFloat
+        var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
+        let attachmentType: InstuctionAttachmentType?
         var assetName: String? = nil
         var previews:[PreviewData] = []
+        fileprivate static let cellWidthMultiplier:CGFloat = 4
         
         var color: UIColor {
             return .white
         }
-
+        
         var defaultName: String {
             return "Movie"
         }
@@ -71,9 +74,17 @@ extension MovieGeneralParameterList {
         static var cellWidth:CGFloat {
             return 10 * cellWidthMultiplier
         }
-        fileprivate static let cellWidthMultiplier:CGFloat = 4
+        
         var sectionWidth:CGFloat {
             return CGFloat(previews.count) * MovieGeneralParameterList.AssetsData.cellWidth
+        }
+        
+        public static func with(type:InstuctionAttachmentType,
+            _ populator: (inout Self) throws -> ()
+        ) rethrows -> Self {
+            var message = Self(attachmentType: type)
+            try populator(&message)
+            return message
         }
         
         static func create(_ asset:AVAssetTrackSegment, composition:AVMutableComposition?, loadPreviews:Bool) -> AssetsData {
@@ -83,17 +94,20 @@ extension MovieGeneralParameterList {
                 array.append(i)
             }
             if loadPreviews {
-                return .init(duration: asset.timeMapping.source.duration.seconds, assetName: asset.description, previews: array.compactMap({
+                return .init(time:.with({
+                    $0.duration = asset.timeMapping.source.duration.seconds
+                }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({
                     let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
                     let previewTime:CMTime = .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: VideoEditorModel.timeScale)
                     return .init(composition?.preview(time: previewTime)?.jpegData(compressionQuality: 0.1))
                 }))
             } else {
-                return .init(duration: asset.timeMapping.source.duration.seconds, assetName: asset.description, previews: array.compactMap({_ in 
+                return .init(time: .with({
+                    $0.duration = asset.timeMapping.source.duration.seconds
+                }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({_ in
                     .init(nil)
                 }))
             }
-            
         }
     }
 }
@@ -101,11 +115,12 @@ extension MovieGeneralParameterList {
 
 extension MovieGeneralParameterList {
     struct RegularRow:MovieAttachmentProtocol {
+        var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment = .init(dict: [:])
+        var shadows: DB.DataBase.MovieParametersDB.Shadows = .init(dict: [:])
         var zoom:CGFloat = 1
         var position: CGPoint = .zero
-        let attachmentType: InstuctionAttachmentType? = .text
-        var inMovieStart: CGFloat
-        var duration: CGFloat
+        let attachmentType: InstuctionAttachmentType?
+        var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
         var assetName: String? = nil
         var id: UUID = .init()
         
@@ -116,15 +131,23 @@ extension MovieGeneralParameterList {
         var defaultName: String {
             return attachmentType?.rawValue.capitalized ?? "-"
         }
+        
+        public static func with(type:InstuctionAttachmentType,
+            _ populator: (inout Self) throws -> ()
+        ) rethrows -> Self {
+            var message = Self(attachmentType: type)
+            try populator(&message)
+            return message
+        }
     }
     
     struct SongRow:AssetAttachmentProtocol {
+        
         var id: UUID = .init()
         let attachmentType: InstuctionAttachmentType? = .song
-        var inMovieStart: CGFloat
-        var duration: CGFloat
+        var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
         var assetName: String? = nil
-        
+        /// Track color
         var color: UIColor {
             return .purple
         }
@@ -132,22 +155,30 @@ extension MovieGeneralParameterList {
         var defaultName: String {
             return attachmentType?.rawValue.capitalized ?? "-"
         }
-
+        
+        public static func with(
+            _ populator: (inout Self) throws -> ()
+        ) rethrows -> Self {
+            var message = Self()
+            try populator(&message)
+            return message
+        }
     }
     
     struct MediaRow:MovieAttachmentProtocol {
+        var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment = .init(dict: [:])
+        var shadows: DB.DataBase.MovieParametersDB.Shadows = .init(dict: [:])
         var zoom:CGFloat = 1
         var position: CGPoint = .zero
-        var attachmentType: InstuctionAttachmentType? {
-            return .media
-        }
-        
-        var inMovieStart: CGFloat
-        var duration: CGFloat
+        var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
         var assetName: String? = nil
         var type:Type = .image
         var previews:[PreviewData] = []
         var id: UUID = .init()
+        
+        var attachmentType: InstuctionAttachmentType? {
+            return .media
+        }
         
         var color: UIColor {
             switch type {
@@ -165,6 +196,14 @@ extension MovieGeneralParameterList {
             case .image:
                 return "Image"
             }
+        }
+        
+        public static func with(
+            _ populator: (inout Self) throws -> ()
+        ) rethrows -> Self {
+            var message = Self()
+            try populator(&message)
+            return message
         }
     }
 }

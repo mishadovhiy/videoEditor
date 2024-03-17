@@ -8,7 +8,6 @@
 import UIKit
 
 class AssetRawView:UIView {
-    
     private var headerView:UIView? {
         self.subviews.first(where: {$0.layer.name == "Header" })
     }
@@ -18,15 +17,16 @@ class AssetRawView:UIView {
     private var pansGetsureView:[UIView] {
         self.subviews.filter({$0.layer.name == "panGestureView"})
     }
-    
     private var xConstraint:NSLayoutConstraint? {
         superview?.constraints.first(where: {$0.firstAttribute == .left})
     }
     private var widthConstraint:NSLayoutConstraint? {
-        superview?.constraints.first(where: {$0.firstAttribute == .width})
+        constraints.first(where: {$0.firstAttribute == .width})
     }
+    private let clickService = AudioToolboxService()
     private let panNormalAlpha:CGFloat = 0.2
-
+    var canSelect = true
+    var isSelected:Bool = false
     var data:AssetAttachmentProtocol?
     private var editRowPressed:((_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->())?
     private var panEnded:((_ view:AssetRawView) -> ())?
@@ -51,10 +51,23 @@ class AssetRawView:UIView {
         }
     }
     
+    override var isUserInteractionEnabled: Bool {
+        get {
+            return super.isUserInteractionEnabled
+        }
+        set {
+            if isSelected {
+                super.isUserInteractionEnabled = true
+                return
+            }
+            super.isUserInteractionEnabled = newValue
+        }
+    }
+    
     private var newConstraints:(CGFloat, CGFloat) {
         let total = parentCollectionWidth ?? 100
-        let x = total * data!.inMovieStart
-        let width = total * data!.duration
+        let x = total * data!.time.start
+        let width = total * data!.time.duration
         return (x, width)
     }
     
@@ -64,7 +77,10 @@ class AssetRawView:UIView {
         editRowPressed = nil
     }
     
-    func setSelected(_ selected:Bool) {
+    func setSelected(_ selected:Bool, deselectAll:Bool = false) {
+        canSelect = deselectAll
+        isSelected = selected
+        isUserInteractionEnabled = super.isUserInteractionEnabled
         layer.animationTransition()
         layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
@@ -78,19 +94,23 @@ class AssetRawView:UIView {
         if sender.state != .ended {
             return
         }
-        editRowPressed?(data, self)
+        if isSelected || !canSelect {
+            return
+        }
         setSelected(true)
+        editRowPressed?(data, self)
     }
     
     @objc private func panGesture(_ sender: UIPanGestureRecognizer) {
-        if layer.borderWidth == 0 {
+        if !isSelected {
             return
         }
         let position = sender.translation(in: self)
+        print("testsfd: ", (widthConstraint?.constant ?? 0) + position.x)
         if sender.view?.tag == 1 {
             xConstraint?.constant += position.x
         } else if sender.view?.tag == 0 {
-            widthConstraint?.constant += position.x
+            widthConstraint!.constant += position.x
         }
         superview?.layoutIfNeeded()
         layoutIfNeeded()
@@ -102,8 +122,9 @@ class AssetRawView:UIView {
             panEnded?(self)
         }
         gestureBegun(!sender.state.isEnded, senderView: sender.view)
+        clickService.vibrate()
     }
-    
+
     private func gestureBegun(_ begun:Bool, senderView:UIView?) {
         let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
             senderView?.alpha = begun ? 0.5 : self.panNormalAlpha

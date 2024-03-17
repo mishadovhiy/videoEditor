@@ -25,9 +25,12 @@ struct AttachentVideoLayerModel {
         let textLayer = CATextLayer()
         textLayer.name = AttachentVideoLayerModel.textLayerName
         textLayer.string = attributedText
-        textLayer.alignmentMode = .center
+        textLayer.alignmentMode = text.textAlighment.textLayerAligmentMode
         textLayer.isWrapped = true
-        
+        textLayer.foregroundColor = text.color.cgColor
+        textLayer.shadowColor = text.shadows.color.cgColor
+        textLayer.shadowOpacity = Float(text.shadows.opasity)
+        textLayer.shadowRadius = text.shadows.radius
         var size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
         size.height *= text.zoom
         setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: videoSize, layerSize: size)

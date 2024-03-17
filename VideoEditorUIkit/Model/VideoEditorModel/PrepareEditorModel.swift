@@ -346,11 +346,16 @@ extension PrepareEditorModel {
     }
     
 
-    private func addLayerComposition(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], layer:CALayer, data:TextAttachmentDB?, videoSize: CGSize) async -> (AVMutableVideoComposition?, CALayer, CALayer)? {
-        
-        await layerEditor.addLayer(to: layer,
+    private func addLayerComposition(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], layer:CALayer, data:MovieAttachmentProtocol?, videoSize: CGSize) async -> (AVMutableVideoComposition?, CALayer, CALayer)? {
+        guard let data else {
+            return nil
+        }
+        let ok = await layerEditor.addLayer(to: layer,
                                    videoSize: videoSize,
-                                   text: .init(attachment: data), videoTotalTime: composition.duration().seconds)
+                                   data: data, videoTotalTime: composition.duration().seconds)
+        if !ok {
+            return nil
+        }
         let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: layer, composition: composition)
         print(videoComposition?.0.instructions, " htgefrdwe")
         return videoComposition

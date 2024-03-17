@@ -18,11 +18,11 @@ class EditorOverlayVC: SuperVC {
     private var selectionIndicatorView:UIView? {
         return view.subviews.first(where: {$0.layer.name == "SelectionIndicatorView"})
     }
-    @IBOutlet private var actionButtons: [BaseButton]!
+    @IBOutlet var actionButtons: [BaseButton]!
     
     var data:ToOverlayData?
     var attachmentData:AssetAttachmentProtocol?
-    private var delegate:EditorOverlayVCDelegate?
+    var attachmentDelegate:EditorOverlayVCDelegate?
     override var initialAnimation: Bool { return false}
     var overlaySizeChanged:((_ newSize:EditorOverlayContainerVC.OverlaySize)->())?
     private var childVC:EditorOverlayContainerVC? {
@@ -51,19 +51,15 @@ class EditorOverlayVC: SuperVC {
         }
     }
     
-    func updateData(_ data:[OverlayCollectionData]) {
-        childVC?.updateData(data)
-    }
-    
     override func removeFromParent() {
         if !(data?.isPopup ?? true) {
             return
         }
-        delegate?.overlayRemoved()
+        attachmentDelegate?.overlayRemoved()
         attachmentData = nil
         view.endEditing(true)
         animateShow(show: false) {
-            self.delegate = nil
+            self.attachmentDelegate = nil
             self.view.constraints.forEach {
                 self.view.removeConstraint($0)
             }
@@ -86,9 +82,13 @@ class EditorOverlayVC: SuperVC {
         }
     }
     
+    func updateData(_ data:[OverlayCollectionData]) {
+        childVC?.updateData(data)
+    }
+    
     func childChangedData(_ attachmentData:AssetAttachmentProtocol) {
         self.attachmentData = attachmentData
-        delegate?.overlayChangedAttachment(attachmentData)
+        attachmentDelegate?.overlayChangedAttachment(attachmentData)
     }
     
     var isHidden:Bool = false {
@@ -111,8 +111,8 @@ class EditorOverlayVC: SuperVC {
     
     // MARK: - IBAction
     @IBAction func addPressed(_ sender: UIButton) {
-        if delegate != nil {
-            delegate?.addAttachmentPressed(attachmentData)
+        if attachmentDelegate != nil {
+            attachmentDelegate?.addAttachmentPressed(attachmentData)
         }
         if data?.isPopup ?? true  {
             removeFromParent()
@@ -132,10 +132,6 @@ class EditorOverlayVC: SuperVC {
 
 fileprivate extension EditorOverlayVC {
     func animateShow(show:Bool, completion:(()->())? = nil) {
-        if show {
-            view.alpha = 0
-            view.layer.zoom(value: 0.7)
-        }
         let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
             self.view.alpha = show ? 1 : 0
             self.view.layer.zoom(value: !show ? 1.2 : 1)
@@ -144,114 +140,6 @@ fileprivate extension EditorOverlayVC {
             completion?()
         }
         animation.startAnimation()
-    }
-}
-
-// MARK: - loadUI
-extension EditorOverlayVC {
-    func setupUI() {
-        if data?.isPopup ?? true {
-            view.layer.cornerRadius = 12
-            view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
-            view.subviews.first(where: {$0 is UIStackView})?.layer.masksToBounds = true
-            view.layer.shadowColor = UIColor.init(.black).cgColor
-            view.layer.shadowOpacity = 0.8
-            view.layer.shadowOffset = .init(width: -1, height: 3)
-            view.layer.shadowRadius = 5
-        } else {
-            view.backgroundColor = view.superview!.backgroundColor ?? .clear
-            actionButtons.first(where: {$0.style == 0})?.superview?.isHidden = hideDoneButton
-            actionButtons.first(where: {$0.style == 1})?.superview?.isHidden = hideCloseButton
-        }
-    }
-    
-    var hideCloseButton:Bool {
-        data?.closePressed == nil && delegate == nil
-    }
-    
-    var hideDoneButton:Bool {
-        data?.donePressed == nil && delegate == nil
-    }
-
-    func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
-        switch type {
-        case .small:
-            return !(data?.isPopup ?? true) ? [.height:(70, "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(50, "height")]
-        case .middle:
-            return !(data?.isPopup ?? true) ? [.height:(85, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(90, "height")]
-        case .big:
-            return !(data?.isPopup ?? true) ? [.height:(250, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(185, "height")]
-        }
-    }
-    
-    private func loadSeectionIndocator(bottomView:UIView, parent:UIViewController) {
-        guard let toView = self.view else { return }
-        let view = UIView()
-        toView.addSubview(view)
-        view.layer.name = "SelectionIndicatorView"
-        view.translatesAutoresizingMaskIntoConstraints = false
-        let imageView = UIImageView(image: .init(named: "bottomSelectionIndicator"))
-        imageView.tintColor = view.superview?.backgroundColor ?? .red
-        view.addSubview(imageView)
-        view.topAnchor.constraint(equalTo: toView.bottomAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
-        view.leadingAnchor.constraint(lessThanOrEqualTo: bottomView.trailingAnchor, constant: -20).isActive = true
-        view.leadingAnchor.constraint(lessThanOrEqualTo: self.view.trailingAnchor, constant: -10).isActive = true
-        imageView.addConstaits([.left:-20, .top:0, .bottom:0])
-        let constraint3 = view.trailingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: -10)
-        constraint3.priority = .init(rawValue: 250)
-        constraint3.isActive = true
-
-        view.addConstaits([.width:50])
-    }
-    
-    func updateMainConstraints(viewController:UIViewController, textFieldEditing:Bool = false) {
-        if let topVC = viewController as? EditorOverlayContainerVC {
-            let hidden = (viewController.navigationController?.viewControllers.count ?? 0) >= 2
-
-            let type = topVC.screenSize ?? (hidden ? .middle : .small)
-            let constraints = primaryConstraints(textFieldEditing ? .middle : type)
-            constraints.forEach { typeData in
-                if let constraint = self.view.constraints.first(where: {
-                    $0.identifier == typeData.value.1
-                }) {
-                    constraint.constant = typeData.value.0
-                } else if let constraint = self.view.superview?.constraints.first(where: {
-                    $0.identifier == typeData.value.1
-                }) {
-                    constraint.constant = typeData.value.0
-                }
-            }
-            let animation = UIViewPropertyAnimator(duration:(data?.isPopup ?? false) ? 0.2 : 0.29, curve: .easeIn) {
-                self.view.layoutIfNeeded()
-                self.view.superview?.layoutIfNeeded()
-                viewController.view.layoutIfNeeded()
-            }
-            animation.addAnimations({
-                self.toggleButtons(hidden: textFieldEditing ? true : hidden, animated: false)
-            }, delayFactor: 0.05)
-            animation.startAnimation()
-            
-            overlaySizeChanged?(type)
-        }
-    }
-    
-    func toggleButtons(hidden:Bool, animated:Bool = true) {
-        actionButtons.forEach { view in
-            var hide = hidden
-            if !hide && attachmentData == nil {
-                hide = view.style == 0 ? data?.donePressed == nil : data?.closePressed == nil
-            }
-            if (view.superview?.isHidden ?? true) != hide {
-                if animated {
-                    UIView.animate(withDuration: 0.3) {
-                        view.superview?.isHidden = hide
-                    }
-                } else {
-                    view.superview?.isHidden = hide
-                }
-            }
-        }
     }
 }
 
@@ -308,7 +196,7 @@ extension EditorOverlayVC {
 }
 
 extension EditorOverlayVC {
-    static func configure() -> EditorOverlayVC {
+    private static func configure() -> EditorOverlayVC {
         let vc = UIStoryboard(name: "EditorOverlay", bundle: nil).instantiateViewController(withIdentifier: "EditorOverlayVC") as? EditorOverlayVC ?? .init()
         return vc
     }
@@ -324,7 +212,7 @@ extension EditorOverlayVC {
         let vc = EditorOverlayVC.configure()
         vc.view.layer.name = String(describing: EditorOverlayVC.self)
         vc.attachmentData = attechemntData ?? TextAttachmentDB.init(dict: [:])
-        vc.delegate = delegate
+        vc.attachmentDelegate = delegate
         vc.view.alpha = 0
         return vc
     }

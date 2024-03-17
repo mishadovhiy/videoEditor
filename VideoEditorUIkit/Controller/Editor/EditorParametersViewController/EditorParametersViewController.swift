@@ -80,6 +80,15 @@ class EditorParametersViewController: SuperVC {
         animation.startAnimation()
     }
     
+    private func togglePressScrollContent(_ enable:Bool) {
+        headersStack.isUserInteractionEnabled = enable
+        assetStackView.subviews.forEach {
+            if let _ = $0 as? StackAssetAttachmentView {
+                $0.isUserInteractionEnabled = enable
+            }
+        }
+    }
+    
     // MARK: receive
     func assetChanged() {
         guard let viewModel,
@@ -197,6 +206,7 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
                 view.deselectAll()
             }
         }
+        togglePressScrollContent(true)
     }
     
     func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
@@ -219,8 +229,10 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
         let durationPercent = (view?.frame.width ?? 0) / total.width
         print(startPercent, "startPercent ")
         print(durationPercent, " durationPercent")
-        viewModel?.editingAsset?.inMovieStart = startPercent
-        viewModel?.editingAsset?.duration = durationPercent
+        viewModel?.editingAsset?.time = .with({
+            $0.start = startPercent
+            $0.duration = durationPercent
+        })
 
     }
     
@@ -228,15 +240,14 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
         guard let parent = parentVC else {
             return
         }
-        parent.playerVC?.pause()
+        togglePressScrollContent(false)
+        removeOverlays()
         viewModel?.editingAssetHolder = data
         viewModel?.editingAsset = data
         viewModel?.editingView = view
-        if let data {
-            parentVC?.playerVC?.editingAttachmentPressed(data)
-        }
-        removeOverlays()
-        coordinator?.presentOverlay(parentVC: parent, stickToView: view ?? self.view, attachmentData: data, delegate: self)
+        parent.playerVC?.pause()
+        self.parentVC?.playerVC?.editingAttachmentPressed(data)
+        self.coordinator?.presentOverlay(parentVC: parent, stickToView: view ?? self.view, attachmentData: data, delegate: self)
     }
     
     var vc: UIViewController {

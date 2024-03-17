@@ -67,6 +67,18 @@
 		8D6CE22A2BA1230800D33A3D /* 1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8D6CE2292BA1230800D33A3D /* 1.mov */; };
 		8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */; };
 		8D75E3922BA11E8C00ED75C0 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */; };
+		8DA694A72BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */; };
+		8DA694A92BA6E9540086AAEC /* NSTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA694A82BA6E9540086AAEC /* NSTextAlignment.swift */; };
+		8DBC3F652BA780C30045CB98 /* AudioToolboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F642BA780C30045CB98 /* AudioToolboxService.swift */; };
+		8DBC3F682BA7813F0045CB98 /* RequestAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F672BA7813F0045CB98 /* RequestAuthorization.swift */; };
+		8DBC3F6A2BA78E320045CB98 /* DB_AssetTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F692BA78E320045CB98 /* DB_AssetTime.swift */; };
+		8DBC3F6C2BA78E530045CB98 /* DB_Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F6B2BA78E530045CB98 /* DB_Shadows.swift */; };
+		8DBC3F6E2BA78EA60045CB98 /* MovieParametersDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F6D2BA78EA60045CB98 /* MovieParametersDB.swift */; };
+		8DBC3F702BA78FB70045CB98 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F6F2BA78FB70045CB98 /* FileManager.swift */; };
+		8DBC3F732BA7935D0045CB98 /* SongAttachmentDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F722BA7935D0045CB98 /* SongAttachmentDB.swift */; };
+		8DBC3F752BA7938D0045CB98 /* ImageAttachmentDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F742BA7938D0045CB98 /* ImageAttachmentDB.swift */; };
+		8DBC3F772BA79A180045CB98 /* InstuctionAttachmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F762BA79A180045CB98 /* InstuctionAttachmentType.swift */; };
+		8DBC3F7A2BA7A6610045CB98 /* DB_AnimationMovieAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F792BA7A6610045CB98 /* DB_AnimationMovieAttachment.swift */; };
 		8DEA29392B8ED9D000FDF952 /* TextAttachmentDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA29382B8ED9D000FDF952 /* TextAttachmentDB.swift */; };
 		8DEF7B542B414E78007B8737 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B532B414E78007B8737 /* DB.swift */; };
 		8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B562B41509A007B8737 /* MovieDB.swift */; };
@@ -138,6 +150,18 @@
 		8D6CE2292BA1230800D33A3D /* 1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 1.mov; sourceTree = "<group>"; };
 		8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilter.swift; sourceTree = "<group>"; };
 		8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUI_EditorOverlayVC.swift; sourceTree = "<group>"; };
+		8DA694A82BA6E9540086AAEC /* NSTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextAlignment.swift; sourceTree = "<group>"; };
+		8DBC3F642BA780C30045CB98 /* AudioToolboxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioToolboxService.swift; sourceTree = "<group>"; };
+		8DBC3F672BA7813F0045CB98 /* RequestAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthorization.swift; sourceTree = "<group>"; };
+		8DBC3F692BA78E320045CB98 /* DB_AssetTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_AssetTime.swift; sourceTree = "<group>"; };
+		8DBC3F6B2BA78E530045CB98 /* DB_Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_Shadows.swift; sourceTree = "<group>"; };
+		8DBC3F6D2BA78EA60045CB98 /* MovieParametersDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieParametersDB.swift; sourceTree = "<group>"; };
+		8DBC3F6F2BA78FB70045CB98 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		8DBC3F722BA7935D0045CB98 /* SongAttachmentDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongAttachmentDB.swift; sourceTree = "<group>"; };
+		8DBC3F742BA7938D0045CB98 /* ImageAttachmentDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentDB.swift; sourceTree = "<group>"; };
+		8DBC3F762BA79A180045CB98 /* InstuctionAttachmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstuctionAttachmentType.swift; sourceTree = "<group>"; };
+		8DBC3F792BA7A6610045CB98 /* DB_AnimationMovieAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_AnimationMovieAttachment.swift; sourceTree = "<group>"; };
 		8DEA29382B8ED9D000FDF952 /* TextAttachmentDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttachmentDB.swift; sourceTree = "<group>"; };
 		8DEF7B532B414E78007B8737 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		8DEF7B562B41509A007B8737 /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
@@ -175,7 +199,7 @@
 		8D18F1382B9F458400194F34 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				8D422D852BA3FD5700E50E87 /* FilterType.swift */,
+				8DBC3F782BA79A350045CB98 /* Type */,
 				8D1BEE992BA68DEC00EB9246 /* Response.swift */,
 				8D1BEE972BA68CAB00EB9246 /* MessageContent.swift */,
 				8D18F1392B9F458400194F34 /* MovieGeneralParameterList */,
@@ -189,6 +213,9 @@
 				8D18F13A2B9F458400194F34 /* MovieParameters.swift */,
 				8D18F13B2B9F458400194F34 /* AssetAttachmentProtocol.swift */,
 				8D18F13C2B9F458400194F34 /* test_MovieGeneralParameterList.swift */,
+				8DBC3F692BA78E320045CB98 /* DB_AssetTime.swift */,
+				8DBC3F792BA7A6610045CB98 /* DB_AnimationMovieAttachment.swift */,
+				8DBC3F6B2BA78E530045CB98 /* DB_Shadows.swift */,
 			);
 			path = MovieGeneralParameterList;
 			sourceTree = "<group>";
@@ -254,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18F15F2B9F460000194F34 /* EditorOverlayVC.swift */,
+				8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */,
 				8D18F1592B9F460000194F34 /* EditorOverlayContainerVC */,
 			);
 			path = EditorOverlayVC;
@@ -345,6 +373,7 @@
 				8D1BEE9B2BA68FA900EB9246 /* NSError.swift */,
 				8D18F18B2B9F466A00194F34 /* AVAsset.swift */,
 				8D18F18C2B9F466A00194F34 /* String.swift */,
+				8DA694A82BA6E9540086AAEC /* NSTextAlignment.swift */,
 				8D18F18D2B9F466A00194F34 /* UIImage.swift */,
 				8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */,
 				8D18F18E2B9F466A00194F34 /* CGFloat.swift */,
@@ -437,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1BEE932BA6677800EB9246 /* Coordinator.swift */,
+				8DBC3F662BA780F90045CB98 /* Service */,
 				8DEF7B552B415083007B8737 /* DB */,
 				8D18F1382B9F458400194F34 /* DataModel */,
 				8D18F12B2B9F455E00194F34 /* VideoEditorModel */,
@@ -454,13 +484,43 @@
 			path = NSObject;
 			sourceTree = "<group>";
 		};
+		8DBC3F662BA780F90045CB98 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8DBC3F642BA780C30045CB98 /* AudioToolboxService.swift */,
+				8DBC3F672BA7813F0045CB98 /* RequestAuthorization.swift */,
+				8DBC3F6F2BA78FB70045CB98 /* FileManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8DBC3F712BA793420045CB98 /* Attachments */ = {
+			isa = PBXGroup;
+			children = (
+				8DEA29382B8ED9D000FDF952 /* TextAttachmentDB.swift */,
+				8DBC3F722BA7935D0045CB98 /* SongAttachmentDB.swift */,
+				8DBC3F742BA7938D0045CB98 /* ImageAttachmentDB.swift */,
+			);
+			path = Attachments;
+			sourceTree = "<group>";
+		};
+		8DBC3F782BA79A350045CB98 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				8D422D852BA3FD5700E50E87 /* FilterType.swift */,
+				8DBC3F762BA79A180045CB98 /* InstuctionAttachmentType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		8DEF7B552B415083007B8737 /* DB */ = {
 			isa = PBXGroup;
 			children = (
 				8DEF7B532B414E78007B8737 /* DB.swift */,
 				8DEF7B582B4150BB007B8737 /* DataBase.swift */,
+				8DBC3F6D2BA78EA60045CB98 /* MovieParametersDB.swift */,
 				8DEF7B562B41509A007B8737 /* MovieDB.swift */,
-				8DEA29382B8ED9D000FDF952 /* TextAttachmentDB.swift */,
+				8DBC3F712BA793420045CB98 /* Attachments */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -584,6 +644,7 @@
 				8D18F1632B9F460000194F34 /* EditorOverlayContainerVCViewModel.swift in Sources */,
 				8D18F1512B9F45EE00194F34 /* ViewModelAssetParametersViewController.swift in Sources */,
 				8D18F1502B9F45EE00194F34 /* EditorViewController.swift in Sources */,
+				8DBC3F6E2BA78EA60045CB98 /* MovieParametersDB.swift in Sources */,
 				8D18F1642B9F460000194F34 /* EditorOverlayVC.swift in Sources */,
 				8D18F14E2B9F45EE00194F34 /* PlayerViewController.swift in Sources */,
 				8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */,
@@ -596,36 +657,47 @@
 				8D18F19A2B9F466A00194F34 /* Constants.swift in Sources */,
 				8D18F1372B9F455E00194F34 /* EditorVideoLayer.swift in Sources */,
 				8D4C17192B3B2DF400953143 /* AppDelegate.swift in Sources */,
+				8DBC3F6C2BA78E530045CB98 /* DB_Shadows.swift in Sources */,
 				8D18F1332B9F455E00194F34 /* AttachentVideoLayer.swift in Sources */,
 				8D18F1362B9F455E00194F34 /* PrepareEditorModel.swift in Sources */,
 				8D18F1552B9F45EE00194F34 /* EditorParametersViewController.swift in Sources */,
 				8D18F13D2B9F458400194F34 /* MovieParameters.swift in Sources */,
 				8D18F1352B9F455E00194F34 /* AnimateVideoLayerCA.swift in Sources */,
+				8DBC3F6A2BA78E320045CB98 /* DB_AssetTime.swift in Sources */,
+				8DBC3F682BA7813F0045CB98 /* RequestAuthorization.swift in Sources */,
 				8D1BEE942BA6677800EB9246 /* Coordinator.swift in Sources */,
 				8D18F1842B9F465300194F34 /* BaseButton.swift in Sources */,
 				8D18F13F2B9F458400194F34 /* test_MovieGeneralParameterList.swift in Sources */,
 				8D1BEE9C2BA68FA900EB9246 /* NSError.swift in Sources */,
 				8D422D842BA3F33800E50E87 /* BaseTextField.swift in Sources */,
 				8D18F1942B9F466A00194F34 /* Extensions_UIKit.swift in Sources */,
+				8DA694A92BA6E9540086AAEC /* NSTextAlignment.swift in Sources */,
 				8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */,
 				8D18F1982B9F466A00194F34 /* CGFloat.swift in Sources */,
 				8D18F1972B9F466A00194F34 /* UIImage.swift in Sources */,
 				8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */,
 				8D18F1522B9F45EE00194F34 /* AssetPreviewCell.swift in Sources */,
+				8DBC3F732BA7935D0045CB98 /* SongAttachmentDB.swift in Sources */,
 				8D18F1932B9F466A00194F34 /* UIColor.swift in Sources */,
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
 				8D18F1822B9F465300194F34 /* AssetRawView.swift in Sources */,
 				8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */,
 				8DF1A8982BA25ABD004ACFFC /* CALayer.swift in Sources */,
 				8D18F1812B9F465300194F34 /* StackAssetAttachmentView.swift in Sources */,
+				8DBC3F772BA79A180045CB98 /* InstuctionAttachmentType.swift in Sources */,
+				8DBC3F7A2BA7A6610045CB98 /* DB_AnimationMovieAttachment.swift in Sources */,
 				8DF1A8962BA219E4004ACFFC /* CGFont.swift in Sources */,
 				8DEF7B542B414E78007B8737 /* DB.swift in Sources */,
+				8DA694A72BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift in Sources */,
 				8D18F13E2B9F458400194F34 /* AssetAttachmentProtocol.swift in Sources */,
 				8D1BEE9A2BA68DEC00EB9246 /* Response.swift in Sources */,
 				8D18F1542B9F45EE00194F34 /* loadUI_EditorParametersViewController.swift in Sources */,
 				8D18F1832B9F465300194F34 /* BaseView.swift in Sources */,
 				8D18F17E2B9F465300194F34 /* Player.swift in Sources */,
+				8DBC3F752BA7938D0045CB98 /* ImageAttachmentDB.swift in Sources */,
 				8D1BEE982BA68CAB00EB9246 /* MessageContent.swift in Sources */,
+				8DBC3F702BA78FB70045CB98 /* FileManager.swift in Sources */,
+				8DBC3F652BA780C30045CB98 /* AudioToolboxService.swift in Sources */,
 				8D18F1602B9F460000194F34 /* EditorOverlayContainerVC.swift in Sources */,
 				8D18F1952B9F466A00194F34 /* AVAsset.swift in Sources */,
 				8D1BEE962BA67FEA00EB9246 /* LoaderVC.swift in Sources */,

@@ -9,15 +9,11 @@ import Foundation
 import AVFoundation
 
 struct AnimateVideoLayer {
-    struct AnimationProperties {
-        var needScale = false
-    }
-    func add(_ newLayer:CALayer, to layer: CALayer, start:CGFloat, duration:CGFloat, totalTime:CGFloat, properties:AnimationProperties) {
+    func add(_ newLayer:CALayer, to layer: CALayer, data:MovieAttachmentProtocol, totalTime:CGFloat) {
         newLayer.opacity = 0
-        appeareAnimation(.opacity, duration: duration, newLayer: newLayer, start: start, totalTime: totalTime)
-        if properties.needScale {
+        appeareAnimation(.opacity, duration: data.time.duration, newLayer: newLayer, start: data.time.start, totalTime: totalTime)
+        if data.animations.needScale {
             layer.add(repeated(key: "transform.scale"), forKey: "scale")
-
         }
         layer.addSublayer(newLayer)
     }
