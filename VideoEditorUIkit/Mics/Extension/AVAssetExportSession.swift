@@ -12,8 +12,8 @@ extension AVAssetExportSession {
     convenience init?(composition:AVMutableComposition) {
         self.init(asset: composition, presetName: AVAssetExportPresetHighestQuality)
     }
-    
-    func exportVideo(videoComposition: AVMutableVideoComposition?, isVideoAdded:Bool = false) async -> URL? {
+        
+    func exportVideo(videoComposition: AVMutableVideoComposition?, isVideoAdded:Bool = false) async -> Response {
         let videoName = UUID().uuidString
         print("newvideoname ", videoName)
         var directory = NSTemporaryDirectory()
@@ -40,11 +40,14 @@ extension AVAssetExportSession {
         
         await self.export()
         if self.status == .completed {
-            return exportURL
-        } else {
+            return .success(Response.VideoExport.init(url: exportURL))
+        } else if self.status == .failed {
             print("exporterror: \(self.error?.localizedDescription ?? "")")
             print(status.rawValue, " status ")
-            return self.status == .failed ? nil : exportURL
+            
+            return .error(self.error?.localizedDescription)
+        } else {
+            return .success(Response.VideoExport(url: exportURL))
         }
     }
 }

@@ -38,11 +38,11 @@ struct EditorVCViewMode {
                 removeAttachments()
             }),
             .init(title: "Delete Movie", image: "trash", didSelect: {
-                self.coordinator?.showAlertWithCancel(confirmTitle:"Delete Movie", okPressed: deleteMovie)
+                self.coordinator?.showConfirmationAlert("Delete Movie", okPressed: deleteMovie)
             }),
             .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
                 let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
-                self.coordinator?.showAlertWithCancel(confirmTitle:"Change url to: " + title, okPressed: {
+                self.coordinator?.showConfirmationAlert("Change url to: " + title, okPressed: {
                     self.toggleOriginalURL(reloadPressed: reloadPressed)
                 })
             }),

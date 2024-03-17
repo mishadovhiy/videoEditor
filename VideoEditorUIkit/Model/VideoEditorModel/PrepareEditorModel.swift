@@ -12,7 +12,7 @@ class PrepareEditorModel {
     
     private var delegate:PrepareEditorModelDelegate!
     private let layerEditor:EditorVideoLayer
-    private var filterEndedLoading:((Bool)->())?
+    var videoCompositionHolder:AVMutableVideoComposition?
     
     init(delegate: PrepareEditorModelDelegate) {
         self.delegate = delegate
@@ -23,61 +23,62 @@ class PrepareEditorModel {
         delegate = nil
     }
     
-    @MainActor func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> URL? {
+    @MainActor func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> Response {
         print(asset.duration, " export duration")
         guard let composition = delegate.movieHolder ?? delegate.movie
         else {
-            print("Cannot create export session.")
-            return nil
+            print("error movieHolder and no delegate.movie", #file, #line, #function)
+            return .error(.init(title:"Error exporting the video", description: "Try reloading the app"))
         }
         let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo)
-        return results
+        return results ?? .error("Unknown Error")
     }
     
-    func addText() async -> Bool {
+    func addText() async -> Response {
         let asset = delegate.movie ?? .init()
         print(asset.duration, " video duration")
         guard let composition = delegate.movieHolder
         else {
-            return false }
+            return .error("Error adding text to the video")
+        }
         let assetTrack = asset.tracks(withMediaType: .video)
         guard let firstTrack = assetTrack.first(where: {$0.naturalSize.width != 0}) else {
-            return false
+            return .error(.init(title:"Error adding text to the video"))
         }
         let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
         let videoComposition = await allCombinedInstructions(composition: composition, assetTrack: assetTrack, videoSize: videoSize, overlayLayer: overlayLayer)
         delegate.movieHolder = composition
-        if let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false) {
-            await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
-            return true
-        } else {
-            return false
+        let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
+        if let _ = localUrl.videoExportResponse?.url {
+            self.videoCompositionHolder = videoComposition
+            await self.movieUpdated(movie: nil, movieURL: localUrl.videoExportResponse?.url, canSetNil: false)
         }
+        return localUrl
     }
 
-    func createVideo(_ url:URL?, needExport:Bool = true, replaceVideo:Bool = false) async -> URL? {
+    func createVideo(_ url:URL?, needExport:Bool = true, replaceVideo:Bool = false) async -> Response {
         let movie = delegate.movie ?? .init()
         guard let url else {
-            return nil
+            return .error("File not found")
         }
         let newMovie = await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)
-        print(newMovie?.duration, " inserted video duration")
-        guard await newMovie?.duration() != .zero,
-              let _ = await insertMovie(movie: newMovie, composition: movie) else {
-            return nil
+        print(newMovie.composition?.duration, " inserted video duration")
+        guard await newMovie.composition?.duration() != .zero,
+              let _ = await insertMovie(movie: newMovie.composition, composition: movie) else {
+            return .error("Error inserting video")
         }
         delegate.movieHolder = movie
         if needExport {
-            guard let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true) else {
-                return nil
+            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
+            if let _ = localUrl.videoExportResponse?.url {
+                await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url)
             }
-            await self.movieUpdated(movie: movie, movieURL: localUrl)
             return localUrl
         } else {
-            return nil
+            return .success()
         }
     }
     
@@ -85,15 +86,15 @@ class PrepareEditorModel {
         let movie = delegate.movieHolder ?? delegate.movie!
         let video = VideoFilter.addFilter(composition: movie, completion: { url in
             Task {
-                await self.filterAddedToComposition(url)
-                await MainActor.run {
-                    completion()
-                }
+                await self.filterAddedToComposition(url, videoComposition: self.videoCompositionHolder)
+                completion()
             }
         })
         
-        if let localUrl = await export(asset: movie, videoComposition: video, isVideo: false) {
-            await self.movieUpdated(movie: movie, movieURL: localUrl, canSetNil: false)
+        let localUrl = await export(asset: movie, videoComposition: video.composition, isVideo: false)
+        
+        if let url = localUrl.videoExportResponse?.url {
+            await self.movieUpdated(movie: movie, movieURL: url, canSetNil: false)
         }
     }
 }
@@ -123,9 +124,10 @@ extension PrepareEditorModel {
         guard let url = Bundle.main.url(forResource: url, withExtension: "mov") ?? Bundle.main.url(forResource: url, withExtension: "mp4") else {
             return false
         }
-        let urlResult = await self.createVideo(url)
+        let urlResult = await self.createVideo(url).videoExportResponse?.url
         if addingVideo, let stringUrl = urlResult?.lastPathComponent {
             DB.db.movieParameters.editingMovie?.originalURL = stringUrl
+            DB.db.movieParameters.editingMovie?.preview = delegate.movie?.tracks.first?.asset?.preview(time: .zero)?.jpegData(compressionQuality: 0.01)
         }
         return urlResult != nil
     }
@@ -153,19 +155,15 @@ extension PrepareEditorModel {
         print(duration, " total duration ")
     }
     
-    private func filterAddedToComposition(_ url:URL?) async {
+    private func filterAddedToComposition(_ url:URL?, videoComposition:AVMutableVideoComposition? = nil) async {
         print("filterAddedToComposition")
         guard let url else {
+            print("no url filterAddedToComposition")
             return
         }
         let movie = AVURLAsset(url: url)
-        if let localUrl = await export(asset: movie, videoComposition: nil, isVideo: false) {
+        if let localUrl = await export(asset: movie, videoComposition: videoComposition, isVideo: false).videoExportResponse?.url {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
-            filterEndedLoading?(true)
-            filterEndedLoading = nil
-        } else {
-            filterEndedLoading?(false)
-            filterEndedLoading = nil
         }
     }
 }
@@ -186,34 +184,37 @@ extension PrepareEditorModel {
 
 // MARK: AVMutableComposition
 extension PrepareEditorModel {
-    func addSound(url:URL?) async -> Bool {
+    func addSound(url:URL?) async -> Response {
         let composition = delegate.movie ?? .init()
         guard let url else {
-            return false
+            return .error(.init(title:"File not found", description: "looks like selected file is not downloaded to the device"))
         }
         let sound = AVURLAsset(url: url)
 
         guard let newAudio = sound.tracks.first(where: {$0.mediaType == .audio})
         else {
             print("error inserting audion: audio is empty, or asset is nil sound: \(sound) duration: \(sound.duration)")
-            return false
+            return .error(.init(title:"Not found audio in the selected file"))
         }
         do {
             let audioMutable = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
             try await audioMutable?.insertTimeRange(CMTimeRange(start: .zero, duration: composition.duration()), of: newAudio, at: .zero)
-            if let url = await export(asset: composition, videoComposition: nil, isVideo: false) {
-                await movieUpdated(movie: composition, movieURL: url, canSetNil: false)
-                return true
+            let response = await export(asset: composition, videoComposition: nil, isVideo: false)
+            if let url = response.videoExportResponse?.url {
+                await movieUpdated(movie: composition, movieURL: response.videoExportResponse?.url, canSetNil: false)
             } else {
-                return false
+                return .init(error:response.error ?? .init(text: "Error adding sound into the composition"))
             }
+            return response
         } catch {
             print(error, " error insering audio into composition")
-            return false
+            return .error(.init(title:error.localizedDescription, description: "Audio not inserted"))
         }
     }
     
-    final private func createComposition(_ urlAsset:AVURLAsset) async -> AVMutableComposition? {
+    typealias compositionReponse = (composition: AVMutableComposition?, error: NSError?)
+    
+    final private func createComposition(_ urlAsset:AVURLAsset) async -> compositionReponse {
         let composition = AVMutableComposition()
         let segments = await loadSegments(asset: urlAsset)
         do {
@@ -226,9 +227,9 @@ extension PrepareEditorModel {
             }
         } catch {
             print("error creating composition from url ", error)
-            return nil
+            return (nil, .init(text: error.localizedDescription))
         }
-        return composition
+        return (composition, nil)
     }
 
     func loadSegments(asset:AVURLAsset?) async -> [(AVAssetTrackSegment, AVAssetTrack)] {

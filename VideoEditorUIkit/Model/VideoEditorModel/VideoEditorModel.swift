@@ -10,7 +10,7 @@ import AVFoundation
 
 protocol VideoEditorModelPresenter {
      @MainActor func videoAdded()
-     @MainActor func errorAddingVideo()
+     @MainActor func errorAddingVideo(_ text:MessageContent?)
     var movieURL:URL?{set get}
     @MainActor func reloadUI()
 }
@@ -56,17 +56,18 @@ class VideoEditorModel {
             if await prepare.createTestBundleVideo("1", addingVideo: true) {
                 await videoAdded()
             } else {
-                await presenter?.errorAddingVideo()
+                await presenter?.errorAddingVideo(.init(title: "Error adding video"))
             }
         }
     }
     
     func addSoundPressed(url:URL?) {
         Task {
-            if await prepare.addSound(url:url) {
+            let ok = await prepare.addSound(url:url)
+            if let _ = ok.videoExportResponse {
                 await videoAdded()
             } else {
-                await presenter?.errorAddingVideo()
+                await presenter?.errorAddingVideo(ok.error?.messageContent ?? .init(title: "Error adding selected audio"))
             }
         }
     }
@@ -76,7 +77,7 @@ class VideoEditorModel {
             if let text = data as? MovieAttachmentProtocol {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
                 DB.db.movieParameters.needReloadLayerAttachments = true
-                
+                DB.db.movieParameters.needReloadFilter = true
                 if let textDB = text as? TextAttachmentDB {
                     DB.db.movieParameters.editingMovie!.texts.append(textDB)
                 }
@@ -92,6 +93,7 @@ class VideoEditorModel {
         Task {
             DB.db.movieParameters.editingMovie?.isOriginalUrl = true
             DB.db.movieParameters.needReloadFilter = true
+            DB.db.movieParameters.needReloadLayerAttachments = true
             await presenter?.reloadUI()
         }
     }
@@ -109,10 +111,11 @@ fileprivate extension VideoEditorModel {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {
             movieHolder = movie
-            if await self.prepare.addText() {
+            let ok = await self.prepare.addText()
+            if let _ = ok.response {
                 await videoAdded(canReload: true)
             } else {
-                await presenter?.errorAddingVideo()
+                await presenter?.errorAddingVideo(ok.error?.messageContent ?? .init(title: "Error adding text"))
             }
         }
     }
@@ -126,6 +129,7 @@ fileprivate extension VideoEditorModel {
     }
     
     private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false) async {
+        let needFilter = DB.db.movieParameters.needReloadFilter && (DB.db.movieParameters.editingMovie?.filter ?? .none) != FilterType.none
         if DB.db.movieParameters.needReloadLayerAttachments {
             DB.db.movieParameters.needReloadLayerAttachments = false
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
@@ -133,7 +137,7 @@ fileprivate extension VideoEditorModel {
         } else if videoAddedAction {
             await videoAdded(canReload: canReload)
         }
-        if DB.db.movieParameters.needReloadFilter && (DB.db.movieParameters.editingMovie?.filter ?? .none) != FilterType.none {
+        if needFilter {
             DB.db.movieParameters.needReloadFilter = false
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
             await prepare.addFilter(completion: {

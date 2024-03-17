@@ -180,6 +180,15 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
+        var preview:Data? {
+            get {
+                return Data.init(base64Encoded: dict["preview"] as? String ?? "")
+            }
+            set {
+                dict.updateValue(newValue?.base64EncodedString() ?? "", forKey: "preview")
+            }
+        }
+        
         var filter:FilterType {
             get {
                 return .init(rawValue: dict["filter"] as? String ?? "") ?? .none

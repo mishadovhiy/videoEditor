@@ -150,9 +150,13 @@ class EditorViewController: SuperVC {
 
 extension EditorViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let selectedURL = urls.first else { return }
-        controller.dismiss(animated: true) {
+        guard let selectedURL = urls.first else {
+            self.coordinator?.showErrorAlert(title: "Invalid file URL", description: "Check if file is downloaded")
+            return
+        }
+        controller.dismiss(animated: true) { [weak self] in
             print("Selected file URL: \(selectedURL)")
+            self?.soundToVideoSelected(selectedURL)
         }
     }
 }
@@ -160,14 +164,13 @@ extension EditorViewController: UIDocumentPickerDelegate {
 extension EditorViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         let item = mediaItemCollection.items.first
-        print(item, " gretrfwedaws")
         guard let url = item?.assetURL else {
             print("url is nil")
-            item as? AVAsset
+            self.coordinator?.showErrorAlert(title: "Selected Song is not downloaded or DRM protected from copying", description: "Try to download the media in the Apple Music app and try again")
             return
         }
-        mediaPicker.dismiss(animated: true) {
-            self.soundToVideoSelected(url)
+        mediaPicker.dismiss(animated: true) { [weak self] in
+            self?.soundToVideoSelected(url)
         }
     }
 }
@@ -195,7 +198,6 @@ extension EditorViewController:PlayerViewControllerPresenter {
     }
 }
 
-
 extension EditorViewController:VideoEditorModelPresenter {
     var movieURL: URL? {
         get {
@@ -222,8 +224,8 @@ extension EditorViewController:VideoEditorModelPresenter {
         newVideoAdded()
     }
     
-    @MainActor func errorAddingVideo() {
-        coordinator?.showAlert(title: "Error", appearence: .type(.error))
+    @MainActor func errorAddingVideo(_ text:MessageContent?) {
+        coordinator?.showErrorAlert(title: text?.title ?? "", description: text?.description)
         self.playerVC?.endRefreshing()
         self.playerVC?.pause()
     }

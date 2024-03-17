@@ -77,11 +77,15 @@ extension Coordinator {
 
 // MARK: - AlertView
 extension Coordinator {
-    func showAlert(title:String, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
-        AppDelegate.shared?.ai.showAlert(title: title, appearence: appearence)
+    func showAlert(title:String, description:String? = nil, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
+        AppDelegate.shared?.ai.showAlert(title: title, description: description, appearence: appearence)
     }
     
-    func showAlertWithCancel(confirmTitle:String, okPressed:@escaping ()->()) {
+    func showErrorAlert(title:String, description:String? = nil) {
+        self.showAlert(title: title, description: description, appearence: .type(.error))
+    }
+    
+    func showConfirmationAlert(_ confirmTitle:String, okPressed:@escaping ()->()) {
         showAlertWithCancel(title: "Are you sure you want to\n" + confirmTitle, description: "This action cannot be undone", type: .error, okPressed: okPressed)
     }
     

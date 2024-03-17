@@ -12,12 +12,15 @@ import CoreImage
 struct VideoFilter {
     
     typealias filterCompletion = (URL?)
+    typealias filterResult = (composition:AVMutableVideoComposition?,
+                              error: NSError?
+    )
     
     static func addFilter(composition:AVMutableComposition,
-                          completion:@escaping(filterCompletion) -> ()) -> AVMutableVideoComposition? {
+                          completion:@escaping(filterCompletion) -> ()) -> filterResult {
         let filterDB = DB.db.movieParameters.editingMovie?.filter ?? .none
         if filterDB == .none {
-            return nil
+            return (nil, nil)
         }
         let filter = CIFilter(type: filterDB)
         let total = prepareTime(total: composition.duration)
@@ -39,7 +42,7 @@ struct VideoFilter {
                 completion((output?.url))
             }
         }
-        return videoComposition
+        return (videoComposition, nil)
     }
     
     private static func prepareTime(total:CMTime) -> CMTime {
