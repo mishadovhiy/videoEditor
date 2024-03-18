@@ -89,15 +89,12 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
-        var songs:[SongAttachmentDB] {
+        var songs:SongAttachmentDB {
             get {
-                let dicts = dict["songs"] as? [[String:Any]]
-                return dicts?.compactMap({
-                    return .init(dict: $0)
-                }) ?? []
+                .init(dict: dict["songs"] as? [String:Any] ?? [:])
             }
             set {
-                dict.updateValue(newValue.compactMap({$0.dict}), forKey: "songs")
+                dict.updateValue(newValue.dict, forKey: "songs")
             }
         }
         
@@ -110,6 +107,17 @@ extension DB.DataBase.MovieParametersDB {
             }
             set {
                 dict.updateValue(newValue.compactMap({$0.dict}), forKey: "images")
+            }
+        }
+        
+        /// max: 1.0
+        var valume: CGFloat {
+            get {
+                let value = CGFloat.init(string: dict["valume"] as? String ?? "0")
+                return value >= 1 ? 1 : (value <= 0 ? 0 : value)
+            }
+            set {
+                dict.updateValue(String.init(value: newValue), forKey: "valume")
             }
         }
         

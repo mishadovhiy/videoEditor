@@ -18,11 +18,11 @@ struct Coordinator {
     func start() {
         UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
         UIApplication.shared.keyWindow?.makeKeyAndVisible()
-    }
+    }    
 }
 
 fileprivate extension Coordinator {
-    fileprivate func present(_ viewControllerToPresent:UIViewController, inViewController:UIViewController? = nil, completion:(()->())? = nil) {
+    func present(_ viewControllerToPresent:UIViewController, inViewController:UIViewController? = nil, completion:(()->())? = nil) {
         let topVC = inViewController ?? viewController
         if let presented = topVC?.presentedViewController {
             self.present(viewControllerToPresent, inViewController: presented, completion: completion)
@@ -31,7 +31,7 @@ fileprivate extension Coordinator {
         }
     }
     
-    fileprivate func push(_ viewController:UIViewController) {
+    func push(_ viewController:UIViewController) {
         self.viewController?.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -54,7 +54,6 @@ extension Coordinator {
     func toAppleMusicList(delegate:MPMediaPickerControllerDelegate?) {
         let mediaPicker = MPMediaPickerController(mediaTypes: .anyAudio)
         setModalPresentation(mediaPicker)
-        mediaPicker.prompt = "Select sound to video"
         mediaPicker.delegate = delegate
         mediaPicker.allowsPickingMultipleItems = false
         present(mediaPicker)

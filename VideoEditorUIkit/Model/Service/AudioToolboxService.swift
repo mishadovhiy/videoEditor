@@ -9,7 +9,7 @@ import AudioToolbox
 import UIKit
 
 struct AudioToolboxService {
-    func vibrate() {
+    func vibrate(style:UIImpactFeedbackGenerator.FeedbackStyle = .soft) {
         if #available(iOS 13.0, *) {
             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         } else {

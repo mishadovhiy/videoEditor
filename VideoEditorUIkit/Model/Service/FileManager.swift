@@ -11,6 +11,7 @@ struct FileManagerServgice {
     
     private let manager:FileManager
     private let url: URL
+    var tempSongURLHolder:URL?
     
     init() {
         manager = FileManager.default

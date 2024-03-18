@@ -15,9 +15,8 @@ protocol AssetAttachmentProtocol {
     var assetName:String? { get set }
     var defaultName:String { get }
     var attachmentType:InstuctionAttachmentType? { get }
-    var color:UIColor {get }
+    var color:UIColor { get }
     var id:UUID { get }
-    
 }
 
 protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
@@ -44,8 +43,16 @@ extension [AssetAttachmentProtocol] {
             }
         }
         print(at)
+        let song = (item as? SongAttachmentDB)
+        if (song?.attachmentType ?? .media) == .song {
+            if song?.selfMovie ?? false {
+                return 1
+            } else {
+                return 0
+            }
+        }
         if at >= 4 {
-            return Int.random(in: 0..<3)
+            return Int.random(in: 0..<4)
         }
         return at
     }

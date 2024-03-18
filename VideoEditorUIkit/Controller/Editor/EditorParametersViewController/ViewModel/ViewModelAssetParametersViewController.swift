@@ -26,15 +26,26 @@ class EditorParametersVCViewModel {
     func assetChanged(_ asset:AVMutableComposition?, editorModel:VideoEditorModel) async  {
         Task {
             assetData.text = DB.db.movieParameters.editingMovie?.texts ?? []
-            let segments = await editorModel.prepare.loadSegments(asset: nil)
+            if DB.db.movieParameters.editingMovie?.songs.attachmentURL != "" {
+                assetData.songs = [
+                    DB.db.movieParameters.editingMovie?.songs ?? .init()
+                ]
+            } else {
+                assetData.songs = []
+            }
+            assetData.songs.append(SongAttachmentDB.with({
+                $0.selfMovie = true
+            }))
+            assetData.media = DB.db.movieParameters.editingMovie?.images ?? []
+            let segments = try await editorModel.movie?.loadTracks(withMediaType: .video) ?? []
             assetData.previewAssets = segments.compactMap({
-                return .create($0.0, composition: asset, loadPreviews: false)
+                return .create($0.segments.first!, composition: asset, loadPreviews: false)
             })
             await MainActor.run {
                 self.reloadData?(false)
             }
             assetData.previewAssets = segments.compactMap({
-                return .create($0.0, composition: asset, loadPreviews: true)
+                return .create($0.segments.first!, composition: asset, loadPreviews: true)
             })
             await MainActor.run {
                 self.reloadData?(true)

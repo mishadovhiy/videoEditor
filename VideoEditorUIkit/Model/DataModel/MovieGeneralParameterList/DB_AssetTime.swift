@@ -17,22 +17,22 @@ extension DB.DataBase.MovieParametersDB {
         init(dict: [String : Any]) {
             self.dict = dict
         }
-        /// seconds
+        /// max: 1.0
         var start: CGFloat {
             get {
-                let value = CGFloat.init(string: dict["inMovieStart"] as? String ?? "0.1")
-                return value >= 1 ? 1 : (value <= 0 ? 0.1 : value)
+                let value = CGFloat.init(string: dict["inMovieStart"] as? String ?? "0")
+                return value >= 1 ? 1 : (value <= 0 ? 0 : value)
             }
             set {
                 dict.updateValue(String.init(value: newValue), forKey: "inMovieStart")
             }
         }
         
-        /// seconds
+        /// max: 1.0
         var duration: CGFloat {
             get {
                 let value = CGFloat.init(string: dict["duration"] as? String ?? "0.5")
-                return value >= 1 ? 1 : (value <= 0 ? 0.3 : value)
+                return value >= 1 ? 1 : (value <= 0 ? 0 : value)
             }
             set {
                 dict.updateValue(String.init(value: newValue), forKey: "duration")

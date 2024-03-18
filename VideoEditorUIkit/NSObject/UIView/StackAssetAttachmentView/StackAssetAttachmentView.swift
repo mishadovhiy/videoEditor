@@ -29,6 +29,14 @@ class StackAssetAttachmentView:UIView {
     }
     
     private var isSelected = false
+    private let audioBox = AudioToolboxService()
+    private var canAddNew:Bool {
+        if attachmentType == .song && data.count == 2 {
+            return false
+        } else {
+            return true
+        }
+    }
     // MARK: - Life-Cycle
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -139,6 +147,10 @@ class StackAssetAttachmentView:UIView {
             return
         }
         if isSelected {return}
+        if !canAddNew {
+            audioBox.vibrate(style: .rigid)
+            return
+        }
         addEmptyPressed()
     }
 }
@@ -223,7 +235,7 @@ fileprivate extension StackAssetAttachmentView {
         layerStack.axis = .vertical
         layerStack.distribution = .fillEqually
         addSubview(layerStack)
-        for i in 0..<5 {
+        for i in 0..<(attachmentType == .song ? 2 : 5) {
             let view = UIView()
             view.isHidden = true
             view.tag = i

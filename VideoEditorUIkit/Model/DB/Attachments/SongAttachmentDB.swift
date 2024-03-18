@@ -22,6 +22,8 @@ struct SongAttachmentDB {
             dict.updateValue(newValue, forKey: "attachmentURL")
         }
     }
+    
+    var selfMovie:Bool = false
 }
 
 // MARK: - AssetAttachmentProtocol
@@ -45,12 +47,15 @@ extension SongAttachmentDB:AssetAttachmentProtocol {
         attachmentType?.rawValue ?? "?"
     }
     var color: UIColor {
-        return .purple
+        return selfMovie ? .yellow : .purple
     }
     
     var time: DB.DataBase.MovieParametersDB.AssetTime {
         get {
-            return .init(dict: dict["time"] as? [String:Any] ?? [:])
+            return .with({
+                $0.duration = 1
+                $0.start = 0
+            })//.init(dict: dict["time"] as? [String:Any] ?? [:])
         }
         set {
             dict.updateValue(newValue.dict, forKey: "time")

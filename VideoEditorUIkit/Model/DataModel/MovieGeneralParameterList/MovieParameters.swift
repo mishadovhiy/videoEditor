@@ -9,9 +9,9 @@ import UIKit
 
 struct MovieGeneralParameterList {
     
-    var songs:[SongRow]
+    var songs:[AssetAttachmentProtocol]
     var text:[MovieAttachmentProtocol]
-    var media:[MediaRow]
+    var media:[MovieAttachmentProtocol]
     var previewAssets:[AssetsData]
     /**
      - total duration of all assets

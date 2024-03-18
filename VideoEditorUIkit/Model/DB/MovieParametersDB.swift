@@ -66,9 +66,11 @@ extension DB.DataBase {
                 print(original, " editingMovieURL")
                 return original
             } else {
-                let result = contents.last(where: {!$0.absoluteString.contains(editingMovie?.originalURL ?? "")})?.absoluteString
+                let result = contents.last(where: {
+                    return !$0.absoluteString.contains(editingMovie?.notFilteredURL ?? "") && !$0.absoluteString.contains(editingMovie?.forceOriginalURL ?? "")
+                })?.absoluteString
                 print(result, " editingMovieURL")
-                return result
+                return result ?? contents.last?.absoluteString
             }
         }
         

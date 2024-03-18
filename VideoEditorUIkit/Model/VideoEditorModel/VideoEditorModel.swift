@@ -61,15 +61,31 @@ class VideoEditorModel {
         }
     }
     
-    func addSoundPressed(url:URL?) {
-        Task {
-            let ok = await prepare.addSound(url:url)
-            if let _ = ok.videoExportResponse {
-                await videoAdded()
-            } else {
-                await presenter?.errorAddingVideo(ok.error?.messageContent ?? .init(title: "Error adding selected audio"))
+    private func performAddSound(url:URL?) async {
+        let ok = await prepare.addSound(url:url)
+        if let videoURL = ok.videoExportResponse {
+            await MainActor.run {
+                AppDelegate.shared?.fileManager?.tempSongURLHolder = url
             }
+            if let component = videoURL.url?.lastPathComponent {
+                DB.db.movieParameters.editingMovie?.notFilteredURL = component
+            }
+            await prepare.movieUpdated(movie: movie, movieURL: videoURL.url)
+            await videoAdded(canReload: false)
+        } else {
+            print(ok.error?.messageContent, " erroraddinsong")
         }
+    }
+    
+    func addSoundPressed(data:SongAttachmentDB?) {
+        Task {
+////            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+////            DB.db.movieParameters.needReloadLayerAttachments = true
+////            DB.db.movieParameters.editingMovie?.songs = data ?? .init()
+////            await presenter?.reloadUI()
+            await self.performAddSound(url: .init(string: data?.attachmentURL ?? ""))
+        }
+        
     }
     
     func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
@@ -81,7 +97,6 @@ class VideoEditorModel {
             if let text = data as? MovieAttachmentProtocol {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
                 DB.db.movieParameters.needReloadLayerAttachments = true
-                DB.db.movieParameters.needReloadFilter = true
                 if let textDB = text as? TextAttachmentDB {
                     DB.db.movieParameters.editingMovie!.texts.append(textDB)
                 }
@@ -149,7 +164,17 @@ fileprivate extension VideoEditorModel {
             DB.db.movieParameters.needReloadLayerAttachments = false
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
             if !(DB.db.movieParameters.editingMovie?.filtered ?? false) {
+                let songUrl = await AppDelegate.shared?.fileManager?.tempSongURLHolder
+                if songUrl == nil {
+                    DB.db.movieParameters.editingMovie?.songs = .init()
+                }
                 addText()
+                if let song = DB.db.movieParameters.editingMovie?.songs,
+                   song.attachmentURL != "",
+                   let songUrl {
+                    print(songUrl, " song url")
+                    await self.performAddSound(url: songUrl)
+                }
             }
         } else if videoAddedAction {
             await videoAdded(canReload: canReload)

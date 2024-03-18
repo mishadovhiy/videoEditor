@@ -152,7 +152,9 @@ class EditorViewController: SuperVC {
     
     private func soundToVideoSelected(_ url:URL) {
         playerVC?.startRefreshing(completion: {
-            self.viewModel?.editorModel.addSoundPressed(url: url)
+            self.viewModel?.editorModel.addSoundPressed(data: .with({
+                $0.attachmentURL = url.absoluteString
+            }))
         })
     }
 }

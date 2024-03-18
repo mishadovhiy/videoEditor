@@ -202,6 +202,7 @@ extension PrepareEditorModel {
             try await audioMutable?.insertTimeRange(CMTimeRange(start: .zero, duration: composition.duration()), of: newAudio, at: .zero)
             let response = await export(asset: composition, videoComposition: nil, isVideo: false)
             if let url = response.videoExportResponse?.url {
+                DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
                 await movieUpdated(movie: composition, movieURL: url, canSetNil: false)
             } else {
                 return .init(error:response.error ?? .init(text: "Error adding sound into the composition"))
@@ -233,7 +234,7 @@ extension PrepareEditorModel {
         return (composition, nil)
     }
 
-    func loadSegments(asset:AVURLAsset?) async -> [(AVAssetTrackSegment, AVAssetTrack)] {
+    func loadSegments(asset:AVURLAsset?, isPreview:Bool = false) async -> [(AVAssetTrackSegment, AVAssetTrack)] {
         guard let asset = asset ?? delegate.movie else {
             return []
         }
