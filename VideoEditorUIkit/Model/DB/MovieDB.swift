@@ -25,11 +25,35 @@ extension DB.DataBase.MovieParametersDB {
         
         var originalURL:String {
             get {
+                return filtered ? notFilteredURL : forceOriginalURL
+            }
+            set {
+                print("originalURLsettd ", newValue)
+                if filtered {
+                    notFilteredURL = newValue
+                } else {
+                    forceOriginalURL = newValue
+                }
+            }
+        }
+        
+        var forceOriginalURL:String {
+            get {
                 return dict["originalURL"] as? String ?? ""
             }
             set {
                 print("originalURLsettd ", newValue)
                 dict.updateValue(newValue, forKey: "originalURL")
+            }
+        }
+        
+        var notFilteredURL:String {
+            get {
+                return dict["notFilteredURL"] as? String ?? ""
+            }
+            set {
+                print("originalURLsettd ", newValue)
+                dict.updateValue(newValue, forKey: "notFilteredURL")
             }
         }
         
@@ -65,6 +89,30 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
+        var songs:[SongAttachmentDB] {
+            get {
+                let dicts = dict["songs"] as? [[String:Any]]
+                return dicts?.compactMap({
+                    return .init(dict: $0)
+                }) ?? []
+            }
+            set {
+                dict.updateValue(newValue.compactMap({$0.dict}), forKey: "songs")
+            }
+        }
+        
+        var images:[ImageAttachmentDB] {
+            get {
+                let dicts = dict["images"] as? [[String:Any]]
+                return dicts?.compactMap({
+                    return .init(dict: $0)
+                }) ?? []
+            }
+            set {
+                dict.updateValue(newValue.compactMap({$0.dict}), forKey: "images")
+            }
+        }
+        
         var preview:Data? {
             get {
                 return Data.init(base64Encoded: dict["preview"] as? String ?? "")
@@ -72,6 +120,10 @@ extension DB.DataBase.MovieParametersDB {
             set {
                 dict.updateValue(newValue?.base64EncodedString() ?? "", forKey: "preview")
             }
+        }
+        
+        var filtered:Bool {
+            return filter != .none
         }
         
         var filter:FilterType {

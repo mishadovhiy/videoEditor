@@ -77,7 +77,7 @@ extension EditorParametersViewController {
     }
     
     func loadLeftHeader() {
-        let images = [0:"movies", 1:"addImage", 2:"addText", 3:"addSound"]
+        let images = [0:"movies", 3:"addImage", 2:"addText", 1:"addSound"]
         assetStackView.arrangedSubviews.forEach {
             let superView = UIView()
             headersStack.addArrangedSubview(superView)

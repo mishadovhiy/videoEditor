@@ -49,20 +49,20 @@ struct EditorOverlayContainerVCViewModel {
     private var songCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         var data:[EditorOverlayVC.OverlayCollectionData] = []
         if (assetDataHolder as? SongAttachmentDB)?.attachmentURL ?? "" == "" {
-            data.insert(.init(title: "Apple Music", didSelect: {
+            data.append(.init(title: "Apple Music", didSelect: {
                 self.uploadPressed?(.appleMusic)
-            }), at: 0)
-            data.insert(.init(title: "Files", didSelect: {
+            }))
+            data.append(.init(title: "Files", didSelect: {
                 self.uploadPressed?(.files)
-            }), at: 0)
+            }))
         } else {
-            data.insert(.init(title: "Change Sound", didSelect: {
+            data.append(.init(title: "Change Sound", didSelect: {
                 assetChanged?({
                     var new = $0 as? SongAttachmentDB ?? .init()
                     new.attachmentURL = ""
                     return new
                 })
-            }), at:0)
+            }))
             data.append(.init(title: "Volume", toOverlay: .init(screenTitle: "Set sound volume", attachmentType: .floatRange(.init(selected: (assetDataHolder as? SongAttachmentDB)?.volume ?? 0, didSelect: { newValue in
                 self.assetChanged?({oldValue in
                     var new = oldValue as? SongAttachmentDB ?? .init()

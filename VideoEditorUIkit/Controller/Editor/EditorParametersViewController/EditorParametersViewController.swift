@@ -61,7 +61,8 @@ class EditorParametersViewController: SuperVC {
     
     // MARK: - setup ui
     func setUI(type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
-        let isHidden = type == .addingVideos || overlaySize == .big
+        let dbHidden = DB.holder?.movieParameters.editingMovie?.filtered ?? false
+        let isHidden = type == .addingVideos || overlaySize == .big || dbHidden
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
         assetStackView.arrangedSubviews.forEach { view in
             if !(view is UICollectionView) {
@@ -73,7 +74,7 @@ class EditorParametersViewController: SuperVC {
                 }
             }
         }
-        addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit Video"
+        addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit/Export Video"
         animation.addAnimations { [weak self] in
             self?.collectionView.layer.cornerRadius(at: !isHidden ? .top : .all, value: 18)
         }

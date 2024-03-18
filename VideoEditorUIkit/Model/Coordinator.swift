@@ -21,7 +21,7 @@ struct Coordinator {
     }
 }
 
-extension Coordinator {
+fileprivate extension Coordinator {
     fileprivate func present(_ viewControllerToPresent:UIViewController, inViewController:UIViewController? = nil, completion:(()->())? = nil) {
         let topVC = inViewController ?? viewController
         if let presented = topVC?.presentedViewController {
@@ -34,6 +34,11 @@ extension Coordinator {
     fileprivate func push(_ viewController:UIViewController) {
         self.viewController?.navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    func setModalPresentation(_ vc:UIViewController) {
+        vc.modalTransitionStyle = .coverVertical
+        vc.modalPresentationStyle = .formSheet
+    }
 }
 
 // MARK: Reusable
@@ -42,11 +47,13 @@ extension Coordinator {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.aiff, .aliasFile, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .audio, .avi, .audiovisualContent, .video, .mpeg2Video, .appleProtectedMPEG4Video, .mp3, .mpeg, .mpeg4Audio, .movie, .m3uPlaylist, .quickTimeMovie], asCopy: true)
         documentPicker.delegate = delegate
         documentPicker.allowsMultipleSelection = false
+        setModalPresentation(documentPicker)
         present(documentPicker)
     }
     
     func toAppleMusicList(delegate:MPMediaPickerControllerDelegate?) {
         let mediaPicker = MPMediaPickerController(mediaTypes: .anyAudio)
+        setModalPresentation(mediaPicker)
         mediaPicker.prompt = "Select sound to video"
         mediaPicker.delegate = delegate
         mediaPicker.allowsPickingMultipleItems = false

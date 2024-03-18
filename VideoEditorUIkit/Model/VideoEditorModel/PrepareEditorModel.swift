@@ -44,7 +44,7 @@ class PrepareEditorModel {
         }
         let assetTrack = asset.tracks(withMediaType: .video)
         guard let firstTrack = assetTrack.first(where: {$0.naturalSize.width != 0}) else {
-            return .error(.init(title:"Error adding text to the video"))
+            return .error("Video frames are to small")
         }
         let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
         let overlayLayer = CALayer()
@@ -52,9 +52,10 @@ class PrepareEditorModel {
         let videoComposition = await allCombinedInstructions(composition: composition, assetTrack: assetTrack, videoSize: videoSize, overlayLayer: overlayLayer)
         delegate.movieHolder = composition
         let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
-        if let _ = localUrl.videoExportResponse?.url {
+        if let url = localUrl.videoExportResponse?.url {
+            DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
             self.videoCompositionHolder = videoComposition
-            await self.movieUpdated(movie: nil, movieURL: localUrl.videoExportResponse?.url, canSetNil: false)
+            await self.movieUpdated(movie: nil, movieURL: url, canSetNil: false)
         }
         return localUrl
     }
@@ -201,7 +202,7 @@ extension PrepareEditorModel {
             try await audioMutable?.insertTimeRange(CMTimeRange(start: .zero, duration: composition.duration()), of: newAudio, at: .zero)
             let response = await export(asset: composition, videoComposition: nil, isVideo: false)
             if let url = response.videoExportResponse?.url {
-                await movieUpdated(movie: composition, movieURL: response.videoExportResponse?.url, canSetNil: false)
+                await movieUpdated(movie: composition, movieURL: url, canSetNil: false)
             } else {
                 return .init(error:response.error ?? .init(text: "Error adding sound into the composition"))
             }

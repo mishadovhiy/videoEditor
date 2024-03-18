@@ -38,10 +38,11 @@ struct FileManagerServgice {
         
         do {
             let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
-            let originalUrl = db.editingMovie?.originalURL ?? ""
+            let originalUrl = db.editingMovie?.forceOriginalURL ?? ""
+            let notFilteredURL = db.editingMovie?.notFilteredURL ?? ""
             let editingUrl = db.editingMovieURL ?? ""
             try contents.forEach({
-                let cantRemove = $0.absoluteString.contains(originalUrl) || $0 == exept || ($0.absoluteString.contains(editingUrl) && exept != nil)
+                let cantRemove = $0.absoluteString.contains(originalUrl) || $0.absoluteString.contains(notFilteredURL) || $0 == exept || ($0.absoluteString.contains(editingUrl) && exept != nil)
                 if exept == nil || !cantRemove {
                     try fileManager.removeItem(at: $0)
                     print("Removed: \($0.lastPathComponent)")

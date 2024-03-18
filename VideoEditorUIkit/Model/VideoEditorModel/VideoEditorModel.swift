@@ -9,8 +9,8 @@ import UIKit
 import AVFoundation
 
 protocol VideoEditorModelPresenter {
-     @MainActor func videoAdded()
-     @MainActor func errorAddingVideo(_ text:MessageContent?)
+    @MainActor func videoAdded()
+    @MainActor func errorAddingVideo(_ text:MessageContent?)
     var movieURL:URL?{set get}
     @MainActor func reloadUI()
 }
@@ -22,7 +22,7 @@ class VideoEditorModel {
     var _movie:AVMutableComposition?
     private var dbParametersHolder:DB.DataBase.MovieParametersDB.MovieDB?
     var movieHolder:AVMutableComposition?
-
+    
     init(presenter:VideoEditorModelPresenter) {
         self.presenter = presenter
         self.prepare = .init(delegate: self)
@@ -74,6 +74,10 @@ class VideoEditorModel {
     
     func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
         Task {
+            if (DB.db.movieParameters.editingMovie?.filtered ?? false) {
+                await presenter?.errorAddingVideo(.init(title: "Attachments cannot be added when after using filter", description: "set filter to text to modify attachments"))
+                return
+            }
             if let text = data as? MovieAttachmentProtocol {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
                 DB.db.movieParameters.needReloadLayerAttachments = true
@@ -91,10 +95,17 @@ class VideoEditorModel {
     
     func addFilterPressed() {
         Task {
+            /// FA-956
             DB.db.movieParameters.editingMovie?.isOriginalUrl = true
             DB.db.movieParameters.needReloadFilter = true
             DB.db.movieParameters.needReloadLayerAttachments = true
             await presenter?.reloadUI()
+            /// FA-956
+//            await prepare.addFilter(completion: {
+//                Task {
+//                    await self.presenter?.reloadUI()
+//                }
+//            })
         }
     }
     
@@ -110,7 +121,10 @@ fileprivate extension VideoEditorModel {
     private func addText() {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {
-            movieHolder = movie
+            if (DB.db.movieParameters.editingMovie?.texts.isEmpty ?? true) {
+                await videoAdded(canReload: false)
+                return
+            }
             let ok = await self.prepare.addText()
             if let _ = ok.response {
                 await videoAdded(canReload: true)
@@ -129,22 +143,28 @@ fileprivate extension VideoEditorModel {
     }
     
     private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false) async {
+        /// FA-956
         let needFilter = DB.db.movieParameters.needReloadFilter && (DB.db.movieParameters.editingMovie?.filter ?? .none) != FilterType.none
         if DB.db.movieParameters.needReloadLayerAttachments {
             DB.db.movieParameters.needReloadLayerAttachments = false
             DB.db.movieParameters.editingMovie?.isOriginalUrl = false
-            addText()
+            if !(DB.db.movieParameters.editingMovie?.filtered ?? false) {
+                addText()
+            }
         } else if videoAddedAction {
             await videoAdded(canReload: canReload)
         }
+        /// FA-956
         if needFilter {
-            DB.db.movieParameters.needReloadFilter = false
-            DB.db.movieParameters.editingMovie?.isOriginalUrl = false
-            await prepare.addFilter(completion: {
-                Task {
-                    await self.presenter?.reloadUI()
-                }
-            })
+            Task {
+                DB.db.movieParameters.needReloadFilter = false
+                DB.db.movieParameters.editingMovie?.isOriginalUrl = false
+                await self.prepare.addFilter(completion: {
+                    Task {
+                        await self.presenter?.reloadUI()
+                    }
+                })
+            }
         }
     }
 }
@@ -159,7 +179,7 @@ extension VideoEditorModel:PrepareEditorModelDelegate {
             _movie = newValue
         }
     }
-        
+    
     var movieURL: URL? {
         get {
             presenter?.movieURL

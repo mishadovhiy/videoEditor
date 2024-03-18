@@ -20,9 +20,10 @@ enum InstuctionAttachmentType:String {
     }
     
     var title:String {
-        if self == .media {
-            return "Image"
+        switch self {
+        case .media: return "Image"
+        case .song: return "Audio"
+        default: return rawValue.capitalized
         }
-        return rawValue.capitalized
     }
 }
