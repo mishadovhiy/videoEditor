@@ -27,6 +27,7 @@ class AssetRawView:UIView {
     private let panNormalAlpha:CGFloat = 0.2
     var canSelect = true
     var isSelected:Bool = false
+    var isEditing:Bool = true
     var data:AssetAttachmentProtocol?
     private var editRowPressed:((_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->())?
     private var panEnded:((_ view:AssetRawView) -> ())?
@@ -78,10 +79,12 @@ class AssetRawView:UIView {
     }
     
     func setSelected(_ selected:Bool, deselectAll:Bool = false) {
-        canSelect = deselectAll
+        canSelect = selected ? true : deselectAll
         isSelected = selected
+        
         isUserInteractionEnabled = super.isUserInteractionEnabled
         layer.animationTransition()
+        layer.opacity = canSelect ? (selected ? 1 : 0.5) : 0.2
         layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
         pansGetsureView.forEach {

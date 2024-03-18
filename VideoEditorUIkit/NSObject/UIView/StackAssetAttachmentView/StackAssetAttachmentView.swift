@@ -90,7 +90,9 @@ class StackAssetAttachmentView:UIView {
             break
         }
         newData?.time.start = 0
-        newData?.time.duration = 0.2
+        if newData?.time.duration == 0 {
+            newData?.time.duration = 0.2
+        }
         if let superView = (delegate as? EditorParametersViewController)?.scrollView {
             let superLeftSpace = EditorParametersViewController.collectionViewSpace
             let scroll = (superView.contentOffset.x + superLeftSpace.x) / (superView.contentSize.width + (superLeftSpace.x * 2))
@@ -102,6 +104,7 @@ class StackAssetAttachmentView:UIView {
         self.setSelected(true)
         addRowView(data: newData, isEmpty: true) { view in
             view.layer.name = "isEmptyView"
+            view.isEditing = false
             view.alpha = 0
             view.layer.zoom(value: 0.7)
             self.editRowPressed(newData, view: view, force: true)

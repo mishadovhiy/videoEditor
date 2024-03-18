@@ -120,7 +120,7 @@ class EditorParametersViewController: SuperVC {
     // MARK: private
     private func updateParentScroll() {
         let max = scrollView.contentSize.width
-        let percent = (scrollView.contentOffset.x - scrollView.contentInset.left) / (max - self.view.frame.width)
+        let percent = (scrollView.contentOffset.x + scrollView.contentInset.left) / (max - self.view.frame.width)
         parentVC?.seek(percent: scrollView.contentOffset.x <= max ? percent : 1)
     }
     

@@ -48,7 +48,8 @@ struct EditorOverlayContainerVCViewModel {
     
     private var songCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         var data:[EditorOverlayVC.OverlayCollectionData] = []
-        if (assetDataHolder as? SongAttachmentDB)?.attachmentURL ?? "" == "" {
+        let songData = assetDataHolder as? SongAttachmentDB
+        if songData?.attachmentURL ?? "" == "" && !(songData?.selfMovie ?? true) {
             data.append(.init(title: "Apple Music", didSelect: {
                 self.uploadPressed?(.appleMusic)
             }))
@@ -56,13 +57,15 @@ struct EditorOverlayContainerVCViewModel {
                 self.uploadPressed?(.files)
             }))
         } else {
-            data.append(.init(title: "Change Sound", didSelect: {
-                assetChanged?({
-                    var new = $0 as? SongAttachmentDB ?? .init()
-                    new.attachmentURL = ""
-                    return new
-                })
-            }))
+            if !(songData?.selfMovie ?? true) {
+                data.append(.init(title: "Change Sound", didSelect: {
+                    assetChanged?({
+                        var new = $0 as? SongAttachmentDB ?? .init()
+                        new.attachmentURL = ""
+                        return new
+                    })
+                }))
+            }
             data.append(.init(title: "Volume", toOverlay: .init(screenTitle: "Set sound volume", attachmentType: .floatRange(.init(selected: (assetDataHolder as? SongAttachmentDB)?.volume ?? 0, didSelect: { newValue in
                 self.assetChanged?({oldValue in
                     var new = oldValue as? SongAttachmentDB ?? .init()
