@@ -39,15 +39,6 @@ struct TextAttachmentDB {
         }
     }
     
-    var needScale:Bool {
-        get {
-            (dict["needScale"] as? Int ?? 1) == 1
-        }
-        set {
-            dict.updateValue(newValue ? 1 : 0, forKey: "needScale")
-        }
-    }
-    
     var textAlighment:NSTextAlignment {
         get {
             return .init(rawValue: dict["textAlighment"] as? Int ?? 1) ?? .center
@@ -60,7 +51,6 @@ struct TextAttachmentDB {
 
 // MARK: - MovieAttachmentProtocol
 extension TextAttachmentDB:MovieAttachmentProtocol {
-    
     var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment {
         get {
             return .init(dict: dict["animations"] as? [String:Any] ?? [:])
@@ -189,7 +179,7 @@ extension TextAttachmentDB {
             $0.time.start = 0.1
             $0.assetName = "New text"
             $0.time.duration = 0.4
-            $0.needScale = true
+            $0.animations.needScale = true
             $0.attachmentType = .text
         })
     }

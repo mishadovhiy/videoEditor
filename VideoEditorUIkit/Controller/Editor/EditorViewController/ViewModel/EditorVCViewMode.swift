@@ -28,15 +28,11 @@ struct EditorVCViewMode {
     typealias void = ()->()
     func mainEditorCollectionData(vc:BaseVC, filterPreviewImage:Data?, filterSelected:@escaping()->(),
                                   reloadPressed:@escaping void,
-                                  removeAttachments:@escaping void,
                                   deleteMovie:@escaping void
     ) -> [EditorOverlayVC.OverlayCollectionData] {
         [
             .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, filterSelected), screenHeight: .big)),
             .init(title: "Reload data", didSelect: reloadPressed),
-            .init(title: "add test sound", didSelect: {
-                removeAttachments()
-            }),
             .init(title: "Delete Movie", image: "trash", didSelect: {
                 self.coordinator?.showConfirmationAlert("Delete Movie", okPressed: deleteMovie)
             }),

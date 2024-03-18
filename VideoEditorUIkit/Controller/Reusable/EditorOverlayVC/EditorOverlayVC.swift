@@ -11,6 +11,7 @@ protocol EditorOverlayVCDelegate {
     func addAttachmentPressed(_ attachmentData:AssetAttachmentProtocol?)
     func overlayChangedAttachment(_ newData:AssetAttachmentProtocol?)
     func overlayRemoved()
+    func uploadPressed(_ type:EditorOverlayContainerVCViewModel.UploadPressedType)->()
 }
 
 class EditorOverlayVC: SuperVC {
@@ -150,10 +151,6 @@ extension EditorOverlayVC:UINavigationControllerDelegate {
         updateMainConstraints(viewController: viewController)
         let hidden = navigationController.viewControllers.count >= 2
         navigationController.setNavigationBarHidden(!hidden, animated: true)
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        let hidden = navigationController.viewControllers.count >= 2
     }
 }
 

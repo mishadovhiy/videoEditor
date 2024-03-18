@@ -95,7 +95,7 @@ class EditorViewController: SuperVC {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let data = DB.db.movieParameters.editingMovie?.preview
             DispatchQueue.main.async {
-                self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: data, filterSelected: self.videoFilterSelected, reloadPressed: self.reloadUI, removeAttachments: self.addSoundPressed, deleteMovie: self.clearDataPressed) ?? [])
+                self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: data, filterSelected: self.videoFilterSelected, reloadPressed: self.reloadUI, deleteMovie: self.clearDataPressed) ?? [])
             }
         }
     }
@@ -142,8 +142,12 @@ class EditorViewController: SuperVC {
         })
     }
     
-    func addSoundPressed() {
+    func addSoundFinderPressed() {
         coordinator?.toDocumentPicker(delegate: self)
+    }
+    
+    func addSoundAppleMusicPressed() {
+        coordinator?.toAppleMusicList(delegate: self)
     }
     
     private func soundToVideoSelected(_ url:URL) {

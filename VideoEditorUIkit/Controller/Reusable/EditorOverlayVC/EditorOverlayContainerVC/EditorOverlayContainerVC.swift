@@ -133,6 +133,10 @@ fileprivate extension EditorOverlayContainerVC {
             }
             
             if parentVC?.attachmentData?.attachmentType != nil && collectionData.isEmpty {
+                viewModel?.uploadPressed = { [weak self] in
+                    self?.parentVC?.attachmentDelegate?.uploadPressed($0)
+                }
+                viewModel?.assetDataHolder = parentVC?.attachmentData
                 collectionData = viewModel?.getCollectionData ?? []
             } else if collectionData.isEmpty {
                 collectionData = parentVC?.data?.collectionData ?? []

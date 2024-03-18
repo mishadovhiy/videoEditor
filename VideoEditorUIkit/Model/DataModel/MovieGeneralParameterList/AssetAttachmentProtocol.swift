@@ -142,7 +142,6 @@ extension MovieGeneralParameterList {
     }
     
     struct SongRow:AssetAttachmentProtocol {
-        
         var id: UUID = .init()
         let attachmentType: InstuctionAttachmentType? = .song
         var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
@@ -166,6 +165,7 @@ extension MovieGeneralParameterList {
     }
     
     struct MediaRow:MovieAttachmentProtocol {
+        var volume: CGFloat = 0
         var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment = .init(dict: [:])
         var shadows: DB.DataBase.MovieParametersDB.Shadows = .init(dict: [:])
         var zoom:CGFloat = 1
