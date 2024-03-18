@@ -73,7 +73,11 @@ class PlayerViewController: PlayerSuperVC {
     
     override func timeChanged(_ percent: CGFloat) {
         super.timeChanged(percent)
-        preseter?.playTimeChanged(percent)
+        if isPlaying {
+            preseter?.playTimeChanged(percent)
+        } else if percent == 0 {
+            preseter?.playTimeChanged(percent)
+        }
     }
 }
 

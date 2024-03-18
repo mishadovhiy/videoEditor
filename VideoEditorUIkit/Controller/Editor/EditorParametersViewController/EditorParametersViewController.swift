@@ -30,7 +30,7 @@ class EditorParametersViewController: SuperVC {
     }
     static var collectionViewSpace:CGPoint {
         let frame = UIApplication.shared.keyWindow?.frame ?? UIScreen.main.bounds
-        return .init(x: frame.width / 2, y: frame.width / 2)
+        return .init(x: frame.width / 2, y: 0)
     }
     
     // MARK: - life-cycle
@@ -119,8 +119,9 @@ class EditorParametersViewController: SuperVC {
     
     // MARK: private
     private func updateParentScroll() {
-        let percent = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width - view.frame.width)
-        parentVC?.seek(percent: percent)
+        let max = scrollView.contentSize.width
+        let percent = (scrollView.contentOffset.x - scrollView.contentInset.left) / (max - self.view.frame.width)
+        parentVC?.seek(percent: scrollView.contentOffset.x <= max ? percent : 1)
     }
     
     private func removeOverlays() {
@@ -131,8 +132,9 @@ class EditorParametersViewController: SuperVC {
     func scrollPercent(_ percent:CGFloat) {
         if !(viewModel?.ignoreScroll ?? false) {
             viewModel?.manualScroll = true
-            let scrollOffset = ((scrollView.contentSize.width + scrollView.contentInset.left) - self.view.frame.width) * percent
-            scrollView.contentOffset.x = (scrollOffset.isNormal ? scrollOffset : 0) - scrollView.contentInset.left
+            let max = scrollView.contentSize.width
+            let scrollOffset = (max - self.view.frame.width) * percent
+            scrollView.contentOffset.x = (scrollOffset.isNormal && scrollOffset <= max ? scrollOffset : (percent <= 0.1 ? 0 : 1)) - scrollView.contentInset.left
         }
     }
     
