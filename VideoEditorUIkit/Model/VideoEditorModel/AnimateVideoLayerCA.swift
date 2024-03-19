@@ -11,6 +11,7 @@ import AVFoundation
 struct AnimateVideoLayer {
     func add(_ newLayer:CALayer, to layer: CALayer, data:MovieAttachmentProtocol, totalTime:CGFloat) {
         newLayer.opacity = 0
+        print(data, " AnimateVideoLayerAnimateVideoLayerAnimateVideoLayer")
         appeareAnimation(.opacity, duration: data.time.duration, newLayer: newLayer, start: data.time.start, totalTime: totalTime)
         if data.animations.needScale {
             layer.add(repeated(key: "transform.scale"), forKey: "scale")

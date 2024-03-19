@@ -4145,8 +4145,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "isUserInteractionEnabled"
             landmarkType = "24">
          </BreakpointContent>
@@ -4161,8 +4161,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "isUserInteractionEnabled"
             landmarkType = "24">
          </BreakpointContent>
@@ -4193,8 +4193,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "attachmentSelected(_:view:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4225,8 +4225,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "removeFromSuperview()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4257,8 +4257,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "panGesture(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4273,8 +4273,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "editRowPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4401,8 +4401,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
             <Locations>
@@ -4727,7 +4727,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B658CF63-26E8-484C-8CA6-E0B9BAC5E727"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoEditorUIkit/Model/DB/MovieDB.swift"
@@ -4743,7 +4743,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C381188E-F690-48E4-8AE5-04595EB7A76B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoEditorUIkit/Controller/Editor/EditorParametersViewController/ViewModel/ViewModelAssetParametersViewController.swift"
@@ -4800,6 +4800,22 @@
             startingLineNumber = "161"
             endingLineNumber = "161"
             landmarkName = "soundToVideoSelected(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED44DE32-2308-4F5A-9333-5C8A38C811DE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoEditorUIkit/Model/VideoEditorModel/AttachentVideoLayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "add(to:videoSize:data:isPreview:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

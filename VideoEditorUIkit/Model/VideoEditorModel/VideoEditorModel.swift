@@ -79,10 +79,6 @@ class VideoEditorModel {
     
     func addSoundPressed(data:SongAttachmentDB?) {
         Task {
-            DB.db.movieParameters.editingMovie?.songs = data ?? .init()
-            await MainActor.run {
-                AppDelegate.shared?.fileManager?.tempSongURLHolder = .init(string: data?.attachmentURL ?? "")
-            }
             if data?.attachmentURL ?? "" != "" {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
                 DB.db.movieParameters.needReloadLayerAttachments = true
@@ -107,8 +103,11 @@ class VideoEditorModel {
                 DB.db.movieParameters.editingMovie?.images.append(image)
                 added = true
             } else if let song = data as? SongAttachmentDB {
-                addSoundPressed(data: song)
-                return
+                added = true
+                DB.db.movieParameters.editingMovie?.songs = song
+                await MainActor.run {
+                    AppDelegate.shared?.fileManager?.tempSongURLHolder = .init(string: song.attachmentURL)
+                }
             }
             if added {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true

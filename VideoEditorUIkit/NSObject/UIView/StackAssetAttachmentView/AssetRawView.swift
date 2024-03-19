@@ -45,9 +45,7 @@ class AssetRawView:UIView {
         self.backgroundColor = data?.color
         self.layer.zPosition = 999
         if updateConstraints {
-            xConstraint!.constant = newConstraints.0
-            widthConstraint!.constant = newConstraints.1
-            self.layoutIfNeeded()
+            self.updateConstraint()
             self.layer.zPosition = 999
         }
     }
@@ -83,7 +81,8 @@ class AssetRawView:UIView {
         isSelected = selected
         
         isUserInteractionEnabled = super.isUserInteractionEnabled
-        alpha = selected ? 1 : (deselectAll ? 1 : 0.2)
+        let hideGestures = selected ? true : deselectAll
+        alpha = hideGestures ? 1 : 0.2
         layer.borderColor = selected ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
         pansGetsureView.forEach {
@@ -143,6 +142,7 @@ class AssetRawView:UIView {
     func updateText(_ text:AssetAttachmentProtocol?) {
         self.data = text
         titleLabel?.text = text?.assetName
+        updateConstraint()
     }
 }
 
@@ -215,7 +215,13 @@ extension AssetRawView {
             view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
         }
     }
-        
+      
+    private func updateConstraint() {
+        xConstraint!.constant = newConstraints.0
+        widthConstraint!.constant = newConstraints.1
+        self.layoutIfNeeded()
+    }
+    
     final private var parentScrollView:UIScrollView? {
         return parentCollectionView?.superview?.superview as? UIScrollView
     }

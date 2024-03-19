@@ -217,6 +217,7 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     
     func overlayRemoved() {
         parentVC?.playerVC?.editorOverlayRemoved()
+        (viewModel?.editingView as? AssetRawView)?.updateText(viewModel?.editingAssetHolder)
         viewModel?.editingView = nil
         assetStackView.subviews.forEach {
             if let view = $0 as? StackAssetAttachmentView {
@@ -231,7 +232,7 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
             Task {
                 self.viewModel?.removeEditedAssetDB()
                 await MainActor.run {
-                    self.parentVC?.addAttachmentPressed(self.viewModel?.attachmentData(attachmentData: attachmentData) ?? attachmentData)
+                    self.parentVC?.addAttachmentPressed(attachmentData)
                 }
             }
         })
@@ -241,9 +242,9 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
 extension EditorParametersViewController:AssetAttachmentViewDelegate {
     func attachmentPanChanged(view: AssetRawView?) {
         let converted = view?.superview?.convert(view?.frame ?? .zero, from: view ?? .init()) ?? .zero
-        let total = view?.superview?.frame ?? .zero
-        let startPercent = converted.minX / total.width
-        let durationPercent = (view?.frame.width ?? 0) / total.width
+        let total = (view?.superview?.frame ?? .zero).width + scrollView.contentInset.left
+        let startPercent = converted.minX / total
+        let durationPercent = (view?.frame.width ?? 0) / total
         print(startPercent, "startPercent ")
         print(durationPercent, " durationPercent")
         viewModel?.editingAsset?.time = .with({
