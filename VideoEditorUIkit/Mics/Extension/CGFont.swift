@@ -13,13 +13,14 @@ extension UIFont {
     }
     
     func calculate(inWindth:CGFloat? = nil, attributes:[NSAttributedString.Key: Any]? = nil, string:String, maxSize:CGSize? = nil) -> CGSize {
-        let fontSize = self.pointSize
         let defaultWidth = UIApplication.shared.keyWindow?.frame.width ?? 100
-        var textAttributes: [NSAttributedString.Key: Any] = [.font: fontSize]
+        var textAttributes: [NSAttributedString.Key: Any] = [.font: self]
         attributes?.forEach({
             textAttributes.updateValue($0.value, forKey: $0.key)
         })
-        let attributedText = NSAttributedString(string: string, attributes: textAttributes)
+        let attributedText = NSAttributedString(string: string == "" ? "-" : string, attributes: textAttributes)
+        print(attributedText, " gterfwdqswefrg")
+        print(inWindth, " gerfwdq ", defaultWidth)
         let boundingRect = attributedText.boundingRect(with: CGSize(width: inWindth ?? defaultWidth, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
         var size = CGSize(width: ceil(boundingRect.size.width), height: ceil(boundingRect.size.height))
         if let maxSize {

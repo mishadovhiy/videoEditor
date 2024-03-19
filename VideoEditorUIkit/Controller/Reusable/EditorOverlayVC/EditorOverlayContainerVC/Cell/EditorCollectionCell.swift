@@ -40,6 +40,10 @@ class EditorCollectionCell: UICollectionViewCell {
         }
         backgroundColor = item.backgroundColor
         setupUI()
+        if type != .big {
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.widthAnchor.constraint(lessThanOrEqualToConstant: 25).isActive = true
+        }
     }
 }
 
@@ -48,7 +52,7 @@ fileprivate extension EditorCollectionCell {
     private func setupUI() {
         titleLabel.textColor = .init(.greyText)
         titleLabel.font = .type(.small)
-        updateConstraint()
+      //  updateConstraint()
         contentView.layer.drawLine([
             .init(x: -5, y: 5),
                 .init(x: -5, y: contentView.frame.height - 10)
@@ -71,8 +75,8 @@ fileprivate extension EditorCollectionCell {
                 imageConstant.constant = 180
                 constant.constant = 200
             case .middle:
-                imageConstant.constant = 60
-                constant.constant = 80
+                imageConstant.constant = 30
+                constant.constant = 50
             default:
                 constant.constant = 32
                 imageConstant.constant = 20

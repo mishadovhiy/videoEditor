@@ -9,13 +9,17 @@ import UIKit
 
 class EditorOverlayContainerVC: SuperVC {
     
-    @IBOutlet weak var sliderView: UISlider!
-    @IBOutlet weak var containerView: UIView!
+   // @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet private weak var collectionView:UICollectionView!
     var primatyViews:[UIView] {
-        [sliderView, containerView]
+        [tableView]
     }
     override var initialAnimation: Bool { return false}
+    var initialTableData:[EditorOverlayVC.ToOverlayData.AttachmentOverlayType]?
+    var tableData:[EditorOverlayVC.ToOverlayData.AttachmentOverlayType] {
+        return screenType?.tableData ?? (initialTableData ?? [])
+    }
     var screenType:EditorOverlayVC.ToOverlayData?
     var viewModel:EditorOverlayContainerVCViewModel?
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
@@ -54,14 +58,20 @@ class EditorOverlayContainerVC: SuperVC {
         toggleNavigationHidden()
     }
     
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        self.parentVC?.updateMainConstraints(viewController: self)
+        collectionView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if needTextField {
-            parent?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
-            collectionView.reloadInputViews()
+            parentVC?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
         }
         toggleNavigationHidden(animated: false)
-        self.parentVC?.updateMainConstraints(viewController: self)
+        collectionView.reloadData()
+        collectionView.reloadInputViews()
     }
     
     private func toggleNavigationHidden(animated:Bool = true) {
@@ -71,8 +81,7 @@ class EditorOverlayContainerVC: SuperVC {
     
     func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]) {
         self.collectionData = collectionData
-        collectionView.reloadData()
-        collectionView.isHidden = collectionData.isEmpty
+        reloadData()
     }
     
     @objc func textFieldDidChanged(_ sender:UITextField) {
@@ -98,19 +107,15 @@ fileprivate extension EditorOverlayContainerVC {
         //view.backgroundColor = (navigationController?.viewControllers.count == 1) ? (parentVC?.view.backgroundColor ?? .clear) : .type(.secondaryBackground)
         view.backgroundColor = (parentVC?.view.backgroundColor ?? .clear)
         navigationController?.navigationBar.backgroundColor = view.backgroundColor
-        primatyViews.forEach({
-            if $0 == self.containerView {
-                $0.isHidden = true
-            } else {
-                $0.superview?.isHidden = true
-            }
-        })
+//        primatyViews.forEach({
+//            $0.superview?.isHidden = true
+//        })
         switch screenType?.attachmentType {
-        case .floatRange(_):
-            sliderView.superview?.isHidden = false
-            sliderView.addTarget(self, action: #selector(sliderChanged(_:)), for: .touchUpInside)
+        case .floatRange(_), .switch(_):
+            if let type = screenType?.attachmentType {
+                screenType?.tableData = [type]
+            }
         case .color(let colorAction):
-            containerView.isHidden = false
             viewModel = .init()
             collectionData = (viewModel?.colorCollectionData ?? []).compactMap({ color in
                 return .init(title: color.title, didSelect: {
@@ -132,20 +137,27 @@ fileprivate extension EditorOverlayContainerVC {
                 viewModel = .init()
             }
             
-            if parentVC?.attachmentData?.attachmentType != nil && collectionData.isEmpty {
+            if parentVC?.attachmentData?.attachmentType != nil && collectionData.count == 0 {
                 viewModel?.uploadPressed = { [weak self] in
                     self?.parentVC?.attachmentDelegate?.uploadPressed($0)
                 }
                 viewModel?.assetDataHolder = parentVC?.attachmentData
                 collectionData = viewModel?.getCollectionData ?? []
-            } else if collectionData.isEmpty {
+            } else if collectionData.count == 0 {
                 collectionData = parentVC?.data?.collectionData ?? []
             }
-            print(collectionData, " tgerfrgthju6")
         }
+        print(collectionData, " tgerfrgthju6" , screenType)
+
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.isHidden = collectionData.isEmpty
+        if tableData.count != 0 {
+            tableView.delegate = self
+            tableView.dataSource = self
+           // addChild(child: SelectionTableViewController.configure(), toView: containerView)
+        }
+        
+        reloadData()
         if !needTextField {
             collectionView.contentInset.left = view.frame.width / 9
         }
@@ -158,6 +170,16 @@ fileprivate extension EditorOverlayContainerVC {
         default: return
         }
     }
+    
+    private func reloadData() {
+        collectionView.superview?.isHidden = collectionData.count == 0
+        collectionView.reloadData()
+      //  collectionView.reloadInputViews()
+        print(tableData.count, " gerfweadw")
+        print(collectionData.count, " gtefrdw")
+        tableView.superview?.isHidden = tableData.count == 0
+        tableView.reloadData()
+    }
 }
 
 extension EditorOverlayContainerVC:UITextFieldDelegate {
@@ -165,7 +187,7 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
         viewModel?.textfieldEditing = false
         parentVC?.updateMainConstraints(viewController: self)
         collectionView.reloadSections(.init(integer: 1))
-        collectionView.reloadInputViews()
+    //    collectionView.reloadInputViews()
         collectionView.reloadData()
     }
     
@@ -173,7 +195,7 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
         viewModel?.textfieldEditing = true
         parentVC?.updateMainConstraints(viewController: self, textFieldEditing: true)
         collectionView.reloadSections(.init(integer: 1))
-        collectionView.reloadInputViews()
+      //  collectionView.reloadInputViews()
     }
 }
 

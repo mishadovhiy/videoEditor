@@ -80,13 +80,13 @@ struct EditorOverlayContainerVCViewModel {
     private var textCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         [
             .init(title: "Text Aligment", image: "textAligment", toOverlay: .init(screenTitle: "Select text Aligment", collectionData: [
-                .init(title: "left", didSelect: {
+                .init(title: "left", image: "textLeft", didSelect: {
                     self.textAligmentChanged(.left)
                 }),
-                .init(title: "Center", didSelect: {
+                .init(title: "Center", image: "textCenter", didSelect: {
                     self.textAligmentChanged(.center)
                 }),
-                .init(title: "Right", didSelect: {
+                .init(title: "Right", image: "textRight", didSelect: {
                     self.textAligmentChanged(.right)
                 })
             ])),

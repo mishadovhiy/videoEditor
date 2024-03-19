@@ -15,7 +15,6 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
             return collectionData.count
-
         } else {
             return needTextField ? 1 : 0
         }
@@ -34,7 +33,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
             return cell
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section != 1 {
             return
@@ -45,5 +44,28 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
         } else if let type = data.toOverlay {
             self.navigationController?.pushViewController(EditorOverlayContainerVC.configure(type: type, collectionData: type.collectionData), animated: true)
         }
-    }    
+    }
+}
+
+extension EditorOverlayContainerVC:UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let viewHeight = view.frame.height - (view.safeAreaInsets.bottom + view.safeAreaInsets.top)
+        if indexPath.section == 0 {
+            return .init(width: view.frame.width / 1.4, height: viewHeight)
+        }
+        var type = screenSize
+        if viewModel?.textfieldEditing ?? false {
+            type = .middle
+        }
+        print(view.frame.height, "gterfwdqas ", type)
+        switch type {
+        case .big:
+            return .init(width: 150, height: viewHeight)
+        default:
+            let font = UIFont.systemFont(ofSize: CGFloat(12), weight: .bold)
+            let textWidth = font.calculate(inWindth:view.frame.width, attributes:[.font:font], string: collectionData[indexPath.row].title).width
+            print(textWidth, " efrwdesax")
+            return .init(width: textWidth <= 80 ? 80 : textWidth, height: viewHeight)
+        }
+    }
 }

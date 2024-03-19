@@ -65,6 +65,9 @@
 		8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C171A2B3B2DF400953143 /* SceneDelegate.swift */; };
 		8D4C17322B3C11C000953143 /* AlertViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8D4C17312B3C11C000953143 /* AlertViewLibrary */; };
 		8D6CE22A2BA1230800D33A3D /* 1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8D6CE2292BA1230800D33A3D /* 1.mov */; };
+		8D75C0FE2BA92B2C00DD9B89 /* SliderTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */; };
+		8D75C1002BA92B3700DD9B89 /* SwitchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */; };
+		8D75C1022BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */; };
 		8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */; };
 		8D75E3922BA11E8C00ED75C0 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */; };
 		8DA694A72BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */; };
@@ -148,6 +151,9 @@
 		8D4C171A2B3B2DF400953143 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8D4C17262B3B2DF600953143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D6CE2292BA1230800D33A3D /* 1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 1.mov; sourceTree = "<group>"; };
+		8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableCell.swift; sourceTree = "<group>"; };
+		8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableCell.swift; sourceTree = "<group>"; };
+		8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView_EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
 		8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilter.swift; sourceTree = "<group>"; };
 		8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUI_EditorOverlayVC.swift; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 				8D18F15A2B9F460000194F34 /* EditorOverlayContainerVC.swift */,
 				8D18F15B2B9F460000194F34 /* Cell */,
 				8D18F15D2B9F460000194F34 /* UICollectionView_EditorOverlayContainerVC.swift */,
+				8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */,
 				8DF4A94D2BA4CFDD00D07C67 /* ViewModel */,
 			);
 			path = EditorOverlayContainerVC;
@@ -302,6 +309,8 @@
 			isa = PBXGroup;
 			children = (
 				8D18F15C2B9F460000194F34 /* EditorCollectionCell.swift */,
+				8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */,
+				8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -658,6 +667,7 @@
 				8D18F1372B9F455E00194F34 /* EditorVideoLayer.swift in Sources */,
 				8D4C17192B3B2DF400953143 /* AppDelegate.swift in Sources */,
 				8DBC3F6C2BA78E530045CB98 /* DB_Shadows.swift in Sources */,
+				8D75C1022BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift in Sources */,
 				8D18F1332B9F455E00194F34 /* AttachentVideoLayer.swift in Sources */,
 				8D18F1362B9F455E00194F34 /* PrepareEditorModel.swift in Sources */,
 				8D18F1552B9F45EE00194F34 /* EditorParametersViewController.swift in Sources */,
@@ -679,6 +689,8 @@
 				8D18F1522B9F45EE00194F34 /* AssetPreviewCell.swift in Sources */,
 				8DBC3F732BA7935D0045CB98 /* SongAttachmentDB.swift in Sources */,
 				8D18F1932B9F466A00194F34 /* UIColor.swift in Sources */,
+				8D75C0FE2BA92B2C00DD9B89 /* SliderTableCell.swift in Sources */,
+				8D75C1002BA92B3700DD9B89 /* SwitchTableCell.swift in Sources */,
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
 				8D18F1822B9F465300194F34 /* AssetRawView.swift in Sources */,
 				8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */,

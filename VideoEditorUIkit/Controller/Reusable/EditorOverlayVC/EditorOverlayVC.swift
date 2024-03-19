@@ -105,7 +105,11 @@ class EditorOverlayVC: SuperVC {
                     self.view.alpha = 1
                 }
             }
-            
+            animation.addCompletion {_ in 
+                self.childVC?.view.layoutSubviews()
+                self.childVC?.view.layoutIfNeeded()
+                self.childVC?.viewDidAppear(true)
+            }
             animation.startAnimation()
         }
     }
@@ -171,22 +175,32 @@ extension EditorOverlayVC {
         var needTextField:Bool? = nil
         var isPopup:Bool = true
         var screenHeight:EditorOverlayContainerVC.OverlaySize? = nil
+        var tableData:[ToOverlayData.AttachmentOverlayType] = []
         var closePressed:(()->())? = nil
         var donePressed:(()->())? = nil
         
         enum AttachmentOverlayType {
             case color (ColorType)
             case floatRange (FloatType)
+            case `switch` (SwitchType)
             case any ((Any)->())
             
             struct ColorType {
+                var title:String = ""
                 var selectedColor:UIColor? = nil
                 var didSelect:(_ newColor:UIColor)->()
             }
             
             struct FloatType {
+                var title:String = ""
                 var selected:CGFloat? = nil
                 var didSelect:(_ newValue:CGFloat)->()
+            }
+                
+            struct SwitchType {
+                var title:String = ""
+                var selected:Bool = false
+                var didSselect:(_ newValue:Bool)->()
             }
         }
     }
