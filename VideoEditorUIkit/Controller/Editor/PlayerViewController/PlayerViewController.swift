@@ -61,8 +61,7 @@ class PlayerViewController: PlayerSuperVC {
     // MARK: - IBAction
     func editingAttachmentPressed(_ data:AssetAttachmentProtocol?) {
         editingAttachmentView?.removeFromSuperview()
-        if data?.attachmentType == .text, 
-            let textDB = data as? TextAttachmentDB {
+        if let textDB = data as? MovieAttachmentProtocol {
             loadEditingView(textDB)
         }
     }

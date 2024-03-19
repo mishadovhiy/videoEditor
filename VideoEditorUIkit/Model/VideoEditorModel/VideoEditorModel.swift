@@ -94,15 +94,19 @@ class VideoEditorModel {
                 await presenter?.errorAddingVideo(.init(title: "Attachments cannot be added when after using filter", description: "set filter to text to modify attachments"))
                 return
             }
-            if let text = data as? MovieAttachmentProtocol {
+            var added = false
+            if let text = data as? TextAttachmentDB {
+                DB.db.movieParameters.editingMovie?.texts.append(text)
+                added = true
+            } else if let image = data as? ImageAttachmentDB {
+                DB.db.movieParameters.editingMovie?.images.append(image)
+                added = true
+            }
+            if added {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
                 DB.db.movieParameters.needReloadLayerAttachments = true
-                if let textDB = text as? TextAttachmentDB {
-                    DB.db.movieParameters.editingMovie!.texts.append(textDB)
-                }
                 await presenter?.reloadUI()
             } else {
-                print("error adding data: nothing to add ", data.debugDescription)
                 await videoAdded(canReload:false)
             }
         }
@@ -133,14 +137,21 @@ class VideoEditorModel {
 }
 
 fileprivate extension VideoEditorModel {
-    private func addText() {
+    private func addLayerAttachments() {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {
-            if (DB.db.movieParameters.editingMovie?.texts.isEmpty ?? true) {
+            var hasValue = false
+            if !(DB.db.movieParameters.editingMovie?.texts.isEmpty ?? true) {
+                hasValue = true
+            }
+            if !(DB.db.movieParameters.editingMovie?.images.isEmpty ?? true) {
+                hasValue = true
+            }
+            if !hasValue {
                 await videoAdded(canReload: false)
                 return
             }
-            let ok = await self.prepare.addText()
+            let ok = await self.prepare.addAttachments()
             if let _ = ok.response {
                 await videoAdded(canReload: true)
             } else {
@@ -168,11 +179,12 @@ fileprivate extension VideoEditorModel {
                 if songUrl == nil {
                     DB.db.movieParameters.editingMovie?.songs = .init()
                 }
-                addText()
+                addLayerAttachments()
                 if let song = DB.db.movieParameters.editingMovie?.songs,
                    song.attachmentURL != "",
                    let songUrl {
                     print(songUrl, " song url")
+                    print(URL(string: song.attachmentURL), " trtewx")
                     await self.performAddSound(url: songUrl)
                 }
             }

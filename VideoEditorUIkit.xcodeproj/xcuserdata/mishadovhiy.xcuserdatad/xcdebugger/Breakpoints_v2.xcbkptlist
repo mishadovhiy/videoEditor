@@ -3327,8 +3327,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "configure(data:dataChanged:videoSize:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4433,8 +4433,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
             <Locations>
@@ -4544,6 +4544,22 @@
             startingLineNumber = "124"
             endingLineNumber = "124"
             landmarkName = "updateParentScroll()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A516EB7D-BB3F-4F10-BF9C-8D14240584FD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "dataUpdated(force:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

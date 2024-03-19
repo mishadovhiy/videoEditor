@@ -35,7 +35,7 @@ class PrepareEditorModel {
         return results ?? .error("Unknown Error")
     }
     
-    func addText() async -> Response {
+    func addAttachments() async -> Response {
         let asset = delegate.movie ?? .init()
         print(asset.duration, " video duration")
         guard let composition = delegate.movieHolder
@@ -271,7 +271,10 @@ extension PrepareEditorModel {
         //                                     text: .init(attachment: data), videoTotalTime: asset.duration().seconds)
         //                let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
         
-        let data = DB.db.movieParameters.editingMovie?.texts ?? []
+        var data:[MovieAttachmentProtocol] = DB.db.movieParameters.editingMovie?.texts ?? []
+        DB.db.movieParameters.editingMovie?.images.forEach({
+            data.append($0)
+        })
         var compositions:[AVVideoComposition] =  []
         var layers:[(CALayer, CALayer)] = []
         for row in data {

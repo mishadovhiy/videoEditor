@@ -34,7 +34,7 @@ class PlayerEditingAttachmentView: UIView {
     func dataUpdated(force:Bool = false) {
         if self.superview == nil { return }
         let model = AttachentVideoLayerModel()
-        if let text = data as? TextAttachmentDB {
+        if let text = data {
             if !force {
                 layer.animationTransition(0.17)
             }
@@ -43,8 +43,9 @@ class PlayerEditingAttachmentView: UIView {
                     $0.removeFromSuperlayer()
                 }
             })
-            let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, text: text, isPreview: true)
-            layer.addSublayer(newLayer)
+            if let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, data: text, isPreview: true) {
+                layer.addSublayer(newLayer)
+            }
             if !force {
                 dataChanged?(text)
             }

@@ -208,7 +208,7 @@ extension EditorOverlayVC {
                           delegate:EditorOverlayVCDelegate?) -> EditorOverlayVC {
         let vc = EditorOverlayVC.configure()
         vc.view.layer.name = String(describing: EditorOverlayVC.self)
-        vc.attachmentData = attechemntData ?? TextAttachmentDB.init(dict: [:])
+        vc.attachmentData = attechemntData
         vc.attachmentDelegate = delegate
         vc.view.alpha = 0
         return vc

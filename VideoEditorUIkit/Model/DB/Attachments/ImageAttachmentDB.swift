@@ -13,6 +13,49 @@ struct ImageAttachmentDB {
     var attachmentType: InstuctionAttachmentType? = .media
     var id: UUID = .init()
     
+    var image:Data? {
+        get {
+            return .init(base64Encoded: dict["image"] as? String ?? "")
+        }
+        set {
+            guard let string = newValue?.base64EncodedString() else {
+                dict.removeValue(forKey: "image")
+                return
+            }
+            dict.updateValue(string, forKey: "image")
+        }
+    }
+    
+    var borderRadius:CGFloat {
+        get {
+            if let value = dict["borderRadius"] as? String {
+                return .init(string: value)
+            } else {
+                return 5
+            }
+        }
+        set {
+            dict.updateValue(String.init(value: newValue), forKey: "borderRadius")
+        }
+    }
+    
+    var backgroundColor: UIColor {
+        get {
+            return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .green
+        }
+        set {
+            dict.updateValue(newValue.toHex, forKey: "backgroundColor")
+        }
+    }
+    
+    var opacity:CGFloat {
+        get {
+            .init(string: dict["opacity"] as? String)
+        }
+        set {
+            dict.updateValue(String.init(value: newValue), forKey: "opacity")
+        }
+    }
 }
 
 // MARK: - MovieAttachmentProtocol
@@ -72,7 +115,7 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     
     var zoom:CGFloat {
         get {
-            .init(string: dict["zoom"] as? String ?? "1")
+            .init(string: dict["zoom"] as? String ?? "0.3")
         }
         set {
             dict.updateValue(String.init(value: newValue), forKey: "zoom")

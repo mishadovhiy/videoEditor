@@ -44,8 +44,7 @@ struct EditorVideoLayer {
     }
     
     func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol, videoTotalTime:CGFloat) -> Bool {
-        if let text = data as? TextAttachmentDB {
-            let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, text: text)
+        if let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, data: data) {
             animation.add(newValue, to: layer, data:data, totalTime: videoTotalTime)
             return true
         } else {
@@ -86,7 +85,7 @@ fileprivate extension EditorVideoLayer {
         videoComposition.instructions = [instruction]
         return .init(instractions: instruction, composition: videoComposition, videoLayer:videoLayer, outputLayer:outputLayer)
     }
-
+    
     struct InstractionsResult {
         let instractions:AVMutableVideoCompositionInstruction
         let composition:AVMutableVideoComposition
