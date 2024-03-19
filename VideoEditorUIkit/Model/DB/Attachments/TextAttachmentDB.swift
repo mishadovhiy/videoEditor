@@ -12,6 +12,7 @@ struct TextAttachmentDB {
     var dict:[String:Any] = [:]
     var attachmentType: InstuctionAttachmentType? = .text
     var id: UUID = .init()
+    private let defaultColor:UIColor = .type(.yellow)
     
     var fontSize:CGFloat {
         get {
@@ -51,6 +52,10 @@ struct TextAttachmentDB {
 
 // MARK: - MovieAttachmentProtocol
 extension TextAttachmentDB:MovieAttachmentProtocol {
+    var trackColor: UIColor {
+        return .type(.yellow1)
+    }
+    
     var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment {
         get {
             return .init(dict: dict["animations"] as? [String:Any] ?? [:])
@@ -75,7 +80,7 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     
     var assetName: String? {
         get {
-            dict["assetName"] as? String ?? "-"
+            dict["assetName"] as? String ?? TextAttachmentDB.demo.assetName
         }
         set {
             if let newValue {
@@ -88,7 +93,11 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     
     var color: UIColor {
         get {
-            return .init(hex: dict["color"] as? String ?? "") ?? .green
+            if let value = dict["color"] as? String {
+                return .init(hex: value) ?? defaultColor
+            } else {
+                return defaultColor
+            }
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "color")

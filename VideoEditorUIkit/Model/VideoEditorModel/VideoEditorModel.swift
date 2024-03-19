@@ -79,13 +79,18 @@ class VideoEditorModel {
     
     func addSoundPressed(data:SongAttachmentDB?) {
         Task {
-////            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
-////            DB.db.movieParameters.needReloadLayerAttachments = true
-////            DB.db.movieParameters.editingMovie?.songs = data ?? .init()
-////            await presenter?.reloadUI()
-            await self.performAddSound(url: .init(string: data?.attachmentURL ?? ""))
+            DB.db.movieParameters.editingMovie?.songs = data ?? .init()
+            await MainActor.run {
+                AppDelegate.shared?.fileManager?.tempSongURLHolder = .init(string: data?.attachmentURL ?? "")
+            }
+            if data?.attachmentURL ?? "" != "" {
+                DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+                DB.db.movieParameters.needReloadLayerAttachments = true
+                await presenter?.reloadUI()
+            } else {
+                await self.performAddSound(url: .init(string: data?.attachmentURL ?? ""))
+            }
         }
-        
     }
     
     func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
@@ -120,11 +125,11 @@ class VideoEditorModel {
             DB.db.movieParameters.needReloadLayerAttachments = true
             await presenter?.reloadUI()
             /// FA-956
-//            await prepare.addFilter(completion: {
-//                Task {
-//                    await self.presenter?.reloadUI()
-//                }
-//            })
+            //            await prepare.addFilter(completion: {
+            //                Task {
+            //                    await self.presenter?.reloadUI()
+            //                }
+            //            })
         }
     }
     
@@ -182,10 +187,10 @@ fileprivate extension VideoEditorModel {
                 addLayerAttachments()
                 if let song = DB.db.movieParameters.editingMovie?.songs,
                    song.attachmentURL != "",
-                   let songUrl {
+                   let songURL = songUrl ?? URL(string: song.attachmentURL) {
                     print(songUrl, " song url")
                     print(URL(string: song.attachmentURL), " trtewx")
-                    await self.performAddSound(url: songUrl)
+                    await self.performAddSound(url: songURL)
                 }
             }
         } else if videoAddedAction {

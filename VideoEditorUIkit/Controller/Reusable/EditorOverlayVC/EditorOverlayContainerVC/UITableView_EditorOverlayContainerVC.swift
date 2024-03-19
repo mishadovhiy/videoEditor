@@ -16,11 +16,11 @@ extension EditorOverlayContainerVC:UITableViewDelegate, UITableViewDataSource {
         switch tableData[indexPath.row] {
         case .floatRange(let data):
             let cell = tableView.dequeueReusableCell(withIdentifier: "SliderTableCell", for: indexPath) as! SliderTableCell
-            cell.set(data)
+            cell.set(data, textColor: parentVC?.textColor)
             return cell
         case .switch(let data):
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableCell", for: indexPath) as! SwitchTableCell
-            cell.set(data)
+            cell.set(data, textColor: parentVC?.textColor)
             return cell
         default:
             return UITableViewCell()

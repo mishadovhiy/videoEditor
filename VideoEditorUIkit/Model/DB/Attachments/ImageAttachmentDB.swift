@@ -12,6 +12,7 @@ struct ImageAttachmentDB {
     var dict:[String:Any] = [:]
     var attachmentType: InstuctionAttachmentType? = .media
     var id: UUID = .init()
+    private let defaultColor:UIColor = .type(.darkBlue)
     
     var image:Data? {
         get {
@@ -84,7 +85,8 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     
     var assetName: String? {
         get {
-            dict["assetName"] as? String ?? "-"
+            dict["assetName"] as? String ?? "Image"
+           // return URL(string: attachme)
         }
         set {
             if let newValue {
@@ -95,9 +97,17 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
         }
     }
     
+    var trackColor: UIColor {
+        return defaultColor
+    }
+    
     var color: UIColor {
         get {
-            return .init(hex: dict["color"] as? String ?? "") ?? .green
+            if let value = dict["color"] as? String {
+                return .init(hex: value) ?? defaultColor
+            } else {
+                return defaultColor
+            }
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "color")

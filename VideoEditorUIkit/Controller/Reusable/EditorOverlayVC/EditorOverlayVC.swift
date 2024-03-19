@@ -26,6 +26,9 @@ class EditorOverlayVC: SuperVC {
     var attachmentDelegate:EditorOverlayVCDelegate?
     override var initialAnimation: Bool { return false}
     var overlaySizeChanged:((_ newSize:EditorOverlayContainerVC.OverlaySize)->())?
+    var textColor:UIColor {
+        return .type((data?.isPopup ?? false) || attachmentData != nil ? .white : .greyText)
+    }
     private var childVC:EditorOverlayContainerVC? {
         return (children.first(where: {
             $0 is UINavigationController
@@ -34,6 +37,9 @@ class EditorOverlayVC: SuperVC {
     // MARK: - Life-Cycle
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
+        if view.superview == nil {
+            return
+        }
         setupUI()
     }
         
@@ -49,6 +55,8 @@ class EditorOverlayVC: SuperVC {
                     view.addConstaits([constraint.key:constraint.value])
                 }
             }
+        } else {
+            childVC?.navigationController?.navigationBar.tintColor = .white
         }
     }
     

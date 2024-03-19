@@ -14,7 +14,10 @@ class SliderTableCell: UITableViewCell {
     
     private var data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.FloatType?
     
-    func set(_ data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.FloatType) {
+    func set(_ data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.FloatType, textColor:UIColor? = nil) {
+        if let color = textColor {
+            titleLabel.textColor = color
+        }
         self.data = data
         slider.value = Float(data.selected ?? 0)
         titleLabel.text = data.title

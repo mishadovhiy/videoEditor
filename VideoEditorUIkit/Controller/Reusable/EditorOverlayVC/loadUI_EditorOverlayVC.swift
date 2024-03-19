@@ -10,6 +10,7 @@ import UIKit
 // MARK: - loadUI
 extension EditorOverlayVC {
     func setupUI() {
+        let defaultColor = view.superview?.backgroundColor ?? .clear
         if data?.isPopup ?? true {
             view.layer.cornerRadius = 12
             view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
@@ -18,8 +19,9 @@ extension EditorOverlayVC {
             view.layer.shadowOpacity = 0.8
             view.layer.shadowOffset = .init(width: -1, height: 3)
             view.layer.shadowRadius = 5
+            view.backgroundColor = attachmentData?.trackColor ?? defaultColor
         } else {
-            view.backgroundColor = view.superview!.backgroundColor ?? .clear
+            view.backgroundColor = defaultColor
             actionButtons.first(where: {$0.style == 0})?.superview?.isHidden = hideDoneButton
             actionButtons.first(where: {$0.style == 1})?.superview?.isHidden = hideCloseButton
         }

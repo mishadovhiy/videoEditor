@@ -47,7 +47,7 @@ extension SongAttachmentDB:AssetAttachmentProtocol {
         attachmentType?.rawValue ?? "?"
     }
     var color: UIColor {
-        return selfMovie ? .yellow : .purple
+        return .type(selfMovie ? .lightPink1 : .purpure)
     }
     
     var time: DB.DataBase.MovieParametersDB.AssetTime {
@@ -62,9 +62,13 @@ extension SongAttachmentDB:AssetAttachmentProtocol {
         }
     }
     
+    var trackColor: UIColor {
+        return color
+    }
+    
     var assetName: String? {
         get {
-            dict["assetName"] as? String ?? "-"
+            return URL(string: attachmentURL)?.lastPathComponent ?? "Video Valume"
         }
         set {
             if let newValue {

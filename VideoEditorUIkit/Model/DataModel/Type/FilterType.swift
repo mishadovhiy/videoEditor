@@ -10,8 +10,8 @@ import Foundation
 enum FilterType:String {
     case none = "none"
     case invert = "CIColorInvert"
-    case CIXRay = "CIXRay"
-    case CIVignetteEffect = "CIVignetteEffect"
+  //  case CIXRay = "CIXRay"
+   // case CIVignetteEffect = "CIVignetteEffect"
     case CIVignette = "CIVignette"
     case CIThermal = "CIThermal"
     case CISepiaTone = "CISepiaTone"
@@ -20,8 +20,8 @@ enum FilterType:String {
     case CIPaletteCentroid = "CIPaletteCentroid"
     case CIMinimumComponent = "CIMinimumComponent"
     case CIMaximumComponent = "CIMaximumComponent"
-    case CIMaskToAlpha = "CIMaskToAlpha"
-    case CILabDeltaE = "CILabDeltaE"
+  //  case CIMaskToAlpha = "CIMaskToAlpha"
+    //case CILabDeltaE = "CILabDeltaE"
     case CIFalseColor = "CIFalseColor"
     case CIDocumentEnhancer = "CIDocumentEnhancer"
     case CIColorPosterize = "CIColorPosterize"
@@ -38,5 +38,5 @@ enum FilterType:String {
         return rawValue
     }
     
-    static let allCases:[Self] = [.none, .invert, .CIXRay, .CIVignetteEffect, .CIVignette, .CIThermal, .CISepiaTone, .CIPhotoEffect, .CIPalettize, .CIPaletteCentroid, .CIMinimumComponent, .CIMaximumComponent, .CIMaskToAlpha, .CILabDeltaE, .CIFalseColor, .CIDocumentEnhancer, .CIColorPosterize, .CIDither, .CIColorMonochrome, .CIColorMap, .CIColorCurves, .CIColorCubesMixedWithMask, .CIColorCubeWithColorSpace, .CIColorCube, .CIColorCrossPolynomial]
+    static let allCases:[Self] = [.none, .invert, .CIVignette, .CIThermal, .CISepiaTone, .CIPhotoEffect, .CIPalettize, .CIPaletteCentroid, .CIMinimumComponent, .CIMaximumComponent, .CIFalseColor, .CIDocumentEnhancer, .CIColorPosterize, .CIDither, .CIColorMonochrome, .CIColorMap, .CIColorCurves, .CIColorCubesMixedWithMask, .CIColorCubeWithColorSpace, .CIColorCube, .CIColorCrossPolynomial]
 }

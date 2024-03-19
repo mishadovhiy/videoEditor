@@ -16,7 +16,6 @@ class AssetHeaderCell: UICollectionReusableView {
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.red.cgColor
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

@@ -59,8 +59,8 @@ extension UIImageView {
 }
 
 extension UIView {
-    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:(CGFloat, String)], safeArea:Bool = true) {
-        guard let superview else {
+    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:(CGFloat, String)], safeArea:Bool = true, toSuperView:UIView? = nil) {
+        guard let superview = self.superview ?? toSuperView else {
             return
         }
         constants.forEach { (key, value) in
@@ -77,13 +77,13 @@ extension UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], safeArea:Bool = true) {
+    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], safeArea:Bool = true, superView:UIView? = nil) {
         let data = constants
         var dataRes:[NSLayoutConstraint.Attribute: (CGFloat, String)] = [:]
         data.forEach {
             dataRes.updateValue(($0.value, ""), forKey: $0.key)
         }
-        addConstaits(dataRes)
+        addConstaits(dataRes, safeArea: safeArea, toSuperView: superView)
     }
     
     func textFieldBottomConstraint(stickyView:UIView, constant:CGFloat = 0) {
@@ -110,6 +110,30 @@ extension UIView {
             self.alpha = 1
             self.layer.zoom(value: 1)
         }
+    }
+    
+    func addBluer(frame:CGRect? = nil, style:UIBlurEffect.Style = (.init(rawValue: -10) ?? .regular), insertAt:Int? = nil, isSecond:Bool = false) -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: style)
+        let bluer = UIVisualEffectView(effect: blurEffect)
+      //  bluer.backgroundColor = .black.withAlphaComponent(0.3)
+        let constaints:[NSLayoutConstraint.Attribute : CGFloat] = [.leading:0, .top:0, .trailing:0, .bottom:0]
+
+        for _ in 0..<5 {
+            let vibracity = UIVisualEffectView(effect: UIBlurEffect(style: style))
+            bluer.contentView.addSubview(vibracity)
+            vibracity.addConstaits(constaints, superView: bluer)
+        }
+        
+        bluer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if let at = insertAt {
+            self.insertSubview(bluer, at: at)
+        } else {
+            self.addSubview(bluer)
+        }
+        
+        bluer.addConstaits(constaints)
+
+        return bluer
     }
 }
 

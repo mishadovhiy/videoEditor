@@ -16,6 +16,7 @@ protocol AssetAttachmentProtocol {
     var defaultName:String { get }
     var attachmentType:InstuctionAttachmentType? { get }
     var color:UIColor { get }
+    var trackColor:UIColor { get }
     var id:UUID { get }
 }
 
@@ -62,6 +63,10 @@ extension [AssetAttachmentProtocol] {
 //MARK: List
 extension MovieGeneralParameterList {
     struct AssetsData:AssetAttachmentProtocol {
+        var trackColor: UIColor {
+            return color
+        }
+        
         
         var id: UUID = .init()
         var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
@@ -122,6 +127,9 @@ extension MovieGeneralParameterList {
 
 extension MovieGeneralParameterList {
     struct RegularRow:MovieAttachmentProtocol {
+        var trackColor: UIColor {
+            return color
+        }
         var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment = .init(dict: [:])
         var shadows: DB.DataBase.MovieParametersDB.Shadows = .init(dict: [:])
         var zoom:CGFloat = 1
@@ -150,6 +158,9 @@ extension MovieGeneralParameterList {
     
     struct SongRow:AssetAttachmentProtocol {
         var id: UUID = .init()
+        var trackColor: UIColor {
+            return color
+        }
         let attachmentType: InstuctionAttachmentType? = .song
         var time:DB.DataBase.MovieParametersDB.AssetTime = .init(dict: [:])
         var assetName: String? = nil
@@ -172,6 +183,9 @@ extension MovieGeneralParameterList {
     }
     
     struct MediaRow:MovieAttachmentProtocol {
+        var trackColor: UIColor {
+            return color
+        }
         var volume: CGFloat = 0
         var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment = .init(dict: [:])
         var shadows: DB.DataBase.MovieParametersDB.Shadows = .init(dict: [:])

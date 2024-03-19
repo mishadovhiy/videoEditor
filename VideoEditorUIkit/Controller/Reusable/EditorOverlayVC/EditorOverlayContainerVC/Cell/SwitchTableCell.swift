@@ -14,7 +14,10 @@ class SwitchTableCell:UITableViewCell {
     
     private var data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.SwitchType?
     
-    func set(_ data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.SwitchType) {
+    func set(_ data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.SwitchType, textColor:UIColor? = nil) {
+        if let color = textColor {
+            titleLabel.textColor = color
+        }
         self.data = data
         `switch`.isOn = data.selected
         titleLabel.text = data.title

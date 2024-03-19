@@ -23,7 +23,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditorCollectionCell", for: indexPath) as! EditorCollectionCell
-            cell.set(collectionData[indexPath.row], type: screenSize, textFieldEditing: viewModel?.textfieldEditing ?? false)
+            cell.set(collectionData[indexPath.row], type: screenSize, textFieldEditing: viewModel?.textfieldEditing ?? false, textColor: parentVC?.textColor)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OverlayTextFieldCell", for: indexPath) as! OverlayTextFieldCell

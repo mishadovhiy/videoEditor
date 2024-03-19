@@ -79,12 +79,11 @@ class AssetRawView:UIView {
     }
     
     func setSelected(_ selected:Bool, deselectAll:Bool = false) {
-        canSelect = selected ? true : deselectAll
+        canSelect = selected ? true : !deselectAll
         isSelected = selected
         
         isUserInteractionEnabled = super.isUserInteractionEnabled
-        layer.animationTransition()
-        layer.opacity = canSelect ? (selected ? 1 : 0.5) : 0.2
+        layer.opacity = canSelect ? (selected ? 1 : 0.8) : 0.2
         layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
         pansGetsureView.forEach {
@@ -151,7 +150,7 @@ extension AssetRawView {
         new.layer.name = data?.id.uuidString
         superView?.addSubview(new)
         new.data = data
-        new.alpha = 0.5
+        new.alpha = 0.8
         new.addConstaits([.left:new.newConstraints.0, .top:0, .width:new.newConstraints.1])
         new.heightAnchor.constraint(lessThanOrEqualToConstant: 30).isActive = true
         new.bottomAnchor.constraint(lessThanOrEqualTo: new.superview!.bottomAnchor).isActive = true

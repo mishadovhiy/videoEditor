@@ -27,7 +27,11 @@ class EditorCollectionCell: UICollectionViewCell {
         
     }
     var textFieldEditing:Bool = false
-    func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool) {
+    func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool, textColor:UIColor?) {
+        if let textColor {
+            titleLabel.textColor = textColor
+            imageView.tintColor = textColor
+        }
         self.textFieldEditing = textFieldEditing
         titleLabel.text = item.title
         self.screenHeight = type
@@ -50,7 +54,6 @@ class EditorCollectionCell: UICollectionViewCell {
 // MARK: - setupUI
 fileprivate extension EditorCollectionCell {
     private func setupUI() {
-        titleLabel.textColor = .init(.greyText)
         titleLabel.font = .type(.small)
       //  updateConstraint()
         contentView.layer.drawLine([
