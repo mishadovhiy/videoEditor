@@ -70,8 +70,8 @@ class VideoEditorModel {
             if let component = videoURL.url?.lastPathComponent {
                 DB.db.movieParameters.editingMovie?.notFilteredURL = component
             }
-            await prepare.movieUpdated(movie: movie, movieURL: videoURL.url)
-            await videoAdded(canReload: false)
+            await prepare.movieUpdated(movie: nil, movieURL: videoURL.url, canSetNil: false)
+            await videoAdded(canReload: true)
         } else {
             print(ok.error?.messageContent, " erroraddinsong")
         }
@@ -108,6 +108,8 @@ class VideoEditorModel {
                 await MainActor.run {
                     AppDelegate.shared?.fileManager?.tempSongURLHolder = .init(string: song.attachmentURL)
                 }
+                await performAddSound(url: URL(string: song.attachmentURL))
+                return
             }
             if added {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true
