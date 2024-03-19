@@ -71,7 +71,11 @@ class PlayerEditingAttachmentView: UIView {
         let currentScale = attachmentLayer.frame.size.width / attachmentLayer.bounds.size.width
         let newScale = currentScale*sender.scale
         attachmentLayer.zoom(value: newScale)
-        sender.scale = 1
+        if let _ = data as? TextAttachmentDB {
+            sender.scale = 1
+        } else {
+            sender.scale = newScale
+        }
         data?.zoom = newScale
     }
 }

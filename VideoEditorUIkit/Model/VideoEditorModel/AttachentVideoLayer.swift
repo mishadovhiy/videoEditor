@@ -24,13 +24,14 @@ struct AttachentVideoLayerModel {
         print("add image: ", image)
         let layer = CALayer()
         layer.name = AttachentVideoLayerModel.textLayerName
-        guard let imageData = (UIImage(named: "movies") ?? UIImage(named: "addImage")) else {
+        layer.frame = .init(origin: image.position, size: .init(width: (videoSize.width / 2) * image.zoom, height: (videoSize.height / 2) * image.zoom))
+        guard let imageData = (UIImage(named: "movies") ?? UIImage(named: "addImage"))?.withTintColor(image.color, renderingMode: .alwaysTemplate) else {
             layer.backgroundColor = UIColor.red.cgColor
             return layer
         }
-        layer.contents = layer
+        layer.contents = imageData.cgImage
+        layer.contentsGravity = .resizeAspect
         setupLayer(layer: layer, data: image, isPreview: isPreview, videoSize: videoSize, layerSize: videoSize)
-
         return layer
     }
     
@@ -47,37 +48,24 @@ struct AttachentVideoLayerModel {
             attributes: attributes)
         
         let textLayer = CATextLayer()
+        textLayer.shouldRasterize = true
+        textLayer.rasterizationScale = UIScreen.main.scale
         textLayer.string = attributedText
         textLayer.alignmentMode = text.textAlighment.textLayerAligmentMode
         textLayer.isWrapped = true
         textLayer.foregroundColor = text.color.cgColor
         var size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
         size.height *= text.zoom
+        textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: size.height))
+        textLayer.zoom(value: text.zoom)
         setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: videoSize, layerSize: size)
-        return textLayer
-    }
-    
-    private func add(video: String, to layer: CALayer, videoSize: CGSize) -> CALayer {
-
-        let textLayer = CATextLayer()
-        textLayer.name = "CATextLayer"
-        textLayer.string = "nbg"
-        textLayer.shouldRasterize = true
-        textLayer.rasterizationScale = UIScreen.main.scale
-        textLayer.backgroundColor = UIColor.clear.cgColor
-        textLayer.alignmentMode = .center
-        
-        textLayer.frame = .init(origin: .zero, size: .init(width: videoSize.width, height: 150))
-        textLayer.displayIfNeeded()
         return textLayer
     }
 }
 
 fileprivate extension AttachentVideoLayerModel {
     func setupLayer(layer:CALayer, data:MovieAttachmentProtocol, isPreview:Bool, videoSize:CGSize, layerSize:CGSize? = nil) {
-        layer.zoom(value: data.zoom)
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
+        
         layer.backgroundColor = UIColor.clear.cgColor
         if isPreview {
             layer.borderColor = UIColor.orange.withAlphaComponent(0.6).cgColor
@@ -89,8 +77,6 @@ fileprivate extension AttachentVideoLayerModel {
         layer.shadowRadius = data.shadows.radius
         print(videoSize, " hgftyguhkjn")
         layer.name = AttachentVideoLayerModel.textLayerName
-
-        layer.frame = .init(origin: data.position, size: .init(width: videoSize.width, height: layerSize?.height ?? videoSize.height))
         layer.displayIfNeeded()
     }
 }

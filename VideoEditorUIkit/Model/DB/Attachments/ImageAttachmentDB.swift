@@ -115,9 +115,10 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     
     var zoom:CGFloat {
         get {
-            .init(string: dict["zoom"] as? String ?? "0.3")
+            .init(string: dict["zoom"] as? String ?? "0.4")
         }
         set {
+            print(newValue, " tgerfwd")
             dict.updateValue(String.init(value: newValue), forKey: "zoom")
         }
     }
