@@ -200,7 +200,7 @@ extension StackAssetAttachmentView {
         isSelected = selected
         isUserInteractionEnabled = super.isUserInteractionEnabled
         layer.animationTransition(0.2)
-        layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
+        layer.borderColor = selected ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
         if !selected,
            let view = layerStack?.arrangedSubviews.first(where: {
@@ -212,6 +212,11 @@ extension StackAssetAttachmentView {
                 view.removeFromSuperview()
             }
         }
+        layerStack?.arrangedSubviews.forEach({
+            if let first = $0.subviews.first(where: {$0 is AssetRawView}) as? AssetRawView {
+                first.setSelected(false, deselectAll: false)
+            }
+        })
     }
     
     private func setEmptyViewHidden(_ hidden:Bool, view:UIView, completion:(()->())? = nil) {

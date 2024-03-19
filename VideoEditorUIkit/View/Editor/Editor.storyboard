@@ -78,11 +78,6 @@
                             <constraint firstAttribute="bottom" secondItem="dn4-TT-YmG" secondAttribute="bottom" id="jZg-Hw-eTc"/>
                             <constraint firstItem="fif-AD-WAD" firstAttribute="trailing" secondItem="8Xk-iw-VDI" secondAttribute="trailing" constant="5" id="kv3-DG-xyx"/>
                         </constraints>
-                        <variation key="heightClass=compact">
-                            <mask key="constraints">
-                                <exclude reference="jZg-Hw-eTc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="mainEditorContainerView" destination="J2M-CR-Vaf" id="blf-ol-r3u"/>

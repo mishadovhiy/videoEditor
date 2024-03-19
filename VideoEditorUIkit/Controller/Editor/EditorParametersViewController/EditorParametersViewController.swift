@@ -197,19 +197,22 @@ extension EditorParametersViewController {
 }
 
 extension EditorParametersViewController:EditorOverlayVCDelegate {
-    func uploadPressed(_ type: EditorOverlayContainerVCViewModel.UploadPressedType) {
-        switch type {
-        case .appleMusic:
-            parentVC?.addSoundAppleMusicPressed()
-        case .files:
-            parentVC?.addSoundFinderPressed()
-        case .photoLibrary:
-            break
+    var attachmentData: AssetAttachmentProtocol? {
+        get {
+            return viewModel?.editingAsset
         }
+        set {
+            viewModel?.editingAsset = newValue
+        }
+    }
+    
+    func uploadPressed(_ type: EditorOverlayContainerVCViewModel.UploadPressedType) {
+        parentVC?.uploadFromPressed(type: type)
     }
     
     func overlayChangedAttachment(_ newData: AssetAttachmentProtocol?) {
         parentVC?.playerVC?.editingAttachmentView?.data = newData as? MovieAttachmentProtocol
+        (viewModel?.editingView as? AssetRawView)?.updateText(newData)
     }
     
     func overlayRemoved() {

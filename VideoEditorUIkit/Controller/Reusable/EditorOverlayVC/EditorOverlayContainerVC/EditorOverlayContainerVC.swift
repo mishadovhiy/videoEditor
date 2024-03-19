@@ -47,6 +47,14 @@ class EditorOverlayContainerVC: SuperVC {
         return navigationController?.parent as? EditorOverlayVC
     }
     
+    var parentVCOptional:EditorOverlayVC? {
+        if navigationController?.viewControllers.count ?? 0 == 1 {
+            return parentVC
+        } else {
+            return nil
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = screenType?.screenTitle
@@ -79,8 +87,9 @@ class EditorOverlayContainerVC: SuperVC {
         self.navigationController?.setNavigationBarHidden(hidden, animated: animated)
     }
     
-    func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]) {
-        self.collectionData = collectionData
+    func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]?) {
+        viewModel?.assetDataHolder = parentVCOptional?.attachmentData
+        self.collectionData = collectionData ?? viewModel?.getCollectionData ?? []
         reloadData()
     }
     
@@ -123,28 +132,34 @@ fileprivate extension EditorOverlayContainerVC {
                 }, backgroundColor:color.backgroundColor ?? .red)
             })
         default:
-            if let attachment = parentVC?.attachmentData?.attachmentType {
-                viewModel = .init(type: attachment, assetChanged: { didChange in
-                    if let value = self.parentVC?.attachmentData  as? TextAttachmentDB {
-                        var oldData = self.parentVC?.attachmentData
-                        oldData = didChange(value)
-                        if let oldData {
-                            self.parentVC?.childChangedData(oldData)
-                        }
+            let needViewModel = tableData.count != 0 || parentVCOptional?.attachmentData?.attachmentType != nil
+            if needViewModel {
+                let attachment = parentVCOptional?.attachmentData?.attachmentType
+                viewModel = .init(type:attachment, didPress: { [weak self] pressType in
+                    guard let self else { return }
+                    switch pressType {
+                    case .delete:
+                        print("parent delete not implemented")
+                    case .reload:
+                        updateData(nil)
+                    case .assetChanged(let changed):
+                        let oldData = changed(self.parentVC?.attachmentData ?? TextAttachmentDB.demo)
+                        self.parentVC?.childChangedData(oldData)
+                        
+                    case .upload(let upload):
+                        self.parentVC?.attachmentDelegate?.uploadPressed(upload)
                     }
                 })
             } else {
                 viewModel = .init()
             }
             
-            if parentVC?.attachmentData?.attachmentType != nil && collectionData.count == 0 {
-                viewModel?.uploadPressed = { [weak self] in
-                    self?.parentVC?.attachmentDelegate?.uploadPressed($0)
-                }
+            if parentVCOptional?.attachmentData?.attachmentType != nil && collectionData.count == 0 {
+                viewModel?.isEditing = parentVC?.isEditingAttachment ?? false
                 viewModel?.assetDataHolder = parentVC?.attachmentData
                 collectionData = viewModel?.getCollectionData ?? []
             } else if collectionData.count == 0 {
-                collectionData = parentVC?.data?.collectionData ?? []
+                collectionData = parentVCOptional?.data?.collectionData ?? []
             }
         }
         print(collectionData, " tgerfrgthju6" , screenType)
@@ -154,7 +169,6 @@ fileprivate extension EditorOverlayContainerVC {
         if tableData.count != 0 {
             tableView.delegate = self
             tableView.dataSource = self
-           // addChild(child: SelectionTableViewController.configure(), toView: containerView)
         }
         
         reloadData()

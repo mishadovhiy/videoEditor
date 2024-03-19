@@ -24,7 +24,7 @@ class AssetRawView:UIView {
         constraints.first(where: {$0.firstAttribute == .width})
     }
     private let clickService = AudioToolboxService()
-    private let panNormalAlpha:CGFloat = 0.2
+    private let panNormalAlpha:CGFloat = 0.1
     var canSelect = true
     var isSelected:Bool = false
     var isEditing:Bool = true
@@ -41,7 +41,7 @@ class AssetRawView:UIView {
         self.data = data
         print(data.debugDescription, " data ")
         self.editRowPressed = editRowPressed
-        titleLabel?.text = data?.assetName ?? data?.defaultName
+        updateText(data)
         self.backgroundColor = data?.color
         self.layer.zPosition = 999
         if updateConstraints {
@@ -79,12 +79,12 @@ class AssetRawView:UIView {
     }
     
     func setSelected(_ selected:Bool, deselectAll:Bool = false) {
-        canSelect = selected ? true : !deselectAll
+        canSelect = selected ? true : deselectAll
         isSelected = selected
         
         isUserInteractionEnabled = super.isUserInteractionEnabled
-        layer.opacity = canSelect ? (selected ? 1 : 0.8) : 0.2
-        layer.borderColor = selected ? UIColor.orange.cgColor : UIColor.clear.cgColor
+        alpha = selected ? 1 : (deselectAll ? 1 : 0.2)
+        layer.borderColor = selected ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
         pansGetsureView.forEach {
             $0.isHidden = !selected
@@ -96,11 +96,14 @@ class AssetRawView:UIView {
         if sender.state != .ended {
             return
         }
-        if isSelected || !canSelect {
+        if isSelected {
             return
         }
-        setSelected(true)
+        if !canSelect {
+            return
+        }
         editRowPressed?(data, self)
+        setSelected(true)
     }
     
     @objc private func panGesture(_ sender: UIPanGestureRecognizer) {
@@ -135,6 +138,11 @@ class AssetRawView:UIView {
             }
         }
         animation.startAnimation()
+    }
+    
+    func updateText(_ text:AssetAttachmentProtocol?) {
+        self.data = text
+        titleLabel?.text = text?.assetName
     }
 }
 
@@ -195,13 +203,17 @@ extension AssetRawView {
         view.isUserInteractionEnabled = true
         view.layer.name = "panGestureView"
         view.isHidden = true
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
         self.addSubview(view)
         view.addConstaits(isRight ? [
             .leading:0, .top:0, .bottom:0, .trailing: -50
         ] : [
             .trailing:0, .top:0, .bottom:0, .width:40
         ])
-        view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
+        if !(data is SongAttachmentDB) {
+            view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
+        }
     }
         
     final private var parentScrollView:UIScrollView? {

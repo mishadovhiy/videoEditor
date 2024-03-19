@@ -12,6 +12,7 @@ protocol EditorOverlayVCDelegate {
     func overlayChangedAttachment(_ newData:AssetAttachmentProtocol?)
     func overlayRemoved()
     func uploadPressed(_ type:EditorOverlayContainerVCViewModel.UploadPressedType)->()
+    var attachmentData:AssetAttachmentProtocol? { get set }
 }
 
 class EditorOverlayVC: SuperVC {
@@ -21,8 +22,16 @@ class EditorOverlayVC: SuperVC {
     }
     @IBOutlet var actionButtons: [BaseButton]!
     
+    var isEditingAttachment:Bool = false
     var data:ToOverlayData?
-    var attachmentData:AssetAttachmentProtocol?
+    var attachmentData:AssetAttachmentProtocol? {
+        get {
+            return attachmentDelegate?.attachmentData
+        }
+        set {
+            attachmentDelegate?.attachmentData = newValue
+        }
+    }
     var attachmentDelegate:EditorOverlayVCDelegate?
     override var initialAnimation: Bool { return false}
     var overlaySizeChanged:((_ newSize:EditorOverlayContainerVC.OverlaySize)->())?
@@ -91,7 +100,7 @@ class EditorOverlayVC: SuperVC {
         }
     }
     
-    func updateData(_ data:[OverlayCollectionData]) {
+    func updateData(_ data:[OverlayCollectionData]?) {
         childVC?.updateData(data)
     }
     

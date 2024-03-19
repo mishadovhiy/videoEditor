@@ -24,6 +24,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cvu-NU-tLm">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="759"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <variation key="heightClass=compact" hidden="YES"/>
                                     </stackView>
                                     <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="05S-cT-avb">
                                         <rect key="frame" x="0.0" y="0.0" width="3000" height="50"/>
@@ -113,6 +114,11 @@
                             <constraint firstItem="cmW-zS-NHa" firstAttribute="top" secondItem="4K3-mj-CHl" secondAttribute="top" id="c2f-uL-rqm"/>
                             <constraint firstItem="4K3-mj-CHl" firstAttribute="bottom" secondItem="cmW-zS-NHa" secondAttribute="bottom" id="ny6-A9-vhl"/>
                         </constraints>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="AeE-ff-chx"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="assetStackView" destination="05S-cT-avb" id="rRT-EZ-xma"/>

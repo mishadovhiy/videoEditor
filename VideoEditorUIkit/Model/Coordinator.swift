@@ -59,6 +59,10 @@ extension Coordinator {
         present(mediaPicker)
     }
     
+    func toPhotoLibrary(delegate:MPMediaPickerControllerDelegate?) {
+        
+    }
+    
     func toVideoPlayer(movieURL:URL?) {
         let vc = PlayerSuperVC.init()
         vc.movieURL = movieURL

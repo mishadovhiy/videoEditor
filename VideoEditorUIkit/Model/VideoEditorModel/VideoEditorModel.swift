@@ -106,6 +106,9 @@ class VideoEditorModel {
             } else if let image = data as? ImageAttachmentDB {
                 DB.db.movieParameters.editingMovie?.images.append(image)
                 added = true
+            } else if let song = data as? SongAttachmentDB {
+                addSoundPressed(data: song)
+                return
             }
             if added {
                 DB.db.movieParameters.editingMovie?.isOriginalUrl = true

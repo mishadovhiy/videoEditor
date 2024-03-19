@@ -142,20 +142,24 @@ class EditorViewController: SuperVC {
         })
     }
     
-    func addSoundFinderPressed() {
-        coordinator?.toDocumentPicker(delegate: self)
-    }
-    
-    func addSoundAppleMusicPressed() {
-        coordinator?.toAppleMusicList(delegate: self)
+    func uploadFromPressed(type: EditorOverlayContainerVCViewModel.UploadPressedType) {
+        
+        switch type {
+        case .appleMusic:
+            coordinator?.toAppleMusicList(delegate: self)
+        case .files:
+            coordinator?.toDocumentPicker(delegate: self)
+        case .photoLibrary:
+            coordinator?.toPhotoLibrary(delegate: self)
+        }
     }
     
     private func soundToVideoSelected(_ url:URL) {
-        playerVC?.startRefreshing(completion: {
-            self.viewModel?.editorModel.addSoundPressed(data: .with({
-                $0.attachmentURL = url.absoluteString
-            }))
-        })
+        var songData = assetParametersVC?.viewModel?.editingAsset as? SongAttachmentDB ?? SongAttachmentDB()
+        songData.attachmentURL = url.absoluteString
+        assetParametersVC?.viewModel?.editingAsset = songData
+        presentingOverlayVC?.updateData(nil)
+        (assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(songData)
     }
 }
 

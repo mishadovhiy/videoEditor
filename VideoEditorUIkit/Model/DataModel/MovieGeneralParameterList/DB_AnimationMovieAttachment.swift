@@ -20,5 +20,7 @@ extension DB.DataBase.MovieParametersDB {
                 dict.updateValue(newValue ? 1 : 0, forKey: "needScale")
             }
         }
+        
+        var scaleDuration:CGFloat = 0
     }
 }
