@@ -104,7 +104,7 @@ class VideoEditorModel {
 }
 
 fileprivate extension VideoEditorModel {
-    private func performAddSound(url:URL?) async {
+    private func performAddSound(url:URL?, canReload:Bool = false) async {
         let ok = await prepare.addSound(url:url)
         if let videoURL = ok.videoExportResponse {
             await MainActor.run {
@@ -114,7 +114,7 @@ fileprivate extension VideoEditorModel {
                 DB.db.movieParameters.editingMovie?.notFilteredURL = component
             }
             await prepare.movieUpdated(movie: nil, movieURL: videoURL.url, canSetNil: false)
-            await videoAdded(canReload: true)
+            await videoAdded(canReload: canReload)
         } else {
             print(ok.error?.messageContent, " erroraddinsong")
         }
@@ -132,7 +132,7 @@ fileprivate extension VideoEditorModel {
         }
     }
     
-    private func addLayerAttachments() {
+    private func addLayerAttachments(canReload:Bool = false) {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {
             var hasValue = false
@@ -148,7 +148,7 @@ fileprivate extension VideoEditorModel {
             }
             let ok = await self.prepare.addAttachments()
             if let _ = ok.response {
-                await videoAdded(canReload: true)
+                await videoAdded(canReload: canReload)
             } else {
                 await presenter?.errorAddingVideo(ok.error?.messageContent ?? .init(title: "Error adding text"))
             }
@@ -180,7 +180,7 @@ fileprivate extension VideoEditorModel {
                    let songURL = songUrl ?? URL(string: song.attachmentURL) {
                     print(songUrl, " song url")
                     print(URL(string: song.attachmentURL), " trtewx")
-                    await self.performAddSound(url: songURL)
+                    await self.performAddSound(url: songURL, canReload: true)
                 }
             }
         } else if videoAddedAction {

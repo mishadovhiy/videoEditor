@@ -48,12 +48,6 @@ class StackAssetAttachmentView:UIView {
     }
     
     override func removeFromSuperview() {
-        layerStack?.arrangedSubviews.forEach({
-            $0.subviews.forEach {
-                $0.removeFromSuperview()
-            }
-            $0.removeFromSuperview()
-        })
         super.removeFromSuperview()
         delegate = nil
     }

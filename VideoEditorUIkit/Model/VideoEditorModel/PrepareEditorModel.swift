@@ -72,10 +72,10 @@ class PrepareEditorModel {
             return .error("Error inserting video")
         }
         delegate.movieHolder = movie
-        let dbVolume = DB.db.movieParameters.editingMovie?.valume
-        let voluem = dbVolume ?? 1 == 1 ? nil : dbVolume
+        let dbVolume = Float(DB.db.movieParameters.editingMovie?.valume ?? 1)
+        let voluem = dbVolume == 1 ? nil : dbVolume
         if needExport {
-            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true, voluem: Float(DB.db.movieParameters.editingMovie?.valume ?? 1))
+            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true, voluem: voluem)
             if let _ = localUrl.videoExportResponse?.url {
                 await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url)
             }

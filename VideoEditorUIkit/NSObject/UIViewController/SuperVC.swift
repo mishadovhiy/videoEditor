@@ -18,9 +18,10 @@ class BaseVC:UIViewController {
     
     override func removeFromParent() {
         children.forEach({
+            $0.view.removeFromSuper()
             $0.removeFromParent()
         })
-        view.removeFromSuperview()
+        view.removeFromSuper()
         super.removeFromParent()
     }
     

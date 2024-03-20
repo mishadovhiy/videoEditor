@@ -54,8 +54,8 @@ struct AttachentVideoLayerModel {
         textLayer.alignmentMode = text.textAlighment.textLayerAligmentMode
         textLayer.isWrapped = true
         textLayer.foregroundColor = text.color.cgColor
-        var size = font.calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
-        size.height *= text.zoom
+        var size = UIFont.systemFont(ofSize: font.pointSize + 8, weight: text.fontWeight).calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
+       // size.height *= text.zoom
         textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: size.height))
         textLayer.zoom(value: text.zoom)
         setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: videoSize, layerSize: size)

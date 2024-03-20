@@ -55,6 +55,7 @@ class EditorParametersViewController: SuperVC {
         collectionView.visibleCells.forEach {
             $0.removeFromSuperview()
         }
+        assetStackView.removeFromSuperview()
         collectionView.removeFromSuperview()
         super.removeFromParent()
     }
@@ -62,12 +63,12 @@ class EditorParametersViewController: SuperVC {
     // MARK: - setup ui
     func setUI(type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         if let holder = DB.holder {
-            
+            self.performSetupUI(type:type, overlaySize:overlaySize, dbParameters:holder)
         } else {
             Task {
                 let db = DB.db
                 await MainActor.run {
-                    self.performSetupUI(type:type,overlaySize:overlaySize,dbParameters:db)
+                    self.performSetupUI(type:type, overlaySize:overlaySize, dbParameters:db)
                 }
             }
         }

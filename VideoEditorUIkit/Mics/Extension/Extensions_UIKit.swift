@@ -59,6 +59,22 @@ extension UIImageView {
 }
 
 extension UIView {
+    func removeFromSuper() {
+        if let stack = self as? UIStackView {
+            stack.arrangedSubviews.forEach {
+                $0.removeFromSuper()
+            }
+        }
+        subviews.forEach {
+            $0.removeFromSuper()
+        }
+        layer.sublayers?.forEach({
+            $0.removeFromSuperlayer()
+        })
+        self.layer.removeAllAnimations()
+        self.removeFromSuperview()
+    }
+    
     func addConstaits(_ constants:[NSLayoutConstraint.Attribute:(CGFloat, String)], safeArea:Bool = true, toSuperView:UIView? = nil) {
         guard let superview = self.superview ?? toSuperView else {
             return
