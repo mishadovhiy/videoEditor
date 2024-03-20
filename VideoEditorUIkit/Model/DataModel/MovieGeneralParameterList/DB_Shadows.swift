@@ -19,7 +19,11 @@ extension DB.DataBase.MovieParametersDB {
                 return .init(hex: dict["color"] as? String ?? "") ?? .clear
             }
             set {
-                dict.updateValue(newValue.toHex, forKey: "color")
+                if newValue != .clear, let toHex = newValue.toHex {
+                    dict.updateValue(toHex, forKey: "color")
+                } else {
+                    dict.removeValue(forKey: "color")
+                }
             }
         }
         

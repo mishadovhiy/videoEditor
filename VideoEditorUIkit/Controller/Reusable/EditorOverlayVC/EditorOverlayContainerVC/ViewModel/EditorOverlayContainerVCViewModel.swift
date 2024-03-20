@@ -29,7 +29,7 @@ struct EditorOverlayContainerVCViewModel {
     }
     
     var colorCollectionData: [EditorOverlayVC.OverlayCollectionData] {
-        let colors:[UIColor] = [.red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange]
+        let colors:[UIColor] = [.clear, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange]
         return colors.compactMap { .init(title: "            ", backgroundColor: $0)}
     }
     
@@ -66,6 +66,14 @@ struct EditorOverlayContainerVCViewModel {
             }))
         } else if !(songData?.selfMovie ?? true) {
             data.append(trashCell)
+        } else if songData?.selfMovie ?? false {
+            data.append(.init(title: "Volume", toOverlay: .init(screenTitle: "General Movie Volume", attachmentType: .floatRange(.init(title: "Set Volume", selected: songData?.volume, didSelect: { newValue in
+                didPress?(.assetChanged({ oldValue in
+                    var new = oldValue as? SongAttachmentDB
+                    new?.volume = newValue
+                    return new ?? songData!
+                }))
+            })))))
         }
         return data
     }

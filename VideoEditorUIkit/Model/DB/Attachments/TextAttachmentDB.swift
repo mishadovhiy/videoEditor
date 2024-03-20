@@ -122,7 +122,11 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
             }
         }
         set {
-            dict.updateValue(newValue.toHex, forKey: "color")
+            if newValue != .clear, let toHex = newValue.toHex {
+                dict.updateValue(toHex, forKey: "color")
+            } else {
+                dict.removeValue(forKey: "color")
+            }
         }
     }
     
@@ -149,8 +153,11 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
             return .init(hex: dict["borderColor"] as? String ?? "") ?? .clear
         }
         set {
-            dict.updateValue(newValue.toHex, forKey: "borderColor")
-        }
+            if newValue != .clear, let toHex = newValue.toHex {
+                dict.updateValue(toHex, forKey: "borderColor")
+            } else {
+                dict.removeValue(forKey: "borderColor")
+            }        }
     }
     
     var backgroundColor:UIColor {
@@ -158,7 +165,11 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
             return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .clear
         }
         set {
-            dict.updateValue(newValue.toHex, forKey: "backgroundColor")
+            if newValue != .clear, let toHex = newValue.toHex {
+                dict.updateValue(toHex, forKey: "backgroundColor")
+            } else {
+                dict.removeValue(forKey: "backgroundColor")
+            }
         }
     }
     

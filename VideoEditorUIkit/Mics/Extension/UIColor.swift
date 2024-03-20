@@ -77,9 +77,9 @@ extension UIColor {
         )
     }
     
-    var toHex:String {
+    var toHex:String? {
         guard let components = self.cgColor.components, components.count >= 3 else {
-            return "FFFFFF"
+            return nil
         }
         
         let r = Float(components[0])
