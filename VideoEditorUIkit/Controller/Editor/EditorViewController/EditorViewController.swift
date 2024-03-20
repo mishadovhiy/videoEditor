@@ -49,6 +49,9 @@ class EditorViewController: SuperVC {
     // MARK: - Life-cycle
     override func loadView() {
         super.loadView()
+        if view.superview == nil {
+            return
+        }
         loadUI()
     }
     
