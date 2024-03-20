@@ -59,10 +59,14 @@ extension Coordinator {
         present(mediaPicker)
     }
     
-    func toPhotoLibrary(delegate:(UIImagePickerControllerDelegate & UINavigationControllerDelegate)?) {
+    func toPhotoLibrary(delegate:(UIImagePickerControllerDelegate & UINavigationControllerDelegate)?, isVideo:Bool = false) {
         let vc = UIImagePickerController()
         vc.delegate = delegate
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            if isVideo {
+                vc.allowsEditing = true
+                vc.mediaTypes = [UTType.movie.identifier]
+            }
             vc.sourceType = .photoLibrary
             present(vc)
         } else {

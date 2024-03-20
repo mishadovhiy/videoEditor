@@ -12,7 +12,6 @@ struct EditorVCViewMode {
     var editorModel:VideoEditorModel!
     var viewType:EditorViewType = .addingVideos
     var firstVideoAdded = false
-    
     init(editorPresenter:VideoEditorModelPresenter) {
         editorModel = .init(presenter:editorPresenter)
     }

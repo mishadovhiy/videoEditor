@@ -43,9 +43,9 @@ class VideoEditorModel {
         }
     }
     
-    func addVideo(force:Bool = false) {
+    func addVideo(force:Bool = false, url:URL?) {
         Task {
-            if await prepare.createTestBundleVideo("1", addingVideo: true) {
+            if await prepare.createSaveVideo(url, addingVideo: true) {
                 await videoAdded()
             } else {
                 await presenter?.errorAddingVideo(.init(title: "Error adding video"))

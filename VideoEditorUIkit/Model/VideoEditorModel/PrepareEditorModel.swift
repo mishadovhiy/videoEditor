@@ -30,7 +30,7 @@ class PrepareEditorModel {
             print("error movieHolder and no delegate.movie", #file, #line, #function)
             return .error(.init(title:"Error exporting the video", description: "Try reloading the app"))
         }
-        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
+        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetMediumQuality)
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
         return results ?? .error("Unknown Error")
     }
@@ -122,11 +122,9 @@ extension PrepareEditorModel {
             return nil
         }
     }
-    
-    func createTestBundleVideo(_ url:String, addingVideo:Bool = false) async -> Bool {
-        guard let url = Bundle.main.url(forResource: url, withExtension: "mov") ?? Bundle.main.url(forResource: url, withExtension: "mp4") else {
-            return false
-        }
+   
+    func createSaveVideo(_ url:URL?, addingVideo:Bool = false) async -> Bool {
+        let url = url ?? testURL
         let urlResult = await self.createVideo(url).videoExportResponse?.url
         if addingVideo, let stringUrl = urlResult?.lastPathComponent {
             DB.db.movieParameters.editingMovie?.originalURL = stringUrl
@@ -366,6 +364,10 @@ extension PrepareEditorModel {
         let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: layer, composition: composition)
         print(videoComposition?.0.instructions, " htgefrdwe")
         return videoComposition
+    }
+    
+    private var testURL:URL? {
+        return Bundle.main.url(forResource: "1", withExtension: "mov") ?? Bundle.main.url(forResource: "1", withExtension: "mp4")
     }
 }
 

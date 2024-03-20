@@ -125,11 +125,20 @@ class EditorViewController: SuperVC {
         })
     }
     
+    private func videoSelectedFrom(url:URL?) {
+        if let url {
+            playerVC?.startRefreshing(completion: {
+                self.viewModel?.editorModel.addVideo(url: url)
+            })
+        } else {
+            print("no video urlss")
+            AudioToolboxService().vibrate(style: .heavy)
+        }
+    }
+    
     func addTrackPressed() {
         if viewModel?.viewType == .addingVideos {
-            playerVC?.startRefreshing(completion: {
-                self.viewModel?.editorModel.addVideo()
-            })
+            coordinator?.toPhotoLibrary(delegate: self, isVideo: true)
         } else {
             mainEditorVC?.isHidden = false
         }
@@ -192,17 +201,22 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
 
 extension EditorViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            print("okkkk")
+      let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL
+        let mediaType = info[UIImagePickerController.InfoKey.mediaType]
+            print("didFinishPickingMediaWithInfo ", info)
             var asset = assetParametersVC?.viewModel?.editingAsset as? ImageAttachmentDB
-            if asset != nil {
+            if asset != nil, 
+                let assetView = assetParametersVC?.viewModel?.editingView as? AssetRawView,
+               let pickedImage
+        {
                 asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
                 presentingOverlayVC?.updateData(nil)
-                (assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(asset)
+                assetView.updateText(asset)
                 playerVC?.editingAttachmentView?.data = asset
-                //update player (editing attachment view)
+            } else if let videoURL = url {
+                videoSelectedFrom(url: videoURL)
             }
-        }
         picker.dismiss(animated: true, completion: nil)
     }
 }
