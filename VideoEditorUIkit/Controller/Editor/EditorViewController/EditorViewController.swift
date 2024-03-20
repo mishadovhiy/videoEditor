@@ -275,6 +275,9 @@ fileprivate extension EditorViewController {
     }
     
     private func hideStartEditing(_ hidden:Bool, animation:UIViewPropertyAnimator?) {
+        if self.view.superview == nil {
+            return
+        }
         if startEditingButton.isHidden == hidden {
             return
         }
@@ -283,18 +286,18 @@ fileprivate extension EditorViewController {
             self.startEditingButton.isHidden = false
         }
         if animation != nil {
-            animation?.addAnimations {
-                self.performMoveEditingButton(hidden)
+            animation?.addAnimations { [weak self] in
+                self?.performMoveEditingButton(hidden)
             }
-            animation?.addCompletion({ _ in
-                self.startEditingButton.isHidden = hidden
+            animation?.addCompletion({ [weak self] _ in
+                self?.startEditingButton.isHidden = hidden
             })
         } else {
-            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
-                self.performMoveEditingButton(hidden)
+            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) { [weak self] in
+                self?.performMoveEditingButton(hidden)
             }
-            animation.addCompletion({ _ in
-                self.startEditingButton.isHidden = hidden
+            animation.addCompletion({ [weak self] _ in
+                self?.startEditingButton.isHidden = hidden
             })
             animation.startAnimation()
         }
