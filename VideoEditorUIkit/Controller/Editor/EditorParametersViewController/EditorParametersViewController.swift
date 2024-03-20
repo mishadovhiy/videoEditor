@@ -61,7 +61,20 @@ class EditorParametersViewController: SuperVC {
     
     // MARK: - setup ui
     func setUI(type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
-        let dbHidden = DB.holder?.movieParameters.editingMovie?.filtered ?? false
+        if let holder = DB.holder {
+            
+        } else {
+            Task {
+                let db = DB.db
+                await MainActor.run {
+                    self.performSetupUI(type:type,overlaySize:overlaySize,dbParameters:db)
+                }
+            }
+        }
+    }
+    
+    private func performSetupUI(type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small, dbParameters:DB.DataBase) {
+        let dbHidden = dbParameters.movieParameters.editingMovie?.filtered ?? false
         let isHidden = type == .addingVideos || overlaySize == .big || dbHidden
         let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
         assetStackView.arrangedSubviews.forEach { view in

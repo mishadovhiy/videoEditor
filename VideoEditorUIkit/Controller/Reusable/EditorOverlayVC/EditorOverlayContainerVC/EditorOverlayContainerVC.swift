@@ -129,7 +129,7 @@ fileprivate extension EditorOverlayContainerVC {
             collectionData = (viewModel?.colorCollectionData ?? []).compactMap({ color in
                 return .init(title: color.title, didSelect: {
                     colorAction.didSelect(color.backgroundColor ?? .red)
-                }, backgroundColor:color.backgroundColor ?? .red)
+                }, backgroundColor:color.backgroundColor ?? .clear)
             })
         default:
             let needViewModel = tableData.count != 0 || parentVCOptional?.attachmentData?.attachmentType != nil

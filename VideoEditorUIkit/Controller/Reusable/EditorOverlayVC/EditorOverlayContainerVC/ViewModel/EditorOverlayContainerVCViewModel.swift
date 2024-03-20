@@ -35,9 +35,7 @@ struct EditorOverlayContainerVCViewModel {
     
     private var imageCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         let imageAsset = self.assetDataHolder as? ImageAttachmentDB ?? .init()
-        var data:[EditorOverlayVC.OverlayCollectionData] = [
-            self.animationCells(current: imageAsset.animations)
-        ]
+        var data:[EditorOverlayVC.OverlayCollectionData] = []
         layerSetupCells().forEach {
             data.append($0)
         }
@@ -51,6 +49,7 @@ struct EditorOverlayContainerVCViewModel {
                 self.didPress?(.upload(.photoLibrary))
             }), at: 0)
         }
+        data.append(self.animationCells(current: imageAsset.animations))
         return data
     }
     
@@ -67,7 +66,7 @@ struct EditorOverlayContainerVCViewModel {
         } else if !(songData?.selfMovie ?? true) {
             data.append(trashCell)
         } else if songData?.selfMovie ?? false {
-            data.append(.init(title: "Volume", toOverlay: .init(screenTitle: "General Movie Volume", attachmentType: .floatRange(.init(title: "Set Volume", selected: songData?.volume, didSelect: { newValue in
+            data.append(.init(title: "Volume", toOverlay: .init(screenTitle: "General Movie Volume", attachmentType: .floatRange(.init(selected: songData?.volume, didSelect: { newValue in
                 didPress?(.assetChanged({ oldValue in
                     var new = oldValue as? SongAttachmentDB
                     new?.volume = newValue
@@ -98,12 +97,12 @@ struct EditorOverlayContainerVCViewModel {
                     value.color = newColor
                     return value
                 }))
-            })))),
-            animationCells(current: textData.animations)
+            }))))
         ]
         layerSetupCells().forEach {
             data.append($0)
         }
+        data.append(animationCells(current: textData.animations))
         if isEditing {
             data.append(trashCell)
         }
@@ -153,7 +152,7 @@ fileprivate extension EditorOverlayContainerVCViewModel {
                     return new ?? asset!
                 }))
             })))),
-            .init(title: "Opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
+            .init(title: "Opacity", image: "opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
                 .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
                     self.didPress?(.assetChanged({
                         var new = $0 as? MovieAttachmentProtocol
@@ -166,7 +165,7 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     }
     
     private func shadowCells(_ asset:MovieAttachmentProtocol?) -> EditorOverlayVC.OverlayCollectionData {
-        .init(title: "Shadow", toOverlay: .init(screenTitle: "Shadow", collectionData: [
+        .init(title: "Shadow", image: "shadow", toOverlay: .init(screenTitle: "Shadow", collectionData: [
             .init(title: "Shadow Size", image: "size", toOverlay: .init(screenTitle: "Shadow size", screenHeight: .big, tableData: [
                 .floatRange(.init(title: "Shadow Radius", selected: asset?.shadows.radius, didSelect: { newValue in
                     self.didPress?(.assetChanged({
@@ -194,7 +193,7 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     }
     
     private func borderCells(_ asset:MovieAttachmentProtocol?) -> EditorOverlayVC.OverlayCollectionData {
-        .init(title: "Border", image: "size", toOverlay: .init(screenTitle: "Border", collectionData: [
+        .init(title: "Border", image: "border", toOverlay: .init(screenTitle: "Border", collectionData: [
             .init(title: "Border Size", image: "size", toOverlay: .init(screenTitle: "Border frames", screenHeight: .big, tableData: [
                 .floatRange(.init(title: "Border Width", selected: asset?.borderWidth, didSelect: { newValue in
                     self.didPress?(.assetChanged({
