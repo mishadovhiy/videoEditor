@@ -52,6 +52,24 @@ struct TextAttachmentDB {
 
 // MARK: - MovieAttachmentProtocol
 extension TextAttachmentDB:MovieAttachmentProtocol {
+    var opacity: CGFloat {
+        get {
+            .init(string: dict["opacity"] as? String)
+        }
+        set {
+            dict.updateValue(String.init(value: newValue), forKey: "opacity")
+        }
+    }
+    
+    var borderRadius: CGFloat {
+        get {
+            .init(string: dict["borderRadius"] as? String)
+        }
+        set {
+            dict.updateValue(String.init(value: newValue), forKey: "borderRadius")
+        }
+    }
+    
     var trackColor: UIColor {
         return .type(.yellow1)
     }
@@ -128,6 +146,15 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "borderColor")
+        }
+    }
+    
+    var backgroundColor:UIColor {
+        get {
+            return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .white
+        }
+        set {
+            dict.updateValue(newValue.toHex, forKey: "backgroundColor")
         }
     }
     

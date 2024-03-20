@@ -28,20 +28,12 @@ class VideoEditorModel {
         self.prepare = .init(delegate: self)
     }
     
-    deinit {
-        dbParametersHolder = nil
-        movieHolder = nil
-        _movie = nil
-        presenter = nil
-        prepare = nil
-    }
-    
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     
     func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {
-            let _ = await prepare.createVideo(url, needExport: needExport)
+            let _ = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
             let db = DB.db.movieParameters
             self.dbParametersHolder = db.editingMovie
             if let url, videoAddedAction {
@@ -61,6 +53,57 @@ class VideoEditorModel {
         }
     }
     
+    func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
+        Task {
+            if (DB.db.movieParameters.editingMovie?.filtered ?? false) {
+                await presenter?.errorAddingVideo(.init(title: "Attachments cannot be added when after using filter", description: "set filter to text to modify attachments"))
+                return
+            }
+            var added = false
+            if let text = data as? TextAttachmentDB {
+                DB.db.movieParameters.editingMovie?.texts.append(text)
+                added = true
+            } else if let image = data as? ImageAttachmentDB {
+                DB.db.movieParameters.editingMovie?.images.append(image)
+                added = true
+            } else if let song = data as? SongAttachmentDB {
+                added = true
+                let wasUrl = DB.db.movieParameters.editingMovie?.songs
+                DB.db.movieParameters.editingMovie?.songs = song
+                await MainActor.run {
+                    AppDelegate.shared?.fileManager?.tempSongURLHolder = .init(string: song.attachmentURL)
+                }
+                
+                if let url = URL(string: song.attachmentURL), wasUrl?.attachmentURL ?? "" == "" {
+                    await performAddSound(url:url)
+                    return
+                }
+            }
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+            DB.db.movieParameters.needReloadLayerAttachments = true
+            await presenter?.reloadUI()
+        }
+    }
+    
+    func addFilterPressed() {
+        Task {
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+            DB.db.movieParameters.needReloadFilter = true
+            DB.db.movieParameters.needReloadLayerAttachments = true
+            await presenter?.reloadUI()
+        }
+    }
+    
+    deinit {
+        dbParametersHolder = nil
+        movieHolder = nil
+        _movie = nil
+        presenter = nil
+        prepare = nil
+    }
+}
+
+fileprivate extension VideoEditorModel {
     private func performAddSound(url:URL?) async {
         let ok = await prepare.addSound(url:url)
         if let videoURL = ok.videoExportResponse {
@@ -89,63 +132,6 @@ class VideoEditorModel {
         }
     }
     
-    func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        Task {
-            if (DB.db.movieParameters.editingMovie?.filtered ?? false) {
-                await presenter?.errorAddingVideo(.init(title: "Attachments cannot be added when after using filter", description: "set filter to text to modify attachments"))
-                return
-            }
-            var added = false
-            if let text = data as? TextAttachmentDB {
-                DB.db.movieParameters.editingMovie?.texts.append(text)
-                added = true
-            } else if let image = data as? ImageAttachmentDB {
-                DB.db.movieParameters.editingMovie?.images.append(image)
-                added = true
-            } else if let song = data as? SongAttachmentDB {
-                added = true
-                DB.db.movieParameters.editingMovie?.songs = song
-                await MainActor.run {
-                    AppDelegate.shared?.fileManager?.tempSongURLHolder = .init(string: song.attachmentURL)
-                }
-                await performAddSound(url: URL(string: song.attachmentURL))
-                return
-            }
-            if added {
-                DB.db.movieParameters.editingMovie?.isOriginalUrl = true
-                DB.db.movieParameters.needReloadLayerAttachments = true
-                await presenter?.reloadUI()
-            } else {
-                await videoAdded(canReload:false)
-            }
-        }
-    }
-    
-    func addFilterPressed() {
-        Task {
-            /// FA-956
-            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
-            DB.db.movieParameters.needReloadFilter = true
-            DB.db.movieParameters.needReloadLayerAttachments = true
-            await presenter?.reloadUI()
-            /// FA-956
-            //            await prepare.addFilter(completion: {
-            //                Task {
-            //                    await self.presenter?.reloadUI()
-            //                }
-            //            })
-        }
-    }
-    
-    func deleteAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        Task {
-            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
-            await presenter?.reloadUI()
-        }
-    }
-}
-
-fileprivate extension VideoEditorModel {
     private func addLayerAttachments() {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {

@@ -113,8 +113,12 @@ extension DB.DataBase.MovieParametersDB {
         /// max: 1.0
         var valume: CGFloat {
             get {
-                let value = CGFloat.init(string: dict["valume"] as? String ?? "0")
-                return value >= 1 ? 1 : (value <= 0 ? 0 : value)
+                if let _ = Double(dict["valume"] as? String ?? "") {
+                    let value = CGFloat.init(string: dict["valume"] as? String ?? "1")
+                    return value >= 1 ? 1 : (value <= 0 ? 0 : value)
+                } else {
+                    return 1
+                }
             }
             set {
                 dict.updateValue(String.init(value: newValue), forKey: "valume")

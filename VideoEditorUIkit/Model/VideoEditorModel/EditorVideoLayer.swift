@@ -52,6 +52,15 @@ struct EditorVideoLayer {
             return false
         }
     }
+    
+    func loadAudioMix(volume:Float) -> AVMutableAudioMix? {
+        let mixParams = AVMutableAudioMixInputParameters()
+        mixParams.setVolume(volume, at: CMTime.zero)
+        
+        let audioMix = AVMutableAudioMix()
+        audioMix.inputParameters = [mixParams]
+        return audioMix
+    }
 }
 
 

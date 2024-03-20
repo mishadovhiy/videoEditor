@@ -25,6 +25,7 @@ class SliderTableCell: UITableViewCell {
     }
     
     @IBAction func sliderChanged(_ sender: UISlider) {
+        print(CGFloat(sender.value), " tgrfedws")
         data?.didSelect(CGFloat(sender.value))
     }
 }

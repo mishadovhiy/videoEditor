@@ -41,7 +41,7 @@ struct AttachentVideoLayerModel {
             .font: font,
             .foregroundColor: text.color,
             .strokeColor: text.borderColor,
-            .strokeWidth: text.borderWidth
+            .strokeWidth: (text.borderWidth * 10)
         ]
         let attributedText = NSAttributedString(
             string: text.assetName ?? "?",
@@ -72,8 +72,14 @@ fileprivate extension AttachentVideoLayerModel {
             layer.borderWidth = 0.5
             layer.cornerRadius = 3
         }
+        layer.borderColor = data.borderColor.cgColor
+        layer.borderWidth = data.borderWidth * 10
+        layer.masksToBounds = data.borderRadius == 0 ? false : true
+        layer.cornerRadius = data.borderRadius * 10
+        layer.backgroundColor = data.backgroundColor.cgColor
+        layer.opacity = Float(data.opacity)
         layer.shadowColor = data.shadows.color.cgColor
-        layer.shadowOpacity = Float(data.shadows.opasity)
+        layer.shadowOpacity = Float(data.shadows.opasity * 10)
         layer.shadowRadius = data.shadows.radius
         print(videoSize, " hgftyguhkjn")
         layer.name = AttachentVideoLayerModel.textLayerName

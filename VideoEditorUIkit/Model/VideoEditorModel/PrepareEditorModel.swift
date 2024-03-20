@@ -23,7 +23,7 @@ class PrepareEditorModel {
         delegate = nil
     }
     
-    @MainActor func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false) async -> Response {
+    @MainActor func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false, voluem:Float? = nil) async -> Response {
         print(asset.duration, " export duration")
         guard let composition = delegate.movieHolder ?? delegate.movie
         else {
@@ -31,7 +31,7 @@ class PrepareEditorModel {
             return .error(.init(title:"Error exporting the video", description: "Try reloading the app"))
         }
         let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
-        let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo)
+        let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
         return results ?? .error("Unknown Error")
     }
     
@@ -60,7 +60,7 @@ class PrepareEditorModel {
         return localUrl
     }
 
-    func createVideo(_ url:URL?, needExport:Bool = true, replaceVideo:Bool = false) async -> Response {
+    func createVideo(_ url:URL?, needExport:Bool = true, setGeneralAudio:Bool = false) async -> Response {
         let movie = delegate.movie ?? .init()
         guard let url else {
             return .error("File not found")
@@ -72,8 +72,10 @@ class PrepareEditorModel {
             return .error("Error inserting video")
         }
         delegate.movieHolder = movie
+        let dbVolume = DB.db.movieParameters.editingMovie?.valume
+        let voluem = dbVolume ?? 1 == 1 ? nil : dbVolume
         if needExport {
-            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
+            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true, voluem: Float(DB.db.movieParameters.editingMovie?.valume ?? 1))
             if let _ = localUrl.videoExportResponse?.url {
                 await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url)
             }

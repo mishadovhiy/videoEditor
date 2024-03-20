@@ -24,8 +24,13 @@ protocol MovieAttachmentProtocol:AssetAttachmentProtocol {
     /// percent in movie asset
     var position:CGPoint { get set }
     var zoom:CGFloat { get set }
+    var opacity:CGFloat { get set }
+    var backgroundColor:UIColor { get set }
     var shadows:DB.DataBase.MovieParametersDB.Shadows { get set }
     var animations:DB.DataBase.MovieParametersDB.AnimationMovieAttachment { get set }
+    var borderWidth:CGFloat { get set }
+    var borderColor:UIColor { get set }
+    var borderRadius:CGFloat { get set }
 }
 
 extension [AssetAttachmentProtocol] {
@@ -127,6 +132,16 @@ extension MovieGeneralParameterList {
 
 extension MovieGeneralParameterList {
     struct RegularRow:MovieAttachmentProtocol {
+        var opacity: CGFloat = 0
+        
+        var backgroundColor: UIColor = .red
+        
+        var borderWidth: CGFloat = 0
+        
+        var borderColor: UIColor = .red
+        
+        var borderRadius: CGFloat = 0
+        
         var trackColor: UIColor {
             return color
         }
@@ -183,6 +198,16 @@ extension MovieGeneralParameterList {
     }
     
     struct MediaRow:MovieAttachmentProtocol {
+        var opacity: CGFloat = 0
+        
+        var backgroundColor: UIColor = .red
+        
+        var borderWidth: CGFloat = 0
+        
+        var borderColor: UIColor = .red
+        
+        var borderRadius: CGFloat = 0
+        
         var trackColor: UIColor {
             return color
         }
