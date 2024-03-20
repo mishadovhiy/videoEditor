@@ -79,7 +79,7 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     }
     
     var defaultName: String {
-        attachmentType?.rawValue ?? "?"
+        return image == nil ? "Empty Image" : "Image"
     }
     
     var time: DB.DataBase.MovieParametersDB.AssetTime {
@@ -94,7 +94,6 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     var assetName: String? {
         get {
             dict["assetName"] as? String ?? "Image"
-           // return URL(string: attachme)
         }
         set {
             if let newValue {

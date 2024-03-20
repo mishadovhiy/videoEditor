@@ -12,33 +12,29 @@ struct AnimateVideoLayer {
     func add(_ newLayer:CALayer, to layer: CALayer, data:MovieAttachmentProtocol, totalTime:CGFloat) {
         newLayer.opacity = 0
         print(data, " AnimateVideoLayerAnimateVideoLayerAnimateVideoLayer")
-        appeareAnimation(.opacity, duration: data.time.duration, newLayer: newLayer, start: data.time.start, totalTime: totalTime)
+        appeareAnimation(data, type: .opacity, newLayer: newLayer, totalTime: totalTime)
         if data.animations.needScale {
-            layer.add(repeated(key: "transform.scale"), forKey: "scale")
+            layer.add(repeated(key: "transform.scale", data: data), forKey: "scale")
         }
         layer.addSublayer(newLayer)
     }
     
     
-    private func appeareAnimation(_ type:AppeareAnimationType, duration:CGFloat, newLayer:CALayer, start:CGFloat, totalTime:CGFloat) {
-        let duratioResult = duration * totalTime
-        let startResult = start * totalTime
-        let show = basicAppeare(type, show: true, start: startResult)
+    private func appeareAnimation(_ data:MovieAttachmentProtocol, type:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType, newLayer:CALayer, totalTime:CGFloat) {
+        let duratioResult = data.time.duration * totalTime
+        let startResult = data.time.start * totalTime
+        let show = basicAppeare(type, show: true, start: startResult, animationDuration: data.animations.appeareAnimation.duration)
         newLayer.add(show, forKey: "show")
         let hide = basicAppeare(type, show: false, start: duratioResult + startResult)
         newLayer.add(reapeatedState(show, hide), forKey: "visible")
         newLayer.add(hide, forKey: "hide")
-    }
-    
-    enum AppeareAnimationType:String {
-        case opacity = "opacity"
     }
 }
 
 
 
 fileprivate extension AnimateVideoLayer {
-    private func repeated(key:String) -> CABasicAnimation {
+    private func repeated(key:String, data:MovieAttachmentProtocol) -> CABasicAnimation {
         let scaleAnimation = CABasicAnimation(keyPath: key)
         scaleAnimation.fromValue = 0.93
         scaleAnimation.toValue = 1.05
@@ -52,11 +48,12 @@ fileprivate extension AnimateVideoLayer {
     }
     
     private func reapeatedState(_ show:CABasicAnimation, _ hide:CABasicAnimation,
-                                type:AppeareAnimationType = .opacity
+                                type:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType = .opacity,
+                                toAlpha:CGFloat = 1
     ) -> CABasicAnimation {
         let vidible = CABasicAnimation(keyPath: type.rawValue)
         vidible.fromValue = 1
-        vidible.toValue = 0.99
+        vidible.toValue = toAlpha - 0.01
         vidible.duration = 0.1
         vidible.isRemovedOnCompletion = false
         vidible.repeatCount = .greatestFiniteMagnitude
@@ -65,14 +62,14 @@ fileprivate extension AnimateVideoLayer {
         return vidible
     }
     
-    func basicAppeare(_ key:AppeareAnimationType, show:Bool, start:CFTimeInterval) -> CABasicAnimation {
+    func basicAppeare(_ key:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType, show:Bool, start:CFTimeInterval, animationDuration:CGFloat = 0.8, alpha:CGFloat = 1) -> CABasicAnimation {
         
         let message = CABasicAnimation(keyPath: key.rawValue)
         if message.duration == 0 {
-            message.duration = 0.8
+            message.duration = animationDuration
         }
-        message.fromValue = show ? 0 : 1
-        message.toValue = show ? 1 : 0
+        message.fromValue = show ? 0 : alpha
+        message.toValue = show ? alpha : 0
         message.autoreverses = false
         message.isRemovedOnCompletion = false
         message.beginTime = start

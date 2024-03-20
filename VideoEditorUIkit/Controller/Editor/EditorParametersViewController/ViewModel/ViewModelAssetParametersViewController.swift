@@ -11,6 +11,7 @@ import AVFoundation
 class EditorParametersVCViewModel {
     var assetData:MovieGeneralParameterList = .test
     var editingAsset:AssetAttachmentProtocol?
+    /// used when cancel pressed, or to delete from db when done pressed
     var editingAssetHolder:AssetAttachmentProtocol?
     var editingView:UIView?
     static var rowsHeight:CGFloat = 20

@@ -100,6 +100,7 @@ class EditorOverlayVC: SuperVC {
         }
     }
     
+    /// data: set nil and call before updating AttachmentProtocol
     func updateData(_ data:[OverlayCollectionData]?) {
         childVC?.updateData(data)
     }

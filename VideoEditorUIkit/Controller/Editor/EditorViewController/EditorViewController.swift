@@ -49,9 +49,6 @@ class EditorViewController: SuperVC {
     // MARK: - Life-cycle
     override func loadView() {
         super.loadView()
-        if view.superview == nil {
-            return
-        }
         loadUI()
     }
     
@@ -190,6 +187,23 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
         mediaPicker.dismiss(animated: true) { [weak self] in
             self?.soundToVideoSelected(url)
         }
+    }
+}
+
+extension EditorViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            print("okkkk")
+            var asset = assetParametersVC?.viewModel?.editingAsset as? ImageAttachmentDB
+            if asset != nil {
+                asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
+                presentingOverlayVC?.updateData(nil)
+                (assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(asset)
+                playerVC?.editingAttachmentView?.data = asset
+                //update player (editing attachment view)
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
