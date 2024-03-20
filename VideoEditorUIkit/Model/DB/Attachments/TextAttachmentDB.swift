@@ -54,7 +54,11 @@ struct TextAttachmentDB {
 extension TextAttachmentDB:MovieAttachmentProtocol {
     var opacity: CGFloat {
         get {
-            .init(string: dict["opacity"] as? String)
+            if let value = dict["opacity"] as? String {
+                return .init(string: value)
+            } else {
+                return 1
+            }
         }
         set {
             dict.updateValue(String.init(value: newValue), forKey: "opacity")
@@ -142,7 +146,7 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     
     var borderColor:UIColor {
         get {
-            return .init(hex: dict["borderColor"] as? String ?? "") ?? .white
+            return .init(hex: dict["borderColor"] as? String ?? "") ?? .clear
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "borderColor")
@@ -151,7 +155,7 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     
     var backgroundColor:UIColor {
         get {
-            return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .white
+            return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .clear
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "backgroundColor")

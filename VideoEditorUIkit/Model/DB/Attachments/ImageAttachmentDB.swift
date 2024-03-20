@@ -32,7 +32,7 @@ struct ImageAttachmentDB {
             if let value = dict["borderRadius"] as? String {
                 return .init(string: value)
             } else {
-                return 5
+                return 0.5
             }
         }
         set {
@@ -42,7 +42,7 @@ struct ImageAttachmentDB {
     
     var backgroundColor: UIColor {
         get {
-            return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .green
+            return .init(hex: dict["backgroundColor"] as? String ?? "") ?? .clear
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "backgroundColor")
@@ -51,7 +51,11 @@ struct ImageAttachmentDB {
     
     var opacity:CGFloat {
         get {
-            .init(string: dict["opacity"] as? String)
+            if let value = dict["opacity"] as? String {
+                return .init(string: value)
+            } else {
+                return 1
+            }
         }
         set {
             dict.updateValue(String.init(value: newValue), forKey: "opacity")
@@ -135,7 +139,7 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     
     var borderColor:UIColor {
         get {
-            return .init(hex: dict["borderColor"] as? String ?? "") ?? .white
+            return .init(hex: dict["borderColor"] as? String ?? "") ?? .clear
         }
         set {
             dict.updateValue(newValue.toHex, forKey: "borderColor")

@@ -16,7 +16,7 @@ extension DB.DataBase.MovieParametersDB {
         
         var color:UIColor {
             get {
-                return .init(hex: dict["color"] as? String ?? "") ?? .green
+                return .init(hex: dict["color"] as? String ?? "") ?? .clear
             }
             set {
                 dict.updateValue(newValue.toHex, forKey: "color")
@@ -28,7 +28,7 @@ extension DB.DataBase.MovieParametersDB {
                 if let size = dict["opasity"] as? String {
                     return .init(string: size)
                 } else {
-                    return 0
+                    return 1
                 }
             }
             set {

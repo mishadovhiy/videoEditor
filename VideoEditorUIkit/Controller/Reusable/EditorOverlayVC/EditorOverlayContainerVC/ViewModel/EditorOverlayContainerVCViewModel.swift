@@ -36,15 +36,11 @@ struct EditorOverlayContainerVCViewModel {
     private var imageCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         let imageAsset = self.assetDataHolder as? ImageAttachmentDB ?? .init()
         var data:[EditorOverlayVC.OverlayCollectionData] = [
-            self.animationCells(current: imageAsset.animations)//,
-//            .init(title: "Border radius", toOverlay: .init(screenTitle: "Border radius", attachmentType: .floatRange(.init(selected: imageAsset?.borderRadius ?? 0, didSelect: { newValue in
-//                self.didPress?(.assetChanged({ oldValue in
-//                    var value = oldValue as? ImageAttachmentDB ?? .init()
-//                    value.borderRadius = newValue
-//                    return value
-//                }))
-//            }))))
+            self.animationCells(current: imageAsset.animations)
         ]
+        layerSetupCells().forEach {
+            data.append($0)
+        }
         if isEditing {
             data.append(trashCell)
             data.insert(.init(title: "Change", image: "addImage", didSelect: {
@@ -68,25 +64,8 @@ struct EditorOverlayContainerVCViewModel {
             data.append(.init(title: "Files", didSelect: {
                 self.didPress?(.upload(.files))
             }))
-        } else {
-            if !(songData?.selfMovie ?? true) {
-                data.append(.init(title: "Change Sound", image: "addSound", didSelect: {
-                    self.didPress?(.assetChanged({
-                        var new = $0 as? SongAttachmentDB ?? .init()
-                        new.attachmentURL = ""
-                        return new
-                    }))
-                    self.didPress?(.reload)
-                    
-                }))
-            }
-            data.append(.init(title: "Volume", image: "valuem", toOverlay: .init(screenTitle: "Set sound volume", attachmentType: .floatRange(.init(selected: (assetDataHolder as? SongAttachmentDB)?.volume ?? 0, didSelect: { newValue in
-                self.didPress?(.assetChanged({
-                    var new = $0 as? SongAttachmentDB ?? .init()
-                    new.volume = newValue
-                    return new
-                }))
-            })))))
+        } else if !(songData?.selfMovie ?? true) {
+            data.append(trashCell)
         }
         return data
     }
@@ -113,23 +92,10 @@ struct EditorOverlayContainerVCViewModel {
                 }))
             })))),
             animationCells(current: textData.animations)
-            //,
-//            .init(title: "Border Color", image: "colors", toOverlay: .init(screenTitle: "Select border Color", attachmentType: .color(.init(selectedColor: (assetDataHolder as? TextAttachmentDB)?.borderColor, didSelect: { newColor in
-//                self.didPress?(.assetChanged({ oldValue in
-//                    var value = oldValue as? TextAttachmentDB ?? .init()
-//                    value.borderColor = newColor
-//                    return value
-//                }))
-//            })))),
-//            .init(title: "Border Width", image: "size", toOverlay: .init(screenTitle: "Set Border Width", attachmentType: .floatRange(.init(selected: (assetDataHolder as? TextAttachmentDB)?.borderWidth, didSelect: { newValue in
-//                self.didPress?(.assetChanged({ oldValue in
-//                    var value = oldValue as? TextAttachmentDB ?? .init()
-//                    value.borderWidth = newValue
-//                    return value
-//                }))
-//            }))))
-            
         ]
+        layerSetupCells().forEach {
+            data.append($0)
+        }
         if isEditing {
             data.append(trashCell)
         }
@@ -165,6 +131,86 @@ fileprivate extension EditorOverlayContainerVCViewModel {
         return .init(title: "Delete", image: "trash") {
             self.didPress?(.delete)
         }
+    }
+    
+    private func layerSetupCells() -> [EditorOverlayVC.OverlayCollectionData] {
+        let asset = self.assetDataHolder as? MovieAttachmentProtocol
+        return [
+            borderCells(asset),
+            shadowCells(asset),
+            .init(title: "Background color", image: "colors", toOverlay: .init(screenTitle: "Background color", attachmentType: .color(.init(title: "Background color", selectedColor: asset?.backgroundColor, didSelect: { newColor in
+                self.didPress?(.assetChanged({ oldValue in
+                    var new = oldValue as? MovieAttachmentProtocol
+                    new?.backgroundColor = newColor
+                    return new ?? asset!
+                }))
+            })))),
+            .init(title: "Opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
+                .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
+                    self.didPress?(.assetChanged({
+                        var new = $0 as? MovieAttachmentProtocol
+                        new?.opacity = newValue
+                        return new ?? asset!
+                    }))
+                }))
+            ]))
+        ]
+    }
+    
+    private func shadowCells(_ asset:MovieAttachmentProtocol?) -> EditorOverlayVC.OverlayCollectionData {
+        .init(title: "Shadow", toOverlay: .init(screenTitle: "Shadow", collectionData: [
+            .init(title: "Shadow Size", image: "size", toOverlay: .init(screenTitle: "Shadow size", screenHeight: .big, tableData: [
+                .floatRange(.init(title: "Shadow Radius", selected: asset?.shadows.radius, didSelect: { newValue in
+                    self.didPress?(.assetChanged({
+                        var new = $0 as? MovieAttachmentProtocol
+                        new?.shadows.radius = newValue
+                        return new ?? asset!
+                    }))
+                })),
+                .floatRange(.init(title: "Shadow Opacity", selected: asset?.shadows.opasity, didSelect: { newValue in
+                    self.didPress?(.assetChanged({
+                        var new = $0 as? MovieAttachmentProtocol
+                        new?.shadows.opasity = newValue
+                        return new ?? asset!
+                    }))
+                }))
+            ])),
+            .init(title: "Color", image: "colors", toOverlay: .init(screenTitle: "Shadow color", attachmentType: .color(.init(title: "Set shadow color", selectedColor: asset?.shadows.color, didSelect: { newColor in
+                self.didPress?(.assetChanged({
+                    var new = $0 as? MovieAttachmentProtocol
+                    new?.shadows.color = newColor
+                    return new ?? asset!
+                }))
+            }))))
+        ]))
+    }
+    
+    private func borderCells(_ asset:MovieAttachmentProtocol?) -> EditorOverlayVC.OverlayCollectionData {
+        .init(title: "Border", image: "size", toOverlay: .init(screenTitle: "Border", collectionData: [
+            .init(title: "Border Size", image: "size", toOverlay: .init(screenTitle: "Border frames", screenHeight: .big, tableData: [
+                .floatRange(.init(title: "Border Width", selected: asset?.borderWidth, didSelect: { newValue in
+                    self.didPress?(.assetChanged({
+                        var new = $0 as? MovieAttachmentProtocol
+                        new?.borderWidth = newValue
+                        return new ?? asset!
+                    }))
+                })),
+                .floatRange(.init(title: "Border Radius", selected: asset?.borderRadius, didSelect: { newValue in
+                    self.didPress?(.assetChanged({
+                        var new = $0 as? MovieAttachmentProtocol
+                        new?.borderRadius = newValue
+                        return new ?? asset!
+                    }))
+                }))
+            ])),
+            .init(title: "Color", image: "colors", toOverlay: .init(screenTitle: "Border color", attachmentType: .color(.init(title: "Set border color", selectedColor: asset?.borderColor, didSelect: { newColor in
+                self.didPress?(.assetChanged({
+                    var new = $0 as? MovieAttachmentProtocol
+                    new?.borderColor = newColor
+                    return new ?? asset!
+                }))
+            }))))
+        ]))
     }
     
 
