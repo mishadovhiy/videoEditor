@@ -30,7 +30,9 @@ class PrepareEditorModel {
             print("error movieHolder and no delegate.movie", #file, #line, #function)
             return .error(.init(title:"Error exporting the video", description: "Try reloading the app"))
         }
-        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetMediumQuality)
+        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)//AVAssetExportPresetMediumQuality
+        //AVAssetExportPreset640x480
+        //AVAssetExportPresetHEVCHighestQuality
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
         return results ?? .error("Unknown Error")
     }

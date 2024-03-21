@@ -43,10 +43,13 @@ struct VideoFilter {
             
             let output = filter?.outputImage?.cropped(to: request.sourceImage.extent)
             request.finish(with: output ?? .empty(), context: nil)
-            print(request.compositionTime, " applying filter of: ", composition.duration)
+            print(request.compositionTime, " applying filter of: ", composition.duration, " hyftdgrfsrgthyjt url: ", output?.url)
+            print("ourerea ", output)
+            print("sizeadsdsadf ",  request.renderSize)
             timeHolder = request.compositionTime
             if request.compositionTime >= compositionDuration && !completed {
                 completed = true
+                request.renderSize
                 print("filter apllied")
                 timeHolder = nil
                 completion((output?.url))

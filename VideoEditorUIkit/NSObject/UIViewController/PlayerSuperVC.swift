@@ -86,8 +86,13 @@ class PlayerSuperVC: SuperVC {
             if replacing {
                 player.replaceCurrentItem(with: item)
             }
-            preparePlayer()
-            player.play()
+            if player.currentItem != nil && player.currentTime() == player.currentItem?.duration {
+                self.seek(seconds: .zero)
+            }
+            if player.currentItem?.duration != .zero {
+                preparePlayer()
+                player.play()
+            }
         } else {
             self.addPlayerView()
             play()
@@ -253,6 +258,6 @@ fileprivate extension PlayerSuperVC {
         playProgressView?.layer.drawLine([
             .init(x: 0, y: 0),
             .init(x: view.frame.width, y: 0)
-        ], color: .red, width: 3, opacity: 1, name: "PlayerViewControllerline")
+        ], color: .type(.yellow), width: 3, opacity: 1, name: "PlayerViewControllerline")
     }
 }
