@@ -48,10 +48,6 @@ class EditorCollectionCell: UICollectionViewCell {
         }
         backgroundColor = item.backgroundColor
         setupUI()
-        if type != .big {
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.widthAnchor.constraint(lessThanOrEqualToConstant: 25).isActive = true
-        }
     }
 }
 

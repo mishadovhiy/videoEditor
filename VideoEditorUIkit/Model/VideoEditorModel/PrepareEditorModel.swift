@@ -30,7 +30,7 @@ class PrepareEditorModel {
             print("error movieHolder and no delegate.movie", #file, #line, #function)
             return .error(.init(title:"Error exporting the video", description: "Try reloading the app"))
         }
-        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetMediumQuality)
+        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPreset640x480)//AVAssetExportPresetMediumQuality
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
         return results ?? .error("Unknown Error")
     }
@@ -60,24 +60,30 @@ class PrepareEditorModel {
         return localUrl
     }
 
-    func createVideo(_ url:URL?, needExport:Bool = true, setGeneralAudio:Bool = false) async -> Response {
+    func createVideo(_ url:URL?, needExport:Bool = true, setGeneralAudio:Bool = false, addingVideo:Bool = false) async -> Response {
         let movie = delegate.movie ?? .init()
         guard let url else {
             return .error("File not found")
         }
-        let newMovie = await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)
+        let newMovie = await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)//await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)
         print(newMovie.composition?.duration, " inserted video duration")
         guard await newMovie.composition?.duration() != .zero,
-              let _ = await insertMovie(movie: newMovie.composition, composition: movie) else {
+              let createdMovie = await insertMovie(movie: newMovie.composition, composition: movie) else {
             return .error("Error inserting video")
         }
-        delegate.movieHolder = movie
-        let dbVolume = Float(DB.db.movieParameters.editingMovie?.valume ?? 1)
-        let voluem = dbVolume == 1 ? nil : dbVolume
+        delegate.movieHolder = createdMovie
         if needExport {
-            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true, voluem: voluem)
-            if let _ = localUrl.videoExportResponse?.url {
-                await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url)
+            //video rotation
+//            let videoSize = layerEditor.videoSize(assetTrack: movie.tracks.first!)
+//            let overlayLayer = CALayer()
+//            overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
+//            let instructions = await allCombinedInstructions(composition: movie, assetTrack: movie.tracks, videoSize: videoSize, overlayLayer: overlayLayer, assetData: [TextAttachmentDB.with({$0.assetName = ""})])
+            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
+            if let url = localUrl.videoExportResponse?.url {
+                if addingVideo {
+                    DB.db.movieParameters.editingMovie?.originalURL = url.lastPathComponent
+                }
+                await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url ?? delegate.movieURL)
             }
             return localUrl
         } else {
@@ -89,7 +95,9 @@ class PrepareEditorModel {
         let movie = delegate.movieHolder ?? delegate.movie!
         let video = VideoFilter.addFilter(composition: movie, completion: { url in
             Task {
-                await self.filterAddedToComposition(url, videoComposition: self.videoCompositionHolder)
+                if await self.filterAddedToComposition(url, videoComposition: self.videoCompositionHolder) {
+                    
+                }
                 completion()
             }
         })
@@ -111,8 +119,16 @@ extension PrepareEditorModel {
         }
         let duration = await movie.duration()
         print(duration, " total coposition duration before insert")
-        movieDescription(movie: composition, duration: duration)
         do {
+//            guard let vid = try await movie.loadTracks(withMediaType: .video).first,
+//            let comp = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) else {
+//                return nil
+//            }
+//            let t1 = CGAffineTransform(translationX: 720, y: 0)
+//                let t2 = t1.rotated(by: CGFloat(CGFloat(32) * .pi / 180))
+//                let finalTransform = t2.translatedBy(x: -720, y: 0)
+//            comp.preferredTransform = finalTransform
+//            try comp.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: vid, at: .zero)
             try composition.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: movie, at: .zero)
             return composition
         } catch {
@@ -123,9 +139,9 @@ extension PrepareEditorModel {
    
     func createSaveVideo(_ url:URL?, addingVideo:Bool = false) async -> Bool {
         let url = url ?? testURL
-        let urlResult = await self.createVideo(url).videoExportResponse?.url
+        let urlResult = await self.createVideo(url, addingVideo: true).videoExportResponse?.url
         if addingVideo, let stringUrl = urlResult?.lastPathComponent {
-            DB.db.movieParameters.editingMovie?.originalURL = stringUrl
+            
             DB.db.movieParameters.editingMovie?.preview = delegate.movie?.tracks.first?.asset?.preview(time: .zero)?.jpegData(compressionQuality: 0.01)
         }
         return urlResult != nil
@@ -154,15 +170,18 @@ extension PrepareEditorModel {
         print(duration, " total duration ")
     }
     
-    private func filterAddedToComposition(_ url:URL?, videoComposition:AVMutableVideoComposition? = nil) async {
+    private func filterAddedToComposition(_ url:URL?, videoComposition:AVMutableVideoComposition? = nil) async -> Bool {
         print("filterAddedToComposition")
         guard let url else {
             print("no url filterAddedToComposition")
-            return
+            return false
         }
         let movie = AVURLAsset(url: url)
         if let localUrl = await export(asset: movie, videoComposition: videoComposition, isVideo: false).videoExportResponse?.url {
             await self.movieUpdated(movie: nil, movieURL: localUrl, canSetNil: false)
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -262,17 +281,13 @@ extension PrepareEditorModel {
 
 // MARK: - video instructions
 extension PrepareEditorModel {
-    final private func allCombinedInstructions(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], videoSize: CGSize, overlayLayer:CALayer) async -> AVMutableVideoComposition? {
-        ///mask single composition
-        //                await layerEditor.addLayer(to: overlayLayer,
-        //                                     videoSize: videoSize,
-        //                                     text: .init(attachment: data), videoTotalTime: asset.duration().seconds)
-        //                let videoComposition = await layerEditor.videoComposition(assetTrack: assetTrack, overlayLayer: overlayLayer, composition: composition)
-        
-        var data:[MovieAttachmentProtocol] = DB.db.movieParameters.editingMovie?.texts ?? []
-        DB.db.movieParameters.editingMovie?.images.forEach({
-            data.append($0)
-        })
+    final private func allCombinedInstructions(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], videoSize: CGSize, overlayLayer:CALayer, assetData:[MovieAttachmentProtocol]? = nil) async -> AVMutableVideoComposition? {
+        var data:[MovieAttachmentProtocol] = assetData ?? DB.db.movieParameters.editingMovie?.texts ?? []
+        if assetData == nil {
+            DB.db.movieParameters.editingMovie?.images.forEach({
+                data.append($0)
+            })
+        }
         var compositions:[AVVideoComposition] =  []
         var layers:[(CALayer, CALayer)] = []
         for row in data {
@@ -350,9 +365,9 @@ extension PrepareEditorModel {
     
 
     private func addLayerComposition(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], layer:CALayer, data:MovieAttachmentProtocol?, videoSize: CGSize) async -> (AVMutableVideoComposition?, CALayer, CALayer)? {
-        guard let data else {
-            return nil
-        }
+//        guard let data else {
+//            return nil
+//        }
         let ok = await layerEditor.addLayer(to: layer,
                                    videoSize: videoSize,
                                    data: data, videoTotalTime: composition.duration().seconds)

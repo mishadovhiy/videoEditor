@@ -65,6 +65,9 @@ class EditorViewController: SuperVC {
             self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
         }
         animation.startAnimation()
+        if view.superview == nil {
+            return
+        }
         if viewModel?.editorModel.movie != nil {
             mainEditorVC?.canSetHidden = type != .addingVideos && viewModel?.editorModel.movie != nil
         } else {

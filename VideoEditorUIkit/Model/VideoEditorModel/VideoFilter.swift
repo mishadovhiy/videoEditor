@@ -15,6 +15,13 @@ struct VideoFilter {
     typealias filterResult = (composition:AVMutableVideoComposition?,
                               error: NSError?
     )
+    fileprivate static var timeHolder:CMTime?
+    
+    fileprivate static func timeChanged(time:CMTime?, changed:@escaping(Bool)->()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(30), execute: {
+            changed(self.timeHolder == time)
+        })
+    }
     
     static func addFilter(composition:AVMutableComposition,
                           completion:@escaping(filterCompletion) -> ()) -> filterResult {
@@ -36,17 +43,27 @@ struct VideoFilter {
             let output = filter?.outputImage?.cropped(to: request.sourceImage.extent)
             request.finish(with: output ?? .empty(), context: nil)
             print(request.compositionTime, " applying filter of: ", composition.duration)
+            timeHolder = request.compositionTime
             if request.compositionTime >= total && !completed {
                 completed = true
                 print("filter apllied")
+                timeHolder = nil
                 completion((output?.url))
+            } else if !completed {
+                timeChanged(time: request.compositionTime) {
+                    if $0 {
+                        completed = true
+                        self.timeHolder = nil
+                        completion((output?.url))
+                    }
+                }
             }
         }
         return (videoComposition, nil)
     }
     
     private static func prepareTime(total:CMTime) -> CMTime {
-        let percent = (0.2 * total.seconds) / 100
+        let percent = (0.19 * total.seconds) / 100
         return total - .init(seconds: percent, preferredTimescale: total.timescale)
     }
 }

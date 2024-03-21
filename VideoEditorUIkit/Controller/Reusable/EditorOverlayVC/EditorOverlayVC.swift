@@ -22,6 +22,7 @@ class EditorOverlayVC: SuperVC {
     }
     @IBOutlet var actionButtons: [BaseButton]!
 
+    var isPopup:Bool = false
     var isEditingAttachment:Bool = false
     var data:ToOverlayData?
     var canSetHidden:Bool = true {
@@ -45,7 +46,11 @@ class EditorOverlayVC: SuperVC {
     override var initialAnimation: Bool { return false}
     var overlaySizeChanged:((_ newSize:EditorOverlayContainerVC.OverlaySize)->())?
     var textColor:UIColor {
-        return .type((data?.isPopup ?? false) || attachmentData != nil ? .white : .greyText)
+        if (view.backgroundColor?.isLight ?? false) {
+            return .type(.black)
+        } else {
+            return .type(isPopup || attachmentData != nil ? .white : .greyText)
+        }
     }
     var childVC:EditorOverlayContainerVC? {
         return (children.first(where: {
@@ -67,7 +72,7 @@ class EditorOverlayVC: SuperVC {
             navigation.delegate = self
             navigation.setNavigationBarHidden(true, animated: true)
         }
-        if !(data?.isPopup ?? true) {
+        if !isPopup {
             primaryConstraints(.small).forEach { constraint in
                 if self.view.constraints.contains(where: {$0.identifier != constraint.value.1}) {
                     view.addConstaits([constraint.key:constraint.value])
@@ -79,9 +84,6 @@ class EditorOverlayVC: SuperVC {
     }
     
     override func removeFromParent() {
-        if !(data?.isPopup ?? true) {
-            return
-        }
         attachmentDelegate?.overlayRemoved()
         attachmentData = nil
         view.endEditing(true)
@@ -152,7 +154,7 @@ class EditorOverlayVC: SuperVC {
         if attachmentDelegate != nil {
             attachmentDelegate?.addAttachmentPressed(attachmentData)
         }
-        if data?.isPopup ?? true  {
+        if isPopup  {
             removeFromParent()
         } else {
             data?.donePressed?()
@@ -160,7 +162,7 @@ class EditorOverlayVC: SuperVC {
     }
     
     @IBAction func closePressed(_ sender: UIButton) {
-        if data?.isPopup ?? true {
+        if isPopup {
             removeFromParent()
         } else {
             data?.closePressed?()
@@ -176,6 +178,14 @@ fileprivate extension EditorOverlayVC {
         }
         animation.addCompletion { _ in
             completion?()
+            if show {
+                self.actionButtons.forEach {
+                    $0.layer.animationTransition()
+                    $0.setTitleColor(self.textColor, for: .normal)
+                    $0.tintColor = self.textColor
+                }
+              //  UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: self.textColor]
+            }
         }
         animation.startAnimation()
     }
@@ -267,6 +277,7 @@ extension EditorOverlayVC {
                             delegate:EditorOverlayVCDelegate?
     ) {
         let vc = EditorOverlayVC.configure(attechemntData: attachmentData, delegate: delegate)
+        vc.isPopup = true
         parent.addChild(child: vc, constaits: vc.primaryConstraints(.small))
         vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.topAnchor, constant: -10).isActive = true
         vc.loadSeectionIndocator(bottomView: bottomView, parent: parent)

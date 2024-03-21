@@ -45,6 +45,10 @@ extension BaseButton {
 fileprivate extension BaseButton {
     func setupUI() {
         let style:BaseButtonType = .init(rawValue: self.style) ?? .primary
+        let radius:CGFloat = cornderRadious == 0 && style != .smallGray ? (style == .primary ? 9 : 5) : 0
+        if radius == layer.cornerRadius && radius != 0 {
+            return
+        }
         if cornderRadious == 0 && style != .smallGray {
             layer.cornerRadius = style == .primary ? 9 : 5
         }

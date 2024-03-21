@@ -34,9 +34,6 @@ class EditorParametersVCViewModel {
             } else {
                 assetData.songs = []
             }
-            assetData.songs.append(SongAttachmentDB.with({
-                $0.selfMovie = true
-            }))
             assetData.media = DB.db.movieParameters.editingMovie?.images ?? []
             let segments = try await editorModel.movie?.loadTracks(withMediaType: .video) ?? []
             assetData.previewAssets = segments.compactMap({

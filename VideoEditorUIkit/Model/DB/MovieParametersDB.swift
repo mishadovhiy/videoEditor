@@ -54,7 +54,6 @@ extension DB.DataBase {
         
         var ignoreClearUrls:[String] {
             var ignore = [
-                editingMovie?.forceOriginalURL ?? "",
                 editingMovie?.notFilteredURL ?? ""
             ]
             if editingMovie?.lastChangedURL ?? "" != editingMovie?.forceOriginalURL ?? "" {
@@ -77,7 +76,10 @@ extension DB.DataBase {
                 print(original, " editingMovieURL")
                 return original
             } else {
-                let ignore = ignoreClearUrls
+                var ignore = ignoreClearUrls
+                if editingMovie?.lastChangedURL ?? "" != editingMovie?.forceOriginalURL ?? "" {
+                    ignore.append(editingMovie?.lastChangedURL ?? "")
+                }
                 let result = contents.last(where: { url in
                     return !ignore.contains(where: {
                         url.absoluteString.contains($0)

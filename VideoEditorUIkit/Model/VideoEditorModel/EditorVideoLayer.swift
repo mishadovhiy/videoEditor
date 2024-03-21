@@ -27,6 +27,10 @@ struct EditorVideoLayer {
         if let first = firstTrack {
             let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: first)
             let transform = first.preferredTransform
+//            let t1 = CGAffineTransform(translationX: 720, y: 0)
+//                let t2 = t1.rotated(by: CGFloat(CGFloat(34) * .pi / 180))
+//                let transform = t2.translatedBy(x: -720, y: 0)
+//                
             layerInstruction.setTransform(transform, at:.zero)
             instraction.instractions.layerInstructions.append(layerInstruction)
         }
@@ -34,22 +38,26 @@ struct EditorVideoLayer {
     }
     
     func videoSize(assetTrack:AVAssetTrack) -> CGSize {
-        let videoInfo = orientation(from: assetTrack.preferredTransform)
-        let size = assetTrack.naturalSize
-        if videoInfo.isPortrait {
-            return size//.init(width: size.height, height: size.width)
-        } else {
-            return size
-        }
+        VideoEditorModel.renderSize
+//        let videoInfo = orientation(from: assetTrack.preferredTransform)
+//        let size = assetTrack.naturalSize
+//        if videoInfo.isPortrait {
+//            return size//.init(width: size.height, height: size.width)
+//        } else {
+//            return size
+//        }
     }
     
-    func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol, videoTotalTime:CGFloat) -> Bool {
+    func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol?, videoTotalTime:CGFloat) -> Bool {
+        guard let data else {
+            return true
+        }
         if let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, data: data) {
             animation.add(newValue, to: layer, data:data, totalTime: videoTotalTime)
             return true
         } else {
-            print("video not added \(data) ", #file, #line)
-            return false
+            print("layer not added \(data) ", #file, #line)
+            return true
         }
     }
     
@@ -80,7 +88,7 @@ fileprivate extension EditorVideoLayer {
             outputLayer.addSublayer(overlayLayer)
         }
         let videoComposition = AVMutableVideoComposition()
-        videoComposition.renderSize = .init(width: 720, height: 720)
+        videoComposition.renderSize = VideoEditorModel.renderSize
         videoComposition.frameDuration = VideoEditorModel.fmp30
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(
             postProcessingAsVideoLayer: videoLayer,

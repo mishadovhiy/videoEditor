@@ -105,16 +105,12 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
     }
     
     var trackColor: UIColor {
-        return defaultColor
+        return color
     }
     
     var color: UIColor {
         get {
-            if let value = dict["color"] as? String {
-                return .init(hex: value) ?? defaultColor
-            } else {
-                return defaultColor
-            }
+            return backgroundColor != .clear ? backgroundColor : defaultColor
         }
         set {
             if newValue != .clear, let toHex = newValue.toHex {

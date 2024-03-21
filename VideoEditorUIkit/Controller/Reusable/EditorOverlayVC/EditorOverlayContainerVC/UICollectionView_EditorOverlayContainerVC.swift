@@ -49,7 +49,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
 
 extension EditorOverlayContainerVC:UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var viewHeight = view.frame.height - (view.safeAreaInsets.bottom + view.safeAreaInsets.top)
+        var viewHeight = view.frame.height// - (view.safeAreaInsets.bottom + view.safeAreaInsets.top)
         if viewHeight <= 20 {
             viewHeight = 50
         }

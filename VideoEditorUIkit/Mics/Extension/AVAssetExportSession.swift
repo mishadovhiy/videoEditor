@@ -28,7 +28,7 @@ extension AVAssetExportSession {
         } else if let videoComposition {
             print(videoComposition.renderSize, " error adding videoComposition")
         }
-        self.shouldOptimizeForNetworkUse = false
+        self.shouldOptimizeForNetworkUse = true
         self.timeRange = await .init(start: .zero, duration: asset.duration())
         self.outputFileType = .mov
         self.outputURL = exportURL

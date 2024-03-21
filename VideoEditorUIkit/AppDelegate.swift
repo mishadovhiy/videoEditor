@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appServicesAuthorization = RequestAuthorization()
         appServicesAuthorization.mediaLibrary()
         appServicesAuthorization.photoLibrary()
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.type(.white)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.type(.white)]
         return true
     }
     

@@ -26,7 +26,7 @@ extension UIColor {
         var blue: CGFloat = 0
         var green: CGFloat = 0
         var alpha: CGFloat = 0
-
+        
         
         getRed(
             &red,
@@ -93,5 +93,12 @@ extension UIColor {
             lroundf(b * 255)
         )
         return hexString
+    }
+    
+    var isLight:Bool {
+        var white: CGFloat = 0.0
+        self.getWhite(&white, alpha: nil)
+        print(white, " ujyrfecdwxs")
+        return white > 0.65
     }
 }

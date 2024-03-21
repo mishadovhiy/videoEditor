@@ -11,7 +11,7 @@ import UIKit
 extension EditorOverlayVC {
     func setupUI() {
         let defaultColor = view.superview?.backgroundColor ?? .clear
-        if data?.isPopup ?? true {
+        if isPopup {
             view.layer.cornerRadius = 12
             view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
             view.subviews.first(where: {$0 is UIStackView})?.layer.masksToBounds = true
@@ -19,7 +19,8 @@ extension EditorOverlayVC {
             view.layer.shadowOpacity = 0.8
             view.layer.shadowOffset = .init(width: -1, height: 3)
             view.layer.shadowRadius = 5
-            view.backgroundColor = attachmentData?.trackColor ?? defaultColor
+            let color = attachmentData?.trackColor ?? defaultColor
+            view.backgroundColor = color
         } else {
             view.backgroundColor = defaultColor
             actionButtons.first(where: {$0.style == 0})?.superview?.isHidden = hideDoneButton
@@ -39,11 +40,11 @@ extension EditorOverlayVC {
         let smallHeightBig = !canSetHidden
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:((smallHeightBig ? 90 : 70), "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(50, "height")]
+            return !isPopup ? [.height:((smallHeightBig ? 90 : 70), "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(55, "height")]
         case .middle:
-            return !(data?.isPopup ?? true) ? [.height:(85, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(90, "height")]
+            return !isPopup ? [.height:(90, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(90, "height")]
         case .big:
-            return !(data?.isPopup ?? true) ? [.height:(250, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(185, "height")]
+            return !isPopup ? [.height:(250, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(185, "height")]
         }
     }
     
@@ -86,7 +87,7 @@ extension EditorOverlayVC {
                     constraint.constant = typeData.value.0
                 }
             }
-            let animation = UIViewPropertyAnimator(duration:(data?.isPopup ?? false) ? 0.2 : 0.29, curve: .easeIn) {
+            let animation = UIViewPropertyAnimator(duration:isPopup ? 0.2 : 0.29, curve: .easeIn) {
                 self.view.layoutIfNeeded()
                 self.view.superview?.layoutIfNeeded()
                 viewController?.view.layoutIfNeeded()

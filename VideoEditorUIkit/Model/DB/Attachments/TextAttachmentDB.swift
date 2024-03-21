@@ -75,7 +75,7 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     }
     
     var trackColor: UIColor {
-        return .type(.yellow1)
+        return color
     }
     
     var animations: DB.DataBase.MovieParametersDB.AnimationMovieAttachment {

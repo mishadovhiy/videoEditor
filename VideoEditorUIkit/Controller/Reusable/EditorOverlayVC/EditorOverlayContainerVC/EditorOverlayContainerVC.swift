@@ -22,7 +22,8 @@ class EditorOverlayContainerVC: SuperVC {
     var screenType:EditorOverlayVC.ToOverlayData?
     var viewModel:EditorOverlayContainerVCViewModel?
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
-    
+    var canReloadSubviews:Bool = true
+
     var needTextField:Bool {
         return parentVC?.data?.needTextField ?? (viewModel?.type == .text) && ((navigationController?.viewControllers.count ?? 0) == 1)
     }
@@ -56,7 +57,9 @@ class EditorOverlayContainerVC: SuperVC {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView.reloadInputViews()
+        if canReloadSubviews {
+            collectionView.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -79,6 +82,10 @@ class EditorOverlayContainerVC: SuperVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateUI()
+        if parentVC?.isPopup ?? false {
+            navigationController?.navigationBar.tintColor = parentVC?.textColor
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: parentVC?.textColor ?? .red]
+        }
     }
     
     func updateUI() {
@@ -208,12 +215,17 @@ fileprivate extension EditorOverlayContainerVC {
 }
 
 extension EditorOverlayContainerVC:UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        canReloadSubviews = false
+        return true
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         viewModel?.textfieldEditing = false
         parentVC?.updateMainConstraints(viewController: self)
         collectionView.reloadSections(.init(integer: 1))
     //    collectionView.reloadInputViews()
         collectionView.reloadData()
+        canReloadSubviews = true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
