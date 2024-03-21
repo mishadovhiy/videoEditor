@@ -37,14 +37,13 @@ struct EditorVideoLayer {
     }
     
     func videoSize(assetTrack:AVAssetTrack) -> CGSize {
-        VideoEditorModel.renderSize
-//        let videoInfo = orientation(from: assetTrack.preferredTransform)
-//        let size = assetTrack.naturalSize
-//        if videoInfo.isPortrait {
-//            return size//.init(width: size.height, height: size.width)
-//        } else {
-//            return size
-//        }
+        let videoInfo = orientation(from: assetTrack.preferredTransform)
+        let size = assetTrack.naturalSize
+        if videoInfo.isPortrait {
+            return .init(width: size.height, height: size.width)
+        } else {
+            return size
+        }
     }
     
     func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol?, videoTotalTime:CGFloat) -> Bool {
@@ -75,13 +74,12 @@ struct EditorVideoLayer {
 fileprivate extension EditorVideoLayer {
     
     private func videoInstractions(track:AVAssetTrack, overlayLayer: CALayer?, composition:AVMutableComposition) async -> InstractionsResult {
-        let videoSize = videoSize(assetTrack: track)
+        let videoSize = videoSize(assetTrack: track)//here
         let videoLayer = CALayer()
-        let size:CGSize = videoSize//overlayLayer?.frame.size ?? .init(width: 10, height: 10)
-        videoLayer.frame = .init(origin: .zero, size: size)
+        let size:CGSize = overlayLayer?.frame.size ?? .init(width: 10, height: 10)
+        videoLayer.frame = .init(origin: .zero, size: track.naturalSize)
         let outputLayer = CALayer()
-        outputLayer.frame = CGRect(origin: .zero, size: videoSize)
-        
+        outputLayer.frame = CGRect(origin: .zero, size: track.naturalSize)
         outputLayer.addSublayer(videoLayer)
         if let overlayLayer {
             outputLayer.addSublayer(overlayLayer)

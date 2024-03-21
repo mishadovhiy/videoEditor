@@ -49,6 +49,7 @@ class PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
+        //here
         let videoComposition = await allCombinedInstructions(composition: composition, assetTrack: assetTrack, videoSize: videoSize, overlayLayer: overlayLayer)
         delegate.movieHolder = composition
         let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
