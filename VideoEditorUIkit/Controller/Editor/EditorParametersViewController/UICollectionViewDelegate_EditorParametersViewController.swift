@@ -42,6 +42,6 @@ extension EditorParametersViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: MovieGeneralParameterList.AssetsData.cellWidth, height: collectionView.frame.height)
+        return CGSize(width: MovieGeneralParameterList.AssetsData.cellWidth, height: collectionView.frame.height <= 0 ? 50 : collectionView.frame.height)
     }
 }

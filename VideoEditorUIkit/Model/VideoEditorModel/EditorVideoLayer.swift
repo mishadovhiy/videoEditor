@@ -80,7 +80,7 @@ fileprivate extension EditorVideoLayer {
             outputLayer.addSublayer(overlayLayer)
         }
         let videoComposition = AVMutableVideoComposition()
-        videoComposition.renderSize = videoSize
+        videoComposition.renderSize = .init(width: 720, height: 720)
         videoComposition.frameDuration = VideoEditorModel.fmp30
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(
             postProcessingAsVideoLayer: videoLayer,

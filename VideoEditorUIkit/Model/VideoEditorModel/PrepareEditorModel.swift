@@ -105,18 +105,16 @@ class PrepareEditorModel {
 
 extension PrepareEditorModel {
     private func insertMovie(movie:AVMutableComposition?, composition:AVMutableComposition) async -> AVMutableComposition? {
-        guard let movie else {
+        guard let movie
+        else {
             return nil
         }
         let duration = await movie.duration()
         print(duration, " total coposition duration before insert")
         movieDescription(movie: composition, duration: duration)
         do {
-            let range = CMTimeRangeMake(start: .zero, duration: duration)
-            try composition.insertTimeRange(range, of: movie, at: .zero)
-            
+            try composition.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: movie, at: .zero)
             return composition
-            
         } catch {
             print(error.localizedDescription)
             return nil

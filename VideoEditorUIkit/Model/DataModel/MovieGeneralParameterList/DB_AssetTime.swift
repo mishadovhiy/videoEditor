@@ -31,7 +31,7 @@ extension DB.DataBase.MovieParametersDB {
         /// max: 1.0
         var duration: CGFloat {
             get {
-                let value = CGFloat.init(string: dict["duration"] as? String ?? "0.5")
+                let value = CGFloat.init(string: dict["duration"] as? String ?? "0.2")
                 return value >= 1 ? 1 : (value <= 0 ? 0 : value)
             }
             set {

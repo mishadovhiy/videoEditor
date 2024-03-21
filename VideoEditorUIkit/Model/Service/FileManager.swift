@@ -39,14 +39,15 @@ struct FileManagerServgice {
         
         do {
             let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
-            let originalUrl = db.editingMovie?.forceOriginalURL ?? ""
-            let notFilteredURL = db.editingMovie?.notFilteredURL ?? ""
-            let editingUrl = db.editingMovieURL ?? ""
-            try contents.forEach({
-                let cantRemove = $0.absoluteString.contains(originalUrl) || $0.absoluteString.contains(notFilteredURL) || $0 == exept || ($0.absoluteString.contains(editingUrl) && exept != nil)
+            var ignore = db.ignoreClearUrls
+            ignore.append(db.editingMovieURL ?? "")
+            try contents.forEach({ url in
+                let cantRemove = ignore.contains {
+                    url.absoluteString.contains($0)
+                } && exept != nil
                 if exept == nil || !cantRemove {
-                    try fileManager.removeItem(at: $0)
-                    print("Removed: \($0.lastPathComponent)")
+                    try fileManager.removeItem(at: url)
+                    print("Removed: \(url.lastPathComponent)")
                 }
             })
         } catch {

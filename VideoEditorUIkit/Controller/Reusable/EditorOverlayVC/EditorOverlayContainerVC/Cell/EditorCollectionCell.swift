@@ -24,8 +24,8 @@ class EditorCollectionCell: UICollectionViewCell {
         if superview == nil {
             return
         }
-        
     }
+    
     var textFieldEditing:Bool = false
     func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool, textColor:UIColor?) {
         if let textColor {
@@ -38,9 +38,13 @@ class EditorCollectionCell: UICollectionViewCell {
         if let imageData = item.imageData,
            let image = UIImage(data: imageData) {
             imageView.image = image
-            imageView.superview?.isHidden = false
+            //imageView.isHidden = false//.superview?.isHidden = false
+        } else if let imageString = item.image,
+                  let imageRes = UIImage.init(named: imageString) {
+          //  imageView.setImage(item.image, superView: imageView)
+            imageView.image = imageRes
         } else {
-            imageView.setImage(item.image, superView: imageView.superview)
+            imageView.image = nil
         }
         backgroundColor = item.backgroundColor
         setupUI()
@@ -55,7 +59,6 @@ class EditorCollectionCell: UICollectionViewCell {
 fileprivate extension EditorCollectionCell {
     private func setupUI() {
         titleLabel.font = .type(.small)
-      //  updateConstraint()
         contentView.layer.drawLine([
             .init(x: -5, y: 5),
                 .init(x: -5, y: contentView.frame.height - 10)

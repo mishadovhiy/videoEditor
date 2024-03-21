@@ -55,6 +55,11 @@ class EditorOverlayContainerVC: SuperVC {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.reloadInputViews()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = screenType?.screenTitle
@@ -74,6 +79,10 @@ class EditorOverlayContainerVC: SuperVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateUI()
+    }
+    
+    func updateUI() {
         if needTextField {
             parentVC?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
         }
@@ -88,6 +97,9 @@ class EditorOverlayContainerVC: SuperVC {
     }
     
     func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]?) {
+        if view.superview == nil {
+            return
+        }
         viewModel?.assetDataHolder = parentVCOptional?.attachmentData
         self.collectionData = collectionData ?? viewModel?.getCollectionData ?? []
         reloadData()

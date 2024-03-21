@@ -36,9 +36,10 @@ extension EditorOverlayVC {
     }
 
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
+        let smallHeightBig = !canSetHidden
         switch type {
         case .small:
-            return !(data?.isPopup ?? true) ? [.height:(70, "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(50, "height")]
+            return !(data?.isPopup ?? true) ? [.height:((smallHeightBig ? 90 : 70), "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(50, "height")]
         case .middle:
             return !(data?.isPopup ?? true) ? [.height:(85, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(90, "height")]
         case .big:
@@ -67,9 +68,10 @@ extension EditorOverlayVC {
         view.addConstaits([.width:50])
     }
     
-    func updateMainConstraints(viewController:UIViewController, textFieldEditing:Bool = false) {
+    func updateMainConstraints(viewController:UIViewController?, textFieldEditing:Bool = false) {
+        let appearedVC = viewController ?? childVC
         if let topVC = viewController as? EditorOverlayContainerVC {
-            let hidden = (viewController.navigationController?.viewControllers.count ?? 0) >= 2
+            let hidden = (appearedVC?.navigationController?.viewControllers.count ?? 0) >= 2
 
             let type = topVC.screenSize ?? (hidden ? .middle : .small)
             let constraints = primaryConstraints(textFieldEditing ? .middle : type)
@@ -87,7 +89,7 @@ extension EditorOverlayVC {
             let animation = UIViewPropertyAnimator(duration:(data?.isPopup ?? false) ? 0.2 : 0.29, curve: .easeIn) {
                 self.view.layoutIfNeeded()
                 self.view.superview?.layoutIfNeeded()
-                viewController.view.layoutIfNeeded()
+                viewController?.view.layoutIfNeeded()
             }
             animation.addAnimations({
                 self.toggleButtons(hidden: textFieldEditing ? true : hidden, animated: false)

@@ -52,6 +52,17 @@ extension DB.DataBase {
             }
         }
         
+        var ignoreClearUrls:[String] {
+            var ignore = [
+                editingMovie?.forceOriginalURL ?? "",
+                editingMovie?.notFilteredURL ?? ""
+            ]
+            if editingMovie?.lastChangedURL ?? "" != editingMovie?.forceOriginalURL ?? "" {
+                ignore.append(editingMovie?.lastChangedURL ?? "")
+            }
+            return ignore
+        }
+        
         var editingMovieURL:String? {
             guard let contents = AppDelegate.shared?.fileManager?.contents else {
                 print("contents: no data at the url")
@@ -66,8 +77,12 @@ extension DB.DataBase {
                 print(original, " editingMovieURL")
                 return original
             } else {
-                let result = contents.last(where: {
-                    return !$0.absoluteString.contains(editingMovie?.notFilteredURL ?? "") && !$0.absoluteString.contains(editingMovie?.forceOriginalURL ?? "")
+                let ignore = ignoreClearUrls
+                let result = contents.last(where: { url in
+                    return !ignore.contains(where: {
+                        url.absoluteString.contains($0)
+                    })
+                    //!$0.absoluteString.contains(editingMovie?.notFilteredURL ?? "") && !$0.absoluteString.contains(editingMovie?.forceOriginalURL ?? "")
                 })?.absoluteString
                 print(result, " editingMovieURL")
                 return result ?? contents.last?.absoluteString

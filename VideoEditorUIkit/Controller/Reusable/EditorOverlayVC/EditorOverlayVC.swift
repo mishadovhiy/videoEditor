@@ -21,9 +21,18 @@ class EditorOverlayVC: SuperVC {
         return view.subviews.first(where: {$0.layer.name == "SelectionIndicatorView"})
     }
     @IBOutlet var actionButtons: [BaseButton]!
-    
+
     var isEditingAttachment:Bool = false
     var data:ToOverlayData?
+    var canSetHidden:Bool = true {
+        didSet {
+         //   toggleButtons(hidden: nil)
+            actionButtons.first(where: {$0.tag == 1})?.alpha = canSetHidden ? 1 : 0
+            if !canSetHidden && isHidden {
+                isHidden = false
+            }
+        }
+    }
     var attachmentData:AssetAttachmentProtocol? {
         get {
             return attachmentDelegate?.attachmentData
@@ -38,7 +47,7 @@ class EditorOverlayVC: SuperVC {
     var textColor:UIColor {
         return .type((data?.isPopup ?? false) || attachmentData != nil ? .white : .greyText)
     }
-    private var childVC:EditorOverlayContainerVC? {
+    var childVC:EditorOverlayContainerVC? {
         return (children.first(where: {
             $0 is UINavigationController
         }) as? UINavigationController)?.topViewController as? EditorOverlayContainerVC
@@ -110,12 +119,16 @@ class EditorOverlayVC: SuperVC {
         attachmentDelegate?.overlayChangedAttachment(attachmentData)
     }
     
-    var isHidden:Bool = false {
-        didSet {
+    var isHidden:Bool {
+        get {
+            self.view.superview?.isHidden ?? false
+        }
+        set {
+            let hide = canSetHidden ? newValue : false
             let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
-                self.view.superview?.isHidden = self.isHidden
+                self.view.superview?.isHidden = hide
             }
-            if isHidden {
+            if hide {
                 animation.addAnimations({
                     self.view.alpha = 0
                 }, delayFactor: 0.18)
@@ -126,7 +139,9 @@ class EditorOverlayVC: SuperVC {
             animation.addCompletion {_ in 
                 self.childVC?.view.layoutSubviews()
                 self.childVC?.view.layoutIfNeeded()
-                self.childVC?.viewDidAppear(true)
+                if !hide {
+                    self.childVC?.updateUI()
+                }
             }
             animation.startAnimation()
         }

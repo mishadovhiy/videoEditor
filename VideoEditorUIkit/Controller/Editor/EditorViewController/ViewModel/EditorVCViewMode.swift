@@ -24,41 +24,90 @@ struct EditorVCViewMode {
         editorModel = nil
     }
     
+    private func loadUrls() -> [URL] {
+        return AppDelegate.shared?.fileManager?.contents ?? []
+    }
+    
+    func toggleOriginalURL(reloadPressed:@escaping()->()) {
+        Task {
+            let value = DB.db.movieParameters.editingMovie?.isOriginalUrl ?? false
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = !value
+            await MainActor.run {
+                reloadPressed()
+            }
+        }
+    }
+}
+
+extension EditorVCViewMode {
+    
     typealias void = ()->()
-    func mainEditorCollectionData(vc:BaseVC, filterPreviewImage:Data?, filterSelected:@escaping()->(),
-                                  reloadPressed:@escaping void,
-                                  deleteMovie:@escaping void
-    ) -> [EditorOverlayVC.OverlayCollectionData] {
+    enum OverlayPressedModel {
+        case reload
+        case delete
+        case filterSelected
+        case toStoredVideos
+    }
+    
+    func addingVideosEditorData(pressed:@escaping(OverlayPressedModel)->()) -> [EditorOverlayVC.OverlayCollectionData] {
+        var data:[EditorOverlayVC.OverlayCollectionData] = []
+        if editorModel.movie != nil {
+            data.append(.init(title: "Start Editing", didSelect: {
+                pressed(.reload)
+            }))
+            data.append(.init(title: "Remove last changes", didSelect: {
+                self.coordinator?.showConfirmationAlert("Remove last changes", okPressed: {
+                    Task {
+                        DB.db.movieParameters.editingMovie?.setPreviusVideoURL()
+                        await MainActor.run {
+                            pressed(.reload)
+                        }
+                    }
+                })
+            }))
+            data.append(deleteCell(pressed: pressed))
+        }
+        return data
+    }
+    
+    func mainEditorCollectionData(pressed:@escaping(OverlayPressedModel)->(), filterPreviewImage:Data?) -> [EditorOverlayVC.OverlayCollectionData] {
         [
-            .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, filterSelected), screenHeight: .big)),
-            .init(title: "Reload data", didSelect: reloadPressed),
-            .init(title: "Delete Movie", image: "trash", didSelect: {
-                self.coordinator?.showConfirmationAlert("Delete Movie", okPressed: deleteMovie)
+            .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, {
+                pressed(.filterSelected)
+            }), screenHeight: .big)),
+            deleteCell(pressed: pressed),
+            .init(title: "Reload data", didSelect: {
+                pressed(.reload)
             }),
             .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
                 let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
                 self.coordinator?.showConfirmationAlert("Change url to: " + title, okPressed: {
-                    self.toggleOriginalURL(reloadPressed: reloadPressed)
+                    self.toggleOriginalURL(reloadPressed: {
+                        pressed(.reload)
+                    })
                 })
             }),
             .init(title: "stored videos", didSelect: {
-                vc.coordinator?.toList(tableData: storedVideosTableData(parentVC: vc))
+                pressed(.toStoredVideos)
             })
         ]
     }
     
-    private func storedVideosTableData(parentVC:BaseVC) -> [SelectionTableViewController.TableData] {
+    private func deleteCell(pressed:@escaping(OverlayPressedModel)->()) -> EditorOverlayVC.OverlayCollectionData {
+        .init(title: "Delete Movie", image: "trash", didSelect: {
+            self.coordinator?.showConfirmationAlert("Delete Movie", okPressed: {
+                pressed(.delete)
+            })
+        })
+    }
+    
+    func storedVideosTableData(parentVC:BaseVC) -> [SelectionTableViewController.TableData] {
         return loadUrls().compactMap({ url in
                 .init(value: url.absoluteString) {
                     parentVC.coordinator?.toVideoPlayer(movieURL: url)
                 }
         })
     }
-    
-    private func loadUrls() -> [URL] {
-        return AppDelegate.shared?.fileManager?.contents ?? []
-    }
-    
     
     private func filterOptionsCollectionData(image:Data?, _ filterSelected:@escaping()->()) -> [EditorOverlayVC.OverlayCollectionData] {
         let defaultImage:UIImage = .init(systemName: "nosign.app.fill")!
@@ -72,16 +121,6 @@ struct EditorVCViewMode {
                         }
                     }
                 }
-        }
-    }
-    
-    func toggleOriginalURL(reloadPressed:@escaping()->()) {
-        Task {
-            let value = DB.db.movieParameters.editingMovie?.isOriginalUrl ?? false
-            DB.db.movieParameters.editingMovie?.isOriginalUrl = !value
-            await MainActor.run {
-                reloadPressed()
-            }
         }
     }
 }

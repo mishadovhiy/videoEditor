@@ -29,6 +29,9 @@ extension DB.DataBase.MovieParametersDB {
             }
             set {
                 print("originalURLsettd ", newValue)
+                if forceOriginalURL != newValue {
+                    lastChangedURL = forceOriginalURL
+                }
                 if filtered {
                     notFilteredURL = newValue
                 } else {
@@ -57,14 +60,29 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
+        mutating func setPreviusVideoURL() {
+            forceOriginalURL = lastChangedURL
+            isOriginalUrl = true
+        }
+        
         var isOriginalUrl:Bool {
             get {
-                let original = dict["isOriginalUrl"] as? Bool ?? false
+                let original = dict["isOriginalUrl"] as? Bool ?? true
                 print("isoriginalurl: ", original)
                 return original
             }
             set {
                 dict.updateValue(newValue, forKey: "isOriginalUrl")
+            }
+        }
+        
+        var lastChangedURL:String {
+            get {
+                return dict["notFilteredURL"] as? String ?? ""
+            }
+            set {
+                print("originalURLsettd ", newValue)
+                dict.updateValue(newValue, forKey: "notFilteredURL")
             }
         }
         
@@ -108,6 +126,14 @@ extension DB.DataBase.MovieParametersDB {
             set {
                 dict.updateValue(newValue.compactMap({$0.dict}), forKey: "images")
             }
+        }
+        
+        var videoEdited:Bool {
+            if images.count != 0 || texts.count != 0 || songs.attachmentURL != "" {
+                return true
+            }
+            print("videoNotEdited")
+            return false
         }
         
         /// max: 1.0

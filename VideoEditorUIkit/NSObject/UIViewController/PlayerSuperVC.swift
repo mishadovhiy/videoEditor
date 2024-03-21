@@ -51,6 +51,8 @@ class PlayerSuperVC: SuperVC {
         playerLayer?.player = nil
         playerLayer?.removeFromSuperlayer()
         removeAllObservers()
+        playTimeChangedAnimation?.stopAnimation(true)
+        playTimeChangedAnimation = nil
         super.removeFromParent()
     }
     
@@ -104,11 +106,20 @@ class PlayerSuperVC: SuperVC {
             self.play(replacing: false)
         }
     }
+    private var playTimeChangedAnimation:UIViewPropertyAnimator? = UIViewPropertyAnimator(duration: 0.8, curve: .easeIn)
     
     private func playerPauseChanged(_ pause:Bool) {
         let button = view.subviews.first(where: {$0.layer.name == "playButton"}) as? UIButton
-        button?.setTitle(pause ? "resume" : "pause", for: .normal)
+        playTimeChangedAnimation?.stopAnimation(true)
+        button?.alpha = 1
+        button?.setImage(.init(named: !pause ? "pause" : "play"), for: .normal)
         isPlaying = !pause
+        if !pause {
+            playTimeChangedAnimation?.addAnimations {
+                button?.alpha = !pause ? 0 : 1
+            }
+            playTimeChangedAnimation?.startAnimation()
+        }
     }
     
     private func playTimeChanged(_ sendond:TimeInterval) {
@@ -195,14 +206,18 @@ fileprivate extension PlayerSuperVC {
             return
         }
         let button = UIButton()
-        button.setTitle("play", for: .normal)
+        button.setImage(.init(named: "play"), for: .normal)
         button.addTarget(self, action: #selector(self.playPressed(_:)), for: .touchUpInside)
         view.addSubview(button)
         button.layer.name = "playButton"
-        button.tintColor = .init(.greyText)
+        let color:UIColor = .init(.greyText)
+        button.tintColor = color.withAlphaComponent(0.16)
         button.titleLabel?.font = .type(.smallMedium)
+        button.layer.shadowColor = UIColor.type(.black).cgColor
+        button.layer.shadowRadius = 2
+        button.layer.shadowOpacity = 0.3
         button.addConstaits([
-            .bottom:10, .left:10, .right:10
+            .centerX:0, .centerY:0, .width:40, .height:40
         ])
     }
     

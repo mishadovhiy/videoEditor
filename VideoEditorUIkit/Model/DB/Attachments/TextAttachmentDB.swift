@@ -229,7 +229,7 @@ extension TextAttachmentDB {
         return .with({
             $0.time.start = 0.1
             $0.assetName = "New text"
-            $0.time.duration = 0.4
+            $0.time.duration = 0.2
             $0.animations.needScale = true
             $0.attachmentType = .text
         })

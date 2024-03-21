@@ -11,7 +11,6 @@ import MediaPlayer
 
 class EditorViewController: SuperVC {
     
-    @IBOutlet weak var startEditingButton: BaseButton!
     @IBOutlet private weak var trackContainerView: UIView!
     @IBOutlet private weak var videoContainerView: UIView!
     @IBOutlet private weak var mainEditorContainerView: UIView!
@@ -65,8 +64,12 @@ class EditorViewController: SuperVC {
             self.playerVC?.setUI(type: type)
             self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
         }
-        self.hideStartEditing(!(type == .addingVideos && movieURL != nil), animation: animation)
         animation.startAnimation()
+        if viewModel?.editorModel.movie != nil {
+            mainEditorVC?.canSetHidden = type != .addingVideos && viewModel?.editorModel.movie != nil
+        } else {
+            mainEditorVC?.canSetHidden = true
+        }
     }
     
     private func loadVideo(movieUrl:URL? = nil) {
@@ -89,13 +92,18 @@ class EditorViewController: SuperVC {
             self.playerVC?.play(replacing: true)
         }
         self.assetParametersVC?.assetChanged()
+        previewImagesUpdated(image: nil)
     }
     
     func previewImagesUpdated(image:Data?) {
-        DispatchQueue(label: "db", qos: .userInitiated).async {
-            let data = DB.db.movieParameters.editingMovie?.preview
-            DispatchQueue.main.async {
-                self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(vc:self, filterPreviewImage: data, filterSelected: self.videoFilterSelected, reloadPressed: self.reloadUI, deleteMovie: self.clearDataPressed) ?? [])
+        if viewModel?.viewType == .addingVideos {
+            self.mainEditorVC?.updateData(viewModel?.addingVideosEditorData(pressed: self.viewModelPrimaryPressed(_:)))
+        } else {
+            DispatchQueue(label: "db", qos: .userInitiated).async {
+                let data = DB.db.movieParameters.editingMovie?.preview
+                DispatchQueue.main.async {
+                    self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(pressed: self.viewModelPrimaryPressed(_:), filterPreviewImage: data) ?? [])
+                }
             }
         }
     }
@@ -111,6 +119,19 @@ class EditorViewController: SuperVC {
     }
     
     // MARK: - IBAction
+    func viewModelPrimaryPressed(_ action:EditorVCViewMode.OverlayPressedModel) {
+        switch action {
+        case .reload:
+            reloadUI()
+        case .delete:
+            clearDataPressed()
+        case .filterSelected:
+            videoFilterSelected()
+        case .toStoredVideos:
+            self.coordinator?.toList(tableData: viewModel?.storedVideosTableData(parentVC: self) ?? [])
+        }
+    }
+    
     func seek(percent:CGFloat) {
         self.playerVC?.seek(seconds: percent * (playerVC?.movie?.duration.seconds ?? 0))
     }
@@ -145,7 +166,6 @@ class EditorViewController: SuperVC {
     }
     
     @IBAction func startEditingPressed(_ sender: Any) {
-        hideStartEditing(true, animation: nil)
         playerVC?.startRefreshing(completion: {
             self.reloadUI()
         })
@@ -289,6 +309,7 @@ fileprivate extension EditorViewController {
         mainEditorVC?.overlaySizeChanged = {
             self.setViewType(self.viewModel?.viewType ?? .editing, overlaySize: $0)
         }
+        previewImagesUpdated(image: nil)
     }
     
     private func loadChildrens() {
@@ -303,39 +324,6 @@ fileprivate extension EditorViewController {
         ].forEach {
             self.addChild(child: $0.key, toView: $0.value)
         }
-    }
-    
-    private func hideStartEditing(_ hidden:Bool, animation:UIViewPropertyAnimator?) {
-        if self.view.superview == nil {
-            return
-        }
-        if startEditingButton.isHidden == hidden {
-            return
-        }
-        if !hidden {
-            self.performMoveEditingButton(true)
-            self.startEditingButton.isHidden = false
-        }
-        if animation != nil {
-            animation?.addAnimations { [weak self] in
-                self?.performMoveEditingButton(hidden)
-            }
-            animation?.addCompletion({ [weak self] _ in
-                self?.startEditingButton.isHidden = hidden
-            })
-        } else {
-            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) { [weak self] in
-                self?.performMoveEditingButton(hidden)
-            }
-            animation.addCompletion({ [weak self] _ in
-                self?.startEditingButton.isHidden = hidden
-            })
-            animation.startAnimation()
-        }
-    }
-    
-    func performMoveEditingButton(_ hidden:Bool) {
-        startEditingButton.layer.move(.top, value: hidden ? -startEditingButton.frame.maxY : 0)
     }
 }
 
