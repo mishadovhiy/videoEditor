@@ -18,10 +18,10 @@ class AssetRawView:UIView {
         self.subviews.filter({$0.layer.name == "panGestureView"})
     }
     private var xConstraint:NSLayoutConstraint? {
-        superview?.constraints.first(where: {$0.firstAttribute == .left})
+        superview?.constraints.first(where: {$0.firstAttribute == .left && $0.identifier == self.layer.name})
     }
     private var widthConstraint:NSLayoutConstraint? {
-        constraints.first(where: {$0.firstAttribute == .width})
+        constraints.first(where: {$0.firstAttribute == .width && $0.identifier == self.layer.name})
     }
     private let clickService = AudioToolboxService()
     private let panNormalAlpha:CGFloat = 0.1
@@ -43,10 +43,10 @@ class AssetRawView:UIView {
         self.editRowPressed = editRowPressed
         updateText(data)
         self.backgroundColor = data?.color
-        self.layer.zPosition = 999
+      //  self.layer.zPosition = 999
         if updateConstraints {
             self.updateConstraint()
-            self.layer.zPosition = 999
+        //    self.layer.zPosition = 999
         }
     }
     
@@ -71,6 +71,7 @@ class AssetRawView:UIView {
     }
     
     override func removeFromSuperview() {
+        self.isUserInteractionEnabled = false
         super.removeFromSuperview()
         data = nil
         editRowPressed = nil
@@ -79,7 +80,6 @@ class AssetRawView:UIView {
     func setSelected(_ selected:Bool, deselectAll:Bool = false) {
         canSelect = selected ? true : deselectAll
         isSelected = selected
-        
         isUserInteractionEnabled = super.isUserInteractionEnabled
         let hideGestures = selected ? true : deselectAll
         alpha = hideGestures ? 1 : 0.2
@@ -92,6 +92,8 @@ class AssetRawView:UIView {
     }
     
     @objc private func editRowPressed(_ sender:UITapGestureRecognizer) {
+        print("edit at fsda: ", self.layer.name)
+        print("adsdas ", data?.assetName)
         if sender.state != .ended {
             return
         }
@@ -106,21 +108,19 @@ class AssetRawView:UIView {
     }
     
     @objc private func panGesture(_ sender: UIPanGestureRecognizer) {
-        if !isSelected {
+        if !isSelected || alpha != 1 {
             return
         }
         let position = sender.translation(in: self)
-        print("testsfd: ", (widthConstraint?.constant ?? 0) + position.x)
+        print("testsfd: ", (widthConstraint?.constant ?? 0) + position.x, " insasd: ", self.layer.name)
+        print("erwrewt ", data?.assetName)
+
         if sender.view?.tag == 1 {
             xConstraint?.constant += position.x
         } else if sender.view?.tag == 0 {
             widthConstraint!.constant += position.x
         }
-        superview?.layoutIfNeeded()
         layoutIfNeeded()
-        subviews.forEach {
-            $0.layoutIfNeeded()
-        }
         sender.setTranslation(.zero, in: self)
         if sender.state.isEnded {
             panEnded?(self)
@@ -140,6 +140,9 @@ class AssetRawView:UIView {
     }
     
     func updateText(_ text:AssetAttachmentProtocol?) {
+        if superview == nil {
+            return
+        }
         self.data = text
         titleLabel?.text = text?.assetName
         updateConstraint()
@@ -159,7 +162,7 @@ extension AssetRawView {
         superView?.addSubview(new)
         new.data = data
         new.alpha = 0.8
-        new.addConstaits([.left:new.newConstraints.0, .top:0, .width:new.newConstraints.1])
+        new.addConstaits([.left:(new.newConstraints.0, new.layer.name!), .top:(0, ""), .width:(new.newConstraints.1, new.layer.name!)])
         new.heightAnchor.constraint(lessThanOrEqualToConstant: 30).isActive = true
         new.bottomAnchor.constraint(lessThanOrEqualTo: new.superview!.bottomAnchor).isActive = true
         new.createHeader(vcSuperView: vcSuperView)
@@ -217,13 +220,9 @@ extension AssetRawView {
     }
       
     private func updateConstraint() {
-        xConstraint!.constant = newConstraints.0
-        widthConstraint!.constant = newConstraints.1
+        xConstraint?.constant = newConstraints.0
+        widthConstraint?.constant = newConstraints.1
         self.layoutIfNeeded()
-    }
-    
-    final private var parentScrollView:UIScrollView? {
-        return parentCollectionView?.superview?.superview as? UIScrollView
     }
     
     final private var parentCollectionWidth:CGFloat? {

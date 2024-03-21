@@ -9,7 +9,6 @@ import UIKit
 
 class EditorOverlayContainerVC: SuperVC {
     
-   // @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet private weak var collectionView:UICollectionView!
     var primatyViews:[UIView] {

@@ -15,7 +15,7 @@ protocol AssetAttachmentViewDelegate {
 class StackAssetAttachmentView:UIView {
     var mediaType:InstuctionAttachmentType?
     private var data:[AssetAttachmentProtocol] = []
-    private var delegate:AssetAttachmentViewDelegate?
+    var delegate:AssetAttachmentViewDelegate?
     var attachmentType:InstuctionAttachmentType? {
         return data.first?.attachmentType ?? mediaType
     }
