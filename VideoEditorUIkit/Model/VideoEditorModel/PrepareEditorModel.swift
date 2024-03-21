@@ -115,15 +115,6 @@ extension PrepareEditorModel {
         let duration = await movie.duration()
         print(duration, " total coposition duration before insert")
         do {
-//            guard let vid = try await movie.loadTracks(withMediaType: .video).first,
-//            let comp = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) else {
-//                return nil
-//            }
-//            let t1 = CGAffineTransform(translationX: 720, y: 0)
-//                let t2 = t1.rotated(by: CGFloat(CGFloat(32) * .pi / 180))
-//                let finalTransform = t2.translatedBy(x: -720, y: 0)
-//            comp.preferredTransform = finalTransform
-//            try comp.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: vid, at: .zero)
             try composition.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: movie, at: .zero)
             return composition
         } catch {
@@ -141,30 +132,7 @@ extension PrepareEditorModel {
         }
         return urlResult != nil
     }
-        
-    private func movieDescription(movie:AVMutableComposition, duration: CMTime) {
-        var vids = 0
-        movie.tracks.forEach {
-            vids += ($0.asset?.tracks.count ?? 0)
-            print("tracks: ", $0.asset?.tracks ?? [])
-            print(vids, " video count")
-            print($0.asset.debugDescription, " asset")
-        }
-        movie.tracks(withMediaType: .video).forEach {
-            print($0.segments.count, " rtehytbrt")
-            $0.segments.forEach {
-                let time = $0.timeMapping.source
-                print("startFrom: ", time.start)
-                print("startDuration: ", time.duration.seconds)
-                
-                print($0.description, " video description")
-            }
-        }
-        print(vids, " total vids")
-        print(movie, " total movie")
-        print(duration, " total duration ")
-    }
-    
+            
     private func filterAddedToComposition(_ url:URL?, videoComposition:AVMutableVideoComposition? = nil) async -> Bool {
         print("filterAddedToComposition")
         guard let url else {
@@ -232,12 +200,23 @@ extension PrepareEditorModel {
         let composition = AVMutableComposition()
         let segments = await loadSegments(asset: urlAsset)
         do {
-            try segments.forEach {
-                if ($0.1.mediaType == .video || $0.1.mediaType == .audio), let _ = composition.addMutableTrack(withMediaType: $0.1.mediaType, preferredTrackID: kCMPersistentTrackID_Invalid) {
-                    let range = CMTimeRangeMake(start: $0.0.timeMapping.target.start, duration: $0.0.timeMapping.target.duration)
-                    
-                    try composition.insertTimeRange(range, of: $0.1.asset!, at: $0.0.timeMapping.target.start)
-                }
+            if
+                let value = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
+                let first = try await urlAsset.loadTracks(withMediaType: .video).first,
+                let time = first.segments.first?.timeMapping.target
+            {
+               // value.preferredVolume = 0.2
+                let range = CMTimeRangeMake(start: time.start, duration: time.duration)
+                try value.insertTimeRange(range, of: first, at: time.start)
+            }
+            if
+                let value = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid),
+                let first = try await urlAsset.loadTracks(withMediaType: .audio).first,
+                let time = first.segments.first?.timeMapping.target
+            {
+              //  value.preferredVolume = 0.2
+                let range = CMTimeRangeMake(start: time.start, duration: time.duration)
+                try value.insertTimeRange(range, of: first, at: time.start)
             }
         } catch {
             print("error creating composition from url ", error)
