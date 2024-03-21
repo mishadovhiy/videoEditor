@@ -78,7 +78,7 @@ fileprivate extension EditorVideoLayer {
     private func videoInstractions(track:AVAssetTrack, overlayLayer: CALayer?, composition:AVMutableComposition) async -> InstractionsResult {
         let videoSize = videoSize(assetTrack: track)
         let videoLayer = CALayer()
-        let size:CGSize = overlayLayer?.frame.size ?? .init(width: 10, height: 10)
+        let size:CGSize = videoSize//overlayLayer?.frame.size ?? .init(width: 10, height: 10)
         videoLayer.frame = .init(origin: .zero, size: size)
         let outputLayer = CALayer()
         outputLayer.frame = CGRect(origin: .zero, size: videoSize)

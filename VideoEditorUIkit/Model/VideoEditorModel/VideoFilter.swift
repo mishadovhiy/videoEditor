@@ -18,7 +18,7 @@ struct VideoFilter {
     fileprivate static var timeHolder:CMTime?
     
     fileprivate static func timeChanged(time:CMTime?, changed:@escaping(Bool)->()) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(30), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
             changed(self.timeHolder == time)
         })
     }
@@ -33,6 +33,7 @@ struct VideoFilter {
         let total = prepareTime(total: composition.duration)
         print(total, " add filter: total composition time")
         var completed = false
+        var compositionDuration = composition.duration
         let videoComposition = AVMutableVideoComposition(asset: composition) { request in
             if completed {
                 print("filtering after complet called")
@@ -44,7 +45,7 @@ struct VideoFilter {
             request.finish(with: output ?? .empty(), context: nil)
             print(request.compositionTime, " applying filter of: ", composition.duration)
             timeHolder = request.compositionTime
-            if request.compositionTime >= total && !completed {
+            if request.compositionTime >= compositionDuration && !completed {
                 completed = true
                 print("filter apllied")
                 timeHolder = nil

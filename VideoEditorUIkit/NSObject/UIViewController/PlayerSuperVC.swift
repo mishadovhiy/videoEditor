@@ -216,6 +216,7 @@ fileprivate extension PlayerSuperVC {
         button.layer.shadowColor = UIColor.type(.black).cgColor
         button.layer.shadowRadius = 2
         button.layer.shadowOpacity = 0.3
+        button.isUserInteractionEnabled = false
         button.addConstaits([
             .centerX:0, .centerY:0, .width:40, .height:40
         ])

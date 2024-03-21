@@ -30,7 +30,7 @@ class PrepareEditorModel {
             print("error movieHolder and no delegate.movie", #file, #line, #function)
             return .error(.init(title:"Error exporting the video", description: "Try reloading the app"))
         }
-        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPreset640x480)//AVAssetExportPresetMediumQuality
+        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetMediumQuality)
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
         return results ?? .error("Unknown Error")
     }
@@ -65,7 +65,7 @@ class PrepareEditorModel {
         guard let url else {
             return .error("File not found")
         }
-        let newMovie = await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)//await createComposition(AVURLAsset(url: url))//AVURLAsset(url: url)
+        let newMovie = await createComposition(AVURLAsset(url: url))
         print(newMovie.composition?.duration, " inserted video duration")
         guard await newMovie.composition?.duration() != .zero,
               let createdMovie = await insertMovie(movie: newMovie.composition, composition: movie) else {
@@ -73,11 +73,6 @@ class PrepareEditorModel {
         }
         delegate.movieHolder = createdMovie
         if needExport {
-            //video rotation
-//            let videoSize = layerEditor.videoSize(assetTrack: movie.tracks.first!)
-//            let overlayLayer = CALayer()
-//            overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
-//            let instructions = await allCombinedInstructions(composition: movie, assetTrack: movie.tracks, videoSize: videoSize, overlayLayer: overlayLayer, assetData: [TextAttachmentDB.with({$0.assetName = ""})])
             let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
             if let url = localUrl.videoExportResponse?.url {
                 if addingVideo {
@@ -308,7 +303,7 @@ extension PrepareEditorModel {
         
         for composition in compositions {
             let animationLayer = CALayer()
-            animationLayer.frame = CGRect(origin: .zero, size: composition.renderSize)
+            animationLayer.frame = CGRect(origin: .zero, size: size)
             animationLayer.isGeometryFlipped = true
             
             let animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: animationLayer, in: animationLayer)
@@ -365,9 +360,6 @@ extension PrepareEditorModel {
     
 
     private func addLayerComposition(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], layer:CALayer, data:MovieAttachmentProtocol?, videoSize: CGSize) async -> (AVMutableVideoComposition?, CALayer, CALayer)? {
-//        guard let data else {
-//            return nil
-//        }
         let ok = await layerEditor.addLayer(to: layer,
                                    videoSize: videoSize,
                                    data: data, videoTotalTime: composition.duration().seconds)
