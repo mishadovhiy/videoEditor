@@ -259,10 +259,10 @@
 			isa = PBXGroup;
 			children = (
 				8D18F14C2B9F45EE00194F34 /* EditorParametersViewController.swift */,
-				8DF4A94B2BA4CFC600D07C67 /* ViewModel */,
-				8D18F1482B9F45EE00194F34 /* Cells */,
 				8D18F14B2B9F45EE00194F34 /* loadUI_EditorParametersViewController.swift */,
 				8D18F14D2B9F45EE00194F34 /* UICollectionViewDelegate_EditorParametersViewController.swift */,
+				8DF4A94B2BA4CFC600D07C67 /* ViewModel */,
+				8D18F1482B9F45EE00194F34 /* Cells */,
 			);
 			path = EditorParametersViewController;
 			sourceTree = "<group>";

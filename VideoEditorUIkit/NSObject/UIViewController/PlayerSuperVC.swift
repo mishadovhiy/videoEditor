@@ -128,7 +128,7 @@ class PlayerSuperVC: SuperVC {
             let playing = self.playerLayer?.player?.rate != 0
             print("completed ", playing)
             self.pause()
-            self.seek(seconds: .zero)
+           // self.seek(seconds: .zero)
         }
         
         let percent = sendond / (movie?.duration.seconds ?? 0)

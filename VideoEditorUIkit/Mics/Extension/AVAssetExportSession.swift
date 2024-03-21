@@ -25,11 +25,6 @@ extension AVAssetExportSession {
         {
             print(videoComposition.renderSize, " reder size")
             self.videoComposition = videoComposition
-            //        let metadataItem:AVMutableMetadataItem = .init()
-            //        metadataItem.key = AVMetadataKey.commonKeyTitle as any NSCopying & NSObjectProtocol
-            //        metadataItem.keySpace = .common
-            //        metadataItem.value = "My Custom Metadata Value" as NSString
-            //        self.metadata = [metadataItem]
         } else if let videoComposition {
             print(videoComposition.renderSize, " error adding videoComposition")
         }

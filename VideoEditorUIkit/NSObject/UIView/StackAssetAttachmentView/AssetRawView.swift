@@ -12,17 +12,24 @@ class AssetRawView:UIView {
         self.subviews.first(where: {$0.layer.name == "Header" })
     }
     private var titleLabel:UILabel? {
-        headerView?.subviews.first(where: {$0 is UILabel}) as? UILabel
+        headerView?.subviews.first(where: {
+            $0 is UILabel && $0.layer.name == "titleLabel"
+        }) as? UILabel
+    }
+    private var timaLabel:UILabel? {
+        headerView?.subviews.first(where: {
+            $0.layer.name == "timaLabel"
+        }) as? UILabel
     }
     private var pansGetsureView:[UIView] {
         self.subviews.filter({$0.layer.name == "panGestureView"})
     }
-    private var xConstraint:NSLayoutConstraint? {
-        superview?.constraints.first(where: {$0.firstAttribute == .left && $0.identifier == self.layer.name})
+    var xConstraint:NSLayoutConstraint? {
+        superview?.constraints.first(where: {$0.firstAttribute == .left && ($0.firstItem as? UIView) == self})
     }
     private var widthConstraint:NSLayoutConstraint? {
-        constraints.first(where: {$0.firstAttribute == .width && $0.identifier == self.layer.name})
-    }
+        constraints.first(where: {$0.firstAttribute == .width && ($0.firstItem as? UIView) == self})
+    }//$0.identifier == self.layer.name
     private let clickService = AudioToolboxService()
     private let panNormalAlpha:CGFloat = 0.1
     var canSelect = true
@@ -81,6 +88,7 @@ class AssetRawView:UIView {
         canSelect = selected ? true : deselectAll
         isSelected = selected
         isUserInteractionEnabled = super.isUserInteractionEnabled
+        self.timaLabel?.alpha = selected ? 1 : 0
         let hideGestures = selected ? true : deselectAll
         alpha = hideGestures ? 1 : 0.2
         layer.borderColor = selected ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
@@ -145,7 +153,12 @@ class AssetRawView:UIView {
         }
         self.data = text
         titleLabel?.text = text?.assetName
+        updatePlayPercent(text?.time.start ?? 0)
         updateConstraint()
+    }
+    
+    func updatePlayPercent(_ percent:CGFloat) {
+        self.timaLabel?.text = "\(percent)"
     }
 }
 
@@ -158,7 +171,7 @@ extension AssetRawView {
                        created:((_ newView:AssetRawView)->())? = nil
     ) {
         let new = AssetRawView()
-        new.layer.name = data?.id.uuidString
+        new.layer.name = data?.id.uuidString ?? UUID().uuidString
         superView?.addSubview(new)
         new.data = data
         new.alpha = 0.8
@@ -184,11 +197,23 @@ extension AssetRawView {
             headerView.leadingAnchor.constraint(greaterThanOrEqualTo: vcSuperView.safeAreaLayoutGuide.leadingAnchor).isActive = true
         }
         let label:UILabel = .init()
+        label.layer.name = "titleLabel"
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .init(.white)
         label.font = .type(.smallMedium)
         headerView.addSubview(label)
         label.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
+        let timeLabel = UILabel.init()
+        timeLabel.layer.name = "timaLabel"
+        timeLabel.backgroundColor = .type(.white).withAlphaComponent(0.5)
+        timeLabel.textColor = .init(.black)
+        timeLabel.font = .type(.smallMedium)
+        timeLabel.layer.cornerRadius = 2
+        timeLabel.layer.masksToBounds = true
+        headerView.addSubview(timeLabel)
+        timeLabel.addConstaits([.left:0, .height:10, .bottom:-10])
+        timeLabel.alpha = 0
+        timeLabel.isUserInteractionEnabled = false
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editRowPressed(_:))))
     }
     

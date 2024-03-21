@@ -18,7 +18,7 @@ protocol PlayerViewControllerPresenter {
 class PlayerViewController: PlayerSuperVC {
     
     fileprivate var preseter:PlayerViewControllerPresenter?
-    private var parentVC: EditorViewController? {
+    var parentVC: EditorViewController? {
         return self.parent as? EditorViewController
     }
     var editingAttachmentView:PlayerEditingAttachmentView? {

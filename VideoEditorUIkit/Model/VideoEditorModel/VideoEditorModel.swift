@@ -59,6 +59,7 @@ class VideoEditorModel {
                 await presenter?.errorAddingVideo(.init(title: "Attachments cannot be added when after using filter", description: "set filter to text to modify attachments"))
                 return
             }
+            print("addingattachment: ", data)
             var added = false
             if let text = data as? TextAttachmentDB {
                 DB.db.movieParameters.editingMovie?.texts.append(text)

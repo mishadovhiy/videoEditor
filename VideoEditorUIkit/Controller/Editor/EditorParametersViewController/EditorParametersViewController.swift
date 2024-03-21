@@ -256,8 +256,9 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
 extension EditorParametersViewController:AssetAttachmentViewDelegate {
     func attachmentPanChanged(view: AssetRawView?) {
         let converted = view?.superview?.convert(view?.frame ?? .zero, from: view ?? .init()) ?? .zero
-        let total = (view?.superview?.frame ?? .zero).width + scrollView.contentInset.left
-        let startPercent = converted.minX / total
+        let x = view?.xConstraint?.constant ?? 0
+        let total = (view?.superview?.frame ?? .zero).width
+        let startPercent = x / total
         let durationPercent = (view?.frame.width ?? 0) / total
         print(startPercent, "startPercent ")
         print(durationPercent, " durationPercent")
@@ -265,6 +266,9 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
             $0.start = startPercent
             $0.duration = durationPercent
         })
+        if let view = viewModel?.editingView as? AssetRawView {
+            view.updatePlayPercent(startPercent)
+        }
 
     }
     
