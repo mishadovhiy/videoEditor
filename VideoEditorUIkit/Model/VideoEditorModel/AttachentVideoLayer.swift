@@ -49,8 +49,8 @@ struct AttachentVideoLayerModel {
             attributes: attributes)
         
         let textLayer = CATextLayer()
-     //   textLayer.shouldRasterize = true
-     //   textLayer.rasterizationScale = UIScreen.main.scale
+        textLayer.shouldRasterize = true
+        textLayer.rasterizationScale = UIScreen.main.scale
         textLayer.string = attributedText
         textLayer.alignmentMode = text.textAlighment.textLayerAligmentMode
         textLayer.isWrapped = true

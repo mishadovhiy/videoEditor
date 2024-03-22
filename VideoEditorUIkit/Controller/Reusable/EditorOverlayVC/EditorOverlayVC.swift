@@ -27,7 +27,6 @@ class EditorOverlayVC: SuperVC {
     var data:ToOverlayData?
     var canSetHidden:Bool = true {
         didSet {
-         //   toggleButtons(hidden: nil)
             actionButtons.first(where: {$0.tag == 1})?.alpha = canSetHidden ? 1 : 0
             if !canSetHidden && isHidden {
                 isHidden = false
@@ -139,7 +138,6 @@ class EditorOverlayVC: SuperVC {
                 }
             }
             animation.addCompletion {_ in 
-                self.childVC?.view.layoutSubviews()
                 self.childVC?.view.layoutIfNeeded()
                 if !hide {
                     self.childVC?.updateUI()

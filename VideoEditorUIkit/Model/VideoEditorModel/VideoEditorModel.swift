@@ -32,6 +32,7 @@ class VideoEditorModel {
     static let fmp30 = CMTime(value: 1, timescale: 30)
     static var renderSize:CGSize = .init(width: 720, height: 720)
     static let exportPresetName: String = AVAssetExportPresetHEVC1920x1080
+    //AVAssetExportPresetHEVC1920x1080
     //AVAssetExportPresetHighestQuality
     //AVAssetExportPresetMediumQuality
     //AVAssetExportPreset640x480
@@ -39,7 +40,7 @@ class VideoEditorModel {
     
     func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {
-            let _ = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
+            let loadedMovie = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
             let db = DB.db.movieParameters
             self.dbParametersHolder = db.editingMovie
             if let url, videoAddedAction {

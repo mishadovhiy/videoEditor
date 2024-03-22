@@ -42,7 +42,7 @@ class EditorParametersViewController: SuperVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewAppeared()
+        viewAppeared()        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

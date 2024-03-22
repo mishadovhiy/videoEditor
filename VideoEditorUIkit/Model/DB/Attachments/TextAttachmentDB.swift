@@ -185,8 +185,9 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     var position:CGPoint {
         get {
             let dict = dict["position"] as? [String:Any] ?? [:]
+            let x:CGFloat = .init(string: dict["x"] as? String)
             let y:CGFloat = .init(string: dict["y"] as? String)
-            return .init(x: .init(string: dict["x"] as? String), y: y == 0 ? 200 : y)
+            return .init(x: x == 0 ? -130 : x, y: y == 0 ? 200 : y)
         }
         set {
             dict.updateValue([
