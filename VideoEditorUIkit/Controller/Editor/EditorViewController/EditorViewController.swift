@@ -89,12 +89,14 @@ class EditorViewController: SuperVC {
     
     // MARK: - receive
     private func newVideoAdded() {
-        self.playerVC?.seek(seconds: .zero)
-        self.playerVC?.endRefreshing {
+        playerVC?.endRefreshing {
             self.playerVC?.play(replacing: true)
         }
-        self.assetParametersVC?.assetChanged()
+        assetParametersVC?.assetChanged()
         previewImagesUpdated(image: nil)
+        if viewModel?.viewType ?? .addingVideos == .addingVideos {
+            setViewType(viewModel?.viewType ?? .addingVideos)
+        }
     }
     
     func previewImagesUpdated(image:Data?) {
@@ -276,15 +278,11 @@ extension EditorViewController:VideoEditorModelPresenter {
             }
         }
         set {
+            print("moviesetts: ", newValue)
             Task {
                 AppDelegate.shared?.fileManager?.clearDirectory(newValue)
-                await MainActor.run {
-                    playerVC?.movieURL = newValue
-                    if viewModel?.viewType ?? .addingVideos == .addingVideos {
-                        setViewType(viewModel?.viewType ?? .addingVideos)
-                    }
-                }
             }
+            playerVC?.movieURL = newValue
         }
     }
     

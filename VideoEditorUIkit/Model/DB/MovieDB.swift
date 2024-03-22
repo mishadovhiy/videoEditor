@@ -65,6 +65,20 @@ extension DB.DataBase.MovieParametersDB {
             isOriginalUrl = true
         }
         
+        var exportEditingURL:String? {
+            get {
+                return dict["exportEditingURL"] as? String
+            }
+            set {
+                print("exportEditingURL ", newValue)
+                if let newValue {
+                    dict.updateValue(newValue, forKey: "exportEditingURL")
+                } else {
+                    dict.removeValue(forKey: "exportEditingURL")
+                }
+            }
+        }
+        
         var isOriginalUrl:Bool {
             get {
                 let original = dict["isOriginalUrl"] as? Bool ?? true

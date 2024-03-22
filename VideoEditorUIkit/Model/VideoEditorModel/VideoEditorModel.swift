@@ -31,7 +31,7 @@ class VideoEditorModel {
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     static let renderSize:CGSize = .init(width: 720, height: 720)
-    static let exportPresetName = AVAssetExportPresetMediumQuality
+    static let exportPresetName = AVAssetExportPresetHighestQuality
     //AVAssetExportPresetHighestQuality
     //AVAssetExportPresetMediumQuality
     //AVAssetExportPreset640x480
@@ -51,10 +51,11 @@ class VideoEditorModel {
     
     func addVideo(force:Bool = false, url:URL?) {
         Task {
-            if await prepare.createSaveVideo(url, addingVideo: true) {
+            let error = await prepare.createSaveVideo(url, addingVideo: true)
+            if error == nil {
                 await videoAdded()
             } else {
-                await presenter?.errorAddingVideo(.init(title: "Error adding video"))
+                await presenter?.errorAddingVideo(.init(title: "Video is not added", description: error?.messageContent?.title))
             }
         }
     }

@@ -54,9 +54,10 @@ extension DB.DataBase {
         
         var ignoreClearUrls:[String] {
             var ignore = [
-                editingMovie?.notFilteredURL ?? ""
+                editingMovie?.notFilteredURL ?? "",
+                editingMovie?.exportEditingURL ?? ""
             ]
-            if editingMovie?.lastChangedURL ?? "" != editingMovie?.forceOriginalURL ?? "" {
+            if editingMovie?.lastChangedURL ?? "" != (editingMovie?.forceOriginalURL ?? "") && (editingMovie?.isOriginalUrl ?? false) {
                 ignore.append(editingMovie?.lastChangedURL ?? "")
             }
             return ignore
@@ -76,18 +77,21 @@ extension DB.DataBase {
                 print(original, " editingMovieURL")
                 return original
             } else {
-                var ignore = ignoreClearUrls
-                if editingMovie?.lastChangedURL ?? "" != editingMovie?.forceOriginalURL ?? "" {
-                    ignore.append(editingMovie?.lastChangedURL ?? "")
+                if let url = editingMovie?.exportEditingURL {
+                    print(url, " editingMovieURL")
+                    return contents.last(where: {$0.absoluteString.contains(url)})?.absoluteString
+                } else {
+                    var ignore = ignoreClearUrls
+                    if editingMovie?.lastChangedURL ?? "" != editingMovie?.forceOriginalURL ?? "" {
+                        ignore.append(editingMovie?.lastChangedURL ?? "")
+                    }
+                    return contents.last(where: { url in
+                        return !ignore.contains(where: {
+                            url.absoluteString.contains($0)
+                        })
+                    })?.absoluteString ?? contents.last?.absoluteString
                 }
-                let result = contents.last(where: { url in
-                    return !ignore.contains(where: {
-                        url.absoluteString.contains($0)
-                    })
-                    //!$0.absoluteString.contains(editingMovie?.notFilteredURL ?? "") && !$0.absoluteString.contains(editingMovie?.forceOriginalURL ?? "")
-                })?.absoluteString
-                print(result, " editingMovieURL")
-                return result ?? contents.last?.absoluteString
+               
             }
         }
         

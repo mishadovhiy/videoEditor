@@ -39,9 +39,11 @@ struct FileManagerServgice {
         
         do {
             let contents = try fileManager.contentsOfDirectory(at: tempDirectoryURL, includingPropertiesForKeys: nil, options: [])
-            var ignore = db.ignoreClearUrls
-            ignore.append(db.editingMovie?.forceOriginalURL ?? "")
-            ignore.append(db.editingMovieURL ?? "")
+            var ignore = exept == nil ? [] : db.ignoreClearUrls
+            if exept != nil {
+                ignore.append(db.editingMovie?.forceOriginalURL ?? "")
+                ignore.append(db.editingMovieURL ?? "")
+            }
             try contents.forEach({ url in
                 let cantRemove = ignore.contains {
                     url.absoluteString.contains($0)

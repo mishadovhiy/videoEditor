@@ -32,6 +32,9 @@ class PrepareEditorModel {
         }
         let export = AVAssetExportSession(asset: composition, presetName: VideoEditorModel.exportPresetName)
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
+        if let url = results?.videoExportResponse?.url?.lastPathComponent {
+            DB.db.movieParameters.editingMovie?.exportEditingURL = url
+        }
         return results ?? .error("Unknown Error")
     }
     
@@ -67,12 +70,11 @@ class PrepareEditorModel {
             return .error("File not found")
         }
         let newMovie = await createComposition(AVURLAsset(url: url))
-        print(newMovie.composition?.duration, " inserted video duration")
-        guard await newMovie.composition?.duration() != .zero,
-              let createdMovie = await insertMovie(movie: newMovie.composition, composition: movie) else {
-            return .error("Error inserting video")
+        let createdMovieResponse = await insertMovie(movie: newMovie.composition, composition: movie)
+        if let error = createdMovieResponse.error {
+            return .init(error: error)
         }
-        delegate.movieHolder = createdMovie
+        delegate.movieHolder = createdMovieResponse.resultMovie
         if needExport {
             let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
             if let url = localUrl.videoExportResponse?.url {
@@ -108,30 +110,41 @@ class PrepareEditorModel {
 
 
 extension PrepareEditorModel {
-    private func insertMovie(movie:AVMutableComposition?, composition:AVMutableComposition) async -> AVMutableComposition? {
+    typealias insertMovieResponse = (resultMovie:AVMutableComposition?, error:NSError?)
+    
+    private func insertMovie(movie:AVMutableComposition?, composition:AVMutableComposition) async -> insertMovieResponse {
         guard let movie
         else {
-            return nil
+            return (nil, .init(text: "Video not found"))
         }
         let duration = await movie.duration()
-        print(duration, " total coposition duration before insert")
+        if duration == .zero {
+            return (nil, .init(text: "Video is empty"))
+        }
+        print(duration, " total coposition duration before inserting")
+        let currentMovieSize = composition.naturalSize
+        if composition.naturalSize != .zero && composition.naturalSize != movie.naturalSize {
+            let text1 = "width: \(Int(movie.naturalSize.width)), height: \(Int(movie.naturalSize.height))"
+            let text2 = "width: \(Int(currentMovieSize.width)), height: \(Int(currentMovieSize.height))"
+            return (nil, .init(text: "Video size of inserted video (\(text1)) is not matching with the size of your video\nPlease select video with the size \(text2)"))
+        }
         do {
             try composition.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: movie, at: .zero)
-            return composition
+            return (composition, nil)
         } catch {
             print(error.localizedDescription)
-            return nil
+            return (nil, .init(text: error.localizedDescription))
         }
     }
    
-    func createSaveVideo(_ url:URL?, addingVideo:Bool = false) async -> Bool {
+    func createSaveVideo(_ url:URL?, addingVideo:Bool = false) async -> NSError? {
         let url = url ?? testURL
-        let urlResult = await self.createVideo(url, addingVideo: true).videoExportResponse?.url
-        if addingVideo, let stringUrl = urlResult?.lastPathComponent {
+        let urlResult = await self.createVideo(url, addingVideo: true)
+        if addingVideo, let stringUrl = urlResult.videoExportResponse?.url?.lastPathComponent {
             
             DB.db.movieParameters.editingMovie?.preview = delegate.movie?.tracks.first?.asset?.preview(time: .zero)?.jpegData(compressionQuality: 0.01)
         }
-        return urlResult != nil
+        return urlResult.videoExportResponse?.url != nil ? nil : (urlResult.error ?? NSError(text: "Error saving the video"))
     }
             
     private func filterAddedToComposition(_ url:URL?, videoComposition:AVMutableVideoComposition? = nil) async -> Bool {

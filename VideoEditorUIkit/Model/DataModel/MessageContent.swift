@@ -26,9 +26,10 @@ struct MessageContent {
     
     var userInfo:[String : Any]? = nil
     
-    init(title: String?, description: String = "", image: Constants.Images? = nil, userInfo: [String : Any]? = nil) {
+    init(title: String?, description: String? = nil, image: Constants.Images? = nil, userInfo: [String : Any]? = nil) {
+        let resDescription = description ?? ""
         self.title = title != "" ? title : (userInfo?["title"] as? String ?? "")
-        self.description = description != "" ? description : (userInfo?["description"] as? String ?? "")
+        self.description = description != "" ? resDescription : (userInfo?["description"] as? String ?? "")
         self.image = image != nil ? image : .init(rawValue: userInfo?["image"] as? String ?? "")
         self.userInfo = userInfo
     }

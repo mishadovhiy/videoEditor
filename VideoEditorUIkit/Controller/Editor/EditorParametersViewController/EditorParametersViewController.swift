@@ -206,7 +206,6 @@ extension EditorParametersViewController {
         }
         if viewModel?.manualScroll ?? false {
             viewModel?.manualScroll = false
-         //   updateParentScroll(manual: true)
         } else {
             updateParentScroll()
         }
