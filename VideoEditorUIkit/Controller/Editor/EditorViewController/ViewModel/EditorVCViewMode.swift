@@ -76,9 +76,6 @@ extension EditorVCViewMode {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
             deleteCell(pressed: pressed),
-            .init(title: "Reload data", didSelect: {
-                pressed(.reload)
-            }),
             .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
                 let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
                 self.coordinator?.showConfirmationAlert("Change url to: " + title, okPressed: {

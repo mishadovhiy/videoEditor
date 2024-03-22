@@ -30,8 +30,8 @@ class VideoEditorModel {
     
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
-    static let renderSize:CGSize = .init(width: 720, height: 720)
-    static let exportPresetName = AVAssetExportPresetHighestQuality
+    static var renderSize:CGSize = .init(width: 720, height: 720)
+    static let exportPresetName: String = AVAssetExportPresetHEVC1920x1080
     //AVAssetExportPresetHighestQuality
     //AVAssetExportPresetMediumQuality
     //AVAssetExportPreset640x480
@@ -169,6 +169,7 @@ fileprivate extension VideoEditorModel {
         } else {
             await presenter?.videoAdded()
         }
+        movieHolder = nil
     }
     
     private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false) async {
@@ -206,6 +207,7 @@ fileprivate extension VideoEditorModel {
                 })
             }
         }
+        
     }
 }
 

@@ -88,17 +88,6 @@ class EditorViewController: SuperVC {
     }
     
     // MARK: - receive
-    private func newVideoAdded() {
-        playerVC?.endRefreshing {
-            self.playerVC?.play(replacing: true)
-        }
-        assetParametersVC?.assetChanged()
-        previewImagesUpdated(image: nil)
-        if viewModel?.viewType ?? .addingVideos == .addingVideos {
-            setViewType(viewModel?.viewType ?? .addingVideos)
-        }
-    }
-    
     func previewImagesUpdated(image:Data?) {
         if viewModel?.viewType == .addingVideos {
             self.mainEditorVC?.updateData(viewModel?.addingVideosEditorData(pressed: self.viewModelPrimaryPressed(_:)))
@@ -287,7 +276,12 @@ extension EditorViewController:VideoEditorModelPresenter {
     }
     
     @MainActor func videoAdded() {
-        newVideoAdded()
+        playerVC?.endRefreshing {
+            self.playerVC?.play(replacing: true)
+        }
+        assetParametersVC?.assetChanged()
+        previewImagesUpdated(image: nil)
+        setViewType(viewModel?.viewType ?? .addingVideos)
     }
     
     @MainActor func errorAddingVideo(_ text:MessageContent?) {

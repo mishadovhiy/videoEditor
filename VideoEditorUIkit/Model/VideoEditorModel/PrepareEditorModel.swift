@@ -52,7 +52,6 @@ class PrepareEditorModel {
         let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
-        //here
         let videoComposition = await allCombinedInstructions(composition: composition, assetTrack: assetTrack, videoSize: videoSize, overlayLayer: overlayLayer)
         delegate.movieHolder = composition
         let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
@@ -142,7 +141,7 @@ extension PrepareEditorModel {
         let urlResult = await self.createVideo(url, addingVideo: true)
         if addingVideo, let stringUrl = urlResult.videoExportResponse?.url?.lastPathComponent {
             
-            DB.db.movieParameters.editingMovie?.preview = delegate.movie?.tracks.first?.asset?.preview(time: .zero)?.jpegData(compressionQuality: 0.01)
+            DB.db.movieParameters.editingMovie?.preview = delegate.movie?.tracks.first?.asset?.preview(time: .zero)?.jpegData(compressionQuality: 0)
         }
         return urlResult.videoExportResponse?.url != nil ? nil : (urlResult.error ?? NSError(text: "Error saving the video"))
     }

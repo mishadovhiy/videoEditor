@@ -116,7 +116,8 @@ extension MovieGeneralParameterList {
                 }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({
                     let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
                     let previewTime:CMTime = .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: VideoEditorModel.timeScale)
-                    return .init(composition?.preview(time: previewTime)?.jpegData(compressionQuality: 0.1))
+                    let image = composition?.preview(time: previewTime)
+                    return .init(image?.jpegData(compressionQuality: 0))
                 }))
             } else {
                 return .init(time: .with({
