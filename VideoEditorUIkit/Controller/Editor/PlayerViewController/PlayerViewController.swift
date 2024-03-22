@@ -42,7 +42,6 @@ class PlayerViewController: PlayerSuperVC {
     override func removeFromParent() {
         super.removeFromParent()
         pause()
-        playerLayer?.removeFromSuperlayer()
         preseter = nil
     }
     
@@ -70,8 +69,8 @@ class PlayerViewController: PlayerSuperVC {
         editingAttachmentView?.removeWithAnimation()
     }
     
-    override func timeChanged(_ percent: CGFloat) {
-        super.timeChanged(percent)
+    override func playerTimeChanged(_ percent: CGFloat) {
+        super.playerTimeChanged(percent)
         if isPlaying {
             preseter?.playTimeChanged(percent)
         } else if percent == 0 {

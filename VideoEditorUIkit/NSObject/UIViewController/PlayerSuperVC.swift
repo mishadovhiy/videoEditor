@@ -12,11 +12,33 @@ class PlayerSuperVC: SuperVC {
     fileprivate var timeChangeObserver:Any?
     var isPlaying:Bool = false
     var movieURL:URL?
-    
-    private var playProgressView:UIView? {
-        return view.subviews.first(where: {$0.layer.name == "playProgressView"})
+    var movie:AVAsset? {
+        return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
     }
     
+    private var timeObserverIgonre = false
+    private var playTimeChangedAnimation:UIViewPropertyAnimator? = UIViewPropertyAnimator(duration: 0.8, curve: .easeIn)
+    
+    private var playProgressView:UIProgressView? {
+        return view.subviews.first(where: {$0.layer.name == "playProgressView"}) as? UIProgressView
+    }
+    
+    fileprivate var playerItem:AVPlayerItem? {
+        guard let movieURL else {
+            return nil
+        }
+        return .init(url: movieURL)
+    }
+    
+    private var durationLabel:UILabel? {
+        return view.subviews.first(where: {$0.layer.name == "durationLabel"}) as? UILabel
+    }
+    
+    private var playerLayer:AVPlayerLayer? {
+        return self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer
+    }
+    
+    // MARK: Life cycle
     override func loadView() {
         super.loadView()
         self.loadUI()
@@ -30,7 +52,7 @@ class PlayerSuperVC: SuperVC {
     
     override func applicationDidAppeare() {
         super.applicationDidAppeare()
-        addObservers()
+        addPlayerTimeObserver()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,9 +64,8 @@ class PlayerSuperVC: SuperVC {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateFrames()
+        playerLayer?.frame = view.layer.bounds
     }
-
     
     override func removeFromParent() {
         playerLayer?.player?.pause()
@@ -56,30 +77,37 @@ class PlayerSuperVC: SuperVC {
         super.removeFromParent()
     }
     
-    func timeChanged(_ percent:CGFloat) { }
+    // MARK: public
+    func playerTimeChanged(_ percent:CGFloat) { }
     
     func pause() {
+        isPlaying = false
         playerLayer?.player?.pause()
     }
     
-    func seek(seconds:TimeInterval) {
+    func seek(seconds:TimeInterval, manual:Bool = false) {
+        print("seeking: ", seconds)
         if playerLayer?.player?.currentItem == nil {
             return
         }
-        self.pause()
-        let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: VideoEditorModel.timeScale)
-        playerLayer?.player?.seek(to: desiredCMTime)
-    }
-    
-    fileprivate var playerIterm:AVPlayerItem? {
-        guard let movieURL else {
-            return nil
+        timeObserverIgonre = manual
+        if !manual {
+            self.pause()
         }
-        return .init(url: movieURL)
+        let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: VideoEditorModel.timeScale)
+
+        playerLayer?.player?.seek(to: desiredCMTime, completionHandler: {
+            if !$0 {
+                return
+            }
+            self.removePlayTimeObserver()
+            self.performTimeChanged(seconds)
+            self.addPlayerTimeObserver()
+        })
     }
     
     func play(replacing:Bool = true) {
-        guard let item = playerIterm else { return}
+        guard let item = playerItem else { return}
         if let playerLayer = self.playerLayer,
            let player = playerLayer.player
         {
@@ -101,6 +129,7 @@ class PlayerSuperVC: SuperVC {
     
     func preparePlayer() { }
     
+    //MARK: IBActions
     @objc fileprivate func playPressed(_ sender:UIButton) {
         if playerLayer == nil {
             return
@@ -111,9 +140,54 @@ class PlayerSuperVC: SuperVC {
             self.play(replacing: false)
         }
     }
-    private var playTimeChangedAnimation:UIViewPropertyAnimator? = UIViewPropertyAnimator(duration: 0.8, curve: .easeIn)
     
-    private func playerPauseChanged(_ pause:Bool) {
+    private func playingTimeObserverChanged(_ sendond:TimeInterval) {
+        print("Current Time: \(sendond)")
+        if sendond == movie?.duration.seconds {
+            let playing = self.playerLayer?.player?.rate != 0
+            print("completed ", playing)
+            self.pause()
+        }
+        let percent = sendond / (movie?.duration.seconds ?? 0)
+        performTimeChanged(sendond)
+        if !timeObserverIgonre {
+            playerTimeChanged(percent)
+        } else {
+            timeObserverIgonre = false
+        }
+    }
+}
+
+// MARK: observers
+fileprivate extension PlayerSuperVC {
+    private func addPlayerTimeObserver() {
+        let timeInterval = CMTime(seconds: 0.01, preferredTimescale: VideoEditorModel.timeScale)
+        self.timeChangeObserver = self.playerLayer?.player?.addPeriodicTimeObserver(forInterval: timeInterval, queue: DispatchQueue.main) { [weak self] time in
+            self?.playingTimeObserverChanged(CMTimeGetSeconds(time))
+        }
+    }
+    
+    private func removeAllObservers(delete:Bool = true) {
+        removePlayTimeObserver()
+    }
+    
+    private func removePlayTimeObserver() {
+        if let timeChangeObserver {
+            playerLayer?.player?.removeTimeObserver(timeChangeObserver)
+            self.timeChangeObserver = nil
+        }
+    }
+}
+
+//MARK: - setupUI
+fileprivate extension PlayerSuperVC {
+    private func performTimeChanged(_ sendond:TimeInterval) {
+        let percent = sendond / (movie?.duration.seconds ?? 0)
+        playProgressView?.progress = Float(percent)
+        durationLabel?.text = "\(Int(sendond))/\(Int(movie?.duration.seconds ?? 0))"
+    }
+    
+    private func pauseStateChanged(_ pause:Bool) {
         let button = view.subviews.first(where: {$0.layer.name == "playButton"}) as? UIButton
         playTimeChangedAnimation?.stopAnimation(true)
         button?.alpha = 1
@@ -126,71 +200,16 @@ class PlayerSuperVC: SuperVC {
             playTimeChangedAnimation?.startAnimation()
         }
     }
-    
-    private func playTimeChanged(_ sendond:TimeInterval) {
-        print("Current Time: \(sendond)")
-        if sendond == movie?.duration.seconds {
-            let playing = self.playerLayer?.player?.rate != 0
-            print("completed ", playing)
-            self.pause()
-           // self.seek(seconds: .zero)
-        }
-        
-        let percent = sendond / (movie?.duration.seconds ?? 0)
-        if let line = self.playProgressView?.layer.sublayers?.first(where: {$0.name == "PlayerViewControllerline"}) as? CAShapeLayer {
-            line.strokeEnd = percent
-        }
-        durationLabel?.text = "\(Int(sendond))/\(Int(movie?.duration.seconds ?? 0))"
-        timeChanged(percent)
-    }
-    
-    var playerLayer:AVPlayerLayer? {
-        return self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer
-    }
-
-    var movie:AVAsset? {
-        return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
-    }
-    
-    func addObservers() {
-        let timeInterval = CMTime(seconds: 0.01, preferredTimescale: VideoEditorModel.timeScale)
-        self.timeChangeObserver = self.playerLayer?.player?.addPeriodicTimeObserver(forInterval: timeInterval, queue: DispatchQueue.main) { [weak self] time in
-            self?.playTimeChanged(CMTimeGetSeconds(time))
-        }
-    }
-    
-    func removeAllObservers(delete:Bool = true) {
-        if let timeChangeObserver {
-            playerLayer?.player?.removeTimeObserver(timeChangeObserver)
-            self.timeChangeObserver = nil
-        }
-    }
-    
-    var durationLabel:UILabel? {
-        return view.subviews.first(where: {$0.layer.name == "durationLabel"}) as? UILabel
-    }
 }
 
-
-//MARK: loadUI
+//MARK: - loadUI
 fileprivate extension PlayerSuperVC {
     func loadUI() {
         addPlayerView()
         addPlayButton()
         addLabel()
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(playTap(_:)))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(playPressed(_:)))
         view.addGestureRecognizer(gesture)
-    }
-    
-    @objc private func playTap(_ sender:UITapGestureRecognizer) {
-        if sender.state != .ended {
-            return
-        }
-        if isPlaying {
-            pause()
-        } else {
-            play(replacing: false)
-        }
     }
     
     private func addLabel() {
@@ -233,31 +252,24 @@ fileprivate extension PlayerSuperVC {
         {
             return
         }
-        guard let playerIterm else {
+        guard let playerItem else {
             return
         }
-        let player = Player(playerItem:playerIterm)
+        let player = Player(playerItem:playerItem)
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = view.layer.bounds
         playerLayer.videoGravity = .resizeAspect
         playerLayer.name = "PrimaryPlayer"
-        player.pauseChanged = playerPauseChanged(_:)
+        player.pauseChanged = pauseStateChanged(_:)
         view.layer.addSublayer(playerLayer)
 
-        addObservers()
+        addPlayerTimeObserver()
         
-        let progressView:UIView = .init()
+        let progressView:UIProgressView = .init()
         progressView.isUserInteractionEnabled = false
         progressView.layer.name = "playProgressView"
         view.addSubview(progressView)
         progressView.addConstaits([.left:0, .right:0, .bottom:0, .height:3], safeArea: true)
     }
-    
-    private func updateFrames() {
-        playerLayer?.frame = view.layer.bounds
-        playProgressView?.layer.drawLine([
-            .init(x: 0, y: 0),
-            .init(x: view.frame.width, y: 0)
-        ], color: .type(.yellow), width: 3, opacity: 1, name: "PlayerViewControllerline")
-    }
 }
+

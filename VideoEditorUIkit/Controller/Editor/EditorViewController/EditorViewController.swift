@@ -90,7 +90,6 @@ class EditorViewController: SuperVC {
     // MARK: - receive
     private func newVideoAdded() {
         self.playerVC?.seek(seconds: .zero)
-        playerVC?.durationLabel?.text = "\(playerVC?.movie?.duration.seconds ?? 0)"
         self.playerVC?.endRefreshing {
             self.playerVC?.play(replacing: true)
         }
@@ -135,8 +134,8 @@ class EditorViewController: SuperVC {
         }
     }
     
-    func seek(percent:CGFloat) {
-        self.playerVC?.seek(seconds: percent * (playerVC?.movie?.duration.seconds ?? 0))
+    func seek(percent:CGFloat, manual:Bool = false) {
+        self.playerVC?.seek(seconds: percent * (playerVC?.movie?.duration.seconds ?? 0), manual: manual)
     }
     
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {

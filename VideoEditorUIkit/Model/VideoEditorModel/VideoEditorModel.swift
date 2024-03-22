@@ -30,7 +30,12 @@ class VideoEditorModel {
     
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
-    static let renderSize:CGSize = .init(width: 1080, height: 1080)
+    static let renderSize:CGSize = .init(width: 720, height: 720)
+    static let exportPresetName = AVAssetExportPresetMediumQuality
+    //AVAssetExportPresetHighestQuality
+    //AVAssetExportPresetMediumQuality
+    //AVAssetExportPreset640x480
+    //AVAssetExportPresetHEVCHighestQuality
     
     func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {

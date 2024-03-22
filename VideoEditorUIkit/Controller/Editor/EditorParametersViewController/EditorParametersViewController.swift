@@ -132,10 +132,10 @@ class EditorParametersViewController: SuperVC {
     }
     
     // MARK: private
-    private func updateParentScroll() {
+    private func updateParentScroll(manual:Bool = false) {
         let max = scrollView.contentSize.width
         let percent = (scrollView.contentOffset.x + scrollView.contentInset.left) / (max - self.view.frame.width)
-        parentVC?.seek(percent: scrollView.contentOffset.x <= max ? percent : 1)
+        parentVC?.seek(percent: scrollView.contentOffset.x <= max ? percent : 1, manual: manual)
     }
     
     private func removeOverlays() {
@@ -143,12 +143,14 @@ class EditorParametersViewController: SuperVC {
     }
     
     // MARK: IBAction
-    func scrollPercent(_ percent:CGFloat) {
+    func scrollPercent(_ percent:CGFloat, selfScrolling:Bool = false) {
         if !(viewModel?.ignoreScroll ?? false) {
             viewModel?.manualScroll = true
             let max = scrollView.contentSize.width
             let scrollOffset = (max - self.view.frame.width) * percent
-            scrollView.contentOffset.x = (scrollOffset.isNormal && scrollOffset <= max ? scrollOffset : (percent <= 0.1 ? 0 : 1)) - scrollView.contentInset.left
+            if !selfScrolling {
+                scrollView.contentOffset.x = (scrollOffset.isNormal && scrollOffset <= max ? scrollOffset : (percent <= 0.1 ? 0 : 1)) - scrollView.contentInset.left
+            }
         }
     }
     
@@ -204,6 +206,7 @@ extension EditorParametersViewController {
         }
         if viewModel?.manualScroll ?? false {
             viewModel?.manualScroll = false
+         //   updateParentScroll(manual: true)
         } else {
             updateParentScroll()
         }
