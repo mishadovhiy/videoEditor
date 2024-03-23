@@ -29,7 +29,7 @@ struct EditorOverlayContainerVCViewModel {
     }
     
     var colorCollectionData: [EditorOverlayVC.OverlayCollectionData] {
-        let colors:[Constants.Color] = [.clear, .red2, .orange, .yellow, .green, .greenBlue, .blue, .darkBlue, .purpure, .pink3, .pink2, .pinkPurpure]
+        let colors:[Constants.Color] = [.clear, .red2, .orange, .yellow, .green, .greenBlue, .blue, .darkBlue, .purpure, .pink3, .pink2, .pinkPurpure, .black, .greyText, .greyText6, .white]
         return colors.compactMap { .init(title: "            ", backgroundColor: .type($0))}
     }
     

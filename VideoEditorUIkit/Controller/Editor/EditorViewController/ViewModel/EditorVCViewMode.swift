@@ -57,16 +57,16 @@ extension EditorVCViewMode {
             data.append(.init(title: "Edit", didSelect: {
                 pressed(.reload)
             }, buttonColor: .type(.purpure)))
-            data.append(.init(title: "Remove last changes", image: "backOval", didSelect: {
-                self.coordinator?.showConfirmationAlert("Remove last changes", okPressed: {
-                    Task {
-                        DB.db.movieParameters.editingMovie?.setPreviusVideoURL()
-                        await MainActor.run {
-                            pressed(.reload)
-                        }
-                    }
-                })
-            }))
+//            data.append(.init(title: "Remove last changes", image: "backOval", didSelect: {
+//                self.coordinator?.showConfirmationAlert("Remove last changes", okPressed: {
+//                    Task {
+//                        DB.db.movieParameters.editingMovie?.setPreviusVideoURL()
+//                        await MainActor.run {
+//                            pressed(.reload)
+//                        }
+//                    }
+//                })
+//            }))
             data.append(deleteCell(pressed: pressed))
         }
         return data

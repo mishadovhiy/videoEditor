@@ -222,6 +222,12 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
             self?.soundToVideoSelected(url)
         }
     }
+    
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+        mediaPicker.dismiss(animated: true) {
+            self.reloadUI()
+        }
+    }
 }
 
 extension EditorViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -290,10 +296,9 @@ extension EditorViewController:VideoEditorModelPresenter {
     @MainActor func videoAdded() {
         assetParametersVC?.assetChanged()
         previewImagesUpdated(image: nil)
+        self.playerVC?.play(replacing: true)
         setViewType(viewModel?.viewType ?? .addingVideos)
-        playerVC?.endRefreshing {
-            self.playerVC?.play(replacing: true)
-        }
+        playerVC?.endRefreshing()
     }
     
     @MainActor func errorAddingVideo(_ text:MessageContent?) {

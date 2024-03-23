@@ -28,6 +28,7 @@ class EditorCollectionCell: UICollectionViewCell {
     
     var textFieldEditing:Bool = false
     func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool, textColor:UIColor?) {
+        backgroundColor = item.backgroundColor ?? .clear
         titleLabel.textColor = .type(item.buttonColor != nil ? .white : .greyText)
         let resultColor = (item.textColor ?? (item.buttonColor != nil ? .white : nil)) ?? (textColor ?? .type(.greyText))
         titleLabel.textColor = resultColor

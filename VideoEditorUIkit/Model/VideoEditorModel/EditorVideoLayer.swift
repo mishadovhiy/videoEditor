@@ -26,11 +26,11 @@ struct EditorVideoLayer {
         let instraction = await videoInstractions(track: firstTrack!, overlayLayer: overlayLayer, composition: composition)
         if let first = firstTrack {
             let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: first)
-         //   let transform = first.preferredTransform
-
-              //  let transform =  CGAffineTransform(rotationAngle:  CGFloat.pi / 1)
+//            let transform = first.preferredTransform
+//print("videotransforms: ", first.preferredTransform)
+//                let transform =  CGAffineTransform(rotationAngle:  CGFloat.pi / 2)
 //
-      //      layerInstruction.setTransform(transform, at:.zero)
+//            layerInstruction.setTransform(transform, at:.zero)
             instraction.instractions.layerInstructions.append(layerInstruction)
         }
         return (instraction.composition, instraction.videoLayer, instraction.outputLayer)

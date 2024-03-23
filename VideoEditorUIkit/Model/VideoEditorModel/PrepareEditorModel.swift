@@ -285,9 +285,9 @@ extension PrepareEditorModel {
 // MARK: - video instructions
 extension PrepareEditorModel {
     final private func allCombinedInstructions(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], videoSize: CGSize, overlayLayer:CALayer, assetData:[MovieAttachmentProtocol]? = nil) async -> AVMutableVideoComposition? {
-        var data:[MovieAttachmentProtocol] = assetData ?? DB.db.movieParameters.editingMovie?.texts ?? []
+        var data:[MovieAttachmentProtocol] = assetData ?? DB.db.movieParameters.editingMovie?.images ?? []
         if assetData == nil {
-            DB.db.movieParameters.editingMovie?.images.forEach({
+            DB.db.movieParameters.editingMovie?.texts.forEach({
                 data.append($0)
             })
         }
