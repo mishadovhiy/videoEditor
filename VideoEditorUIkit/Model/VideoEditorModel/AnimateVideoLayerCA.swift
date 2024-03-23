@@ -23,10 +23,10 @@ struct AnimateVideoLayer {
     private func appeareAnimation(_ data:MovieAttachmentProtocol, type:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType, newLayer:CALayer, totalTime:CGFloat) {
         let duratioResult = data.time.duration * totalTime
         let startResult = data.time.start * totalTime
-        let show = basicAppeare(type, show: true, start: startResult, animationDuration: data.animations.appeareAnimation.duration)
+        let show = basicAppeare(type, show: true, start: startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: data.opacity)
         newLayer.add(show, forKey: "show")
-        let hide = basicAppeare(type, show: false, start: duratioResult + startResult)
-        newLayer.add(reapeatedState(show, hide), forKey: "visible")
+        let hide = basicAppeare(type, show: false, start: duratioResult + startResult, alpha: data.opacity)
+        newLayer.add(reapeatedState(show, hide, toAlpha: data.opacity), forKey: "visible")
         newLayer.add(hide, forKey: "hide")
     }
 }
@@ -36,9 +36,11 @@ struct AnimateVideoLayer {
 fileprivate extension AnimateVideoLayer {
     private func repeated(key:String, data:MovieAttachmentProtocol) -> CABasicAnimation {
         let scaleAnimation = CABasicAnimation(keyPath: key)
-        scaleAnimation.fromValue = 0.93
-        scaleAnimation.toValue = 1.05
-        scaleAnimation.duration = 0.5
+        let difference:CGFloat = 0.05
+        let max:CGFloat = 1
+        scaleAnimation.fromValue = max - difference
+        scaleAnimation.toValue = max
+        scaleAnimation.duration = 0.34
         scaleAnimation.repeatCount = .greatestFiniteMagnitude
         scaleAnimation.autoreverses = true
         scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -52,7 +54,7 @@ fileprivate extension AnimateVideoLayer {
                                 toAlpha:CGFloat = 1
     ) -> CABasicAnimation {
         let vidible = CABasicAnimation(keyPath: type.rawValue)
-        vidible.fromValue = 1
+        vidible.fromValue = toAlpha
         vidible.toValue = toAlpha - 0.01
         vidible.duration = 0.1
         vidible.isRemovedOnCompletion = false

@@ -43,7 +43,7 @@ class PlayerEditingAttachmentView: UIView {
                     $0.removeFromSuperlayer()
                 }
             })
-            if let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, data: text, isPreview: true) {
+            if let newLayer = model.add(to: layer, videoSize: layer.frame.size, data: text, isPreview: true) {
                 layer.addSublayer(newLayer)
             }
             if !force {

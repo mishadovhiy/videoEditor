@@ -29,31 +29,34 @@ class EditorCollectionCell: UICollectionViewCell {
     var textFieldEditing:Bool = false
     func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool, textColor:UIColor?) {
         titleLabel.textColor = .type(item.buttonColor != nil ? .white : .greyText)
-        if let textColor {
-            titleLabel.textColor = textColor
-            imageView.tintColor = textColor
-        }
-        titleLabel.backgroundColor = item.buttonColor
+        let resultColor = (item.textColor ?? (item.buttonColor != nil ? .white : nil)) ?? (textColor ?? .type(.greyText))
+        titleLabel.textColor = resultColor
+        imageView.tintColor = item.buttonColor == nil ? resultColor : .type(.greyText)
+
+        titleLabel.backgroundColor = item.buttonColor ?? .clear
         titleLabel.layer.cornerRadius = 4
         titleLabel.layer.masksToBounds = true
-        if item.buttonColor != nil {
-            titleLabel.textColor = .white
-        }
+        
         self.textFieldEditing = textFieldEditing
         titleLabel.text = item.title
         self.screenHeight = type
         if let imageData = item.imageData,
-           let image = UIImage(data: imageData) {
+           let image = UIImage(data: imageData)
+        {
             imageView.image = image
-            //imageView.isHidden = false//.superview?.isHidden = false
         } else if let imageString = item.image,
                   let imageRes = UIImage.init(named: imageString) {
-          //  imageView.setImage(item.image, superView: imageView)
-            imageView.image = imageRes
+            if let imageData = item.imageData,
+               let secondImage = UIImage(data: imageData)
+            {
+                imageView.image = imageRes.combineImages(image2: secondImage, imageSize: .init(width: 30, height: 30))
+            } else {
+                imageView.image = imageRes
+            }
         } else {
             imageView.image = nil
         }
-        backgroundColor = item.backgroundColor
+        
         setupUI()
     }
 }

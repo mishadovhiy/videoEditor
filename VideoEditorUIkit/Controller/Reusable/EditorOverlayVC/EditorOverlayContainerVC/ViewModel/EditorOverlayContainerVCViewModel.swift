@@ -135,9 +135,9 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     }
     
     private var trashCell:EditorOverlayVC.OverlayCollectionData {
-        return .init(title: "Delete", image: "trash") {
+        return .init(title: "Delete", image: "trash", didSelect:{
             self.didPress?(.delete)
-        }
+        })
     }
     
     private func layerSetupCells() -> [EditorOverlayVC.OverlayCollectionData] {
@@ -151,16 +151,16 @@ fileprivate extension EditorOverlayContainerVCViewModel {
                     new?.backgroundColor = newColor
                     return new ?? asset!
                 }))
-            }))))//,
-//            .init(title: "Opacity", image: "opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
-//                .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
-//                    self.didPress?(.assetChanged({
-//                        var new = $0 as? MovieAttachmentProtocol
-//                        new?.opacity = newValue
-//                        return new ?? asset!
-//                    }))
-//                }))
-//            ]))
+            })))),
+            .init(title: "Opacity", image: "opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
+                .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
+                    self.didPress?(.assetChanged({
+                        var new = $0 as? MovieAttachmentProtocol
+                        new?.opacity = newValue
+                        return new ?? asset!
+                    }))
+                }))
+            ]))
         ]
     }
     

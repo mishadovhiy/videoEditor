@@ -28,7 +28,9 @@ class EditorOverlayVC: SuperVC {
     var data:ToOverlayData?
     var canSetHidden:Bool = true {
         didSet {
-            actionButtons.first(where: {$0.tag == 1})?.alpha = canSetHidden ? 1 : 0
+            actionButtons.forEach({
+                $0.alpha = canSetHidden ? 1 : 0
+            })
             if !canSetHidden && isHidden {
                 isHidden = false
             }
@@ -206,55 +208,6 @@ extension EditorOverlayVC:UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         UIApplication.shared.keyWindow?.endEditing(true)
         toggleNavigationController(appeared: viewController)
-    }
-}
-
-extension EditorOverlayVC {
-    struct OverlayCollectionData {
-        let title:String
-        var image:String? = nil
-        var imageData:Data? = nil
-        var didSelect:(()->())?
-        var toOverlay:ToOverlayData? = nil
-        var backgroundColor:UIColor? = nil
-        var buttonColor:UIColor? = nil
-    }
-    
-    struct ToOverlayData {
-        let screenTitle:String
-        var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
-        var attachmentType:AttachmentOverlayType? = nil
-        var needTextField:Bool? = nil
-        var isPopup:Bool = true
-        var screenHeight:EditorOverlayContainerVC.OverlaySize? = nil
-        var tableData:[ToOverlayData.AttachmentOverlayType] = []
-        var closePressed:(()->())? = nil
-        var donePressed:(()->())? = nil
-        
-        enum AttachmentOverlayType {
-            case color (ColorType)
-            case floatRange (FloatType)
-            case `switch` (SwitchType)
-            case any ((Any)->())
-            
-            struct ColorType {
-                var title:String = ""
-                var selectedColor:UIColor? = nil
-                var didSelect:(_ newColor:UIColor)->()
-            }
-            
-            struct FloatType {
-                var title:String = ""
-                var selected:CGFloat? = nil
-                var didSelect:(_ newValue:CGFloat)->()
-            }
-                
-            struct SwitchType {
-                var title:String = ""
-                var selected:Bool = false
-                var didSselect:(_ newValue:Bool)->()
-            }
-        }
     }
 }
 

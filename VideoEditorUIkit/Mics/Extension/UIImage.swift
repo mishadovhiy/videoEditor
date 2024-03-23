@@ -41,4 +41,23 @@ extension UIImage {
         
         return filteredImage
     }
+    
+    func combineImages(image2: UIImage, imageSize:CGSize) -> UIImage? {
+        let image1 = self
+        let size = CGSize(width: max(imageSize.width, imageSize.width),
+                          height: max(imageSize.height, imageSize.height))
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        
+        image1.draw(in: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
+        
+        image2.draw(in: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
+
+        let combinedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return combinedImage
+    }
+
 }

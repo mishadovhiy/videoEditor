@@ -57,6 +57,13 @@ class PlayerViewController: PlayerSuperVC {
         self.parentVC?.playerChangedAttachment(newData)
     }
     
+    override func play(replacing: Bool = true) {
+        super.play(replacing: replacing)
+        if movieURL == nil {
+            parentVC?.addTrackPressed()
+        }
+    }
+    
     // MARK: - IBAction
     func editingAttachmentPressed(_ data:AssetAttachmentProtocol?) {
         editingAttachmentView?.removeFromSuperview()

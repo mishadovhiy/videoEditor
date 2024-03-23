@@ -74,10 +74,10 @@ extension EditorVCViewMode {
     
     func mainEditorCollectionData(pressed:@escaping(OverlayPressedModel)->(), filterPreviewImage:Data?) -> [EditorOverlayVC.OverlayCollectionData] {
         [
-            .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, {
+            .init(title: "Filter", image: "filterColored", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
-            .init(title: "Export", didSelect: {
+            .init(title: "Export", image: "export", didSelect: {
                 pressed(.startAnimating(completed: {
                     pressed(.export)
                 }))
@@ -102,7 +102,7 @@ extension EditorVCViewMode {
             self.coordinator?.showConfirmationAlert("Delete Movie", okPressed: {
                 pressed(.delete)
             })
-        })
+        }, textColor: .type(.red2))
     }
     
     func storedVideosTableData(parentVC:BaseVC) -> [SelectionTableViewController.TableData] {

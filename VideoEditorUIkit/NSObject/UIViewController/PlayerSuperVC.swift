@@ -23,6 +23,10 @@ class PlayerSuperVC: SuperVC {
         return view.subviews.first(where: {$0.layer.name == "playProgressView"}) as? UIProgressView
     }
     
+    private var noDataView:UIStackView? {
+        return view.subviews.first(where: {$0.layer.name == "noDataView"}) as? UIStackView
+    }
+    
     fileprivate var playerItem:AVPlayerItem? {
         guard let movieURL else {
             return nil
@@ -78,6 +82,18 @@ class PlayerSuperVC: SuperVC {
     }
     
     // MARK: public
+    override func endRefreshing(completion: (() -> ())? = nil) {
+        super.endRefreshing(completion: {
+            self.showNoDataView(show: self.movieURL == nil)
+            completion?()
+        })
+    }
+    
+    override func startRefreshing(completion: (() -> ())? = nil) {
+        super.startRefreshing(completion: completion)
+        showNoDataView(show: false)
+    }
+    
     func playerTimeChanged(_ percent:CGFloat) { }
     
     func pause() {
@@ -131,9 +147,6 @@ class PlayerSuperVC: SuperVC {
     
     //MARK: IBActions
     @objc fileprivate func playPressed(_ sender:UIButton) {
-        if playerLayer == nil {
-            return
-        }
         if isPlaying {
             self.pause()
         } else {
@@ -208,6 +221,7 @@ fileprivate extension PlayerSuperVC {
     func loadUI() {
         addPlayerView()
         addPlayButton()
+        addNoDataView()
         addLabel()
         let gesture = UITapGestureRecognizer(target: self, action: #selector(playPressed(_:)))
         view.addGestureRecognizer(gesture)
@@ -247,6 +261,22 @@ fileprivate extension PlayerSuperVC {
         ])
     }
     
+    private func addNoDataView() {
+        let stack = UIStackView()
+        stack.layer.name = "noDataView"
+        view.addSubview(stack)
+        
+        let label = UILabel()
+        stack.addArrangedSubview(label)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = .type(.greyText)
+        label.font = .type(.regulatMedium)
+        label.text = "Start Adding video from\nPhoto Library"
+        
+        stack.addConstaits([.centerX:0, .centerY:100, .width:view.frame.width])
+    }
+    
     private func addPlayerView() {
         if let playerLayer = self.playerLayer,
            let _ = playerLayer.player
@@ -271,6 +301,18 @@ fileprivate extension PlayerSuperVC {
         progressView.layer.name = "playProgressView"
         view.addSubview(progressView)
         progressView.addConstaits([.left:0, .right:0, .bottom:0, .height:3], safeArea: true)
+    }
+    
+    private func showNoDataView(show:Bool, completion:(()->())? = nil) {
+        let animation = UIViewPropertyAnimator(duration: 0.15, curve: .easeInOut) {
+            self.noDataView?.alpha = show ? 1 : 0
+        }
+        if let completion {
+            animation.addCompletion({ _ in
+                completion()
+            })
+        }
+        animation.startAnimation()
     }
 }
 
