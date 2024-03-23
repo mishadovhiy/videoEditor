@@ -48,6 +48,7 @@ extension EditorVCViewMode {
         case filterSelected
         case toStoredVideos
         case export
+        case startAnimating (completed:()->())
     }
     
     func addingVideosEditorData(pressed:@escaping(OverlayPressedModel)->()) -> [EditorOverlayVC.OverlayCollectionData] {
@@ -77,7 +78,9 @@ extension EditorVCViewMode {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
             .init(title: "Export", didSelect: {
-                pressed(.export)
+                pressed(.startAnimating(completed: {
+                    pressed(.export)
+                }))
             }, buttonColor: .type(.darkBlue)),
             deleteCell(pressed: pressed),
 //            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {

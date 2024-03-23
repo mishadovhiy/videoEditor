@@ -2643,8 +2643,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "reloadUI()"
             landmarkType = "7">
             <Locations>
@@ -3058,8 +3058,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "clearDataPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4711,8 +4711,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "soundToVideoSelected(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5317,8 +5317,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "playTimeChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5461,8 +5461,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "movieURL"
             landmarkType = "24">
          </BreakpointContent>
@@ -6058,8 +6058,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "errorAddingVideo(_:)"
             landmarkType = "7">
          </BreakpointContent>

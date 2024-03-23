@@ -132,6 +132,8 @@ class EditorViewController: SuperVC {
             self.coordinator?.toList(tableData: viewModel?.storedVideosTableData(parentVC: self) ?? [])
         case .export:
             viewModel?.editorModel.exportToLibraryPressed()
+        case .startAnimating(completed: let completed):
+            self.playerVC?.startRefreshing(completion: completed)
         }
     }
     
