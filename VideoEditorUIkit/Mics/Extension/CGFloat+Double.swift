@@ -24,7 +24,7 @@ extension Double {
     
     func stringTime(_ format:DateComponentsFormatter.ZeroFormattingBehavior) -> String {
         let formatter = DateComponentsFormatter()
-        var units:NSCalendar.Unit = [.minute, .second, .nanosecond]
+        var units:NSCalendar.Unit = [.minute, .second]
         if self >= 3600 {
             units = [.hour, .minute, .second]
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rLM-dp-mMF">
-    <device id="retina6_12" orientation="portrait" appearance="dark"/>
+    <device id="retina5_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -14,21 +14,21 @@
             <objects>
                 <viewController storyboardIdentifier="EditorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rLM-dp-mMF" customClass="EditorViewController" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DK9-lA-R5g">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dn4-TT-YmG">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jEO-Ya-Jeo">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="527"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="527"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FfG-RN-FMy">
-                                        <rect key="frame" x="0.0" y="527" width="393" height="232"/>
+                                        <rect key="frame" x="0.0" y="527" width="414" height="189"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ohh-1K-fdl">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="232"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="189"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="240" id="iRE-v4-kQm"/>
@@ -46,7 +46,7 @@
                                                 </variation>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2M-CR-Vaf">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                                 <color key="backgroundColor" name="primaryBackground"/>
                                             </view>
                                         </subviews>
