@@ -9,10 +9,17 @@ import UIKit
 
 extension UIColor {
     static func type(_ type:Constants.Color) -> UIColor {
+        if type == .clear {
+            return .clear
+        }
         return .init(type) ?? UIColor.red
     }
     
     convenience init?(_ colorConstrant:Constants.Color) {
+        if colorConstrant == .clear {
+            self.init()
+            return
+        }
         let row = colorConstrant.rawValue
         if row.contains("#") {
             self.init(hex: row)

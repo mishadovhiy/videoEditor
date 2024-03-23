@@ -4839,8 +4839,8 @@
             filePath = "VideoEditorUIkit/Mics/Extension/UIColor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "toHex"
             landmarkType = "24">
          </BreakpointContent>

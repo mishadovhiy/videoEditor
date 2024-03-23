@@ -29,8 +29,8 @@ struct EditorOverlayContainerVCViewModel {
     }
     
     var colorCollectionData: [EditorOverlayVC.OverlayCollectionData] {
-        let colors:[UIColor] = [.clear, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange, .red, .systemPink, .blue, .orange]
-        return colors.compactMap { .init(title: "            ", backgroundColor: $0)}
+        let colors:[Constants.Color] = [.clear, .red2, .orange, .yellow, .green, .greenBlue, .blue, .darkBlue, .purpure, .pink3, .pink2, .pinkPurpure]
+        return colors.compactMap { .init(title: "            ", backgroundColor: .type($0))}
     }
     
     private var imageCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
