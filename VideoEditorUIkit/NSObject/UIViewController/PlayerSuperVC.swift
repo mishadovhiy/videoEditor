@@ -235,7 +235,7 @@ fileprivate extension PlayerSuperVC {
         button.addTarget(self, action: #selector(self.playPressed(_:)), for: .touchUpInside)
         view.addSubview(button)
         button.layer.name = "playButton"
-        let color:UIColor = .init(.greyText)
+        let color:UIColor = .type(.greyText)
         button.tintColor = color.withAlphaComponent(0.16)
         button.titleLabel?.font = .type(.smallMedium)
         button.layer.shadowColor = UIColor.type(.black).cgColor

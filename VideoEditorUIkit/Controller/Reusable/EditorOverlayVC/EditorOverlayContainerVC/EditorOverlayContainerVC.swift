@@ -23,7 +23,7 @@ class EditorOverlayContainerVC: SuperVC {
     var viewModel:EditorOverlayContainerVCViewModel?
     var collectionData:[EditorOverlayVC.OverlayCollectionData] = []
     var canReloadSubviews:Bool = true
-
+    
     var needTextField:Bool {
         return parentVC?.data?.needTextField ?? (viewModel?.type == .text) && ((navigationController?.viewControllers.count ?? 0) == 1)
     }
@@ -94,6 +94,24 @@ class EditorOverlayContainerVC: SuperVC {
             parentVC?.childChangedData(data)
         }
     }
+    
+    func primaryPressed(_ pressType: EditorOverlayContainerVCViewModel.PressedType) {
+        switch pressType {
+        case .delete:
+            print("parent delete not implemented")
+            self.parentVC?.childChangedData(nil)
+            parentVC?.performAddAttachment()
+        case .reload:
+            updateData(nil)
+        case .assetChanged(let changed):
+            let oldData = changed(self.parentVC?.attachmentData ?? TextAttachmentDB.demo)
+            self.parentVC?.childChangedData(oldData)
+        case .upload(let upload):
+            self.parentVC?.attachmentDelegate?.uploadPressed(upload)
+        }
+        
+    }
+    
 }
 
 extension EditorOverlayContainerVC {
@@ -125,21 +143,7 @@ extension EditorOverlayContainerVC {
             let needViewModel = tableData.count != 0 || parentVCOptional?.attachmentData?.attachmentType != nil
             if needViewModel {
                 let attachment = parentVCOptional?.attachmentData?.attachmentType
-                viewModel = .init(type:attachment, didPress: { [weak self] pressType in
-                    guard let self else { return }
-                    switch pressType {
-                    case .delete:
-                        print("parent delete not implemented")
-                    case .reload:
-                        updateData(nil)
-                    case .assetChanged(let changed):
-                        let oldData = changed(self.parentVC?.attachmentData ?? TextAttachmentDB.demo)
-                        self.parentVC?.childChangedData(oldData)
-                        
-                    case .upload(let upload):
-                        self.parentVC?.attachmentDelegate?.uploadPressed(upload)
-                    }
-                })
+                viewModel = .init(type:attachment, didPress: primaryPressed(_:))
             } else {
                 viewModel = .init()
             }
@@ -152,7 +156,6 @@ extension EditorOverlayContainerVC {
                 collectionData = parentVCOptional?.data?.collectionData ?? []
             }
         }
-        print(collectionData, " tgerfrgthju6" , screenType)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -170,9 +173,6 @@ extension EditorOverlayContainerVC {
     private func reloadData() {
         collectionView.superview?.isHidden = collectionData.count == 0
         collectionView.reloadData()
-        //  collectionView.reloadInputViews()
-        print(tableData.count, " gerfweadw")
-        print(collectionData.count, " gtefrdw")
         tableView.superview?.isHidden = tableData.count == 0
         tableView.reloadData()
     }
@@ -188,7 +188,6 @@ extension EditorOverlayContainerVC {
             navigationController?.navigationBar.tintColor = parentVC?.textColor
             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: parentVC?.textColor ?? .red]
         }
-        
     }
 }
 
@@ -209,18 +208,6 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
         viewModel?.textfieldEditing = true
         parentVC?.updateMainConstraints(viewController: self, textFieldEditing: true)
         collectionView.reloadSections(.init(integer: 1))
-      //  collectionView.reloadInputViews()
-    }
-}
-
-extension EditorOverlayContainerVC:UIColorPickerViewControllerDelegate {
-    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        switch screenType?.attachmentType {
-        case .color(let selected):
-            selected.didSelect(color)
-        default:
-            break
-        }
     }
 }
 

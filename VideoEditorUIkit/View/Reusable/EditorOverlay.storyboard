@@ -170,20 +170,11 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="127.99999999999997"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
-                                                                    <rect key="frame" x="0.0" y="108" width="128" height="20"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="20" id="REh-du-Mds"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                                    <color key="textColor" name="greyText"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kCc-8b-Jig">
                                                                     <rect key="frame" x="20" y="0.0" width="88" height="88"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xyv-fV-g7v">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="88" height="66"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RNn-Xy-KyA">
                                                                                     <rect key="frame" x="-22" y="-2" width="132" height="122"/>
@@ -220,21 +211,28 @@
                                                                                 <constraint firstItem="RNn-Xy-KyA" firstAttribute="top" secondItem="Xyv-fV-g7v" secondAttribute="top" constant="-2" id="n5W-Hx-U8a"/>
                                                                             </constraints>
                                                                         </view>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="start editing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
+                                                                            <rect key="frame" x="4" y="68" width="80" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Mqi-m7-3Ut"/>
+                                                                                <constraint firstAttribute="height" constant="20" id="REh-du-Mds"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                            <color key="textColor" name="greyText"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="kCc-8b-Jig" secondAttribute="trailing" constant="20" id="2uw-fH-l8x"/>
-                                                                <constraint firstAttribute="trailing" secondItem="MuI-Q6-YEg" secondAttribute="trailing" id="8Pm-UT-Qjc"/>
-                                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kCc-8b-Jig" secondAttribute="bottom" constant="20" id="CSu-Dy-n2I"/>
+                                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kCc-8b-Jig" secondAttribute="bottom" id="CSu-Dy-n2I"/>
                                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kCc-8b-Jig" secondAttribute="bottom" id="FxF-aY-CNW"/>
-                                                                <constraint firstItem="kCc-8b-Jig" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nfX-6q-zTk" secondAttribute="top" id="PWB-g3-NfV"/>
-                                                                <constraint firstAttribute="bottom" secondItem="MuI-Q6-YEg" secondAttribute="bottom" id="d0C-nj-TOP"/>
+                                                                <constraint firstItem="kCc-8b-Jig" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nfX-6q-zTk" secondAttribute="top" constant="5" id="PWB-g3-NfV"/>
                                                                 <constraint firstItem="kCc-8b-Jig" firstAttribute="centerY" secondItem="nfX-6q-zTk" secondAttribute="centerY" id="lLg-K2-tQc"/>
                                                                 <constraint firstItem="kCc-8b-Jig" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nfX-6q-zTk" secondAttribute="top" id="qI7-uE-8H9"/>
                                                                 <constraint firstItem="kCc-8b-Jig" firstAttribute="leading" secondItem="nfX-6q-zTk" secondAttribute="leading" constant="20" id="ubM-xn-z3w"/>
-                                                                <constraint firstItem="MuI-Q6-YEg" firstAttribute="leading" secondItem="nfX-6q-zTk" secondAttribute="leading" id="zP2-Rx-2bc"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
@@ -418,7 +416,7 @@
             <color red="0.090000003576278687" green="0.090000003576278687" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

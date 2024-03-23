@@ -130,6 +130,8 @@ class EditorViewController: SuperVC {
             videoFilterSelected()
         case .toStoredVideos:
             self.coordinator?.toList(tableData: viewModel?.storedVideosTableData(parentVC: self) ?? [])
+        case .export:
+            viewModel?.editorModel.exportToLibraryPressed()
         }
     }
     

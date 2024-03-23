@@ -28,9 +28,16 @@ class EditorCollectionCell: UICollectionViewCell {
     
     var textFieldEditing:Bool = false
     func set(_ item: EditorOverlayVC.OverlayCollectionData, type:EditorOverlayContainerVC.OverlaySize? = nil, textFieldEditing:Bool, textColor:UIColor?) {
+        titleLabel.textColor = .type(item.buttonColor != nil ? .white : .greyText)
         if let textColor {
             titleLabel.textColor = textColor
             imageView.tintColor = textColor
+        }
+        titleLabel.backgroundColor = item.buttonColor
+        titleLabel.layer.cornerRadius = 4
+        titleLabel.layer.masksToBounds = true
+        if item.buttonColor != nil {
+            titleLabel.textColor = .white
         }
         self.textFieldEditing = textFieldEditing
         titleLabel.text = item.title

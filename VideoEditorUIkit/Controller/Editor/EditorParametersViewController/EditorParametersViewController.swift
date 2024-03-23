@@ -261,7 +261,6 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
 
 extension EditorParametersViewController:AssetAttachmentViewDelegate {
     func attachmentPanChanged(view: AssetRawView?) {
-        let converted = view?.superview?.convert(view?.frame ?? .zero, from: view ?? .init()) ?? .zero
         let x = view?.xConstraint?.constant ?? 0
         let total = (view?.superview?.frame ?? .zero).width
         let startPercent = x / total

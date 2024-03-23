@@ -23,8 +23,8 @@ class PrepareEditorModel {
         delegate = nil
     }
     
-    @MainActor func export(asset:AVAsset, videoComposition:AVMutableVideoComposition?, isVideo:Bool, isQuery:Bool = false, voluem:Float? = nil) async -> Response {
-        print(asset.duration, " export duration")
+    @MainActor func export(asset:AVAsset?, videoComposition:AVMutableVideoComposition?, isVideo:Bool = false, isQuery:Bool = false, voluem:Float? = nil) async -> Response {
+        print(asset?.duration, " export duration")
         guard let composition = delegate.movieHolder ?? delegate.movie
         else {
             print("error movieHolder and no delegate.movie", #file, #line, #function)
@@ -213,18 +213,28 @@ extension PrepareEditorModel {
         let composition = AVMutableComposition()
         let segments = await loadSegments(asset: urlAsset)
         do {
+            let firstAudio:AVAssetTrack!
+            let firstOpt:AVAssetTrack!
+            if #available(iOS 15.0, *) {
+                firstOpt = try await urlAsset.loadTracks(withMediaType: .video).first
+                firstAudio = try await urlAsset.loadTracks(withMediaType: .audio).first
+            } else {
+                firstOpt = urlAsset.tracks(withMediaType: .video).first
+                firstAudio = urlAsset.tracks(withMediaType: .audio).first
+            }
             if
                 let value = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
-                let first = try await urlAsset.loadTracks(withMediaType: .video).first,
+                let first = firstOpt,
                 let time = first.segments.first?.timeMapping.target
             {
                // value.preferredVolume = 0.2
                 let range = CMTimeRangeMake(start: time.start, duration: time.duration)
                 try value.insertTimeRange(range, of: first, at: time.start)
             }
+            
             if
                 let value = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid),
-                let first = try await urlAsset.loadTracks(withMediaType: .audio).first,
+                let first = firstAudio,
                 let time = first.segments.first?.timeMapping.target
             {
               //  value.preferredVolume = 0.2
@@ -245,7 +255,13 @@ extension PrepareEditorModel {
         var results:[(AVAssetTrackSegment, AVAssetTrack)] = []
         var id:[String] = []
         do {
-            try await asset.load(.tracks).forEach {
+            let tracks:[AVAssetTrack]!
+            if #available(iOS 15, *) {
+                tracks = try await asset.load(.tracks)
+            } else {
+                tracks = asset.tracks
+            }
+            tracks.forEach {
                 let track = $0
                 let urlAsset = $0.asset as? AVURLAsset
                 if $0.mediaType == .audio || $0.mediaType == .video && !id.contains(urlAsset?.url.absoluteString ?? "-1") {

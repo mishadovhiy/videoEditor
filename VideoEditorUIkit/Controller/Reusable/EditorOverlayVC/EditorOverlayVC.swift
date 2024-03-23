@@ -23,6 +23,7 @@ class EditorOverlayVC: SuperVC {
     @IBOutlet var actionButtons: [BaseButton]!
 
     var isPopup:Bool = false
+    static let editingLayerName = "isEmptyView"
     var isEditingAttachment:Bool = false
     var data:ToOverlayData?
     var canSetHidden:Bool = true {
@@ -117,7 +118,7 @@ class EditorOverlayVC: SuperVC {
         childVC?.updateData(data)
     }
     
-    func childChangedData(_ attachmentData:AssetAttachmentProtocol) {
+    func childChangedData(_ attachmentData:AssetAttachmentProtocol?) {
         self.attachmentData = attachmentData
         attachmentDelegate?.overlayChangedAttachment(attachmentData)
     }
@@ -156,16 +157,20 @@ class EditorOverlayVC: SuperVC {
         viewController?.navigationController?.setNavigationBarHidden(hidden, animated: true)
     }
     
-    // MARK: - IBAction
-    @IBAction func addPressed(_ sender: UIButton) {
+    func performAddAttachment() {
         if attachmentDelegate != nil {
             attachmentDelegate?.addAttachmentPressed(attachmentData)
         }
         if isPopup  {
-            removeFromParent()
+            dismiss(animated: true)
         } else {
             data?.donePressed?()
         }
+    }
+    
+    // MARK: - IBAction
+    @IBAction func addPressed(_ sender: UIButton) {
+        performAddAttachment()
     }
     
     @IBAction func closePressed(_ sender: UIButton) {
@@ -212,6 +217,7 @@ extension EditorOverlayVC {
         var didSelect:(()->())?
         var toOverlay:ToOverlayData? = nil
         var backgroundColor:UIColor? = nil
+        var buttonColor:UIColor? = nil
     }
     
     struct ToOverlayData {
@@ -280,6 +286,7 @@ extension EditorOverlayVC {
                             delegate:EditorOverlayVCDelegate?
     ) {
         let vc = EditorOverlayVC.configure(attechemntData: attachmentData, delegate: delegate)
+        vc.isEditingAttachment = bottomView.layer.name != self.editingLayerName
         vc.isPopup = true
         parent.addChild(child: vc, constaits: vc.primaryConstraints(.small))
         vc.view.translatesAutoresizingMaskIntoConstraints = false

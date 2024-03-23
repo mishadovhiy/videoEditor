@@ -28,7 +28,11 @@ extension AVAsset {
             return self.duration
         }
         do {
-            return try await load(.duration)
+            if #available(iOS 15, *) {
+                return try await load(.duration)
+            } else {
+                return self.duration
+            }
         } catch {
             return .invalid
         }

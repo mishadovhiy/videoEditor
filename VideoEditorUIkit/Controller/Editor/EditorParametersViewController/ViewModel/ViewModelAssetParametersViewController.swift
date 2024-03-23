@@ -35,7 +35,12 @@ class EditorParametersVCViewModel {
                 assetData.songs = []
             }
             assetData.media = DB.db.movieParameters.editingMovie?.images ?? []
-            let segments = try await editorModel.movie?.loadTracks(withMediaType: .video) ?? []
+            var segments:[AVMutableCompositionTrack]!
+            if #available(iOS 15.0, *) {
+                segments = try await editorModel.movie?.loadTracks(withMediaType: .video) ?? []
+            } else {
+                segments = editorModel.movie?.tracks(withMediaType: .video)
+            }
             assetData.previewAssets = segments.compactMap({
                 return .create($0.segments.first!, composition: asset, loadPreviews: false)
             })

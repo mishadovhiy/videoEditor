@@ -73,8 +73,8 @@ class AssetRawView:UIView {
     
     private var newConstraints:(CGFloat, CGFloat) {
         let total = parentCollectionWidth ?? 100
-        let x = total * data!.time.start
-        let width = total * data!.time.duration
+        let x = total * (data?.time.start ?? 0)
+        let width = total * (data?.time.duration ?? 0)
         return (x, width)
     }
     
@@ -135,7 +135,6 @@ class AssetRawView:UIView {
             panEnded?(self)
         }
         gestureBegun(!sender.state.isEnded, senderView: sender.view)
-        clickService.vibrate()
     }
 
     private func gestureBegun(_ begun:Bool, senderView:UIView?) {

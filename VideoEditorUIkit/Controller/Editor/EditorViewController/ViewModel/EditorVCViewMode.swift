@@ -47,15 +47,16 @@ extension EditorVCViewMode {
         case delete
         case filterSelected
         case toStoredVideos
+        case export
     }
     
     func addingVideosEditorData(pressed:@escaping(OverlayPressedModel)->()) -> [EditorOverlayVC.OverlayCollectionData] {
         var data:[EditorOverlayVC.OverlayCollectionData] = []
         if editorModel.movie != nil {
-            data.append(.init(title: "Start Editing", didSelect: {
+            data.append(.init(title: "Edit", didSelect: {
                 pressed(.reload)
-            }))
-            data.append(.init(title: "Remove last changes", didSelect: {
+            }, buttonColor: .type(.purpure)))
+            data.append(.init(title: "Remove last changes", image: "backOval", didSelect: {
                 self.coordinator?.showConfirmationAlert("Remove last changes", okPressed: {
                     Task {
                         DB.db.movieParameters.editingMovie?.setPreviusVideoURL()
@@ -75,18 +76,21 @@ extension EditorVCViewMode {
             .init(title: "Filter", image: "filter", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
+            .init(title: "Export", didSelect: {
+                pressed(.export)
+            }, buttonColor: .type(.darkBlue)),
             deleteCell(pressed: pressed),
-            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
-                let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
-                self.coordinator?.showConfirmationAlert("Change url to: " + title, okPressed: {
-                    self.toggleOriginalURL(reloadPressed: {
-                        pressed(.reload)
-                    })
-                })
-            }),
-            .init(title: "stored videos", didSelect: {
-                pressed(.toStoredVideos)
-            })
+//            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
+//                let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
+//                self.coordinator?.showConfirmationAlert("Change url to: " + title, okPressed: {
+//                    self.toggleOriginalURL(reloadPressed: {
+//                        pressed(.reload)
+//                    })
+//                })
+//            }),
+//            .init(title: "stored videos", didSelect: {
+//                pressed(.toStoredVideos)
+//            })
         ]
     }
     

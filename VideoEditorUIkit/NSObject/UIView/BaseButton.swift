@@ -54,7 +54,7 @@ fileprivate extension BaseButton {
         }
         backgroundColor = style == .smallGray ? .clear : .link.withAlphaComponent(0.45)
         titleLabel?.font = .systemFont(ofSize: style == .primary ? Constants.Font.primaryButton.rawValue : Constants.Font.secondaryButton.rawValue, weight: style == .primary ? .medium : .medium)
-        let tint:UIColor = style != .smallGray ? .type(.white) : (style == .smallGray ? .init(.greyText6) : .type(.white))
+        let tint:UIColor = style != .smallGray ? .type(.white) : (style == .smallGray ? .type(.greyText6) : .type(.white))
         titleLabel?.tintColor = tint
         titleLabel?.textColor = tint
         tintColor = tint
@@ -64,13 +64,16 @@ fileprivate extension BaseButton {
             self.addConstaits(style == .primary ? [.height:BaseButton.buttonHeight] : [.width:40, .height:BaseButton.buttonHeight])
         }
         if style == .primary {
-            layer.shadowColor = UIColor.init(.black).cgColor
+            layer.shadowColor = UIColor.type(.black).cgColor
             layer.shadowOpacity = 0.5
             layer.shadowOffset = .init(width: -1, height: 3)
             contentEdgeInsets.left = 15
             contentEdgeInsets.right = 15
-            configuration?.contentInsets.leading = 15
-            configuration?.contentInsets.trailing = 15
+            if #available(iOS 15.0, *) {
+                configuration?.contentInsets.trailing = 15
+                configuration?.contentInsets.leading = 15
+            }
+            
         }
         if style != .smallGray {
             layer.borderWidth = 0.5

@@ -107,7 +107,9 @@ extension UIView {
         if #available(iOS 17.0, *) {
             self.keyboardLayoutGuide.usesBottomSafeArea = false
         }
-        stickyView.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor).isActive = true
+        if #available(iOS 15.0, *) {
+            stickyView.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor).isActive = true
+        }
     }
     
     func removeWithAnimation() {

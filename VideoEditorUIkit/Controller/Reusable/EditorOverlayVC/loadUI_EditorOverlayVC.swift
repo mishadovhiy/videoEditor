@@ -15,7 +15,7 @@ extension EditorOverlayVC {
             view.layer.cornerRadius = 12
             view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
             view.subviews.first(where: {$0 is UIStackView})?.layer.masksToBounds = true
-            view.layer.shadowColor = UIColor.init(.black).cgColor
+            view.layer.shadowColor = UIColor.type(.black).cgColor
             view.layer.shadowOpacity = 0.8
             view.layer.shadowOffset = .init(width: -1, height: 3)
             view.layer.shadowRadius = 5

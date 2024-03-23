@@ -189,16 +189,28 @@ extension DB.DataBase.MovieParametersDB {
         
         
         mutating func removeEditedAsset(_ attachment:AssetAttachmentProtocol?) {
+            print("wiil remove ", attachment)
+            var removed = false
             if let text = attachment as? TextAttachmentDB {
-                var removed = false
                 texts.removeAll(where: {
                     if !removed {
-                        removed = true
+                        print("removeadsads: ", $0, " willremove: ", text == $0)
                         return text == $0
                     } else {
                         return false
                     }
                 })
+            } else if let image = attachment as? ImageAttachmentDB {
+                images.removeAll(where: {
+                    if !removed {
+                        print("removeadsads: ", $0, " willremove: ", image == $0)
+                        return image == $0
+                    } else {
+                        return false
+                    }
+                })
+            } else if let _ = attachment as? SongAttachmentDB {
+                self.songs = .init()
             }
         }
         

@@ -19,6 +19,17 @@ struct Coordinator {
         UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
         UIApplication.shared.keyWindow?.makeKeyAndVisible()
     }    
+    
+    // MARK: private
+  
+    var videoDocumentTypeList:[Any] {
+        if #available(iOS 14.0, *) {
+            let results:[UTType] = [.aiff, .aliasFile, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .audio, .avi, .audiovisualContent, .video, .mpeg2Video, .appleProtectedMPEG4Video, .mp3, .mpeg, .mpeg4Audio, .movie, .m3uPlaylist, .quickTimeMovie]
+            return results
+        } else {
+            return ["aiff", "aliasFile", "appleProtectedMPEG4Audio", "audio", "avi", "audiovisualContent", "video", "mpeg2Video", "appleProtectedMPEG4Video", "mp3", "mpeg", "mpeg4Audio", "movie", "m3uPlaylist", "quickTimeMovie"]
+        }
+    }
 }
 
 fileprivate extension Coordinator {
@@ -44,7 +55,12 @@ fileprivate extension Coordinator {
 // MARK: Reusable
 extension Coordinator {
     func toDocumentPicker(delegate:UIDocumentPickerDelegate?) {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.aiff, .aliasFile, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .audio, .avi, .audiovisualContent, .video, .mpeg2Video, .appleProtectedMPEG4Video, .mp3, .mpeg, .mpeg4Audio, .movie, .m3uPlaylist, .quickTimeMovie], asCopy: true)
+        let documentPicker:UIDocumentPickerViewController!
+        if #available(iOS 14.0, *) {
+            documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: videoDocumentTypeList.compactMap({$0 as? UTType}), asCopy: true)
+        } else {
+            documentPicker = UIDocumentPickerViewController(documentTypes: ["mp3", "audio", "movie", "quickTimeMovie"], in: .import)
+        }
         documentPicker.delegate = delegate
         documentPicker.allowsMultipleSelection = false
         setModalPresentation(documentPicker)
@@ -65,7 +81,13 @@ extension Coordinator {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             if isVideo {
                 vc.allowsEditing = true
-                vc.mediaTypes = [UTType.movie.identifier]
+                vc.mediaTypes = videoDocumentTypeList.compactMap({
+                    if #available(iOS 14.0, *) {
+                        return ($0 as? UTType)?.identifier
+                    } else {
+                        return ($0 as? String)
+                    }
+                })
             }
             vc.sourceType = .photoLibrary
             present(vc)

@@ -40,10 +40,10 @@ struct EditorOverlayContainerVCViewModel {
             data.append($0)
         }
         if isEditing {
-            data.append(trashCell)
             data.insert(.init(title: "Change", image: "addImage", didSelect: {
                 self.didPress?(.upload(.photoLibrary))
             }), at: 0)
+            data.insert(trashCell, at: 0)
         } else {
             data.insert(.init(title: "Choose Image", image: "addImage", didSelect: {
                 self.didPress?(.upload(.photoLibrary))
@@ -64,7 +64,7 @@ struct EditorOverlayContainerVCViewModel {
                 self.didPress?(.upload(.files))
             }))
         } else if !(songData?.selfMovie ?? true) {
-            data.append(trashCell)
+            data.insert(trashCell, at: 0)
         } else if songData?.selfMovie ?? false {
             data.append(.init(title: "Volume", toOverlay: .init(screenTitle: "General Movie Volume", attachmentType: .floatRange(.init(selected: songData?.volume, didSelect: { newValue in
                 didPress?(.assetChanged({ oldValue in
@@ -104,7 +104,7 @@ struct EditorOverlayContainerVCViewModel {
         }
         data.append(animationCells(current: textData.animations))
         if isEditing {
-            data.append(trashCell)
+            data.insert(trashCell, at: 0)
         }
         return data
     }

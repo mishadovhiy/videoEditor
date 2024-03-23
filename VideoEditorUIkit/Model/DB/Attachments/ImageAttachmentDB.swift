@@ -185,7 +185,8 @@ extension ImageAttachmentDB:Equatable {
         lhs.time == rhs.time &&
         lhs.color == rhs.color &&
         lhs.borderColor == rhs.borderColor &&
-        lhs.borderWidth == rhs.borderWidth
+        lhs.borderWidth == rhs.borderWidth &&
+        lhs.zoom == rhs.zoom
     }
 }
 

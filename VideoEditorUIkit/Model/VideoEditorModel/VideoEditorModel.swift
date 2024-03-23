@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 protocol VideoEditorModelPresenter {
     @MainActor func videoAdded()
@@ -101,6 +102,35 @@ class VideoEditorModel {
             DB.db.movieParameters.needReloadFilter = true
             DB.db.movieParameters.needReloadLayerAttachments = true
             await presenter?.reloadUI()
+        }
+    }
+    
+    func exportToLibraryPressed() {
+        Task {
+            self.movieHolder = self.movie
+            let export = await prepare.export(asset:movie,videoComposition:nil, isVideo: false)
+            guard let url = export.videoExportResponse?.url else {
+                await presenter?.errorAddingVideo(.init(title: "Video not exported", description: export.error?.messageContent?.title))
+                return
+            }
+            await MainActor.run {
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+                }) { success, error in
+                    if success {
+                        print("Video saved to photo library")
+                        Task {
+                            await self.videoAdded(canReload:true)
+                            await AppDelegate.shared?.coordinator?.showAlert(title: "Video has been exported\nSuccessfully", appearence: .type(.succsess))
+                        }
+                    } else {
+                        print("Failed to save video to photo library:", error?.localizedDescription ?? "Unknown error")
+                        Task {
+                            await self.presenter?.errorAddingVideo(.init(title: error?.localizedDescription))
+                        }
+                    }
+                }
+            }
         }
     }
     

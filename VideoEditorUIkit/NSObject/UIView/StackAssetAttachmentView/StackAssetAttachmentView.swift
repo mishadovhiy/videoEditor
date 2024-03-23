@@ -97,7 +97,7 @@ class StackAssetAttachmentView:UIView {
         }
         self.setSelected(true)
         addRowView(data: newData, isEmpty: true) { view in
-            view.layer.name = "isEmptyView"
+            view.layer.name = EditorOverlayVC.editingLayerName
             view.isEditing = false
             view.alpha = 0
             view.layer.zoom(value: 0.7)
@@ -198,8 +198,8 @@ extension StackAssetAttachmentView {
         layer.borderWidth = selected ? 1 : 0
         if !selected,
            let view = layerStack?.arrangedSubviews.first(where: {
-               $0.subviews.contains(where: {$0.layer.name == "isEmptyView"})})?.subviews.first(where: {
-                   $0.layer.name == "isEmptyView"
+               $0.subviews.contains(where: {$0.layer.name == EditorOverlayVC.editingLayerName})})?.subviews.first(where: {
+                   $0.layer.name == EditorOverlayVC.editingLayerName
                })
         {
             setEmptyViewHidden(true, view: view) {
