@@ -37,10 +37,9 @@ extension EditorOverlayVC {
     }
 
     func primaryConstraints(_ type:EditorOverlayContainerVC.OverlaySize) -> [NSLayoutConstraint.Attribute: (CGFloat, String)] {
-        let smallHeightBig = !canSetHidden
         switch type {
         case .small:
-            return !isPopup ? [.height:((smallHeightBig ? 90 : 70), "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(55, "height")]
+            return !isPopup ? [.height:(70, "height")] : [.left: (10, "left"), .right:(-10, "right"), .height:(55, "height")]
         case .middle:
             return !isPopup ? [.height:(90, "height")] : [.left: (0, "left"), .right:(0, "right"), .height:(90, "height")]
         case .big:

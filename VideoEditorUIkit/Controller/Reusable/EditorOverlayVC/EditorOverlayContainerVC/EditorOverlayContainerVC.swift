@@ -68,38 +68,14 @@ class EditorOverlayContainerVC: SuperVC {
         setupUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        toggleNavigationHidden()
-    }
-    
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        self.parentVC?.updateMainConstraints(viewController: self)
         collectionView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateUI()
-        if parentVC?.isPopup ?? false {
-            navigationController?.navigationBar.tintColor = parentVC?.textColor
-            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: parentVC?.textColor ?? .red]
-        }
-    }
-    
-    func updateUI() {
-        if needTextField {
-            parentVC?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
-        }
-        toggleNavigationHidden(animated: false)
-        collectionView.reloadData()
-        collectionView.reloadInputViews()
-    }
-    
-    private func toggleNavigationHidden(animated:Bool = true) {
-        let hidden = (self.navigationController?.viewControllers.count ?? 0) <= 1
-        self.navigationController?.setNavigationBarHidden(hidden, animated: animated)
     }
     
     func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]?) {
@@ -129,14 +105,10 @@ extension EditorOverlayContainerVC {
 }
 
 // MARK: - setupUI
-fileprivate extension EditorOverlayContainerVC {
-    func setupUI() {
-        //view.backgroundColor = (navigationController?.viewControllers.count == 1) ? (parentVC?.view.backgroundColor ?? .clear) : .type(.secondaryBackground)
+extension EditorOverlayContainerVC {
+    private func setupUI() {
         view.backgroundColor = (parentVC?.view.backgroundColor ?? .clear)
         navigationController?.navigationBar.backgroundColor = view.backgroundColor
-//        primatyViews.forEach({
-//            $0.superview?.isHidden = true
-//        })
         switch screenType?.attachmentType {
         case .floatRange(_), .switch(_):
             if let type = screenType?.attachmentType {
@@ -181,7 +153,7 @@ fileprivate extension EditorOverlayContainerVC {
             }
         }
         print(collectionData, " tgerfrgthju6" , screenType)
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         if tableData.count != 0 {
@@ -195,22 +167,28 @@ fileprivate extension EditorOverlayContainerVC {
         }
     }
     
-    @objc private func sliderChanged(_ sender:UISlider) {
-        switch screenType?.attachmentType {
-        case .floatRange(let floatType):
-            floatType.didSelect(CGFloat(sender.value))
-        default: return
-        }
-    }
-    
     private func reloadData() {
         collectionView.superview?.isHidden = collectionData.count == 0
         collectionView.reloadData()
-      //  collectionView.reloadInputViews()
+        //  collectionView.reloadInputViews()
         print(tableData.count, " gerfweadw")
         print(collectionData.count, " gtefrdw")
         tableView.superview?.isHidden = tableData.count == 0
         tableView.reloadData()
+    }
+    
+    func updateUI() {
+        if needTextField {
+            parentVC?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
+        }
+        parentVC?.toggleNavigationController(appeared: self, countVC: false)
+        collectionView.reloadData()
+        collectionView.reloadInputViews()
+        if parentVC?.isPopup ?? false {
+            navigationController?.navigationBar.tintColor = parentVC?.textColor
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: parentVC?.textColor ?? .red]
+        }
+        
     }
 }
 
@@ -223,7 +201,6 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
         viewModel?.textfieldEditing = false
         parentVC?.updateMainConstraints(viewController: self)
         collectionView.reloadSections(.init(integer: 1))
-    //    collectionView.reloadInputViews()
         collectionView.reloadData()
         canReloadSubviews = true
     }

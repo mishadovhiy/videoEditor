@@ -6,19 +6,17 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AssetPreviewCell:UICollectionViewCell {
     
     @IBOutlet private weak var previewImageView: UIImageView!
     @IBOutlet private weak var secondLabel: UILabel!
     
-    func set(previewImage:Data?, secondText:String) {
-        secondLabel.text = secondText
-        if let previewImage {
-            previewImageView.image = .init(data: previewImage)
-        } else {
-            previewImageView.image = nil
-        }
+    func set(time:Double,
+             asset:AVAsset?) {
+        secondLabel.text = ""
+        setPreviewImage(seconds: time, asset: asset)
         previewImageView.constraints.first(where: {$0.firstAttribute == .width})?.constant = MovieGeneralParameterList.AssetsData.cellWidth
         previewImageView.layoutIfNeeded()
     }
@@ -31,5 +29,15 @@ class AssetPreviewCell:UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         previewImageView.image = nil
+    }
+    
+    private func setPreviewImage(seconds:Double, asset:AVAsset?) {
+        let previewTime:CMTime = .init(seconds: seconds, preferredTimescale: VideoEditorModel.timeScale)
+        if let imageData = asset?.preview(time: previewTime)?.jpegData(compressionQuality: 0),
+           let image = UIImage(data: imageData) {
+            previewImageView.image = image
+        } else {
+            previewImageView.image = nil
+        }
     }
 }

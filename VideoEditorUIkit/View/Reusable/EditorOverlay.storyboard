@@ -114,13 +114,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xxL-zW-0AR">
-                                <rect key="frame" x="0.0" y="0.0" width="289" height="656"/>
+                                <rect key="frame" x="0.0" y="0.0" width="289" height="622"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrZ-ql-Vo3">
-                                        <rect key="frame" x="0.0" y="0.0" width="289" height="656"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="289" height="622"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xt4-iA-GdT">
-                                                <rect key="frame" x="0.0" y="0.0" width="289" height="656"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="289" height="622"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="3Tn-AO-Xce"/>
@@ -164,10 +164,10 @@
                                                         </connections>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="EditorCollectionCell" id="jSU-Ku-cZ8" customClass="EditorCollectionCell" customModule="VideoEditorUIkit" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="176" width="128" height="128"/>
+                                                        <rect key="frame" x="0.0" y="138" width="128" height="127.99999999999997"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="nfX-6q-zTk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="127.99999999999997"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
@@ -364,7 +364,7 @@
                         <viewLayoutGuide key="safeArea" id="d1e-NN-L45"/>
                         <color key="backgroundColor" name="secondaryBackground"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="xxL-zW-0AR" secondAttribute="bottom" id="F12-02-PsF"/>
+                            <constraint firstItem="d1e-NN-L45" firstAttribute="bottom" secondItem="xxL-zW-0AR" secondAttribute="bottom" id="F12-02-PsF"/>
                             <constraint firstAttribute="trailing" secondItem="xxL-zW-0AR" secondAttribute="trailing" id="VAk-vB-wt4"/>
                             <constraint firstItem="xxL-zW-0AR" firstAttribute="leading" secondItem="kqA-bl-Oyc" secondAttribute="leading" id="b3X-8R-nU2"/>
                             <constraint firstItem="xxL-zW-0AR" firstAttribute="top" secondItem="kqA-bl-Oyc" secondAttribute="top" id="bFu-b6-pEv"/>
@@ -418,7 +418,7 @@
             <color red="0.090000003576278687" green="0.090000003576278687" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

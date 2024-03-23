@@ -12,7 +12,7 @@
         <scene sceneID="vEL-rO-KD5">
             <objects>
                 <viewController storyboardIdentifier="PlayerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WRP-Uq-Dd7" customClass="PlayerViewController" customModule="VideoEditorUIkit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="235-EM-xDm">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="235-EM-xDm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="qmZ-aM-qFO"/>

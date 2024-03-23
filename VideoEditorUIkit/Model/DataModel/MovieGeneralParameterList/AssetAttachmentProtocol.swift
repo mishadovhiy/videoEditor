@@ -110,22 +110,22 @@ extension MovieGeneralParameterList {
             for i in 0..<Int(count) {
                 array.append(i)
             }
-            if loadPreviews {
+           // if loadPreviews {
                 return .init(time:.with({
                     $0.duration = asset.timeMapping.source.duration.seconds
                 }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({
                     let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
-                    let previewTime:CMTime = .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: VideoEditorModel.timeScale)
-                    let image = composition?.preview(time: previewTime)
-                    return .init(image?.jpegData(compressionQuality: 0))
+               //     let previewTime:CMTime = .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: VideoEditorModel.timeScale)
+              //      let image = composition?.preview(time: previewTime)
+                    return .init(time: plus)
                 }))
-            } else {
-                return .init(time: .with({
-                    $0.duration = asset.timeMapping.source.duration.seconds
-                }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({_ in
-                    .init(nil)
-                }))
-            }
+//            } else {
+//                return .init(time: .with({
+//                    $0.duration = asset.timeMapping.source.duration.seconds
+//                }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({_ in
+//                    .init(nil)
+//                }))
+//            }
         }
     }
 }

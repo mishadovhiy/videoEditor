@@ -43,10 +43,8 @@ extension MovieGeneralParameterList.MediaRow {
 
 extension MovieGeneralParameterList {
     struct PreviewData {
-        var image:Data?
-        init(_ image: Data? = nil) {
-            self.image = image
-        }
+        var image:Data? = nil
+        var time:Double? = nil
     }
 }
 

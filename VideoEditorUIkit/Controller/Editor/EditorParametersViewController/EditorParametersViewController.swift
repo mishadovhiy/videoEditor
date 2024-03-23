@@ -21,7 +21,7 @@ class EditorParametersViewController: SuperVC {
     }
     
     var viewModel:EditorParametersVCViewModel?
-    private var parentVC: EditorViewController? {
+    var parentVC: EditorViewController? {
         return parent as? EditorViewController
     }
     override var initialAnimation: Bool { return false}

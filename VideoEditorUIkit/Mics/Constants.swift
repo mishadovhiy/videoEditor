@@ -38,7 +38,8 @@ struct Constants {
         case pinkRed = "#FF2071"
         
         static var trackColor:UIColor {
-            return .type(.secondaryBackground)
+            return .init(hex: "0A0A0A") ?? .red
+            //.type(.secondaryBackground)
         }
     }
     

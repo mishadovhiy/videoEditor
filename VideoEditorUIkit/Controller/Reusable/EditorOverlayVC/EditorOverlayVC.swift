@@ -54,7 +54,7 @@ class EditorOverlayVC: SuperVC {
     var childVC:EditorOverlayContainerVC? {
         return (children.first(where: {
             $0 is UINavigationController
-        }) as? UINavigationController)?.topViewController as? EditorOverlayContainerVC
+        }) as? UINavigationController)?.viewControllers.first as? EditorOverlayContainerVC
     }
     // MARK: - Life-Cycle
     override func didMove(toParent parent: UIViewController?) {
@@ -68,8 +68,10 @@ class EditorOverlayVC: SuperVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let navigation = children.first(where: {$0 is UINavigationController}) as? UINavigationController {
-            navigation.delegate = self
-            navigation.setNavigationBarHidden(true, animated: true)
+            if navigation.delegate == nil {
+                navigation.delegate = self
+                navigation.setNavigationBarHidden(true, animated: true)
+            }
         }
         if !isPopup {
             primaryConstraints(.small).forEach { constraint in
@@ -147,6 +149,13 @@ class EditorOverlayVC: SuperVC {
         }
     }
     
+    func toggleNavigationController(appeared viewController:UIViewController?, countVC:Bool = true) {
+        updateMainConstraints(viewController: viewController)
+        let vcCount = (viewController?.navigationController?.viewControllers.count ?? 0) == 1
+        let hidden = countVC ? vcCount : viewController == childVC
+        viewController?.navigationController?.setNavigationBarHidden(hidden, animated: true)
+    }
+    
     // MARK: - IBAction
     @IBAction func addPressed(_ sender: UIButton) {
         if attachmentDelegate != nil {
@@ -182,7 +191,6 @@ fileprivate extension EditorOverlayVC {
                     $0.setTitleColor(self.textColor, for: .normal)
                     $0.tintColor = self.textColor
                 }
-              //  UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: self.textColor]
             }
         }
         animation.startAnimation()
@@ -190,12 +198,9 @@ fileprivate extension EditorOverlayVC {
 }
 
 extension EditorOverlayVC:UINavigationControllerDelegate {
-    
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         UIApplication.shared.keyWindow?.endEditing(true)
-        updateMainConstraints(viewController: viewController)
-        let hidden = navigationController.viewControllers.count >= 2
-        navigationController.setNavigationBarHidden(!hidden, animated: true)
+        toggleNavigationController(appeared: viewController)
     }
 }
 
@@ -277,7 +282,8 @@ extension EditorOverlayVC {
         let vc = EditorOverlayVC.configure(attechemntData: attachmentData, delegate: delegate)
         vc.isPopup = true
         parent.addChild(child: vc, constaits: vc.primaryConstraints(.small))
-        vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.topAnchor, constant: -10).isActive = true
+        vc.view.translatesAutoresizingMaskIntoConstraints = false
+        vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.bottomAnchor, constant: attachmentData?.attachmentType == .text ? -40 : -20).isActive = true
         vc.loadSeectionIndocator(bottomView: bottomView, parent: parent)
         vc.animateShow(show: true)
     }

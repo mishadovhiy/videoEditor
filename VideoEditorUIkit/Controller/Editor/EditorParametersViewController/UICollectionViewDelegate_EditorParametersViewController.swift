@@ -19,7 +19,7 @@ extension EditorParametersViewController:UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCollectionCell", for: indexPath) as! AssetPreviewCell
-        cell.set(previewImage: viewModel?.tableData[indexPath.section].previews[indexPath.row].image, secondText: "")
+        cell.set(time: viewModel?.tableData[indexPath.section].previews[indexPath.row].time ?? 0, asset: self.parentVC?.playerVC?.movie)
         return cell
     }
     
