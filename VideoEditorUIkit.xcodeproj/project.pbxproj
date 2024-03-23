@@ -47,7 +47,7 @@
 		8D18F1952B9F466A00194F34 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18B2B9F466A00194F34 /* AVAsset.swift */; };
 		8D18F1962B9F466A00194F34 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18C2B9F466A00194F34 /* String.swift */; };
 		8D18F1972B9F466A00194F34 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18D2B9F466A00194F34 /* UIImage.swift */; };
-		8D18F1982B9F466A00194F34 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18E2B9F466A00194F34 /* CGFloat.swift */; };
+		8D18F1982B9F466A00194F34 /* CGFloat+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F18E2B9F466A00194F34 /* CGFloat+Double.swift */; };
 		8D18F1992B9F466A00194F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D18F18F2B9F466A00194F34 /* Assets.xcassets */; };
 		8D18F19A2B9F466A00194F34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F1902B9F466A00194F34 /* Constants.swift */; };
 		8D1BEE922BA642F300EB9246 /* audio1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8D1BEE912BA63C9000EB9246 /* audio1.m4a */; };
@@ -133,7 +133,7 @@
 		8D18F18B2B9F466A00194F34 /* AVAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAsset.swift; sourceTree = "<group>"; };
 		8D18F18C2B9F466A00194F34 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8D18F18D2B9F466A00194F34 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		8D18F18E2B9F466A00194F34 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		8D18F18E2B9F466A00194F34 /* CGFloat+Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Double.swift"; sourceTree = "<group>"; };
 		8D18F18F2B9F466A00194F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D18F1902B9F466A00194F34 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8D1BEE912BA63C9000EB9246 /* audio1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio1.m4a; sourceTree = "<group>"; };
@@ -388,7 +388,7 @@
 				8DA694A82BA6E9540086AAEC /* NSTextAlignment.swift */,
 				8D18F18D2B9F466A00194F34 /* UIImage.swift */,
 				8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */,
-				8D18F18E2B9F466A00194F34 /* CGFloat.swift */,
+				8D18F18E2B9F466A00194F34 /* CGFloat+Double.swift */,
 				8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */,
 				8DF1A8952BA219E4004ACFFC /* CGFont.swift */,
 				8DF1A8972BA25ABD004ACFFC /* CALayer.swift */,
@@ -687,7 +687,7 @@
 				8D18F1942B9F466A00194F34 /* Extensions_UIKit.swift in Sources */,
 				8DA694A92BA6E9540086AAEC /* NSTextAlignment.swift in Sources */,
 				8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */,
-				8D18F1982B9F466A00194F34 /* CGFloat.swift in Sources */,
+				8D18F1982B9F466A00194F34 /* CGFloat+Double.swift in Sources */,
 				8D18F1972B9F466A00194F34 /* UIImage.swift in Sources */,
 				8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */,
 				8D18F1522B9F45EE00194F34 /* AssetPreviewCell.swift in Sources */,

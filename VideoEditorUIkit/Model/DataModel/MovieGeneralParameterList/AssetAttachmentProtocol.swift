@@ -97,7 +97,7 @@ extension MovieGeneralParameterList {
         }
         
         public static func with(type:InstuctionAttachmentType,
-            _ populator: (inout Self) throws -> ()
+                                _ populator: (inout Self) throws -> ()
         ) rethrows -> Self {
             var message = Self(attachmentType: type)
             try populator(&message)
@@ -110,22 +110,12 @@ extension MovieGeneralParameterList {
             for i in 0..<Int(count) {
                 array.append(i)
             }
-           // if loadPreviews {
-                return .init(time:.with({
-                    $0.duration = asset.timeMapping.source.duration.seconds
-                }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({
-                    let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
-               //     let previewTime:CMTime = .init(seconds: asset.timeMapping.source.start.seconds + plus, preferredTimescale: VideoEditorModel.timeScale)
-              //      let image = composition?.preview(time: previewTime)
-                    return .init(time: plus)
-                }))
-//            } else {
-//                return .init(time: .with({
-//                    $0.duration = asset.timeMapping.source.duration.seconds
-//                }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({_ in
-//                    .init(nil)
-//                }))
-//            }
+            return .init(time:.with({
+                $0.duration = asset.timeMapping.source.duration.seconds
+            }), attachmentType: nil, assetName: asset.description, previews: array.compactMap({
+                let plus = (CGFloat($0) / CGFloat(Int(count))) * asset.timeMapping.source.end.seconds
+                return .init(time: plus)
+            }))
         }
     }
 }
@@ -164,7 +154,7 @@ extension MovieGeneralParameterList {
         }
         
         public static func with(type:InstuctionAttachmentType,
-            _ populator: (inout Self) throws -> ()
+                                _ populator: (inout Self) throws -> ()
         ) rethrows -> Self {
             var message = Self(attachmentType: type)
             try populator(&message)

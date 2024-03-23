@@ -19,7 +19,7 @@ class StackAssetAttachmentView:UIView {
     var attachmentType:InstuctionAttachmentType? {
         return data.first?.attachmentType ?? mediaType
     }
-    
+    private var totalVideoDuration:Double = 0
     private var layerStack:UIStackView? {
         return self.subviews.first(where: {$0 is UIStackView}) as? UIStackView
     }
@@ -171,7 +171,7 @@ extension StackAssetAttachmentView {
         let layer = isEmpty ? 0 : self.data.layerNumber(item: data)
         if let layer,
            let toView = layerStack?.arrangedSubviews[layer] {
-            AssetRawView.create(superView: toView, data: data, vcSuperView: delegate!.vc.view, editRowPressed: {row,view in 
+            AssetRawView.create(superView: toView, data: data, vcSuperView: delegate!.vc.view, totalVideoDuration: totalVideoDuration, editRowPressed: {row,view in
                 self.editRowPressed(row, view:view)
             }, panEnded: assetChangePanEnded(_:), created:created)
             toView.isHidden = false
@@ -312,7 +312,7 @@ fileprivate extension StackAssetAttachmentView {
 }
 
 extension StackAssetAttachmentView {
-    static func create(_ data:[AssetAttachmentProtocol], type:InstuctionAttachmentType, delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
+    static func create(_ data:[AssetAttachmentProtocol], type:InstuctionAttachmentType, totalVideoDuration:Double, delegate:AssetAttachmentViewDelegate?, to view:UIStackView) {
         let new = StackAssetAttachmentView.init(frame: .zero)
         new.mediaType = type
         new.data = data

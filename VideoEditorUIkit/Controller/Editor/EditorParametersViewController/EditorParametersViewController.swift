@@ -132,6 +132,10 @@ class EditorParametersViewController: SuperVC {
     }
     
     // MARK: private
+    var videoDuration:Double {
+        return parentVC?.viewModel?.editorModel.movieDuration ?? 0
+    }
+    
     private func updateParentScroll(manual:Bool = false) {
         let max = scrollView.contentSize.width
         let percent = (scrollView.contentOffset.x + scrollView.contentInset.left) / (max - self.view.frame.width)
@@ -228,12 +232,12 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     
     func overlayChangedAttachment(_ newData: AssetAttachmentProtocol?) {
         parentVC?.playerVC?.editingAttachmentView?.data = newData as? MovieAttachmentProtocol
-        (viewModel?.editingView as? AssetRawView)?.updateText(newData)
+        (viewModel?.editingView as? AssetRawView)?.updateText(newData, totalVideoDuration: videoDuration)
     }
     
     func overlayRemoved() {
         parentVC?.playerVC?.editorOverlayRemoved()
-        (viewModel?.editingView as? AssetRawView)?.updateText(viewModel?.editingAssetHolder)
+        (viewModel?.editingView as? AssetRawView)?.updateText(viewModel?.editingAssetHolder, totalVideoDuration: videoDuration)
         viewModel?.editingView = nil
         assetStackView.subviews.forEach {
             if let view = $0 as? StackAssetAttachmentView {
@@ -269,7 +273,7 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
             $0.duration = durationPercent
         })
         if let view = viewModel?.editingView as? AssetRawView {
-            view.updatePlayPercent(startPercent)
+            view.updatePlayPercent(startPercent, totalDuration: videoDuration)
         }
 
     }

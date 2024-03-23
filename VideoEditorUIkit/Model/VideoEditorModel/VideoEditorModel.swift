@@ -28,6 +28,7 @@ class VideoEditorModel {
         self.prepare = .init(delegate: self)
     }
     
+    var movieDuration:Double = 0
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     static var renderSize:CGSize = .init(width: 1920, height: 1080)//1920x1080
@@ -165,6 +166,7 @@ fileprivate extension VideoEditorModel {
     }
     
     private func videoAdded(canReload:Bool = true) async {
+        movieDuration = await movie?.duration().seconds ?? 0
         if DB.db.movieParameters.editingMovie?.texts.count ?? 0 != 0 && canReload {
             await self.presenter?.reloadUI()
         } else {

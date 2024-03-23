@@ -181,10 +181,11 @@ fileprivate extension PlayerSuperVC {
 
 //MARK: - setupUI
 fileprivate extension PlayerSuperVC {
-    private func performTimeChanged(_ sendond:TimeInterval) {
-        let percent = sendond / (movie?.duration.seconds ?? 0)
+    private func performTimeChanged(_ seconds:TimeInterval) {
+        let percent = seconds / (movie?.duration.seconds ?? 0)
         playProgressView?.progress = Float(percent)
-        durationLabel?.text = "\(Int(sendond))/\(Int(movie?.duration.seconds ?? 0))"
+        playProgressView?.tintColor = .type(.white)
+        durationLabel?.text = seconds.stringTime + "/" + (movie?.duration.seconds.stringTime ?? "-")
     }
     
     private func pauseStateChanged(_ pause:Bool) {

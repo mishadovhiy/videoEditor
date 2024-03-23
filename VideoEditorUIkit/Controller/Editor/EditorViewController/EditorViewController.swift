@@ -189,7 +189,7 @@ class EditorViewController: SuperVC {
         songData.attachmentURL = url.absoluteString
         assetParametersVC?.viewModel?.editingAsset = songData
         presentingOverlayVC?.updateData(nil)
-        (assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(songData)
+        (assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(songData, totalVideoDuration: viewModel?.editorModel.movieDuration ?? 0)
     }
 }
 
@@ -233,7 +233,7 @@ extension EditorViewController:UIImagePickerControllerDelegate, UINavigationCont
         {
                 asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
                 presentingOverlayVC?.updateData(nil)
-                assetView.updateText(asset)
+                assetView.updateText(asset, totalVideoDuration: viewModel?.editorModel.movieDuration ?? 0)
                 playerVC?.editingAttachmentView?.data = asset
             } else if let videoURL = url {
                 videoSelectedFrom(url: videoURL)

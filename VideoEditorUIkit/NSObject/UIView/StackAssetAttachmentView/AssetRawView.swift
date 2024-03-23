@@ -41,6 +41,7 @@ class AssetRawView:UIView {
     
     func updateView(data:AssetAttachmentProtocol?,
                     updateConstraints:Bool = true,
+                    totalVideoDuration:Double,
                     editRowPressed:@escaping(_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->(),
                     panEnded:@escaping(_ view:AssetRawView)->()
     ) {
@@ -48,7 +49,7 @@ class AssetRawView:UIView {
         self.data = data
         print(data.debugDescription, " data ")
         self.editRowPressed = editRowPressed
-        updateText(data)
+        updateText(data, totalVideoDuration: totalVideoDuration)
         self.backgroundColor = data?.color
       //  self.layer.zPosition = 999
         if updateConstraints {
@@ -147,18 +148,18 @@ class AssetRawView:UIView {
         animation.startAnimation()
     }
     
-    func updateText(_ text:AssetAttachmentProtocol?) {
+    func updateText(_ text:AssetAttachmentProtocol?, totalVideoDuration:Double) {
         if superview == nil {
             return
         }
         self.data = text
         titleLabel?.text = text?.assetName
-        updatePlayPercent(text?.time.start ?? 0)
+        updatePlayPercent(text?.time.start ?? 0, totalDuration: totalVideoDuration)
         updateConstraint()
     }
     
-    func updatePlayPercent(_ percent:CGFloat) {
-        self.timaLabel?.text = "\(percent)"
+    func updatePlayPercent(_ percent:CGFloat, totalDuration:CGFloat) {
+        self.timaLabel?.text = "\(Double(percent * totalDuration).stringTime(.default))"
     }
 }
 
@@ -166,6 +167,7 @@ extension AssetRawView {
     static func create(superView:UIView?, 
                        data:AssetAttachmentProtocol?,
                        vcSuperView:UIView,
+                       totalVideoDuration:Double,
                        editRowPressed:@escaping(_ row: AssetAttachmentProtocol?, _ view:AssetRawView?)->(),
                        panEnded:@escaping(_ view:AssetRawView) -> (),
                        created:((_ newView:AssetRawView)->())? = nil
@@ -179,7 +181,7 @@ extension AssetRawView {
         new.heightAnchor.constraint(lessThanOrEqualToConstant: 30).isActive = true
         new.bottomAnchor.constraint(lessThanOrEqualTo: new.superview!.bottomAnchor).isActive = true
         new.createHeader(vcSuperView: vcSuperView)
-        new.updateView(data: data, updateConstraints: false, editRowPressed: editRowPressed, panEnded: panEnded)
+        new.updateView(data: data, updateConstraints: false, totalVideoDuration: totalVideoDuration, editRowPressed: editRowPressed, panEnded: panEnded)
         new.createPans()
         new.layer.cornerRadius = 7
         created?(new)

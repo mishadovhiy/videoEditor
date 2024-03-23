@@ -71,7 +71,7 @@ extension EditorParametersViewController {
             {
                 stack.updateView(dataRow.0)
             } else {
-                StackAssetAttachmentView.create(dataRow.0, type: dataRow.1, delegate: self, to: assetStackView)
+                StackAssetAttachmentView.create(dataRow.0, type: dataRow.1, totalVideoDuration: videoDuration, delegate: self, to: assetStackView)
             }
         })
     }
