@@ -40,6 +40,7 @@ class VideoEditorModel {
     //AVAssetExportPreset640x480
     //AVAssetExportPresetHEVCHighestQuality
     
+    
     func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {
             let loadedMovie = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)

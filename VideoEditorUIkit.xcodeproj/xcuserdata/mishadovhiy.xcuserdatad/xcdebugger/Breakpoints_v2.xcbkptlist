@@ -4347,8 +4347,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
             <Locations>
@@ -4855,8 +4855,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5014,8 +5014,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "addAttachmentPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5110,8 +5110,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
             <Locations>
@@ -5618,8 +5618,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "movie"
             landmarkType = "24">
          </BreakpointContent>
