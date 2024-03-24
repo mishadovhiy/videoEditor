@@ -66,7 +66,7 @@ struct AttachentVideoLayerModel {
        // size.height *= text.zoom
         let x = (text.position.x * vidSize.width)
         let y = (text.position.y * vidSize.height)
-        print("ladcasx ", text.position)
+        print("textPosition: ", text.position)
         textLayer.frame = .init(origin: .init(x: x, y: y), size: .init(width: size.width, height: size.height))
         textLayer.zoom(value: text.zoom)
         setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: vidSize, layerSize: size)
