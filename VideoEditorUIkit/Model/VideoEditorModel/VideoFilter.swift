@@ -49,7 +49,6 @@ struct VideoFilter {
             timeHolder = request.compositionTime
             if request.compositionTime >= compositionDuration && !completed {
                 completed = true
-                request.renderSize
                 print("filter apllied")
                 timeHolder = nil
                 completion((output?.url))

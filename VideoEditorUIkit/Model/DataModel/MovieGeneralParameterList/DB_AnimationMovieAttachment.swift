@@ -14,7 +14,7 @@ extension DB.DataBase.MovieParametersDB {
         
         var needScale:Bool {
             get {
-                return (dict["needScale"] as? Int ?? 1) == 1
+                return (dict["needScale"] as? Int ?? 0) == 1
             }
             set {
                 dict.updateValue(newValue ? 1 : 0, forKey: "needScale")
