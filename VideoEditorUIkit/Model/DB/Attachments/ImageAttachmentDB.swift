@@ -169,7 +169,7 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
             }
             let y:CGFloat = .init(string: dict["y"] as? String)
             let x:CGFloat = .init(string: dict["x"] as? String)
-            return .init(x: x < 0 ? 0 : (x > 0.95 ? 0.95 : x), y: y < 0 ? 0 : (y > 0.95 ? 0.95 : y))
+            return .init(x: x < -0.2 ? -0.2 : (x > 0.95 ? 0.95 : x), y: y < -0.2 ? -0.2 : (y > 0.95 ? 0.95 : y))
         }
         set {
             dict.updateValue([
