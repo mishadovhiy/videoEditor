@@ -1,8 +1,9 @@
-project state: not completed
-
 ## Technical overview of current features
 - Combine videos with AVMutableComposition 
-- add CaLayer to AVAsset with animation with CABasicAnimation
+- add CALayer to AVAsset with animation with CABasicAnimation
+- add CIFilter
+- add sound
+- export video to Photo Library
 
 
 # Auto scroll assets when video is playing
