@@ -55,7 +55,7 @@ extension SongAttachmentDB:AssetAttachmentProtocol {
             return .with({
                 $0.duration = 1
                 $0.start = 0
-            })//.init(dict: dict["time"] as? [String:Any] ?? [:])
+            })
         }
         set {
             dict.updateValue(newValue.dict, forKey: "time")
