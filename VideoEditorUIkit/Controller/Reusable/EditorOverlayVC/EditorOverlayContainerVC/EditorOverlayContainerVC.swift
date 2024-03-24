@@ -199,7 +199,6 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         viewModel?.textfieldEditing = false
         parentVC?.updateMainConstraints(viewController: self)
-        collectionView.reloadSections(.init(integer: 1))
         collectionView.reloadData()
         canReloadSubviews = true
     }

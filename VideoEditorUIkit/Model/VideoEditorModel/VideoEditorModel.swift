@@ -32,7 +32,7 @@ class VideoEditorModel {
     var movieDuration:Double = 0
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
-    static var renderSize:CGSize = .init(width: 1920, height: 1080)//1920x1080
+    static var renderSize:CGSize = .init(width: 1080, height: 1080)//1920x1080
     static let exportPresetName: String = AVAssetExportPresetHEVCHighestQuality
     //AVAssetExportPresetHEVC1920x1080
     //AVAssetExportPresetHighestQuality

@@ -12,8 +12,8 @@ extension UIFont {
         return font.font
     }
     
-    func calculate(inWindth:CGFloat? = nil, attributes:[NSAttributedString.Key: Any]? = nil, string:String, maxSize:CGSize? = nil) -> CGSize {
-        let defaultWidth = UIApplication.shared.keyWindow?.frame.width ?? 100
+    func calculate(inWindth:CGSize? = nil, attributes:[NSAttributedString.Key: Any]? = nil, string:String, maxSize:CGSize? = nil) -> CGSize {
+        let defaultWidth = UIApplication.shared.keyWindow?.frame ?? .zero
         var textAttributes: [NSAttributedString.Key: Any] = [.font: self]
         attributes?.forEach({
             textAttributes.updateValue($0.value, forKey: $0.key)
@@ -21,7 +21,7 @@ extension UIFont {
         let attributedText = NSAttributedString(string: string == "" ? "-" : string, attributes: textAttributes)
         print(attributedText, " gterfwdqswefrg")
         print(inWindth, " gerfwdq ", defaultWidth)
-        let boundingRect = attributedText.boundingRect(with: CGSize(width: inWindth ?? defaultWidth, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
+        let boundingRect = attributedText.boundingRect(with: inWindth ?? defaultWidth.size, options: .usesLineFragmentOrigin, context: nil)
         var size = CGSize(width: ceil(boundingRect.size.width), height: ceil(boundingRect.size.height))
         if let maxSize {
             if size.width >= maxSize.width {

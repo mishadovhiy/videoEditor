@@ -66,7 +66,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegateFlowLayout {
             return .init(width: 150, height: viewHeight)
         default:
             let font = UIFont.systemFont(ofSize: CGFloat(12), weight: .bold)
-            let textWidth = font.calculate(inWindth:view.frame.width, attributes:[.font:font], string: collectionData[indexPath.row].title).width
+            let textWidth = font.calculate(inWindth:view.frame.size, attributes:[.font:font], string: collectionData[indexPath.row].title).width
             print(textWidth, " efrwdesax")
             return .init(width: textWidth <= 80 ? 80 : textWidth, height: viewHeight)
         }

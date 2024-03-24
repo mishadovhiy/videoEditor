@@ -22,9 +22,12 @@ struct AttachentVideoLayerModel {
     
     private func add(to layer: CALayer, videoSize: CGSize, image:ImageAttachmentDB, isPreview:Bool = false) -> CALayer {
         print("add image: ", image)
+        let vidSize = isPreview ? layer.frame.size : videoSize
         let layer = CALayer()
         layer.name = AttachentVideoLayerModel.textLayerName
-        layer.frame = .init(origin: image.position, size: .init(width: (videoSize.width / 2) * image.zoom, height: (videoSize.height / 2) * image.zoom))
+        let x = (image.position.x * vidSize.width)
+        let y = (image.position.y * vidSize.height)
+        layer.frame = .init(origin: .init(x: x, y: y), size: .init(width: (videoSize.width / 2) * image.zoom, height: (videoSize.height / 2) * image.zoom))
         let imageData = image.image != nil ? UIImage(data: image.image!) : nil
         guard let imageData = (imageData ?? UIImage(named: "addImage"))?.withTintColor(image.color, renderingMode: .alwaysTemplate) else {
             layer.backgroundColor = UIColor.red.cgColor
@@ -32,11 +35,15 @@ struct AttachentVideoLayerModel {
         }
         layer.contents = imageData.cgImage
         layer.contentsGravity = .resizeAspect
+        layer.borderColor = image.borderColor.cgColor
+        layer.borderWidth = image.borderWidth * 10
+        layer.masksToBounds = image.borderRadius == 0 ? false : true
         setupLayer(layer: layer, data: image, isPreview: isPreview, videoSize: videoSize, layerSize: videoSize)
         return layer
     }
     
     private func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false) -> CALayer {
+        let vidSize = isPreview ? layer.frame.size : videoSize
         let font = UIFont.systemFont(ofSize: text.fontSize, weight: text.fontWeight)
         let attributes:[NSAttributedString.Key : Any] = [
             .font: font,
@@ -55,11 +62,14 @@ struct AttachentVideoLayerModel {
         textLayer.alignmentMode = text.textAlighment.textLayerAligmentMode
         textLayer.isWrapped = true
         textLayer.foregroundColor = text.color.cgColor
-        let size = UIFont.systemFont(ofSize: font.pointSize + 8, weight: text.fontWeight).calculate(inWindth: videoSize.width, attributes: attributes, string: attributedText.string, maxSize: videoSize)
+        let size = UIFont.systemFont(ofSize: font.pointSize + 8, weight: text.fontWeight).calculate(inWindth:vidSize, attributes: attributes, string: attributedText.string)
        // size.height *= text.zoom
-        textLayer.frame = .init(origin: text.position, size: .init(width: videoSize.width, height: size.height))
+        let x = (text.position.x * vidSize.width)
+        let y = (text.position.y * vidSize.height)
+        print("ladcasx ", text.position)
+        textLayer.frame = .init(origin: .init(x: x, y: y), size: .init(width: size.width, height: size.height))
         textLayer.zoom(value: text.zoom)
-        setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: videoSize, layerSize: size)
+        setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: vidSize, layerSize: size)
         return textLayer
     }
 }
@@ -73,9 +83,6 @@ fileprivate extension AttachentVideoLayerModel {
             layer.borderWidth = 0.5
             layer.cornerRadius = 3
         }
-        layer.borderColor = data.borderColor.cgColor
-        layer.borderWidth = data.borderWidth * 10
-        layer.masksToBounds = data.borderRadius == 0 ? false : true
         layer.cornerRadius = data.borderRadius * 10
         layer.backgroundColor = data.backgroundColor.cgColor
         layer.opacity = Float(data.opacity)

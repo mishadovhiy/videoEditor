@@ -184,10 +184,12 @@ extension TextAttachmentDB:MovieAttachmentProtocol {
     
     var position:CGPoint {
         get {
-            let dict = dict["position"] as? [String:Any] ?? [:]
+            guard let dict = dict["position"] as? [String:Any] else {
+                return .init(x: 0.2, y: 0.2)
+            }
             let x:CGFloat = .init(string: dict["x"] as? String)
             let y:CGFloat = .init(string: dict["y"] as? String)
-            return .init(x: x == 0 ? 0 : x, y: y == 0 ? 200 : y)
+            return .init(x: x < 0 ? 0 : (x > 0.95 ? 0.95 : x), y: y < 0 ? 0 : (y > 0.95 ? 0.95 : y))
         }
         set {
             dict.updateValue([

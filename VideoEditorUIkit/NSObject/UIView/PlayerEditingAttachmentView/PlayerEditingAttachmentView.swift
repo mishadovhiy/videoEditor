@@ -43,7 +43,7 @@ class PlayerEditingAttachmentView: UIView {
                     $0.removeFromSuperlayer()
                 }
             })
-            if let newLayer = model.add(to: layer, videoSize: layer.frame.size, data: text, isPreview: true) {
+            if let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, data: text, isPreview: true) {
                 layer.addSublayer(newLayer)
             }
             if !force {
@@ -56,12 +56,10 @@ class PlayerEditingAttachmentView: UIView {
     
     @objc private func panGesture(_ sender:UIPanGestureRecognizer) {
         let position = sender.translation(in: self)
+        let resultes:CGPoint = .init(x: position.x / (self.superview?.frame.width ?? 0), y: position.y / (self.superview?.frame.height ?? 0))
+        let value = data?.position ?? .zero
+        data?.position = .init(x: resultes.x + value.x, y: value.y + resultes.y)
         sender.setTranslation(.zero, in: self)
-        let currentPosition = attachmentLayer?.frame ?? .zero
-        attachmentLayer?.frame.origin = .init(x: currentPosition.origin.x + position.x, y: currentPosition.minY + position.y)
-        if sender.state.isEnded {
-            data?.position = attachmentLayer?.frame.origin ?? .zero
-        }
     }
     
     @objc private func pinchGesture(_ sender: UIPinchGestureRecognizer) {
@@ -70,13 +68,15 @@ class PlayerEditingAttachmentView: UIView {
         }
         let currentScale = attachmentLayer.frame.size.width / attachmentLayer.bounds.size.width
         let newScale = currentScale*sender.scale
-        attachmentLayer.zoom(value: newScale)
         if let _ = data as? TextAttachmentDB {
             sender.scale = 1
         } else {
             sender.scale = newScale
         }
         data?.zoom = newScale
+        if sender.state.isEnded {
+            dataUpdated()
+        }
     }
 }
 

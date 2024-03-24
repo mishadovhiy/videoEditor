@@ -3288,22 +3288,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "612A33B1-70A1-49BF-98B0-7AD114F6EFBB"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "dataUpdated(force:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F4DD2593-1DB8-40A2-B9D9-A660D23CDE7D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -4503,8 +4487,8 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/AttachentVideoLayer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "add(to:videoSize:text:isPreview:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6077,6 +6061,38 @@
             startingLineNumber = "180"
             endingLineNumber = "180"
             landmarkName = "closePressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9F15CD45-4F7B-42FD-8B78-C30E4E8DCF6E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoEditorUIkit/NSObject/UIView/PlayerEditingAttachmentView/PlayerEditingAttachmentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "pinchGesture(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "07010D12-5F30-4256-BED7-A6123AEAB612"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoEditorUIkit/Model/VideoEditorModel/AttachentVideoLayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "add(to:videoSize:text:isPreview:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

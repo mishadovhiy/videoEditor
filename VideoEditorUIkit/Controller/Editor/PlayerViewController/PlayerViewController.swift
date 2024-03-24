@@ -90,7 +90,7 @@ class PlayerViewController: PlayerSuperVC {
 // MARK: loadUI
 fileprivate extension PlayerViewController {
     private func loadEditingView(_ textDB:MovieAttachmentProtocol) {
-        let newView = PlayerEditingAttachmentView.configure(data: textDB, dataChanged: overlayEdited(_:), videoSize: VideoEditorModel.renderSize)
+        let newView = PlayerEditingAttachmentView.configure(data: textDB, dataChanged: overlayEdited(_:), videoSize: movie?.tracks(withMediaType: .video).first?.naturalSize ?? VideoEditorModel.renderSize)
         view.addSubview(newView)
     }
 }
