@@ -91,7 +91,8 @@ class EditorViewController: SuperVC {
                 self.viewModel?.editorModel.loadVideo(url, canShowError: false)
             }
         } else {
-            setViewType(.addingVideos)
+            viewModel?.viewType = .addingVideos
+            videoAdded()
         }
     }
     
@@ -254,17 +255,21 @@ extension EditorViewController:UIImagePickerControllerDelegate, UINavigationCont
 
 extension EditorViewController:PlayerViewControllerPresenter {
     func reloadUI() {
-        coordinator?.start()
-        view.removeFromSuperview()
-        viewModel?.deinit()
-        removeFromParent()
+        mainEditorVC?.canSetHidden = true
+        viewModel?.editorModel.movie = nil
+        viewModel?.editorModel.movieHolder = nil
+        loadVideoDB()
+//        coordinator?.start()
+//        view.removeFromSuperview()
+//        viewModel?.deinit()
+//        removeFromParent()
     }
     
     func clearDataPressed() {
-        movieURL = nil
         Task {
             DB.db.movieParameters = .init(dict: [:])
             await MainActor.run {
+                self.movieURL = nil
                 self.reloadUI()
             }
         }
@@ -296,9 +301,14 @@ extension EditorViewController:VideoEditorModelPresenter {
     @MainActor func videoAdded() {
         assetParametersVC?.assetChanged()
         previewImagesUpdated(image: nil)
-        self.playerVC?.play(replacing: true)
         setViewType(viewModel?.viewType ?? .addingVideos)
-        playerVC?.endRefreshing()
+        playerVC?.endRefreshing(completion: {
+            if self.movieURL == nil {
+                self.playerVC?.removePlayer()
+            } else {
+                self.playerVC?.play(replacing: true)
+            }
+        })
     }
     
     @MainActor func errorAddingVideo(_ text:MessageContent?) {
@@ -315,12 +325,22 @@ fileprivate extension EditorViewController {
             viewModel = .init(editorPresenter: self)
         }
         loadChildrens()
-        loadVideo(movieUrl: lastEditedVideoURL)
+        loadVideoDB()
         trackContainerView.layer.zPosition = 2
         mainEditorVC?.overlaySizeChanged = {
             self.setViewType(self.viewModel?.viewType ?? .editing, overlaySize: $0)
         }
         previewImagesUpdated(image: nil)
+    }
+    
+    private func loadVideoDB() {
+        Task {
+            let url = lastEditedVideoURL
+            self.viewModel?.viewType = url == nil ? .addingVideos : .editing
+            await MainActor.run {
+                self.loadVideo(movieUrl: url)
+            }
+        }
     }
     
     private func loadChildrens() {

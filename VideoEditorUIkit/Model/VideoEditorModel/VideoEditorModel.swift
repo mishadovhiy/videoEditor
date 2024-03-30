@@ -199,7 +199,8 @@ fileprivate extension VideoEditorModel {
     private func videoAdded(canReload:Bool = true) async {
         movieDuration = await movie?.duration().seconds ?? 0
         if DB.db.movieParameters.editingMovie?.texts.count ?? 0 != 0 && canReload {
-            await self.presenter?.reloadUI()
+           // await self.presenter?.reloadUI()
+            await presenter?.videoAdded()
         } else {
             await presenter?.videoAdded()
         }

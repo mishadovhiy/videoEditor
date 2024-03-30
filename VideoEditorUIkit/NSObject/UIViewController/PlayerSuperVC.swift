@@ -143,6 +143,11 @@ class PlayerSuperVC: SuperVC {
         }
     }
     
+    func removePlayer() {
+        playerLayer?.player?.pause()
+        playerLayer?.removeFromSuperlayer()
+    }
+    
     func preparePlayer() { }
     
     //MARK: IBActions
