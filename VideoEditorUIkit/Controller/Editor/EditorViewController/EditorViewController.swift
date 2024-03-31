@@ -251,9 +251,7 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        mediaPicker.dismiss(animated: true) {
-            self.reloadUI()
-        }
+        mediaPicker.dismiss(animated: true)
     }
 }
 

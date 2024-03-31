@@ -57,9 +57,9 @@ struct EditorOverlayContainerVCViewModel {
         var data:[EditorOverlayVC.OverlayCollectionData] = []
         let songData = assetDataHolder as? SongAttachmentDB
         if songData?.attachmentURL ?? "" == "" && !(songData?.selfMovie ?? true) {
-            data.append(.init(title: "Apple Music", didSelect: {
-                self.didPress?(.upload(.appleMusic))
-            }))
+//            data.append(.init(title: "Apple Music", didSelect: {
+//                self.didPress?(.upload(.appleMusic))
+//            }))
             data.append(.init(title: "Files", didSelect: {
                 self.didPress?(.upload(.files))
             }))

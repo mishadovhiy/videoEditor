@@ -199,7 +199,8 @@ fileprivate extension PlayerSuperVC {
         let percent = seconds / (movie?.duration.seconds ?? 0)
         playProgressView?.progress = Float(percent)
         playProgressView?.tintColor = .type(.white)
-        durationLabel?.text = seconds.stringTime + "/" + (movie?.duration.seconds.stringTime ?? "-")
+        let currentTime = percent >= 1 ? movie?.duration.seconds.stringTime : seconds.stringTime
+        durationLabel?.text = (currentTime ?? "") + "/" + (movie?.duration.seconds.stringTime ?? "-")
     }
     
     private func pauseStateChanged(_ pause:Bool) {
