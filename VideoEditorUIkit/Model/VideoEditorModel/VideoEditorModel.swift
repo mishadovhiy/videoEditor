@@ -120,8 +120,12 @@ class VideoEditorModel {
                 }) { success, error in
                     if success {
                         print("Video saved to photo library")
-                        AppDelegate.shared?.coordinator?.showAlert(title: "Video has been exported\nSuccessfully", appearence: .type(.succsess))
+                        
                         Task {
+                            await MainActor.run {
+                                AppDelegate.shared?.coordinator?.showAlert(title: "Video has been exported\nSuccessfully", appearence: .type(.succsess))
+
+                            }
                             await self.videoAdded(canReload:true)
                         }
                     } else {

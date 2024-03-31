@@ -155,6 +155,7 @@ class StackAssetAttachmentView:UIView {
 // MARK: - updateUI
 extension StackAssetAttachmentView {
     public func updateView(_ data:[AssetAttachmentProtocol]? = nil) {
+        setSelected(false)
         updateSuperViews()
         if let data {
             self.data = data

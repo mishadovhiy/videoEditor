@@ -117,6 +117,23 @@ class EditorParametersViewController: SuperVC {
         }
     }
     
+    override var isAnimating: Bool {
+        get {
+            return parentVC?.isAnimating ?? false
+        }
+        set {
+            parentVC?.isAnimating = newValue
+        }
+    }
+    
+    override func startRefreshing(canReturn: Bool = false, completion: (() -> ())? = nil) {
+        parentVC?.startRefreshing(canReturn: canReturn, completion: completion)
+    }
+    
+    override func endRefreshing(completion: (() -> ())? = nil) {
+        parentVC?.endRefreshing(completion: completion)
+    }
+    
     // MARK: receive
     func assetChanged() {
         guard let viewModel,

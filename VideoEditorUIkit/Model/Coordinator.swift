@@ -78,7 +78,7 @@ extension Coordinator {
     func toPhotoLibrary(delegate:(UIImagePickerControllerDelegate & UINavigationControllerDelegate)?, canVibrate:Bool = true, isVideo:Bool = false) {
         if let loaderVC = delegate as? LoaderVC,
            canVibrate {
-            loaderVC.audioToolBox.vibrate()
+            loaderVC.audioToolBox?.vibrate()
         }
         let vc = UIImagePickerController()
         vc.delegate = delegate

@@ -17,8 +17,8 @@ class PlayerSuperVC: SuperVC {
     }
     
     private var timeObserverIgonre = false
-    private var playTimeChangedAnimation:UIViewPropertyAnimator? = UIViewPropertyAnimator(duration: 0.8, curve: .easeIn)
-    
+    private let playTimeChangedAnimation:UIViewPropertyAnimator? = UIViewPropertyAnimator(duration: 0.8, curve: .easeIn)
+    private let noDataAnimation = UIViewPropertyAnimator(duration: 0.8, curve: .easeIn)
     private var playProgressView:UIProgressView? {
         return view.subviews.first(where: {$0.layer.name == "playProgressView"}) as? UIProgressView
     }
@@ -77,7 +77,6 @@ class PlayerSuperVC: SuperVC {
         playerLayer?.removeFromSuperlayer()
         removeAllObservers()
         playTimeChangedAnimation?.stopAnimation(true)
-        playTimeChangedAnimation = nil
         super.removeFromParent()
     }
     
@@ -129,9 +128,6 @@ class PlayerSuperVC: SuperVC {
         {
             if replacing {
                 player.replaceCurrentItem(with: item)
-            }
-            if player.currentItem != nil && player.currentTime() == player.currentItem?.duration {
-                self.seek(seconds: .zero)
             }
             if player.currentItem?.duration != .zero {
                 preparePlayer()
@@ -309,15 +305,16 @@ fileprivate extension PlayerSuperVC {
     }
     
     private func showNoDataView(show:Bool, completion:(()->())? = nil) {
-        let animation = UIViewPropertyAnimator(duration: 0.15, curve: .easeInOut) {
+        noDataAnimation.stopAnimation(true)
+        noDataAnimation.addAnimations({
             self.noDataView?.alpha = show ? 1 : 0
-        }
+        })
         if let completion {
-            animation.addCompletion({ _ in
+            noDataAnimation.addCompletion({ _ in
                 completion()
             })
         }
-        animation.startAnimation()
+        noDataAnimation.startAnimation()
     }
 }
 

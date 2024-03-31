@@ -13,11 +13,22 @@ class LoaderVC:BaseVC {
     var initialAnimation:Bool {
         return initialAnimationSet
     }
-    let audioToolBox = AudioToolboxService()
+    var audioToolBox:AudioToolboxService?
     
     override func loadView() {
         super.loadView()
+        audioToolBox = .init()
         self.addLoaderView()
+    }
+    
+    override func applicationDidAppeare() {
+        super.applicationDidAppeare()
+        audioToolBox = .init()
+    }
+    
+    override func applicationDidHide() {
+        super.applicationDidHide()
+        audioToolBox = nil
     }
     
     func endRefreshing(completion:(()->())? = nil) {
@@ -27,7 +38,7 @@ class LoaderVC:BaseVC {
     
     func startRefreshing(canReturn:Bool = false, completion:(()->())? = nil) {
         if isAnimating && canReturn {
-            audioToolBox.vibrate(style: .error)
+            audioToolBox?.vibrate(style: .error)
             return
         }
         isAnimating = true

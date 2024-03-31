@@ -16,20 +16,17 @@ class EditorViewController: SuperVC {
     @IBOutlet private weak var mainEditorContainerView: UIView!
     
     var playerVC:PlayerViewController? {
-        if !Thread.isMainThread {
-            print("error Player called from background thread")
-        }
         return self.children.first(where: {$0 is PlayerViewController
         }) as? PlayerViewController
     }
     
     private var assetParametersVC:EditorParametersViewController? {
-        return self.children.first(where: {$0 is EditorParametersViewController
+        children.first(where: {$0 is EditorParametersViewController
         }) as? EditorParametersViewController
     }
     
     var mainEditorVC:EditorOverlayVC? {
-        return self.children.first(where: {
+        children.first(where: {
             ($0 is EditorOverlayVC) && $0.view.layer.name == "mainEditorView"
         }) as? EditorOverlayVC
     }
@@ -45,6 +42,7 @@ class EditorViewController: SuperVC {
     }
     var viewModel:EditorVCViewMode?
     
+    private let setupAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
     // MARK: - Life-cycle
     override func loadView() {
         super.loadView()
@@ -68,11 +66,12 @@ class EditorViewController: SuperVC {
     // MARK: - setup ui
     func setViewType(_ type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         self.viewModel?.viewType = type
-        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+        setupAnimation.stopAnimation(true)
+        setupAnimation.addAnimations {
             self.playerVC?.setUI(type: type)
             self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
         }
-        animation.startAnimation()
+        setupAnimation.startAnimation()
         if view.superview == nil {
             return
         }
@@ -87,13 +86,30 @@ class EditorViewController: SuperVC {
         let url = movieUrl ?? self.movieURL
         if let url {
             setViewType(.editing)
-            playerVC?.startRefreshing {
+            startRefreshing {
                 self.viewModel?.editorModel.loadVideo(url, canShowError: false)
             }
         } else {
             viewModel?.viewType = .addingVideos
             videoAdded()
         }
+    }
+    
+    override var isAnimating: Bool {
+        get {
+            return playerVC?.isAnimating ?? false
+        }
+        set {
+            playerVC?.isAnimating = newValue
+        }
+    }
+    
+    override func startRefreshing(canReturn: Bool = false, completion: (() -> ())? = nil) {
+        playerVC?.startRefreshing(canReturn: canReturn, completion: completion)
+    }
+    
+    override func endRefreshing(completion: (() -> ())? = nil) {
+        playerVC?.endRefreshing(completion: completion)
     }
     
     // MARK: - receive
@@ -132,11 +148,11 @@ class EditorViewController: SuperVC {
         case .toStoredVideos:
             self.coordinator?.toList(tableData: viewModel?.storedVideosTableData(parentVC: self) ?? [])
         case .export:
-            playerVC?.startRefreshing(canReturn: true, completion: {
+            startRefreshing(canReturn: true, completion: {
                 self.viewModel?.editorModel.exportToLibraryPressed()
             })
         case .startAnimating(completed: let completed):
-            self.playerVC?.startRefreshing(completion: completed)
+            startRefreshing(completion: completed)
         }
     }
     
@@ -145,27 +161,27 @@ class EditorViewController: SuperVC {
     }
     
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        playerVC?.startRefreshing(canReturn: true, completion: {
+        startRefreshing(canReturn: true, completion: {
             self.viewModel?.editorModel.addAttachmentPressed(data)
         })
     }
     
     func videoFilterSelected() {
-        playerVC?.startRefreshing(canReturn: true, completion: {
+        startRefreshing(canReturn: true, completion: {
             self.viewModel?.editorModel.addFilterPressed()
         })
     }
     
     private func videoSelectedFrom(url:URL?, controller:UIViewController) {
         if let url {
-            playerVC?.startRefreshing(canReturn: true, completion: {
+            startRefreshing(canReturn: true, completion: {
                 controller.dismiss(animated: true) {
                     self.viewModel?.editorModel.addVideo(url: url)
                 }
             })
         } else {
             print("no video urlss")
-            audioToolBox.vibrate(style: .error)
+            audioToolBox?.vibrate(style: .error)
         }
     }
     
@@ -178,8 +194,9 @@ class EditorViewController: SuperVC {
     }
     
     @IBAction func startEditingPressed(_ sender: Any) {
-        audioToolBox.vibrate()
-        playerVC?.startRefreshing(completion: {
+        audioToolBox?.vibrate()
+        mainEditorVC?.isHidden = true
+        startRefreshing(completion: {
             self.reloadUI()
         })
     }
@@ -204,7 +221,7 @@ class EditorViewController: SuperVC {
     }
     
     private func soundToVideoSelected(_ url:URL, controller:UIViewController) {
-        playerVC?.startRefreshing(canReturn: true, completion: {
+        startRefreshing(canReturn: true, completion: {
             controller.dismiss(animated: true) {
                 self.performSongToVideoSelected(url)
             }
@@ -293,7 +310,9 @@ extension EditorViewController:VideoEditorModelPresenter {
             }
         }
         set {
-            print("moviesetts: ", newValue)
+            if newValue == nil {
+                self.mainEditorVC?.isHidden = true
+            }
             Task {
                 AppDelegate.shared?.fileManager?.clearDirectory(newValue)
             }
@@ -305,7 +324,7 @@ extension EditorViewController:VideoEditorModelPresenter {
         assetParametersVC?.assetChanged()
         previewImagesUpdated(image: nil)
         setViewType(viewModel?.viewType ?? .addingVideos)
-        playerVC?.endRefreshing(completion: {
+        endRefreshing(completion: {
             if self.movieURL == nil {
                 self.playerVC?.removePlayer()
             } else {
@@ -316,8 +335,8 @@ extension EditorViewController:VideoEditorModelPresenter {
     
     @MainActor func errorAddingVideo(_ text:MessageContent?) {
         coordinator?.showErrorAlert(title: text?.title ?? "", description: text?.description)
-        self.playerVC?.endRefreshing()
-        self.playerVC?.pause()
+        endRefreshing()
+        playerVC?.pause()
     }
 }
 

@@ -30,6 +30,7 @@ class AssetRawView:UIView {
     private var widthConstraint:NSLayoutConstraint? {
         constraints.first(where: {$0.firstAttribute == .width && ($0.firstItem as? UIView) == self})
     }//$0.identifier == self.layer.name
+    private let gesturesBegunAnimation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut)
     private let clickService = AudioToolboxService()
     private let panNormalAlpha:CGFloat = 0.1
     var canSelect = true
@@ -51,10 +52,8 @@ class AssetRawView:UIView {
         self.editRowPressed = editRowPressed
         updateText(data, totalVideoDuration: totalVideoDuration)
         self.backgroundColor = data?.color
-      //  self.layer.zPosition = 999
         if updateConstraints {
             self.updateConstraint()
-        //    self.layer.zPosition = 999
         }
     }
     
@@ -69,13 +68,6 @@ class AssetRawView:UIView {
             }
             super.isUserInteractionEnabled = newValue
         }
-    }
-    
-    private var newConstraints:(CGFloat, CGFloat) {
-        let total = parentCollectionWidth ?? 100
-        let x = total * (data?.time.start ?? 0)
-        let width = total * (data?.time.duration ?? 0)
-        return (x, width)
     }
     
     override func removeFromSuperview() {
@@ -138,13 +130,14 @@ class AssetRawView:UIView {
     }
 
     private func gestureBegun(_ begun:Bool, senderView:UIView?) {
-        let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
+        gesturesBegunAnimation.stopAnimation(true)
+        gesturesBegunAnimation.addAnimations {
             senderView?.alpha = begun ? 0.5 : self.panNormalAlpha
             if (senderView?.tag ?? 0) != 0 {
                 self.layer.move(.top, value: begun ? -5 : 0)
             }
         }
-        animation.startAnimation()
+        gesturesBegunAnimation.startAnimation()
     }
     
     func updateText(_ text:AssetAttachmentProtocol?, totalVideoDuration:Double) {
@@ -253,6 +246,13 @@ extension AssetRawView {
     
     final private var parentCollectionWidth:CGFloat? {
         return parentCollectionView?.constraints.first(where: {$0.identifier == "collectionWidth"})?.constant ?? (UIApplication.shared.keyWindow?.frame.width ?? 100)
+    }
+    
+    private var newConstraints:(CGFloat, CGFloat) {
+        let total = parentCollectionWidth ?? 100
+        let x = total * (data?.time.start ?? 0)
+        let width = total * (data?.time.duration ?? 0)
+        return (x, width)
     }
     
     private var parentCollectionView:UICollectionView? {

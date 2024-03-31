@@ -86,15 +86,16 @@ extension EditorOverlayVC {
                     constraint.constant = typeData.value.0
                 }
             }
-            let animation = UIViewPropertyAnimator(duration:isPopup ? 0.2 : 0.29, curve: .easeIn) {
+            updateConstraintAnimation.stopAnimation(true)
+            updateConstraintAnimation.addAnimations {
                 self.view.layoutIfNeeded()
                 self.view.superview?.layoutIfNeeded()
                 viewController?.view.layoutIfNeeded()
             }
-            animation.addAnimations({
+            updateConstraintAnimation.addAnimations({
                 self.toggleButtons(hidden: textFieldEditing ? true : hidden, animated: false)
             }, delayFactor: 0.05)
-            animation.startAnimation()
+            updateConstraintAnimation.startAnimation()
             
             overlaySizeChanged?(type)
         }

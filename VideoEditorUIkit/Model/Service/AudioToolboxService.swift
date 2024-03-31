@@ -9,15 +9,20 @@ import AudioToolbox
 import UIKit
 import CoreHaptics
 
-struct AudioToolboxService {
+class AudioToolboxService {
     private var engine: CHHapticEngine?
     init() {
         do {
             engine = try CHHapticEngine()
             try engine?.start()
         } catch {
+            engine = nil
             print("Error initializing haptic engine: \(error.localizedDescription)")
         }
+    }
+    
+    deinit {
+        engine = nil
     }
     
     func vibrate(style:VibrationStyle = .default) {

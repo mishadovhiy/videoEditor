@@ -59,6 +59,11 @@ class EditorOverlayVC: SuperVC {
             $0 is UINavigationController
         }) as? UINavigationController)?.viewControllers.first as? EditorOverlayContainerVC
     }
+    
+    private let isHiddenAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+    private let appearenceAnimation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut)
+    let updateConstraintAnimation = UIViewPropertyAnimator(duration: 0.24, curve: .easeIn)
+    
     // MARK: - Life-Cycle
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
@@ -117,7 +122,9 @@ class EditorOverlayVC: SuperVC {
     
     /// data: set nil and call before updating AttachmentProtocol
     func updateData(_ data:[OverlayCollectionData]?) {
-        childVC?.updateData(data)
+        if childVC?.navigationController?.viewControllers.count ?? 0 == 1 {
+            childVC?.updateData(data)
+        }
     }
     
     func childChangedData(_ attachmentData:AssetAttachmentProtocol?) {
@@ -130,25 +137,27 @@ class EditorOverlayVC: SuperVC {
             self.view.superview?.isHidden ?? false
         }
         set {
+            isHiddenAnimation.stopAnimation(true)
             let hide = canSetHidden ? newValue : false
-            let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            isHiddenAnimation.addAnimations {
                 self.view.superview?.isHidden = hide
+
             }
             if hide {
-                animation.addAnimations({
+                isHiddenAnimation.addAnimations({
                     self.view.alpha = 0
                 }, delayFactor: 0.18)
-                animation.addCompletion {_ in
+                isHiddenAnimation.addCompletion {_ in
                     self.view.alpha = 1
                 }
             }
-            animation.addCompletion {_ in 
+            isHiddenAnimation.addCompletion {_ in
                 self.childVC?.view.layoutIfNeeded()
                 if !hide {
                     self.childVC?.updateUI()
                 }
             }
-            animation.startAnimation()
+            isHiddenAnimation.startAnimation()
         }
     }
     
@@ -186,11 +195,12 @@ class EditorOverlayVC: SuperVC {
 
 fileprivate extension EditorOverlayVC {
     func animateShow(show:Bool, completion:(()->())? = nil) {
-        let animation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut) {
+        appearenceAnimation.stopAnimation(true)
+        appearenceAnimation.addAnimations {
             self.view.alpha = show ? 1 : 0
             self.view.layer.zoom(value: !show ? 1.2 : 1)
         }
-        animation.addCompletion { _ in
+        appearenceAnimation.addCompletion { _ in
             completion?()
             if show {
                 self.actionButtons.forEach {
@@ -200,7 +210,7 @@ fileprivate extension EditorOverlayVC {
                 }
             }
         }
-        animation.startAnimation()
+        appearenceAnimation.startAnimation()
     }
 }
 
