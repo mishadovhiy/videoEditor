@@ -141,7 +141,6 @@ class EditorOverlayVC: SuperVC {
             let hide = canSetHidden ? newValue : false
             isHiddenAnimation.addAnimations {
                 self.view.superview?.isHidden = hide
-
             }
             if hide {
                 isHiddenAnimation.addAnimations({
