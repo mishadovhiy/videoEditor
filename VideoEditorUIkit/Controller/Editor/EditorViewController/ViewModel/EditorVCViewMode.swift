@@ -78,9 +78,7 @@ extension EditorVCViewMode {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
             .init(title: "Export", image: "export", didSelect: {
-                pressed(.startAnimating(completed: {
-                    pressed(.export)
-                }))
+                pressed(.export)
             }, buttonColor: .type(.darkBlue)),
             deleteCell(pressed: pressed),
 //            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {

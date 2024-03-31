@@ -145,7 +145,7 @@ class StackAssetAttachmentView:UIView {
         }
         if isSelected {return}
         if !canAddNew {
-            audioBox.vibrate(style: .rigid)
+            audioBox.vibrate(style: .error)
             return
         }
         addEmptyPressed()
@@ -246,6 +246,7 @@ fileprivate extension StackAssetAttachmentView {
         layerStack.addConstaits([.left:0, .right:0, .top:0, .bottom:0])
         print(data, " grefgtyh")
         self.updateView(self.data)
+       // self.addConstaits([.height:50])
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emptyRowPressed(_:))))
         self.backgroundColor = Constants.Color.trackColor
         loadLeftHeader()

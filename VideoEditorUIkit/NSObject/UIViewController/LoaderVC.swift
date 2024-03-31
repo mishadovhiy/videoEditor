@@ -8,10 +8,12 @@
 import UIKit
 
 class LoaderVC:BaseVC {
+    var isAnimating:Bool = true
     var initialAnimationSet:Bool = true
     var initialAnimation:Bool {
         return initialAnimationSet
     }
+    let audioToolBox = AudioToolboxService()
     
     override func loadView() {
         super.loadView()
@@ -19,10 +21,16 @@ class LoaderVC:BaseVC {
     }
     
     func endRefreshing(completion:(()->())? = nil) {
+        isAnimating = false
         toggleAnimating(false, completion: completion)
     }
     
-    func startRefreshing(completion:(()->())? = nil) {
+    func startRefreshing(canReturn:Bool = false, completion:(()->())? = nil) {
+        if isAnimating && canReturn {
+            audioToolBox.vibrate(style: .error)
+            return
+        }
+        isAnimating = true
         toggleAnimating(true, completion: completion)
     }
     

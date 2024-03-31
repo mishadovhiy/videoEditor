@@ -132,7 +132,9 @@ class EditorViewController: SuperVC {
         case .toStoredVideos:
             self.coordinator?.toList(tableData: viewModel?.storedVideosTableData(parentVC: self) ?? [])
         case .export:
-            viewModel?.editorModel.exportToLibraryPressed()
+            playerVC?.startRefreshing(canReturn: true, completion: {
+                self.viewModel?.editorModel.exportToLibraryPressed()
+            })
         case .startAnimating(completed: let completed):
             self.playerVC?.startRefreshing(completion: completed)
         }
@@ -143,23 +145,27 @@ class EditorViewController: SuperVC {
     }
     
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-        viewModel?.editorModel.addAttachmentPressed(data)
+        playerVC?.startRefreshing(canReturn: true, completion: {
+            self.viewModel?.editorModel.addAttachmentPressed(data)
+        })
     }
     
     func videoFilterSelected() {
-        playerVC?.startRefreshing(completion: {
+        playerVC?.startRefreshing(canReturn: true, completion: {
             self.viewModel?.editorModel.addFilterPressed()
         })
     }
     
-    private func videoSelectedFrom(url:URL?) {
+    private func videoSelectedFrom(url:URL?, controller:UIViewController) {
         if let url {
-            playerVC?.startRefreshing(completion: {
-                self.viewModel?.editorModel.addVideo(url: url)
+            playerVC?.startRefreshing(canReturn: true, completion: {
+                controller.dismiss(animated: true) {
+                    self.viewModel?.editorModel.addVideo(url: url)
+                }
             })
         } else {
             print("no video urlss")
-            AudioToolboxService().vibrate(style: .heavy)
+            audioToolBox.vibrate(style: .error)
         }
     }
     
@@ -172,13 +178,13 @@ class EditorViewController: SuperVC {
     }
     
     @IBAction func startEditingPressed(_ sender: Any) {
+        audioToolBox.vibrate()
         playerVC?.startRefreshing(completion: {
             self.reloadUI()
         })
     }
     
     func uploadFromPressed(type: EditorOverlayContainerVCViewModel.UploadPressedType) {
-        
         switch type {
         case .appleMusic:
             coordinator?.toAppleMusicList(delegate: self)
@@ -189,12 +195,20 @@ class EditorViewController: SuperVC {
         }
     }
     
-    private func soundToVideoSelected(_ url:URL) {
-        var songData = assetParametersVC?.viewModel?.editingAsset as? SongAttachmentDB ?? SongAttachmentDB()
+    private func performSongToVideoSelected(_ url:URL) {
+        var songData = self.assetParametersVC?.viewModel?.editingAsset as? SongAttachmentDB ?? SongAttachmentDB()
         songData.attachmentURL = url.absoluteString
-        assetParametersVC?.viewModel?.editingAsset = songData
-        presentingOverlayVC?.updateData(nil)
-        (assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(songData, totalVideoDuration: viewModel?.editorModel.movieDuration ?? 0)
+        self.assetParametersVC?.viewModel?.editingAsset = songData
+        self.presentingOverlayVC?.updateData(nil)
+        (self.assetParametersVC?.viewModel?.editingView as? AssetRawView)?.updateText(songData, totalVideoDuration: self.viewModel?.editorModel.movieDuration ?? 0)
+    }
+    
+    private func soundToVideoSelected(_ url:URL, controller:UIViewController) {
+        playerVC?.startRefreshing(canReturn: true, completion: {
+            controller.dismiss(animated: true) {
+                self.performSongToVideoSelected(url)
+            }
+        })
     }
 }
 
@@ -204,10 +218,7 @@ extension EditorViewController: UIDocumentPickerDelegate {
             coordinator?.showErrorAlert(title: "Invalid file URL", description: "Check if file is downloaded")
             return
         }
-        controller.dismiss(animated: true) { [weak self] in
-            print("Selected file URL: \(selectedURL)")
-            self?.soundToVideoSelected(selectedURL)
-        }
+        soundToVideoSelected(selectedURL, controller: controller)
     }
 }
 
@@ -219,9 +230,7 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
             coordinator?.showErrorAlert(title: "Selected Song is not downloaded or DRM protected from copying", description: "Try to download the media in the Apple Music app and try again")
             return
         }
-        mediaPicker.dismiss(animated: true) { [weak self] in
-            self?.soundToVideoSelected(url)
-        }
+        soundToVideoSelected(url, controller: mediaPicker)
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
@@ -247,22 +256,16 @@ extension EditorViewController:UIImagePickerControllerDelegate, UINavigationCont
                 assetView.updateText(asset, totalVideoDuration: viewModel?.editorModel.movieDuration ?? 0)
                 playerVC?.editingAttachmentView?.data = asset
             } else if let videoURL = url {
-                videoSelectedFrom(url: videoURL)
+                videoSelectedFrom(url: videoURL, controller: picker)
             }
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 
 extension EditorViewController:PlayerViewControllerPresenter {
     func reloadUI() {
-        mainEditorVC?.canSetHidden = true
         viewModel?.editorModel.movie = nil
         viewModel?.editorModel.movieHolder = nil
         loadVideoDB()
-//        coordinator?.start()
-//        view.removeFromSuperview()
-//        viewModel?.deinit()
-//        removeFromParent()
     }
     
     func clearDataPressed() {

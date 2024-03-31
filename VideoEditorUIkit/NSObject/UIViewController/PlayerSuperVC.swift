@@ -89,8 +89,8 @@ class PlayerSuperVC: SuperVC {
         })
     }
     
-    override func startRefreshing(completion: (() -> ())? = nil) {
-        super.startRefreshing(completion: completion)
+    override func startRefreshing(canReturn:Bool = false, completion: (() -> ())? = nil) {
+        super.startRefreshing(canReturn: canReturn, completion: completion)
         showNoDataView(show: false)
     }
     

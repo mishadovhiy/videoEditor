@@ -33,6 +33,8 @@ class EditorParametersViewController: SuperVC {
         return .init(x: frame.width / 2, y: 0)
     }
     
+    private let setupUIAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+    
     // MARK: - life-cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,24 +77,35 @@ class EditorParametersViewController: SuperVC {
     }
     
     private func performSetupUI(type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small, dbParameters:DB.DataBase) {
+        setupUIAnimation.stopAnimation(true)
         let dbHidden = dbParameters.movieParameters.editingMovie?.filtered ?? false
-        let isHidden = type == .addingVideos || overlaySize == .big || dbHidden
-        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+        print("parameterss: ", type)
+        let filterPresented = parentVC?.mainEditorVC?.childVC?.navigationController?.viewControllers.count ?? 0
+        print("efdwefr ", filterPresented)
+        var isHidden = type == .addingVideos || overlaySize == .big || dbHidden
+        if filterPresented != 1 {
+            isHidden = true
+        }
+        let headerStacks = headersStack ?? .init()
         assetStackView.arrangedSubviews.forEach { view in
             if !(view is UICollectionView) {
-                animation.addAnimations {[weak self] in
-                    view.isHidden = isHidden
-                    if let headerView = self?.headersStack.arrangedSubviews.first(where: {$0.tag == view.tag}) {
-                        headerView.isHidden = isHidden
+                setupUIAnimation.addAnimations {
+                    if view.isHidden != isHidden {
+                        view.isHidden = isHidden
+                    }
+                    if let headerView = headerStacks.arrangedSubviews.first(where: {$0.tag == view.tag}) {
+                        if headerView.isHidden != isHidden {
+                            headerView.isHidden = isHidden
+                        }
                     }
                 }
             }
         }
         addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit/Export Video"
-        animation.addAnimations { [weak self] in
+        setupUIAnimation.addAnimations { [weak self] in
             self?.collectionView.layer.cornerRadius(at: !isHidden ? .top : .all, value: 18)
         }
-        animation.startAnimation()
+        setupUIAnimation.startAnimation()
     }
     
     private func togglePressScrollContent(_ enable:Bool) {
@@ -248,14 +261,12 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     }
     
     func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
-        parentVC?.playerVC?.startRefreshing(completion: {
-            Task {
-                self.viewModel?.removeEditedAssetDB()
-                await MainActor.run {
-                    self.parentVC?.addAttachmentPressed(attachmentData)
-                }
+        Task {
+            self.viewModel?.removeEditedAssetDB()
+            await MainActor.run {
+                self.parentVC?.addAttachmentPressed(attachmentData)
             }
-        })
+        }
     }
 }
 
