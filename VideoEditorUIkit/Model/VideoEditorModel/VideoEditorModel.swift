@@ -23,7 +23,6 @@ class VideoEditorModel {
     var _movie:AVMutableComposition?
     private var dbParametersHolder:DB.DataBase.MovieParametersDB.MovieDB?
     var movieHolder:AVMutableComposition?
-    
     init(presenter:VideoEditorModelPresenter) {
         self.presenter = presenter
         self.prepare = .init(delegate: self)
@@ -109,7 +108,7 @@ class VideoEditorModel {
     func exportToLibraryPressed() {
         Task {
             self.movieHolder = self.movie
-            let export = await prepare.export(asset:movie,videoComposition:nil, isVideo: false)
+            let export = await prepare.export(asset:movie,videoComposition:prepare.videoCompositionHolder, isVideo: false)
             guard let url = export.videoExportResponse?.url else {
                 await presenter?.errorAddingVideo(.init(title: "Video not exported", description: export.error?.messageContent?.title))
                 return
