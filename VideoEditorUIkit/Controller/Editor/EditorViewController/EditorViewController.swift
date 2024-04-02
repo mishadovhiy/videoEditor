@@ -266,10 +266,12 @@ extension EditorViewController:UIImagePickerControllerDelegate, UINavigationCont
                 let assetView = assetParametersVC?.viewModel?.editingView as? AssetRawView,
                let pickedImage
         {
-                asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
-                presentingOverlayVC?.updateData(nil)
-                assetView.updateText(asset, totalVideoDuration: viewModel?.editorModel.movieDuration ?? 0)
-                playerVC?.editingAttachmentView?.data = asset
+                picker.dismiss(animated: true) {
+                    asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
+                    self.presentingOverlayVC?.updateData(nil)
+                    assetView.updateText(asset, totalVideoDuration: self.viewModel?.editorModel.movieDuration ?? 0)
+                    self.playerVC?.editingAttachmentView?.data = asset
+                }
             } else if let videoURL = url {
                 videoSelectedFrom(url: videoURL, controller: picker)
             }
