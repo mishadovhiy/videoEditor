@@ -108,4 +108,9 @@ extension UIColor {
         print(white, " ujyrfecdwxs")
         return white > 0.65
     }
+    
+    static var random:UIColor {
+        let all:[UIColor] = [.green.withAlphaComponent(0.3), .blue.withAlphaComponent(0.3), .orange, .green, .blue, .black, .purple]
+        return all.randomElement() ?? .red
+    }
 }
