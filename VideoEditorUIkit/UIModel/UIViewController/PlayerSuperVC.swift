@@ -13,14 +13,14 @@ class PlayerSuperVC: SuperVC {
     var isPlaying:Bool = false
     var movieURL:URL?
     var movie:AVAsset? {
-        if let vc = self as? PlayerViewController,
-           let editor = vc.parentVC?.viewModel?.editorModel,
-            let movie = editor.movieHolder
-        {
-            return movie
-        } else {
+//        if let vc = self as? PlayerViewController,
+//           let editor = vc.parentVC?.viewModel?.editorModel,
+//           let movie = editor.movieHolder
+//        {
+//            return movie
+//        } else {
             return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
-        }
+//        }
         
     }
     
@@ -36,19 +36,19 @@ class PlayerSuperVC: SuperVC {
     }
     
     fileprivate var playerItem:AVPlayerItem? {
-        guard let movieURL else {
-            return nil
-        }
-        if let vc = self as? PlayerViewController,
-           let editor = vc.parentVC?.viewModel?.editorModel,
-            let movie = editor.movieHolder
-        {
-            let item:AVPlayerItem = .init(asset: movie)
-            item.videoComposition = editor.prepare.videoCompositionHolder
-            return item
-        } else {
+//        if let vc = self as? PlayerViewController,
+//           let editor = vc.parentVC?.viewModel?.editorModel,
+//           let movie = editor.movieHolder
+//        {
+//            let item:AVPlayerItem = .init(asset: movie)
+//            item.videoComposition = editor.prepare.videoCompositionHolder
+//            return item
+//        } else {
+            guard let movieURL else {
+                return nil
+            }
             return .init(url: movieURL)
-        }
+//        }
     }
     
     private var durationLabel:UILabel? {
@@ -127,7 +127,7 @@ class PlayerSuperVC: SuperVC {
             self.pause()
         }
         let desiredCMTime = CMTime(seconds: seconds, preferredTimescale: VideoEditorModel.timeScale)
-
+        
         playerLayer?.player?.seek(to: desiredCMTime, completionHandler: {
             if !$0 {
                 return
@@ -312,7 +312,7 @@ fileprivate extension PlayerSuperVC {
         playerLayer.name = "PrimaryPlayer"
         player.pauseChanged = pauseStateChanged(_:)
         view.layer.addSublayer(playerLayer)
-
+        
         addPlayerTimeObserver()
         
         let progressView:UIProgressView = .init()

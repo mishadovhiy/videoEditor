@@ -256,6 +256,11 @@ extension VideoEditorModel:PrepareEditorModelDelegate {
             return _movie
         }
         set {
+//            if prepare.isExporting {
+//                Task {
+//                    await videoAdded(canReload: true)
+//                }
+//            }
             _movie = newValue
         }
     }

@@ -13,6 +13,7 @@ class PrepareEditorModel {
     private var delegate:PrepareEditorModelDelegate!
     private let layerEditor:EditorVideoLayer
     var videoCompositionHolder:AVMutableVideoComposition?
+    var isExporting:Bool = false
     
     init(delegate: PrepareEditorModelDelegate) {
         self.delegate = delegate
@@ -53,11 +54,15 @@ class PrepareEditorModel {
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
         let videoComposition = await allCombinedInstructions(composition: composition, assetTrack: assetTrack, videoSize: videoSize, overlayLayer: overlayLayer)
+        isExporting = true
+        videoCompositionHolder = videoComposition
         delegate.movieHolder = composition
+     //   await self.movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
         let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
         if let url = localUrl.videoExportResponse?.url {
             DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
             self.videoCompositionHolder = videoComposition
+            isExporting = false
             await self.movieUpdated(movie: nil, movieURL: url, canSetNil: false)
         }
         return localUrl
@@ -193,11 +198,15 @@ extension PrepareEditorModel {
         do {
             let audioMutable = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
             try await audioMutable?.insertTimeRange(CMTimeRange(start: .zero, duration: composition.duration()), of: newAudio, at: .zero)
+            isExporting = true
+        //    await movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
             let response = await export(asset: composition, videoComposition: nil, isVideo: false)
             if let url = response.videoExportResponse?.url {
                 DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
+                isExporting = false
                 await movieUpdated(movie: composition, movieURL: url, canSetNil: false)
             } else {
+                isExporting = false
                 return .init(error:response.error ?? .init(text: "Error adding sound into the composition"))
             }
             return response

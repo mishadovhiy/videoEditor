@@ -440,7 +440,7 @@
 				8D9F32F22B3DDFFF00697F76 /* Model */,
 				8D4C17372B3C23C100953143 /* Controller */,
 				8D4C17392B3C23DE00953143 /* View */,
-				8D9F32FA2B3E082400697F76 /* NSObject */,
+				8D9F32FA2B3E082400697F76 /* UIModel */,
 				8D4C17382B3C23D100953143 /* Mics */,
 				8D4C17262B3B2DF600953143 /* Info.plist */,
 			);
@@ -498,14 +498,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8D9F32FA2B3E082400697F76 /* NSObject */ = {
+		8D9F32FA2B3E082400697F76 /* UIModel */ = {
 			isa = PBXGroup;
 			children = (
 				8D18F1732B9F465200194F34 /* AVPlayer */,
 				8D18F1782B9F465300194F34 /* UIView */,
 				8D18F1752B9F465300194F34 /* UIViewController */,
 			);
-			path = NSObject;
+			path = UIModel;
 			sourceTree = "<group>";
 		};
 		8DBC3F662BA780F90045CB98 /* Service */ = {
