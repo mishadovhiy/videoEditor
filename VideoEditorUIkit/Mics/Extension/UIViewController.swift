@@ -5,7 +5,7 @@
 //  Created by Misha Dovhiy on 04.04.2024.
 //
 
-import Foundation
+import UIKit
 
 extension UIViewController {
     func addChild(child:UIViewController, toView:UIView? = nil, constaits:[NSLayoutConstraint.Attribute:(CGFloat, String)]? = nil, name:String? = nil, toSafeArea:Bool = true) {

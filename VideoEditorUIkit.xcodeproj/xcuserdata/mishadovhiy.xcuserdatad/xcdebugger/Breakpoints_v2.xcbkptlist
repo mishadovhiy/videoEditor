@@ -66,38 +66,6 @@
             endingLineNumber = "122"
             landmarkName = "removeAllObservers(delete:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "052DB891-72FE-4C1C-AA64-F003B5FA3AB1 - d54ee530d3532a25"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.PlayerSuperVC.addObservers() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/SuperVC/PlayerSuperVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "716">
-               </Location>
-               <Location
-                  uuid = "052DB891-72FE-4C1C-AA64-F003B5FA3AB1 - f6d7b0f71508297f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.PlayerSuperVC.removeAllObservers(delete: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/SuperVC/PlayerSuperVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "104">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -162,38 +130,6 @@
             endingLineNumber = "49"
             landmarkName = "addTrackPressed(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2CE76CF2-E851-4668-8573-901FAD97150E - 4c556cf3aec3f7f7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.PlayerViewController.addTrackPressed(__C.UIButton) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "2CE76CF2-E851-4668-8573-901FAD97150E - 93a7dde5a02f125f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.PlayerViewController.addTrackPressed(__C.UIButton) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -210,38 +146,6 @@
             endingLineNumber = "56"
             landmarkName = "deletePressed(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C6603190-13C4-456C-B5A8-83169223884F - fefcf307f0c0b385"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.PlayerViewController.deletePressed(__C.UIButton) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "C6603190-13C4-456C-B5A8-83169223884F - 88715f72c583d0ee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.PlayerViewController.deletePressed(__C.UIButton) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/PlayerViewController/PlayerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -258,68 +162,6 @@
             endingLineNumber = "57"
             landmarkName = "addVideo()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5C6430A0-8AF4-4FD5-95F2-2790103AE624 - d42b58c599f5286a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in VideoEditorUIkit.EditorModel.addVideo() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  uuid = "5C6430A0-8AF4-4FD5-95F2-2790103AE624 - c53a76d6d27f549a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) await resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in VideoEditorUIkit.EditorModel.addVideo() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "5C6430A0-8AF4-4FD5-95F2-2790103AE624 - f06450e9329263a3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) suspend resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in VideoEditorUIkit.EditorModel.addVideo() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  uuid = "5C6430A0-8AF4-4FD5-95F2-2790103AE624 - f06450e9329263a3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) suspend resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in VideoEditorUIkit.EditorModel.addVideo() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "88">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -336,38 +178,6 @@
             endingLineNumber = "148"
             landmarkName = "loadVideo(movieUrl:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4B2EADF4-384A-4031-AA11-A0D1506BDACE - 6ebe71f47486b4fd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.EditorViewController.loadVideo(movieUrl: Swift.Optional&lt;Foundation.URL&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "524">
-               </Location>
-               <Location
-                  uuid = "4B2EADF4-384A-4031-AA11-A0D1506BDACE - 6ebe71f47486b4fd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.EditorViewController.loadVideo(movieUrl: Swift.Optional&lt;Foundation.URL&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "612">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -384,38 +194,6 @@
             endingLineNumber = "150"
             landmarkName = "loadVideo(movieUrl:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B33D0346-5EF6-4899-99C1-4AD7BF2BB498 - 37a7105626fef314"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorViewController.loadVideo(movieUrl: Swift.Optional&lt;Foundation.URL&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "732">
-               </Location>
-               <Location
-                  uuid = "B33D0346-5EF6-4899-99C1-4AD7BF2BB498 - 6ebe71f47486b433"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.EditorViewController.loadVideo(movieUrl: Swift.Optional&lt;Foundation.URL&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "524">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -448,53 +226,6 @@
             endingLineNumber = "42"
             landmarkName = "loadVideo(_:canShowError:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "882B6CBD-8F0B-44D0-A81C-13E1F8786E93 - 967c6cd5557c1473"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "276">
-               </Location>
-               <Location
-                  uuid = "882B6CBD-8F0B-44D0-A81C-13E1F8786E93 - f4c36900a3505f85"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "882B6CBD-8F0B-44D0-A81C-13E1F8786E93 - c2d989b5b9555050"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -511,83 +242,6 @@
             endingLineNumber = "134"
             landmarkName = "createVideo(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "93D90692-171E-48E3-8CAC-DB59FA71544B - 8ce4000799d81c74"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "276">
-               </Location>
-               <Location
-                  uuid = "93D90692-171E-48E3-8CAC-DB59FA71544B - d4def48c2124a8e0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "93D90692-171E-48E3-8CAC-DB59FA71544B - d4def48c2124a675"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "93D90692-171E-48E3-8CAC-DB59FA71544B - 1ccbef12e921cee7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  uuid = "93D90692-171E-48E3-8CAC-DB59FA71544B - 1ccbef12e921c072"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "92">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -620,113 +274,6 @@
             endingLineNumber = "109"
             landmarkName = "createVideo(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - ac483230b9d5abb6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "828">
-               </Location>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - d140066478e7aa80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - d140066478e7abdb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - 3c1e193b09d366e3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - 3c1e193b09d367b8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "212">
-               </Location>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - 24a4e398b12264e6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(8) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "98C0C1FE-0775-4A29-A6C1-6DFDDBF4B3CD - 24a4e398b12265bd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(8) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -743,38 +290,6 @@
             endingLineNumber = "107"
             landmarkName = "createVideo(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1DFEBEAA-EBAB-49C1-973B-9F8BF135DDD0 - ac483230b9d5ab70"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "740">
-               </Location>
-               <Location
-                  uuid = "1DFEBEAA-EBAB-49C1-973B-9F8BF135DDD0 - 8ce4000799d8137c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "212">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -823,38 +338,6 @@
             endingLineNumber = "23"
             landmarkName = "export(asset:videoComposition:isVideo:isQuery:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AF807640-EB93-4DDE-BCEE-4ECEA1551560 - 97645095fe286579"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.export(asset: __C.AVAsset, videoComposition: Swift.Optional&lt;__C.AVMutableVideoComposition&gt;, isVideo: Swift.Bool, isQuery: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "444">
-               </Location>
-               <Location
-                  uuid = "AF807640-EB93-4DDE-BCEE-4ECEA1551560 - e879093a9c112177"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.export(asset: __C.AVAsset, videoComposition: Swift.Optional&lt;__C.AVMutableVideoComposition&gt;, isVideo: Swift.Bool, isQuery: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "152">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -887,38 +370,6 @@
             endingLineNumber = "56"
             landmarkName = "addVideo()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "88F68DB5-AA30-43CF-891E-D5B8E31052C1 - d74e84e24cdf38bf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorModel.addVideo() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "88F68DB5-AA30-43CF-891E-D5B8E31052C1 - d42b58c599f5286a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in VideoEditorUIkit.EditorModel.addVideo() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -967,38 +418,6 @@
             endingLineNumber = "41"
             landmarkName = "loadVideo(_:canShowError:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A4BE2362-BECD-4899-A444-879894B7EF91 - 967c6cd5557c1414"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "120">
-               </Location>
-               <Location
-                  uuid = "A4BE2362-BECD-4899-A444-879894B7EF91 - c2d989b5b9555016"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1015,53 +434,6 @@
             endingLineNumber = "44"
             landmarkName = "loadVideo(_:canShowError:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CF807645-8FE5-4E0F-A50E-7D1E4F510F64 - f36aa921d2b8feb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "CF807645-8FE5-4E0F-A50E-7D1E4F510F64 - 556445e2cf1f2dea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "CF807645-8FE5-4E0F-A50E-7D1E4F510F64 - bb93f4736100cbe9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/EditorViewController/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1094,38 +466,6 @@
             endingLineNumber = "15"
             landmarkName = "loadUI()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3F0DD5D3-599A-4DB3-B028-BDFC223E055A - bacff0eb740d86b5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.AssetParametersViewController.loadUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/AssetParametersViewController/loadUI_AssetParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  uuid = "3F0DD5D3-599A-4DB3-B028-BDFC223E055A - bacff0eb740d86b5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.AssetParametersViewController.loadUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/AssetParametersViewController/loadUI_AssetParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1142,53 +482,6 @@
             endingLineNumber = "14"
             landmarkName = "loadUI()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8ED5C37D-8DAC-4612-A280-1554D6C302C2 - 77db9fc33a242ea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.AssetParametersViewController.loadUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/AssetParametersViewController/loadUI_AssetParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "156">
-               </Location>
-               <Location
-                  uuid = "8ED5C37D-8DAC-4612-A280-1554D6C302C2 - bacff0eb740d8696"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.AssetParametersViewController.loadUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/AssetParametersViewController/loadUI_AssetParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "8ED5C37D-8DAC-4612-A280-1554D6C302C2 - bacff0eb740d8696"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.AssetParametersViewController.loadUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/VideoEditorUIkit/VideoEditorUIkit/Controller/AssetParametersViewController/loadUI_AssetParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1349,68 +642,6 @@
             endingLineNumber = "51"
             landmarkName = "removeFromSuperview()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6B4EB0C6-D795-4F31-8962-1917C08B6DAD - 3a2d2fbec38e8b2d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.StackAssetAttachmentView.removeFromSuperview() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "6B4EB0C6-D795-4F31-8962-1917C08B6DAD - 1c6990b4958c1aa6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIView) -&gt; () in VideoEditorUIkit.StackAssetAttachmentView.removeFromSuperview() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "6B4EB0C6-D795-4F31-8962-1917C08B6DAD - 3a2d2fbec38e8a06"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.StackAssetAttachmentView.removeFromSuperview() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "6B4EB0C6-D795-4F31-8962-1917C08B6DAD - 1c6990b4958c1c4f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIView) -&gt; () in VideoEditorUIkit.StackAssetAttachmentView.removeFromSuperview() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1427,38 +658,6 @@
             endingLineNumber = "106"
             landmarkName = "removeFromParent()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "84494EA7-447A-400E-A2F6-EA6FB43AB7FB - 23edc5529fb54df0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayVC.positionInScrollChanged(new: __C.CGRect, editingRawView: __C.UIView) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "84494EA7-447A-400E-A2F6-EA6FB43AB7FB - 51b036a9bbb660b8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (__C.NSLayoutConstraint) -&gt; () in closure #1 () -&gt; () in VideoEditorUIkit.EditorOverlayVC.removeFromParent() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "1124">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1731,68 +930,6 @@
             endingLineNumber = "79"
             landmarkName = "createVideo(_:needExport:replaceVideo:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2E9745D4-3D2E-4E6E-9BBB-8BD2CAE8C7EE - ef927833cb91f465"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(9) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "264">
-               </Location>
-               <Location
-                  uuid = "2E9745D4-3D2E-4E6E-9BBB-8BD2CAE8C7EE - b2aa80a61a5176ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(10) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  uuid = "2E9745D4-3D2E-4E6E-9BBB-8BD2CAE8C7EE - 448aba8c85269bb9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(11) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "2E9745D4-3D2E-4E6E-9BBB-8BD2CAE8C7EE - 3a91bb1d3e036c61"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "920">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1822,8 +959,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "1420">
+                  endingLineNumber = "32">
                </Location>
                <Location
                   uuid = "65D0DD25-5631-436E-AEDF-FC67DADD82FD - 126468cec4046259"
@@ -1837,8 +973,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "2040">
+                  endingLineNumber = "31">
                </Location>
                <Location
                   uuid = "65D0DD25-5631-436E-AEDF-FC67DADD82FD - e5961d047638c937"
@@ -1852,8 +987,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "2376">
+                  endingLineNumber = "30">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1885,8 +1019,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "132">
+                  endingLineNumber = "105">
                </Location>
                <Location
                   uuid = "EF70394C-E3C5-4201-BE2C-683E076F2CD2 - c45b622df7403227"
@@ -1900,8 +1033,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "180">
+                  endingLineNumber = "105">
                </Location>
                <Location
                   uuid = "EF70394C-E3C5-4201-BE2C-683E076F2CD2 - 7f2476bbc5dcee21"
@@ -1915,8 +1047,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "312">
+                  endingLineNumber = "105">
                </Location>
                <Location
                   uuid = "EF70394C-E3C5-4201-BE2C-683E076F2CD2 - 7f2476bbc5dcee02"
@@ -1930,8 +1061,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "312">
+                  endingLineNumber = "106">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1963,8 +1093,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "1264">
+                  endingLineNumber = "118">
                </Location>
                <Location
                   uuid = "347D782B-2993-4BC3-8168-F196A3BC6808 - c45b622df74030f0"
@@ -1978,8 +1107,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "1440">
+                  endingLineNumber = "118">
                </Location>
                <Location
                   uuid = "347D782B-2993-4BC3-8168-F196A3BC6808 - c45b622df74030d1"
@@ -1993,8 +1121,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "1440">
+                  endingLineNumber = "119">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2013,83 +1140,6 @@
             endingLineNumber = "108"
             landmarkName = "insertMovie(movie:composition:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "085BC1C2-E70A-43A9-B3BD-6F818F62FEE1 - be0b8f2c94d2976b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "085BC1C2-E70A-43A9-B3BD-6F818F62FEE1 - b2b51e985f41972f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  uuid = "085BC1C2-E70A-43A9-B3BD-6F818F62FEE1 - b2b51e985f41951d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  uuid = "085BC1C2-E70A-43A9-B3BD-6F818F62FEE1 - c4059fae7b08695b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  uuid = "085BC1C2-E70A-43A9-B3BD-6F818F62FEE1 - c4059fae7b086b69"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "180">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2106,38 +1156,6 @@
             endingLineNumber = "105"
             landmarkName = "insertMovie(movie:composition:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7EFCB6ED-979C-4B84-B80C-83C7D637B6C7 - be0b8f2c94d29708"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  uuid = "7EFCB6ED-979C-4B84-B80C-83C7D637B6C7 - c4059fae7b086b0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "660">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2154,38 +1172,6 @@
             endingLineNumber = "113"
             landmarkName = "insertMovie(movie:composition:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D9B5993E-19A1-479A-BFF9-946ED166644D - 21fae2fde212e46"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
-                  offsetFromSymbolStart = "312">
-               </Location>
-               <Location
-                  uuid = "D9B5993E-19A1-479A-BFF9-946ED166644D - c4059fae7b086a02"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "144"
-                  endingLineNumber = "144"
-                  offsetFromSymbolStart = "724">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2202,38 +1188,6 @@
             endingLineNumber = "115"
             landmarkName = "insertMovie(movie:composition:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "30CCBE76-C975-4BE4-A858-533CC47A3DD1 - 21fae2fde212e46"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
-                  offsetFromSymbolStart = "312">
-               </Location>
-               <Location
-                  uuid = "30CCBE76-C975-4BE4-A858-533CC47A3DD1 - c4059fae7b086a40"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.insertMovie(movie: Swift.Optional&lt;__C.AVURLAsset&gt;, composition: __C.AVMutableComposition) async -&gt; Swift.Optional&lt;__C.AVMutableComposition&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
-                  offsetFromSymbolStart = "900">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2266,68 +1220,6 @@
             endingLineNumber = "73"
             landmarkName = "createVideo(_:needExport:replaceVideo:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9E673956-A9E8-479A-BF08-7CE2C9D98E3E - 3a91bb1d3e036d27"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "732">
-               </Location>
-               <Location
-                  uuid = "9E673956-A9E8-479A-BF08-7CE2C9D98E3E - c7883fd7347356d8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) await resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "9E673956-A9E8-479A-BF08-7CE2C9D98E3E - 1110daac24582e56"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "9E673956-A9E8-479A-BF08-7CE2C9D98E3E - 1110daac24583121"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, replaceVideo: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2360,38 +1252,6 @@
             endingLineNumber = "264"
             landmarkName = "overlayChangedAttachment(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "FB9DB22D-98FA-4A1E-BEBE-DFD55FA25AE5 - 2a7b6c5555a109c3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorParametersViewController.overlayChangedAttachment(Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "FB9DB22D-98FA-4A1E-BEBE-DFD55FA25AE5 - 2a7b6c5555a10e47"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorParametersViewController.overlayChangedAttachment(Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2472,53 +1332,6 @@
             endingLineNumber = "44"
             landmarkName = "loadVideo(_:canShowError:videoAddedAction:needExport:canReload:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E1A992E1-F759-42B0-B21B-DECB7B0F2CA0 - 69b1172743cde5b6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool, videoAddedAction: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "E1A992E1-F759-42B0-B21B-DECB7B0F2CA0 - fc05094c06e4e2ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool, videoAddedAction: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "E1A992E1-F759-42B0-B21B-DECB7B0F2CA0 - 18d18d759894a1b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.EditorModel.loadVideo(_: Swift.Optional&lt;Foundation.URL&gt;, canShowError: Swift.Bool, videoAddedAction: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2535,38 +1348,6 @@
             endingLineNumber = "55"
             landmarkName = "addVideo(force:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "052E92B8-6F06-4A10-AD4B-297BC6E77B60 - 901caa0c7b65bb0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorModel.addVideo(force: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  uuid = "052E92B8-6F06-4A10-AD4B-297BC6E77B60 - 285159668f9aae6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in VideoEditorUIkit.EditorModel.addVideo(force: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/EditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2583,38 +1364,6 @@
             endingLineNumber = "204"
             landmarkName = "leftHeaderPressed(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5FA8A2D6-3EC9-4386-92D2-DDFFE6B6EE28 - b5af46fd54d685b8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIView) -&gt; () in VideoEditorUIkit.EditorParametersViewController.leftHeaderPressed(__C.UITapGestureRecognizer) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127"
-                  offsetFromSymbolStart = "1036">
-               </Location>
-               <Location
-                  uuid = "5FA8A2D6-3EC9-4386-92D2-DDFFE6B6EE28 - b51fce44784fba48"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorParametersViewController.leftHeaderPressed(__C.UITapGestureRecognizer) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
-                  offsetFromSymbolStart = "1300">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2644,8 +1393,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "116"
-                  endingLineNumber = "116"
-                  offsetFromSymbolStart = "420">
+                  endingLineNumber = "116">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - acf657de468eb60f"
@@ -2659,8 +1407,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "116"
-                  endingLineNumber = "116"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "116">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - b84119bf69e6140e"
@@ -2674,8 +1421,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "116"
-                  endingLineNumber = "116"
-                  offsetFromSymbolStart = "36">
+                  endingLineNumber = "116">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - 916b857d2397589c"
@@ -2689,8 +1435,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "420">
+                  endingLineNumber = "112">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - acf657de468eb693"
@@ -2704,8 +1449,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "112">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - b84119bf69e61492"
@@ -2719,8 +1463,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "36">
+                  endingLineNumber = "112">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - 916b857d239747a5"
@@ -2734,8 +1477,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "420">
+                  endingLineNumber = "119">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - acf657de468ea9aa"
@@ -2749,8 +1491,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "119">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - b84119bf69e60bab"
@@ -2764,8 +1505,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "36">
+                  endingLineNumber = "119">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - 916b857d23974729"
@@ -2779,8 +1519,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "420">
+                  endingLineNumber = "123">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - acf657de468ea926"
@@ -2794,8 +1533,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "123">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - b84119bf69e60b27"
@@ -2809,8 +1547,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "36">
+                  endingLineNumber = "123">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - 916b857d2397474a"
@@ -2824,8 +1561,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "420">
+                  endingLineNumber = "122">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - acf657de468ea945"
@@ -2839,8 +1575,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "122">
                </Location>
                <Location
                   uuid = "D5A7768E-AF94-450F-9B92-2F8EC41773B3 - b84119bf69e60b44"
@@ -2854,8 +1589,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "36">
+                  endingLineNumber = "122">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2890,53 +1624,6 @@
             endingLineNumber = "40"
             landmarkName = "addText()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A275232A-0AF5-48D5-A247-19B9745ED5BB - f24a053c6fa78cb4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addText(data: VideoEditorUIkit.MovieAttachmentProtocol) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "1036">
-               </Location>
-               <Location
-                  uuid = "A275232A-0AF5-48D5-A247-19B9745ED5BB - 384415bdd2dd504a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addText(data: VideoEditorUIkit.MovieAttachmentProtocol) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "988">
-               </Location>
-               <Location
-                  uuid = "A275232A-0AF5-48D5-A247-19B9745ED5BB - 465e243eb9f21448"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addText(data: VideoEditorUIkit.MovieAttachmentProtocol) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "152">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2969,53 +1656,6 @@
             endingLineNumber = "40"
             landmarkName = "originalURL"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "6E78927F-86BE-4CBC-8439-F01C68D3CD24 - 4f8b01e1d5d06d64"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.DB.DataBase.MovieParametersDB.MovieDB.originalURL.setter : Swift.String"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/MovieDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "6E78927F-86BE-4CBC-8439-F01C68D3CD24 - 4f8b01e1d5d06d47"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.DB.DataBase.MovieParametersDB.MovieDB.originalURL.setter : Swift.String"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/MovieDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "129"
-                  endingLineNumber = "129"
-                  offsetFromSymbolStart = "280">
-               </Location>
-               <Location
-                  uuid = "6E78927F-86BE-4CBC-8439-F01C68D3CD24 - 4f8b01e1d5d05395"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.DB.DataBase.MovieParametersDB.MovieDB.originalURL.setter : Swift.String"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/MovieDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
-                  offsetFromSymbolStart = "280">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3045,8 +1685,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "1332">
+                  endingLineNumber = "43">
                </Location>
                <Location
                   uuid = "9D3124F0-0D2F-4DEC-807B-0D6C9C26DCB7 - 26f40746f34706c4"
@@ -3060,8 +1699,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "1940">
+                  endingLineNumber = "43">
                </Location>
                <Location
                   uuid = "9D3124F0-0D2F-4DEC-807B-0D6C9C26DCB7 - 9f585b9d64fad92d"
@@ -3075,8 +1713,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "2080">
+                  endingLineNumber = "42">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3108,8 +1745,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "1608">
+                  endingLineNumber = "47">
                </Location>
                <Location
                   uuid = "FEF2199B-27E2-443F-AEA6-F814160422F6 - 26f40746f34706a9"
@@ -3123,8 +1759,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "1852">
+                  endingLineNumber = "46">
                </Location>
                <Location
                   uuid = "FEF2199B-27E2-443F-AEA6-F814160422F6 - 9f585b9d64fad9a1"
@@ -3138,8 +1773,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "1896">
+                  endingLineNumber = "46">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3238,38 +1872,6 @@
             endingLineNumber = "29"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F5D78C51-C679-4D5F-9FB6-ECF3EEC06F71 - 56167d7ff464ce01"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayContainerVC.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/UICollectionView_EditorOverlayContainerVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "692">
-               </Location>
-               <Location
-                  uuid = "F5D78C51-C679-4D5F-9FB6-ECF3EEC06F71 - 56167d7ff464ce01"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayContainerVC.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/UICollectionView_EditorOverlayContainerVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "744">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3315,8 +1917,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "28">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 8e02c3966347818d"
@@ -3330,8 +1931,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "108">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 8e02c3966347818d"
@@ -3345,8 +1945,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "816">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 24c6f15d0c341091"
@@ -3360,8 +1959,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "24">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - c637aafe31fc9d8f"
@@ -3375,8 +1973,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "60">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - b4ac8849bc4ddc93"
@@ -3390,8 +1987,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 3e781166ff959981"
@@ -3405,8 +2001,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "28">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 3e781166ff959981"
@@ -3420,8 +2015,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "100">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - dd834d12e7661782"
@@ -3435,8 +2029,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "20">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 71aaf9ce8c4a9583"
@@ -3450,8 +2043,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "28">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 8e02c3966347818d"
@@ -3465,8 +2057,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "2604">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - 8e02c3966347818d"
@@ -3480,8 +2071,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "2444">
+                  endingLineNumber = "192">
                </Location>
                <Location
                   uuid = "27E8C393-C671-4975-8638-A3A4BCFCFB86 - e82ab0c0f4b828ed"
@@ -3495,8 +2085,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "188"
-                  endingLineNumber = "188"
-                  offsetFromSymbolStart = "2576">
+                  endingLineNumber = "188">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3528,8 +2117,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "199"
-                  endingLineNumber = "199"
-                  offsetFromSymbolStart = "2032">
+                  endingLineNumber = "199">
                </Location>
                <Location
                   uuid = "DC379BC0-72F2-4450-AE14-1CE0414236C1 - 8e02c39663467ef2"
@@ -3543,8 +2131,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "199"
-                  endingLineNumber = "199"
-                  offsetFromSymbolStart = "2368">
+                  endingLineNumber = "199">
                </Location>
                <Location
                   uuid = "DC379BC0-72F2-4450-AE14-1CE0414236C1 - e82ab0c0f4b9d78a"
@@ -3558,8 +2145,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "2404">
+                  endingLineNumber = "195">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3578,38 +2164,6 @@
             endingLineNumber = "209"
             landmarkName = "addSound(url:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "646FD666-3CE1-41F5-B4F8-68605551F2C7 - c637aafe31fd6023"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addSound(url: Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "212"
-                  endingLineNumber = "212"
-                  offsetFromSymbolStart = "984">
-               </Location>
-               <Location
-                  uuid = "646FD666-3CE1-41F5-B4F8-68605551F2C7 - c637aafe31fd6023"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addSound(url: Swift.Optional&lt;Foundation.URL&gt;) async -&gt; Swift.Bool"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/EditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "212"
-                  endingLineNumber = "212"
-                  offsetFromSymbolStart = "1088">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3642,38 +2196,6 @@
             endingLineNumber = "48"
             landmarkName = "exportVideo(videoComposition:isVideoAdded:volume:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E165C951-E5AA-422E-AA73-F1D6CFC31523 - ef07aa6e4950dba0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for __C.AVAssetExportSession.exportVideo(videoComposition: Swift.Optional&lt;__C.AVMutableVideoComposition&gt;, isVideoAdded: Swift.Bool) async -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Mics/Extension/AVAssetExportSession.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "1372">
-               </Location>
-               <Location
-                  uuid = "E165C951-E5AA-422E-AA73-F1D6CFC31523 - 73a520bc0c00eaca"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for __C.AVAssetExportSession.exportVideo(videoComposition: Swift.Optional&lt;__C.AVMutableVideoComposition&gt;, isVideoAdded: Swift.Bool) async -&gt; VideoEditorUIkit.Response"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Mics/Extension/AVAssetExportSession.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "1576">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3706,38 +2228,6 @@
             endingLineNumber = "98"
             landmarkName = "addFilter(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "62B9F0E6-E2DD-4B1B-9A98-62E02A811E6D - eb13a3032b4129e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "124">
-               </Location>
-               <Location
-                  uuid = "62B9F0E6-E2DD-4B1B-9A98-62E02A811E6D - eb13a3032b4129e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "148">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3767,8 +2257,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "444">
+                  endingLineNumber = "157">
                </Location>
                <Location
                   uuid = "4F471F82-3072-47B7-85FB-27BE2C8B9D4A - dabff500f01fb4ba"
@@ -3782,8 +2271,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "40">
+                  endingLineNumber = "157">
                </Location>
                <Location
                   uuid = "4F471F82-3072-47B7-85FB-27BE2C8B9D4A - 8db5a9f6336b16bb"
@@ -3797,8 +2285,7 @@
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "157"
-                  endingLineNumber = "157"
-                  offsetFromSymbolStart = "116">
+                  endingLineNumber = "157">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3817,38 +2304,6 @@
             endingLineNumber = "169"
             landmarkName = "setupUI()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "24ECC4FF-6E07-4605-A8C3-D22510FA66B6 - 5fad773c837656a7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayContainerVC.setupUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/EditorOverlayContainerVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
-                  offsetFromSymbolStart = "5828">
-               </Location>
-               <Location
-                  uuid = "24ECC4FF-6E07-4605-A8C3-D22510FA66B6 - 5fad773c837656a7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayContainerVC.setupUI() -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/EditorOverlayContainerVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
-                  offsetFromSymbolStart = "6328">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4089,38 +2544,6 @@
             endingLineNumber = "159"
             landmarkName = "updateView(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4177D55C-E84E-4E42-A7CE-BF2309BE8B07 - cd8d9703426127e0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.StackAssetAttachmentView.addRowView(data: VideoEditorUIkit.AssetAttachmentProtocol, isEmpty: Swift.Bool, created: Swift.Optional&lt;(VideoEditorUIkit.AssetRawView) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "236">
-               </Location>
-               <Location
-                  uuid = "4177D55C-E84E-4E42-A7CE-BF2309BE8B07 - a453ca96c3913180"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.StackAssetAttachmentView.updateView(Swift.Optional&lt;Swift.Array&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/StackAssetAttachmentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4137,98 +2560,6 @@
             endingLineNumber = "222"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C8081502-9DEF-43DF-8DAF-4288839B0244 - f7cd2782e9e67587"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "844">
-               </Location>
-               <Location
-                  uuid = "C8081502-9DEF-43DF-8DAF-4288839B0244 - 4eea2a68d86a01bd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "864">
-               </Location>
-               <Location
-                  uuid = "C8081502-9DEF-43DF-8DAF-4288839B0244 - f7cd2782e9e67587"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "608">
-               </Location>
-               <Location
-                  uuid = "C8081502-9DEF-43DF-8DAF-4288839B0244 - 4eea2a68d86a01bd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "628">
-               </Location>
-               <Location
-                  uuid = "C8081502-9DEF-43DF-8DAF-4288839B0244 - f7cd2782e9e67587"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "596">
-               </Location>
-               <Location
-                  uuid = "C8081502-9DEF-43DF-8DAF-4288839B0244 - 4eea2a68d86a01bd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "616">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4501,38 +2832,6 @@
             endingLineNumber = "49"
             landmarkName = "backgroundColor"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "BC2F8768-1807-475A-BCFD-69F41129DFB7 - 7431c0fdf17db0d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.ImageAttachmentDB.backgroundColor.setter : __C.UIColor"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/Attachments/ImageAttachmentDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "332">
-               </Location>
-               <Location
-                  uuid = "BC2F8768-1807-475A-BCFD-69F41129DFB7 - 7431c0fdf17db0d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.ImageAttachmentDB.backgroundColor.setter : __C.UIColor"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/Attachments/ImageAttachmentDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "224">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4549,38 +2848,6 @@
             endingLineNumber = "51"
             landmarkName = "backgroundColor"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "82ED2FB0-2737-4D64-AE17-4F4A9297179A - 7431c0fdf17dbcb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.ImageAttachmentDB.backgroundColor.setter : __C.UIColor"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/Attachments/ImageAttachmentDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "492">
-               </Location>
-               <Location
-                  uuid = "82ED2FB0-2737-4D64-AE17-4F4A9297179A - 7431c0fdf17dbcb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.ImageAttachmentDB.backgroundColor.setter : __C.UIColor"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/DB/Attachments/ImageAttachmentDB.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "400">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4677,53 +2944,6 @@
             endingLineNumber = "169"
             landmarkName = "create(superView:data:vcSuperView:totalVideoDuration:editRowPressed:panEnded:created:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "46D37327-9D66-4F0C-9D08-96B49C5E200C - 919d8cd87d4c2e43"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static VideoEditorUIkit.AssetRawView.create(superView: Swift.Optional&lt;__C.UIView&gt;, data: Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;, vcSuperView: __C.UIView, editRowPressed: (Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;, Swift.Optional&lt;VideoEditorUIkit.AssetRawView&gt;) -&gt; (), panEnded: (VideoEditorUIkit.AssetRawView) -&gt; (), created: Swift.Optional&lt;(VideoEditorUIkit.AssetRawView) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "1268">
-               </Location>
-               <Location
-                  uuid = "46D37327-9D66-4F0C-9D08-96B49C5E200C - 919d8cd87d4c2e43"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static VideoEditorUIkit.AssetRawView.create(superView: Swift.Optional&lt;__C.UIView&gt;, data: Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;, vcSuperView: __C.UIView, editRowPressed: (Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;, Swift.Optional&lt;VideoEditorUIkit.AssetRawView&gt;) -&gt; (), panEnded: (VideoEditorUIkit.AssetRawView) -&gt; (), created: Swift.Optional&lt;(VideoEditorUIkit.AssetRawView) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "1040">
-               </Location>
-               <Location
-                  uuid = "46D37327-9D66-4F0C-9D08-96B49C5E200C - 919d8cd87d4c2e43"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static VideoEditorUIkit.AssetRawView.create(superView: Swift.Optional&lt;__C.UIView&gt;, data: Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;, vcSuperView: __C.UIView, editRowPressed: (Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;, Swift.Optional&lt;VideoEditorUIkit.AssetRawView&gt;) -&gt; (), panEnded: (VideoEditorUIkit.AssetRawView) -&gt; (), created: Swift.Optional&lt;(VideoEditorUIkit.AssetRawView) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/NSObject/UIView/StackAssetAttachmentView/AssetRawView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "1308">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4816,42 +3036,10 @@
             filePath = "VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "addLayerComposition(composition:assetTrack:layer:data:videoSize:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "48C80FC2-28E6-47EF-94FF-41342D5CBB1E - d043a148ef400b9b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addLayerComposition(composition: __C.AVMutableComposition, assetTrack: Swift.Array&lt;__C.AVMutableCompositionTrack&gt;, layer: __C.CALayer, data: Swift.Optional&lt;VideoEditorUIkit.MovieAttachmentProtocol&gt;, videoSize: __C.CGSize) async -&gt; Swift.Optional&lt;(Swift.Optional&lt;__C.AVMutableVideoComposition&gt;, __C.CALayer, __C.CALayer)&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "354"
-                  endingLineNumber = "354"
-                  offsetFromSymbolStart = "192">
-               </Location>
-               <Location
-                  uuid = "48C80FC2-28E6-47EF-94FF-41342D5CBB1E - 84ed312297ae79d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addLayerComposition(composition: __C.AVMutableComposition, assetTrack: Swift.Array&lt;__C.AVMutableCompositionTrack&gt;, layer: __C.CALayer, data: Swift.Optional&lt;VideoEditorUIkit.MovieAttachmentProtocol&gt;, videoSize: __C.CGSize) async -&gt; Swift.Optional&lt;(Swift.Optional&lt;__C.AVMutableVideoComposition&gt;, __C.CALayer, __C.CALayer)&gt;"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "354"
-                  endingLineNumber = "354"
-                  offsetFromSymbolStart = "240">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4868,53 +3056,6 @@
             endingLineNumber = "242"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9B17457D-42F7-4E8C-A597-A89A1F115E3F - f13dfc8175a58935"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "196"
-                  endingLineNumber = "196"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "9B17457D-42F7-4E8C-A597-A89A1F115E3F - cb293798b05c2eab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in closure #1 () -&gt; () in closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "196"
-                  endingLineNumber = "196"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "9B17457D-42F7-4E8C-A597-A89A1F115E3F - 5181010e3001a0ad"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in closure #1 () -&gt; () in closure #1 @Sendable () async -&gt; () in VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "196"
-                  endingLineNumber = "196"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4975,8 +3116,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "addPlayerView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4991,8 +3132,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "pause()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5011,38 +3152,6 @@
             endingLineNumber = "184"
             landmarkName = "scrollPercent(_:selfScrolling:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "35B53B50-D91D-4129-98E0-71A86B78DF3D - 4ebfd154aeeb9843"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorParametersViewController.scrollPercent(CoreGraphics.CGFloat) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "588">
-               </Location>
-               <Location
-                  uuid = "35B53B50-D91D-4129-98E0-71A86B78DF3D - 5a5d7576320c6c9b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorParametersViewController.scrollPercent(_: CoreGraphics.CGFloat, selfScrolling: Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "608">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5087,8 +3196,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "seek(seconds:manual:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5135,8 +3244,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "seek(seconds:manual:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5151,10 +3260,10 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "seek(seconds:manual:)"
-            landmarkType = "7">
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "PlayerSuperVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5167,8 +3276,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "playingTimeObserverChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5219,53 +3328,6 @@
             endingLineNumber = "74"
             landmarkName = "createVideo(_:needExport:setGeneralAudio:addingVideo:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C7805650-3456-4B63-83DA-ABF37CA84159 - d31729acd3c02f31"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, setGeneralAudio: Swift.Bool, addingVideo: Swift.Bool) async -&gt; VideoEditorUIkit.Response"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "75"
-                  endingLineNumber = "75"
-                  offsetFromSymbolStart = "1068">
-               </Location>
-               <Location
-                  uuid = "C7805650-3456-4B63-83DA-ABF37CA84159 - 751a4534647316fb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) await resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, setGeneralAudio: Swift.Bool, addingVideo: Swift.Bool) async -&gt; VideoEditorUIkit.Response"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "75"
-                  endingLineNumber = "75"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "C7805650-3456-4B63-83DA-ABF37CA84159 - 43613ea723d95337"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.createVideo(_: Swift.Optional&lt;Foundation.URL&gt;, needExport: Swift.Bool, setGeneralAudio: Swift.Bool, addingVideo: Swift.Bool) async -&gt; VideoEditorUIkit.Response"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "75"
-                  endingLineNumber = "75"
-                  offsetFromSymbolStart = "160">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5314,98 +3376,6 @@
             endingLineNumber = "102"
             landmarkName = "addFilter(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "FBF53BE5-5A65-41C4-9D50-6D909596BD72 - 852c4fac59c4bf2e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "103"
-                  endingLineNumber = "103"
-                  offsetFromSymbolStart = "1264">
-               </Location>
-               <Location
-                  uuid = "FBF53BE5-5A65-41C4-9D50-6D909596BD72 - a1116030052b297a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "103"
-                  endingLineNumber = "103"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "FBF53BE5-5A65-41C4-9D50-6D909596BD72 - 7b225c33fe3dfb2c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "103"
-                  endingLineNumber = "103"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "FBF53BE5-5A65-41C4-9D50-6D909596BD72 - 852c4fac59c4becd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "1264">
-               </Location>
-               <Location
-                  uuid = "FBF53BE5-5A65-41C4-9D50-6D909596BD72 - a1116030052b2899"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "FBF53BE5-5A65-41C4-9D50-6D909596BD72 - 7b225c33fe3dfacf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5422,98 +3392,6 @@
             endingLineNumber = "95"
             landmarkName = "addFilter(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8B1BF539-2E34-47AC-AEB1-ECBC8E65CBE8 - 7d61c5321094b12"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "228">
-               </Location>
-               <Location
-                  uuid = "8B1BF539-2E34-47AC-AEB1-ECBC8E65CBE8 - 9b446849be29e8ec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "8B1BF539-2E34-47AC-AEB1-ECBC8E65CBE8 - e58fd4a47518ed87"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  uuid = "8B1BF539-2E34-47AC-AEB1-ECBC8E65CBE8 - e58fd4a47518ed87"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "8B1BF539-2E34-47AC-AEB1-ECBC8E65CBE8 - 50cc3cb369cca293"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "8B1BF539-2E34-47AC-AEB1-ECBC8E65CBE8 - eb13a3032b412985"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in VideoEditorUIkit.PrepareEditorModel.addFilter(completion: () -&gt; ()) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/PrepareEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5530,38 +3408,6 @@
             endingLineNumber = "88"
             landmarkName = "videoInstractions(track:overlayLayer:composition:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "98FB291E-992F-4D76-85DF-12D3845DBBBD - f8f4025d047d6579"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.EditorVideoLayer.videoInstractions(track: __C.AVAssetTrack, overlayLayer: Swift.Optional&lt;__C.CALayer&gt;, composition: __C.AVMutableComposition) async -&gt; VideoEditorUIkit.EditorVideoLayer.InstractionsResult"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/EditorVideoLayer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "664">
-               </Location>
-               <Location
-                  uuid = "98FB291E-992F-4D76-85DF-12D3845DBBBD - f8f4025d047d6579"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.EditorVideoLayer.videoInstractions(track: __C.AVAssetTrack, overlayLayer: Swift.Optional&lt;__C.CALayer&gt;, composition: __C.AVMutableComposition) async -&gt; VideoEditorUIkit.EditorVideoLayer.InstractionsResult"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/EditorVideoLayer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "672">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5574,8 +3420,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "loadView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5626,38 +3472,6 @@
             endingLineNumber = "78"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "38B1A12B-AD42-4C5D-9D10-8777DF9AB265 - b6902d4dc51a5f36"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayContainerVC.viewDidAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/EditorOverlayContainerVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "38B1A12B-AD42-4C5D-9D10-8777DF9AB265 - b6902d4dc51a5f36"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorOverlayContainerVC.viewDidAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Reusable/EditorOverlayVC/EditorOverlayContainerVC/EditorOverlayContainerVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5766,8 +3580,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "play(replacing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5782,8 +3596,8 @@
             filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "play(replacing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5834,53 +3648,6 @@
             endingLineNumber = "234"
             landmarkName = "checkVideoInstructions(videoAddedAction:canReload:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7C4D8DFA-B9BE-4A49-BC37-F95FB3E576E6 - 7f203334fb728187"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "1612">
-               </Location>
-               <Location
-                  uuid = "7C4D8DFA-B9BE-4A49-BC37-F95FB3E576E6 - 25e464ecdcdd03fd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(8) await resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "7C4D8DFA-B9BE-4A49-BC37-F95FB3E576E6 - 58bcc15cc541d1af"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(9) suspend resume partial function for VideoEditorUIkit.VideoEditorModel.checkVideoInstructions(videoAddedAction: Swift.Bool, canReload: Swift.Bool) async -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Model/VideoEditorModel/VideoEditorModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5897,68 +3664,6 @@
             endingLineNumber = "85"
             landmarkName = "performSetupUI(type:overlaySize:dbParameters:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4A9474E0-C9A3-4146-9322-3672B9A80270 - ebccdcac0743dc22"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorParametersViewController.performSetupUI(type: VideoEditorUIkit.EditorViewType, overlaySize: VideoEditorUIkit.EditorOverlayContainerVC.OverlaySize, dbParameters: VideoEditorUIkit.DB.DataBase) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "1712">
-               </Location>
-               <Location
-                  uuid = "4A9474E0-C9A3-4146-9322-3672B9A80270 - d19cc0f7aac9311b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIView) -&gt; () in VideoEditorUIkit.EditorParametersViewController.performSetupUI(type: VideoEditorUIkit.EditorViewType, overlaySize: VideoEditorUIkit.EditorOverlayContainerVC.OverlaySize, dbParameters: VideoEditorUIkit.DB.DataBase) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "4A9474E0-C9A3-4146-9322-3672B9A80270 - 5e9353209be552f6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (__C.UIView) -&gt; () in VideoEditorUIkit.EditorParametersViewController.performSetupUI(type: VideoEditorUIkit.EditorViewType, overlaySize: VideoEditorUIkit.EditorOverlayContainerVC.OverlaySize, dbParameters: VideoEditorUIkit.DB.DataBase) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "4A9474E0-C9A3-4146-9322-3672B9A80270 - 252eb6321ab38415"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in VideoEditorUIkit.EditorParametersViewController.performSetupUI(type: VideoEditorUIkit.EditorViewType, overlaySize: VideoEditorUIkit.EditorOverlayContainerVC.OverlaySize, dbParameters: VideoEditorUIkit.DB.DataBase) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorParametersViewController/EditorParametersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5991,38 +3696,6 @@
             endingLineNumber = "164"
             landmarkName = "addAttachmentPressed(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5EFAEC3A-5F73-4A4B-BAC2-DE20F98C1E95 - 2336b331a0a0728e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoEditorUIkit.EditorViewController.addAttachmentPressed(Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "5EFAEC3A-5F73-4A4B-BAC2-DE20F98C1E95 - cc9b6b9a12af8f6b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoEditorUIkit.EditorViewController.addAttachmentPressed(Swift.Optional&lt;VideoEditorUIkit.AssetAttachmentProtocol&gt;) -&gt; ()"
-                  moduleName = "VideoEditorUIkit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mishadovhiy/Developer/aaavideoEditor/VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6054,6 +3727,22 @@
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "vibrate(style:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E896D7E-C98E-4D8A-992F-0B8CE9F2B86E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoEditorUIkit/NSObject/UIViewController/PlayerSuperVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "addPlayerView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
