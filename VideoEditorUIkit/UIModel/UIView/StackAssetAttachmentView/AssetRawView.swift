@@ -83,13 +83,18 @@ class AssetRawView:UIView {
         isUserInteractionEnabled = super.isUserInteractionEnabled
         self.timaLabel?.alpha = selected ? 1 : 0
         let hideGestures = selected ? true : deselectAll
-        alpha = hideGestures ? 1 : 0.2
+        alpha = 1//hideGestures ? 1 : 0.2
+        self.layer.cornerRadius = selected ? 2 : 5
         layer.borderColor = selected ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.clear.cgColor
         layer.borderWidth = selected ? 1 : 0
         pansGetsureView.forEach {
             $0.isHidden = !selected
         }
         self.layer.zPosition = selected ? 999 : 2
+    }
+    
+    var hasSelected:Bool {
+        AppDelegate.shared?.coordinator?.rootVC?.playerVC?.editingAttachmentView != nil
     }
     
     @objc private func editRowPressed(_ sender:UITapGestureRecognizer) {
@@ -170,12 +175,12 @@ extension AssetRawView {
         new.data = data
         new.alpha = 0.8
         new.addConstaits([.left:(new.newConstraints.0, new.layer.name!), .top:(0, ""), .width:(new.newConstraints.1, new.layer.name!)])
-        new.heightAnchor.constraint(lessThanOrEqualToConstant: 30).isActive = true
+        new.heightAnchor.constraint(lessThanOrEqualToConstant: 18).isActive = true
         new.bottomAnchor.constraint(lessThanOrEqualTo: new.superview!.bottomAnchor).isActive = true
         new.createHeader(vcSuperView: vcSuperView)
         new.updateView(data: data, updateConstraints: false, totalVideoDuration: totalVideoDuration, editRowPressed: editRowPressed, panEnded: panEnded)
         new.createPans()
-        new.layer.cornerRadius = 7
+        new.layer.cornerRadius = 5
         created?(new)
     }
     

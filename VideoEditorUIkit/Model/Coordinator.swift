@@ -20,6 +20,10 @@ struct Coordinator {
         UIApplication.shared.keyWindow?.makeKeyAndVisible()
     }    
     
+    public var rootVC:EditorViewController? {
+        viewController as? EditorViewController
+    }
+    
     // MARK: private
   
     var videoDocumentTypeList:[Any] {

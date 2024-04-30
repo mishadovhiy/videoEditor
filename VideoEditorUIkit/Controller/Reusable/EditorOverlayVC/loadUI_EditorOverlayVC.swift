@@ -16,7 +16,7 @@ extension EditorOverlayVC {
             view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
             view.subviews.first(where: {$0 is UIStackView})?.layer.masksToBounds = true
             view.layer.shadowColor = UIColor.type(.black).cgColor
-            view.layer.shadowOpacity = 0.8
+            view.layer.shadowOpacity = 0.5
             view.layer.shadowOffset = .init(width: -1, height: 3)
             view.layer.shadowRadius = 5
             let color = attachmentData?.trackColor ?? defaultColor
@@ -142,11 +142,12 @@ extension EditorOverlayVC {
         var tableData:[ToOverlayData.AttachmentOverlayType] = []
         var closePressed:(()->())? = nil
         var donePressed:(()->())? = nil
-        
+        var screenOverlayButton:ButtonData? = nil
         enum AttachmentOverlayType {
             case color (ColorType)
             case floatRange (FloatType)
             case `switch` (SwitchType)
+            case segmented (StringListType)
             case any ((Any)->())
             
             struct ColorType {
@@ -159,6 +160,13 @@ extension EditorOverlayVC {
                 var title:String = ""
                 var selected:CGFloat? = nil
                 var didSelect:(_ newValue:CGFloat)->()
+            }
+            
+            struct StringListType {
+                let title:String
+                let list:[String]
+                let selectedAt:Int
+                var didSelect:(_ at:Int)->()
             }
                 
             struct SwitchType {

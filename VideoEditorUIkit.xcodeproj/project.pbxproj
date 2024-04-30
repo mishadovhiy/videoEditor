@@ -74,6 +74,8 @@
 		8D75C1022BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */; };
 		8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */; };
 		8D75E3922BA11E8C00ED75C0 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */; };
+		8D9A35372BE17A5600650A3D /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9A35362BE17A5600650A3D /* PickerTableCell.swift */; };
+		8D9A35392BE17FCE00650A3D /* MovieSettingsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9A35382BE17FCE00650A3D /* MovieSettingsDB.swift */; };
 		8DA694A72BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */; };
 		8DA694A92BA6E9540086AAEC /* NSTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA694A82BA6E9540086AAEC /* NSTextAlignment.swift */; };
 		8DBC3F652BA780C30045CB98 /* AudioToolboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBC3F642BA780C30045CB98 /* AudioToolboxService.swift */; };
@@ -165,6 +167,8 @@
 		8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView_EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
 		8D75E38F2BA1041E00ED75C0 /* CIFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilter.swift; sourceTree = "<group>"; };
 		8D75E3912BA11E8C00ED75C0 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		8D9A35362BE17A5600650A3D /* PickerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableCell.swift; sourceTree = "<group>"; };
+		8D9A35382BE17FCE00650A3D /* MovieSettingsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSettingsDB.swift; sourceTree = "<group>"; };
 		8DA694A62BA6D4CD0086AAEC /* loadUI_EditorOverlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadUI_EditorOverlayVC.swift; sourceTree = "<group>"; };
 		8DA694A82BA6E9540086AAEC /* NSTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextAlignment.swift; sourceTree = "<group>"; };
 		8DBC3F642BA780C30045CB98 /* AudioToolboxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioToolboxService.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 				8D18F15C2B9F460000194F34 /* EditorCollectionCell.swift */,
 				8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */,
 				8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */,
+				8D9A35362BE17A5600650A3D /* PickerTableCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				8DEF7B582B4150BB007B8737 /* DataBase.swift */,
 				8DBC3F6D2BA78EA60045CB98 /* MovieParametersDB.swift */,
 				8DEF7B562B41509A007B8737 /* MovieDB.swift */,
+				8D9A35382BE17FCE00650A3D /* MovieSettingsDB.swift */,
 				8DBC3F712BA793420045CB98 /* Attachments */,
 			);
 			path = DB;
@@ -662,6 +668,7 @@
 				8D5A24832BBE032A00ABEBA7 /* UIGestureRecognizer.swift in Sources */,
 				8D18F1962B9F466A00194F34 /* String.swift in Sources */,
 				8D26ADCB2BA3933C009CEEB4 /* SelectionTableViewController.swift in Sources */,
+				8D9A35392BE17FCE00650A3D /* MovieSettingsDB.swift in Sources */,
 				8D18F1922B9F466A00194F34 /* AVAssetExportSession.swift in Sources */,
 				8D18F1562B9F45EE00194F34 /* UICollectionViewDelegate_EditorParametersViewController.swift in Sources */,
 				8D18F1802B9F465300194F34 /* PlayerSuperVC.swift in Sources */,
@@ -702,6 +709,7 @@
 				8D422D842BA3F33800E50E87 /* BaseTextField.swift in Sources */,
 				8DA694A92BA6E9540086AAEC /* NSTextAlignment.swift in Sources */,
 				8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */,
+				8D9A35372BE17A5600650A3D /* PickerTableCell.swift in Sources */,
 				8D18F1982B9F466A00194F34 /* CGFloat+Double.swift in Sources */,
 				8D18F1972B9F466A00194F34 /* UIImage.swift in Sources */,
 				8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */,

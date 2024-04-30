@@ -9,6 +9,7 @@ import UIKit
 
 class EditorOverlayContainerVC: SuperVC {
     
+    @IBOutlet weak var additionalButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet private weak var collectionView:UICollectionView!
     var primatyViews:[UIView] {
@@ -112,6 +113,10 @@ class EditorOverlayContainerVC: SuperVC {
         
     }
     
+    @IBAction func additionalButtonPressed(_ sender: BaseButton) {
+        screenType?.screenOverlayButton?.pressed()
+    }
+    
 }
 
 extension EditorOverlayContainerVC {
@@ -127,6 +132,12 @@ extension EditorOverlayContainerVC {
     private func setupUI() {
         view.backgroundColor = (parentVC?.view.backgroundColor ?? .clear)
         navigationController?.navigationBar.backgroundColor = view.backgroundColor
+        if let buttonData = screenType?.screenOverlayButton {
+            additionalButton.setTitle(buttonData.title, for: .normal)
+            additionalButton.isHidden = false
+        }
+        print(screenType?.tableData, " gtefrdew")
+        initialTableData = screenType?.tableData
         switch screenType?.attachmentType {
         case .floatRange(_), .switch(_):
             if let type = screenType?.attachmentType {
@@ -163,11 +174,7 @@ extension EditorOverlayContainerVC {
             tableView.delegate = self
             tableView.dataSource = self
         }
-        
         reloadData()
-        if !needTextField {
-            collectionView.contentInset.left = view.frame.width / 9
-        }
     }
     
     private func reloadData() {

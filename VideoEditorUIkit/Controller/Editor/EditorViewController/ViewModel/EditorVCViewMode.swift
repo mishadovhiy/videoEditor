@@ -77,9 +77,9 @@ extension EditorVCViewMode {
             .init(title: "Filter", image: "filterColored", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
-            .init(title: "Export", image: "export", didSelect: {
+            .init(title: "Export", image: "export", toOverlay: exportOptionsList(exportPressed: {
                 pressed(.export)
-            }, buttonColor: .type(.darkBlue)),
+            }), buttonColor: .type(.darkBlue)),
             deleteCell(pressed: pressed),
 //            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
 //                let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
@@ -93,6 +93,21 @@ extension EditorVCViewMode {
 //                pressed(.toStoredVideos)
 //            })
         ]
+    }
+    
+    private func exportOptionsList(exportPressed:@escaping ()->()) -> EditorOverlayVC.ToOverlayData {
+        return .init(screenTitle: "Export", screenHeight:.big, tableData: [
+            .segmented(.init(title:"Video quality", list: Constants.videoQualities, selectedAt: DB.holder!.settings.videoQualityIndex, didSelect: { at in
+                DispatchQueue(label: "db", qos: .userInitiated).async {
+                    DB.db.settings.videoQuality = Constants.videoQualities[at]
+                }})),
+            .segmented(.init(title:"Video size", list: Constants.videoQalitySizes.compactMap({
+                return "width: \($0.width)" + " height: \($0.height)"
+            }), selectedAt: DB.holder!.settings.videoSizeQualityIndex, didSelect: { at in
+            DispatchQueue(label: "db", qos: .userInitiated).async {
+                DB.db.settings.videoSize = Constants.videoQalitySizes[at]
+            }}))
+        ], screenOverlayButton: .init(title: "Export", pressed: exportPressed))
     }
     
     private func deleteCell(pressed:@escaping(OverlayPressedModel)->()) -> EditorOverlayVC.OverlayCollectionData {

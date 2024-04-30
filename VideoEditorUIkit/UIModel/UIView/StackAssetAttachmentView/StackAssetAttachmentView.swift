@@ -60,6 +60,10 @@ class StackAssetAttachmentView:UIView {
         updateLayers()
     }
     
+    var hasSelected: Bool {
+        AppDelegate.shared?.coordinator?.rootVC?.playerVC?.editingAttachmentView != nil
+    }
+
     func deselectAll() {
         setSelected(false)
         layerStack?.arrangedSubviews.forEach( {

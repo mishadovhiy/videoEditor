@@ -34,3 +34,8 @@ struct MessageContent {
         self.userInfo = userInfo
     }
 }
+
+struct ButtonData {
+    let title:String
+    let pressed:()->()
+}

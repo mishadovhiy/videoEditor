@@ -67,8 +67,8 @@ fileprivate extension EditorCollectionCell {
     private func setupUI() {
         titleLabel.font = .type(.small)
         contentView.layer.drawLine([
-            .init(x: -5, y: 5),
-                .init(x: -5, y: contentView.frame.height - 10)
+            .init(x: 0, y: 0),
+            .init(x: 0, y: contentView.frame.height)
         ], color: .init(.separetor), name: "LeftSeparetor")
     }
     

@@ -93,8 +93,8 @@ class EditorOverlayVC: SuperVC {
     }
     
     override func removeFromParent() {
-        attachmentDelegate?.overlayRemoved()
-        attachmentData = nil
+        self.attachmentDelegate?.overlayRemoved()
+        self.attachmentData = nil
         view.endEditing(true)
         animateShow(show: false) {
             self.attachmentDelegate = nil
@@ -193,11 +193,14 @@ class EditorOverlayVC: SuperVC {
 }
 
 fileprivate extension EditorOverlayVC {
-    func animateShow(show:Bool, completion:(()->())? = nil) {
+    final func animateShow(show:Bool, completion:(()->())? = nil) {
         appearenceAnimation.stopAnimation(true)
-        appearenceAnimation.addAnimations {
-            self.view.alpha = show ? 1 : 0
-            self.view.layer.zoom(value: !show ? 1.2 : 1)
+        appearenceAnimation.addAnimations { [ weak self] in
+            self?.view.alpha = show ? 1 : 0
+            self?.view.layer.zoom(value: !show ? 1.2 : 1)
+        }
+        if show {
+            self.view.layer.zoom(value: 0.6)
         }
         appearenceAnimation.addCompletion { _ in
             completion?()
@@ -206,6 +209,10 @@ fileprivate extension EditorOverlayVC {
                     $0.layer.animationTransition()
                     $0.setTitleColor(self.textColor, for: .normal)
                     $0.tintColor = self.textColor
+                }
+                let plusButton = self.actionButtons.first(where: {$0.tag == 1})
+                UIView.animate(withDuration: 0.2) {
+                    plusButton?.backgroundColor = (self.attachmentData?.trackColor ?? self.view.backgroundColor)?.darker().withAlphaComponent(0.2)
                 }
             }
         }

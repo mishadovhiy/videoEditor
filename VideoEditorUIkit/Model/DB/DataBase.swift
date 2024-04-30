@@ -25,5 +25,14 @@ extension DB {
                 dict.updateValue(newValue.dict, forKey: "MovieParametersDB")
             }
         }
+        
+        var settings:MovieSettingsDB {
+            get {
+                .init(dict: dict["MovieSettingsDB"] as? [String:Any] ?? [:])
+            }
+            set {
+                dict.updateValue(newValue.dict, forKey: "MovieSettingsDB")
+            }
+        }
     }
 }
