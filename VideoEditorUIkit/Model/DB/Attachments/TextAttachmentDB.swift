@@ -9,10 +9,35 @@ import UIKit
 
 struct TextAttachmentDB {
     
-    var dict:[String:Any] = [:]
+    var dict:[String:Any] = [:] {
+        didSet {
+            if isAddingNew {
+                var new = self
+                new.isAddingNew = false
+                new.assetName = nil
+                DB.db.settings.defaultText = new
+            }
+        }
+    }
     var attachmentType: InstuctionAttachmentType? = .text
     var id: UUID = .init()
-    private let defaultColor:UIColor = .type(.yellow)
+    private let defaultColor:UIColor = .type(.white)
+    private var isAddingNew = false
+    
+    init(dict: [String : Any] = [:], attachmentType: InstuctionAttachmentType? = nil, id: UUID? = nil, canSetDefault:Bool = false) {
+        if canSetDefault {
+            self.dict = DB.db.settings.defaultText.dict
+            isAddingNew = true
+        } else {
+            self.dict = dict
+        }
+        if let attachmentType {
+            self.attachmentType = attachmentType
+        }
+        if let id {
+            self.id = id
+        }
+    }
     
     var fontSize:CGFloat {
         get {

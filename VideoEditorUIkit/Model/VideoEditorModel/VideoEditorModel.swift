@@ -46,6 +46,7 @@ class VideoEditorModel {
     
     func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {
+            print("loadVideoerfedw ", Date())
             let loadedMovie = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
             let db = DB.db.movieParameters
             self.dbParametersHolder = db.editingMovie
@@ -225,7 +226,9 @@ fileprivate extension VideoEditorModel {
                 if songUrl == nil {
                     DB.db.movieParameters.editingMovie?.songs = .init()
                 }
+                print("addingLayersasdsd ", Date())
                 addLayerAttachments()
+                print("layersAddeddfsadsa ", Date())
                 if let song = DB.db.movieParameters.editingMovie?.songs,
                    song.attachmentURL != "",
                    let songURL = songUrl ?? URL(string: song.attachmentURL) {

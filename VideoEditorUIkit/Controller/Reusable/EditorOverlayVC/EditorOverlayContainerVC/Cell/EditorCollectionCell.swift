@@ -7,11 +7,6 @@
 
 import UIKit
 
-class OverlayTextFieldCell:UICollectionViewCell {
-    
-    @IBOutlet weak var textField: BaseTextField!
-}
-
 class EditorCollectionCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!

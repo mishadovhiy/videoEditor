@@ -10,6 +10,9 @@ import Foundation
 extension DB.DataBase {
     struct MovieSettingsDB {
         var dict:[String:Any]
+        init(dict: [String : Any]) {
+            self.dict = dict
+        }
         
         var videoQuality:String {
             get {
@@ -63,7 +66,7 @@ extension DB.DataBase {
         
         var defaultText:TextAttachmentDB {
             get {
-                .init(dict: dict["defaultText"] as? [String:Any] ?? [:])
+                return .init(dict: dict["defaultText"] as? [String:Any] ?? [:])
             }
             set {
                 dict.updateValue(newValue.dict, forKey: "defaultText")

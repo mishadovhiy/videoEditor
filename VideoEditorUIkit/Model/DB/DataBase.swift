@@ -17,18 +17,16 @@ extension DB {
         var movieParameters: MovieParametersDB {
             get {
                 let dict = dict["MovieParametersDB"] as? [String:Any] ?? [:]
-                print(dict, " dataBase saving")
                 return .init(dict: dict)
             }
             set {
-                print(newValue.dict, " dataBase updated")
                 dict.updateValue(newValue.dict, forKey: "MovieParametersDB")
             }
         }
         
         var settings:MovieSettingsDB {
             get {
-                .init(dict: dict["MovieSettingsDB"] as? [String:Any] ?? [:])
+                return .init(dict: dict["MovieSettingsDB"] as? [String:Any] ?? [:])
             }
             set {
                 dict.updateValue(newValue.dict, forKey: "MovieSettingsDB")

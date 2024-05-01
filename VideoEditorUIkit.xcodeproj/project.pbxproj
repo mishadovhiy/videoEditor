@@ -93,6 +93,8 @@
 		8DEF7B542B414E78007B8737 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B532B414E78007B8737 /* DB.swift */; };
 		8DEF7B572B41509A007B8737 /* MovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B562B41509A007B8737 /* MovieDB.swift */; };
 		8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7B582B4150BB007B8737 /* DataBase.swift */; };
+		8DF00BE02BE298ED00D6FB07 /* ViewModel_StackAssetAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF00BDF2BE298ED00D6FB07 /* ViewModel_StackAssetAttachmentView.swift */; };
+		8DF00BE22BE2B45E00D6FB07 /* OverlayTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF00BE12BE2B45E00D6FB07 /* OverlayTextFieldCell.swift */; };
 		8DF171BD2B9F48A700F71D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DF171BC2B9F48A700F71D03 /* LaunchScreen.storyboard */; };
 		8DF1A8962BA219E4004ACFFC /* CGFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1A8952BA219E4004ACFFC /* CGFont.swift */; };
 		8DF1A8982BA25ABD004ACFFC /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1A8972BA25ABD004ACFFC /* CALayer.swift */; };
@@ -186,6 +188,8 @@
 		8DEF7B532B414E78007B8737 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		8DEF7B562B41509A007B8737 /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
 		8DEF7B582B4150BB007B8737 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		8DF00BDF2BE298ED00D6FB07 /* ViewModel_StackAssetAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_StackAssetAttachmentView.swift; sourceTree = "<group>"; };
+		8DF00BE12BE2B45E00D6FB07 /* OverlayTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayTextFieldCell.swift; sourceTree = "<group>"; };
 		8DF171BC2B9F48A700F71D03 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DF1A8952BA219E4004ACFFC /* CGFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFont.swift; sourceTree = "<group>"; };
 		8DF1A8972BA25ABD004ACFFC /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18F15C2B9F460000194F34 /* EditorCollectionCell.swift */,
+				8DF00BE12BE2B45E00D6FB07 /* OverlayTextFieldCell.swift */,
 				8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */,
 				8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */,
 				8D9A35362BE17A5600650A3D /* PickerTableCell.swift */,
@@ -383,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18F17A2B9F465300194F34 /* StackAssetAttachmentView.swift */,
+				8DF00BDF2BE298ED00D6FB07 /* ViewModel_StackAssetAttachmentView.swift */,
 				8D18F17B2B9F465300194F34 /* AssetRawView.swift */,
 			);
 			path = StackAssetAttachmentView;
@@ -712,12 +718,14 @@
 				8D9A35372BE17A5600650A3D /* PickerTableCell.swift in Sources */,
 				8D18F1982B9F466A00194F34 /* CGFloat+Double.swift in Sources */,
 				8D18F1972B9F466A00194F34 /* UIImage.swift in Sources */,
+				8DF00BE22BE2B45E00D6FB07 /* OverlayTextFieldCell.swift in Sources */,
 				8DEF7B592B4150BB007B8737 /* DataBase.swift in Sources */,
 				8D18F1522B9F45EE00194F34 /* AssetPreviewCell.swift in Sources */,
 				8DBC3F732BA7935D0045CB98 /* SongAttachmentDB.swift in Sources */,
 				8D18F1932B9F466A00194F34 /* UIColor.swift in Sources */,
 				8D75C0FE2BA92B2C00DD9B89 /* SliderTableCell.swift in Sources */,
 				8D75C1002BA92B3700DD9B89 /* SwitchTableCell.swift in Sources */,
+				8DF00BE02BE298ED00D6FB07 /* ViewModel_StackAssetAttachmentView.swift in Sources */,
 				8D4C171B2B3B2DF400953143 /* SceneDelegate.swift in Sources */,
 				8D18F1822B9F465300194F34 /* AssetRawView.swift in Sources */,
 				8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */,

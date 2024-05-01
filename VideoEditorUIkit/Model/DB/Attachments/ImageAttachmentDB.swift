@@ -9,10 +9,34 @@ import UIKit
 
 struct ImageAttachmentDB {
     
-    var dict:[String:Any] = [:]
+    var dict:[String:Any] = [:] {
+        didSet {
+            if isAddingNew {
+                var new = self
+                new.isAddingNew = false
+                new.image = nil
+                DB.db.settings.defaultImage = new
+            }
+        }
+    }
     var attachmentType: InstuctionAttachmentType? = .media
     var id: UUID = .init()
-    private let defaultColor:UIColor = .type(.darkBlue)
+    private let defaultColor:UIColor = .type(.pinkPurpure)
+    private var isAddingNew:Bool = false
+    init(dict: [String : Any] = [:], attachmentType: InstuctionAttachmentType? = nil, id: UUID? = nil, canSetDefault:Bool = false) {
+        if canSetDefault {
+            self.dict = DB.db.settings.defaultImage.dict
+            isAddingNew = true
+        } else {
+            self.dict = dict
+        }
+        if let attachmentType {
+            self.attachmentType = attachmentType
+        }
+        if let id {
+            self.id = id
+        }
+    }
     
     var image:Data? {
         get {

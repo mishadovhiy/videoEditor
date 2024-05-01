@@ -11,10 +11,10 @@ struct DB {
     static var holder: DataBase?
     static var db:DataBase {
         get {
-            return holder ?? .init(dict: (UserDefaults.standard.value(forKey: "DataBase") as? [String:Any] ?? [:]))
+            return DB.holder ?? .init(dict: (UserDefaults.standard.value(forKey: "DataBase") as? [String:Any] ?? [:]))
         }
         set {
-            holder = newValue
+            DB.holder = newValue
             if Thread.isMainThread {
                 DispatchQueue(label: "db", qos: .userInitiated).async {
                     UserDefaults.standard.setValue(newValue.dict, forKey: "DataBase")

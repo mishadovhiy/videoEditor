@@ -27,7 +27,7 @@ class StackAssetAttachmentView:UIView {
     private var leftHeaderView:UIView? {
         layerStack?.subviews.first(where: {$0.layer.name == "LeftHeaderView"})
     }
-    
+    private var viewModel:ViewModelStackAssetAttachmentView?
     private var isSelected = false
     private let audioBox = AudioToolboxService()
     private var canAddNew:Bool {
@@ -74,40 +74,20 @@ class StackAssetAttachmentView:UIView {
             }
         })
     }
-    
+        
     func addEmptyPressed() {
-        var newData:AssetAttachmentProtocol?
-        switch attachmentType {
-        case .text:
-            newData = TextAttachmentDB()
-        case .song:
-            newData = SongAttachmentDB()
-        case .media:
-            newData = ImageAttachmentDB()
-        default:
-            break
-        }
-        newData?.time.start = 0
-        if newData?.time.duration == 0 {
-            newData?.time.duration = 0.2
-        }
-        if let superView = (delegate as? EditorParametersViewController)?.scrollView {
-            let superLeftSpace = EditorParametersViewController.collectionViewSpace
-            let scroll = (superView.contentOffset.x + superLeftSpace.x) / (superView.contentSize.width + (superLeftSpace.x * 2))
-            newData?.time.start = scroll >= 1 ? 1 : (scroll <= 0 ? 0 : scroll)
-        }
-        guard let newData else {
+        guard let superView = (delegate as? EditorParametersViewController)?.scrollView else {
             return
         }
-        self.setSelected(true)
-        addRowView(data: newData, isEmpty: true) { view in
-            view.layer.name = EditorOverlayVC.editingLayerName
-            view.isEditing = false
-            view.alpha = 0
-            view.layer.zoom(value: 0.7)
-            self.editRowPressed(newData, view: view, force: true)
-            view.setSelected(true)
-            self.setEmptyViewHidden(false, view: view)
+        let superLeftSpace = EditorParametersViewController.collectionViewSpace
+        let scroll = (superView.contentOffset.x + superLeftSpace.x) / (superView.contentSize.width + (superLeftSpace.x * 2))
+        DispatchQueue(label: "db",qos: .userInitiated).async {
+            guard let newData = self.viewModel?.createEmptyData(scroll: scroll) else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.parformAddEmptyData(newData: newData)
+            }
         }
     }
     
@@ -238,6 +218,7 @@ fileprivate extension StackAssetAttachmentView {
             self.updateView(self.data)
             return
         }
+        viewModel = .init(type: self.attachmentType)
         let layerStack:UIStackView = .init()
         layerStack.axis = .vertical
         layerStack.distribution = .fillEqually
@@ -287,6 +268,20 @@ fileprivate extension StackAssetAttachmentView {
         label.textColor = .init(.greyText)
         stack.addConstaits([.left:2, .right:-2, .bottom:-3])
     }
+    
+    private func parformAddEmptyData(newData:AssetAttachmentProtocol) {
+        self.setSelected(true)
+        addRowView(data: newData, isEmpty: true) { view in
+            view.layer.name = EditorOverlayVC.editingLayerName
+            view.isEditing = false
+            view.alpha = 0
+            view.layer.zoom(value: 0.7)
+            self.editRowPressed(newData, view: view, force: true)
+            view.setSelected(true)
+            self.setEmptyViewHidden(false, view: view)
+        }
+    }
+
     
     private func updateLayers() {
         [false, true].forEach {
