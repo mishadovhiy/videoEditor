@@ -15,6 +15,12 @@ struct ImageAttachmentDB {
                 var new = self
                 new.isAddingNew = false
                 new.image = nil
+                if new.position.y > 1 || new.position.y < 0 || new.position.x > 1 || new.position.x < 0 {
+                    new.position = .zero
+                }
+                if new.zoom <= 0.2 || new.zoom >= 1 {
+                    new.zoom = 0.4
+                }
                 DB.db.settings.defaultImage = new
             }
         }
@@ -191,9 +197,8 @@ extension ImageAttachmentDB:MovieAttachmentProtocol {
             guard let dict = dict["position"] as? [String:Any] else {
                 return .init(x: 0.2, y: 0.2)
             }
-            let y:CGFloat = .init(string: dict["y"] as? String)
-            let x:CGFloat = .init(string: dict["x"] as? String)
-            return .init(x: x < -0.2 ? -0.2 : (x > 0.95 ? 0.95 : x), y: y < -0.2 ? -0.2 : (y > 0.95 ? 0.95 : y))
+            let position:CGPoint = .init(x: .init(string: dict["x"] as? String), y: .init(string: dict["y"] as? String))
+            return position == .zero ? .init(x: 0.2, y: 0.2) : position
         }
         set {
             dict.updateValue([

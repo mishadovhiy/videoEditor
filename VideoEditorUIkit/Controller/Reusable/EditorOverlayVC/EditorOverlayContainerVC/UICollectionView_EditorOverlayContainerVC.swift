@@ -29,6 +29,7 @@ extension EditorOverlayContainerVC:UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OverlayTextFieldCell", for: indexPath) as! OverlayTextFieldCell
             cell.textField.delegate = self
             cell.textField.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
+            cell.textField.textColor = parentVC?.textColor
             cell.textField.text = parentVC?.attachmentData?.assetName == TextAttachmentDB.demo.assetName ? "" : parentVC?.attachmentData?.assetName
             return cell
         }

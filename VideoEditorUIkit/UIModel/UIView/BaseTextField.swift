@@ -23,8 +23,18 @@ class BaseTextField:UITextField {
         }
         set {
             attributedPlaceholder = .init(string: newValue ?? "", attributes: [
-                .foregroundColor:UIColor.type(.black).withAlphaComponent(0.5)
+                .foregroundColor:(textColor ?? .type(.black)).withAlphaComponent(0.5)
             ])
+        }
+    }
+    
+    override var textColor: UIColor? {
+        get {
+            return super.textColor
+        }
+        set {
+            super.textColor = newValue
+            self.placeholder = super.placeholder
         }
     }
 }
@@ -34,11 +44,5 @@ fileprivate extension BaseTextField {
     func defaultTextFieldStyle() {
         font = .type(.regulatMedium)
         textColor = .init(.black)
-        placeholder = super.placeholder
-        backgroundColor = .type(.greyText6)
-        layer.cornerRadius = 5
-        layer.masksToBounds = true
-        layer.borderColor = UIColor.type(.greyText).cgColor
-        layer.borderWidth = 0.5
     }
 }
