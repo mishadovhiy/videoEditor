@@ -49,14 +49,6 @@ class EditorViewController: SuperVC {
         loadUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        mainEditorVC?.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(30), execute: {
-            self.mainEditorVC?.isHidden = true
-        })
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel?.deinit()

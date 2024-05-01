@@ -259,7 +259,7 @@ extension EditorOverlayVC {
         vc.isPopup = true
         parent.addChild(child: vc, constaits: vc.primaryConstraints(.small))
         vc.view.translatesAutoresizingMaskIntoConstraints = false
-        vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.bottomAnchor, constant: attachmentData?.attachmentType == .text ? -40 : -20).isActive = true
+        vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.bottomAnchor, constant: attachmentData?.attachmentType == .text ? -26 : -20).isActive = true
         vc.loadSeectionIndocator(bottomView: bottomView, parent: parent)
         vc.animateShow(show: true)
     }

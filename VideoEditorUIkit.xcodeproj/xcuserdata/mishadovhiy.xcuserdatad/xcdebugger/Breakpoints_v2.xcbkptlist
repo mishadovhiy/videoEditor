@@ -1620,8 +1620,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "clearDataPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3072,8 +3072,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "playTimeChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3200,8 +3200,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "movieURL"
             landmarkType = "24">
          </BreakpointContent>
@@ -3264,8 +3264,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "setViewType(_:overlaySize:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3424,8 +3424,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "errorAddingVideo(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3536,8 +3536,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "videoAdded()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3600,8 +3600,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "addAttachmentPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3616,8 +3616,8 @@
             filePath = "VideoEditorUIkit/Controller/Editor/EditorViewController/EditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "addAttachmentPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
