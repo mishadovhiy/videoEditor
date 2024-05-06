@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FilterType:String {
+enum FilterType:String, CaseIterable {
     case none = "none"
     case invert = "CIColorInvert"
   //  case CIXRay = "CIXRay"
@@ -37,6 +37,4 @@ enum FilterType:String {
     var title:String {
         return rawValue
     }
-    
-    static let allCases:[Self] = [.none, .invert, .CIVignette, .CIThermal, .CISepiaTone, .CIPhotoEffect, .CIPalettize, .CIPaletteCentroid, .CIMinimumComponent, .CIMaximumComponent, .CIFalseColor, .CIDocumentEnhancer, .CIColorPosterize, .CIDither, .CIColorMonochrome, .CIColorMap, .CIColorCurves, .CIColorCubesMixedWithMask, .CIColorCubeWithColorSpace, .CIColorCube, .CIColorCrossPolynomial]
 }
