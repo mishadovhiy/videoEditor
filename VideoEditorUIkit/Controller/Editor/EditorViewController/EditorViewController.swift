@@ -153,6 +153,7 @@ class EditorViewController: SuperVC {
     }
     
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
+    //    self.presentingOverlayVC?.removeFromParent()
         startRefreshing(canReturn: true, completion: {
             self.viewModel?.editorModel.addAttachmentPressed(data)
         })
@@ -166,6 +167,7 @@ class EditorViewController: SuperVC {
     
     private func videoSelectedFrom(url:URL?, controller:UIViewController) {
         if let url {
+            self.playerVC?.playTimeHolder = nil
             startRefreshing(canReturn: true, completion: {
                 controller.dismiss(animated: true) {
                     self.viewModel?.editorModel.addVideo(url: url)
@@ -322,6 +324,7 @@ extension EditorViewController:VideoEditorModelPresenter {
             } else {
                 self.playerVC?.play(replacing: true)
             }
+     //       self.playerVC?.editorOverlayRemoved()
         })
     }
     

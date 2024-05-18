@@ -62,6 +62,9 @@ extension UIView {
     }
     
     func removeWithAnimation() {
+        if superview == nil {
+            return
+        }
         UIView.animate(withDuration: 0.2, animations: {
             self.layer.zoom(value: 1.3)
             self.alpha = 0

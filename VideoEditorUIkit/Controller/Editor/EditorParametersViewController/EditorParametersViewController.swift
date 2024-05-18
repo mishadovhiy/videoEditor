@@ -28,6 +28,7 @@ class EditorParametersViewController: SuperVC {
     var viewType:EditorViewType {
         return parentVC?.viewModel?.viewType ?? .addingVideos
     }
+    private var isSavePressed = false
     static var collectionViewSpace:CGPoint {
         let frame = UIApplication.shared.keyWindow?.frame ?? UIScreen.main.bounds
         return .init(x: frame.width / 2, y: 0)
@@ -155,10 +156,13 @@ class EditorParametersViewController: SuperVC {
                 removeOverlays()
             }
         }
+        print("gterfesdfregt ")
+
     }
     
     func changeDataWithoutReload(_ newData:AssetAttachmentProtocol?) {
         viewModel?.editingAsset = newData as? MovieAttachmentProtocol
+        print("dataChangedasdadsd ")
     }
     
     // MARK: private
@@ -266,7 +270,9 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     }
     
     func overlayRemoved() {
-        parentVC?.playerVC?.editorOverlayRemoved()
+   //     if !isSavePressed {
+            parentVC?.playerVC?.editorOverlayRemoved()
+     //   }
         (viewModel?.editingView as? AssetRawView)?.updateText(viewModel?.editingAssetHolder, totalVideoDuration: videoDuration)
         viewModel?.editingView = nil
         assetStackView.subviews.forEach {
@@ -278,6 +284,7 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     }
     
     func addAttachmentPressed(_ attachmentData: AssetAttachmentProtocol?) {
+        isSavePressed = true
         Task {
             self.viewModel?.removeEditedAssetDB()
             await MainActor.run {

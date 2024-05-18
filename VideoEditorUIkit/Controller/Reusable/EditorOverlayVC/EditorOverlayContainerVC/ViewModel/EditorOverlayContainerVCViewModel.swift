@@ -143,8 +143,6 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     private func layerSetupCells() -> [EditorOverlayVC.OverlayCollectionData] {
         let asset = self.assetDataHolder as? MovieAttachmentProtocol
         return [
-            borderCells(asset),
-            shadowCells(asset),
             .init(title: "Background color", image: "colors", toOverlay: .init(screenTitle: "Background color", attachmentType: .color(.init(title: "Background color", selectedColor: asset?.backgroundColor, didSelect: { newColor in
                 self.didPress?(.assetChanged({ oldValue in
                     var new = oldValue as? MovieAttachmentProtocol
@@ -152,6 +150,8 @@ fileprivate extension EditorOverlayContainerVCViewModel {
                     return new ?? asset!
                 }))
             })))),
+            borderCells(asset),
+            shadowCells(asset),
             .init(title: "Opacity", image: "opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
                 .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
                     self.didPress?(.assetChanged({

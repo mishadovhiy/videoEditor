@@ -19,10 +19,14 @@ class PlayerEditingAttachmentView: UIView {
     }
     
     var data:MovieAttachmentProtocol? {
-        didSet { dataUpdated() }
+        didSet { 
+            print("attachmenmtDidSetdsa")
+            dataUpdated() }
     }
     var dataChanged:DataChanged?
-    var videoSize:CGSize?
+    var videoSize:CGSize? {
+        return VideoEditorModel.renderSize
+    }
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -51,6 +55,28 @@ class PlayerEditingAttachmentView: UIView {
             }
         } else {
             print("error unparcing data ", data)
+        }
+    }
+    lazy var attachmentAnimation = AnimateVideoLayer()
+    private var animating:Bool = false
+    
+    func playerTimeChanged(_ percent:CGFloat) {
+        guard let data else {
+            return
+        }
+        let to = data.time.start + data.time.duration
+        let hide = data.time.start > percent || (to < percent && percent > data.time.start)
+        let change = self.alpha != (hide ? 0 : 1)
+        if change && !animating {
+            animating = true
+            self.attachmentAnimation.appearenceAnimation(data, newLayer: layer, show: !hide)
+            Timer.scheduledTimer(withTimeInterval: data.animations.appeareAnimation.duration, repeats: false) { _ in
+                self.alpha = hide ? 0 : 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(20), execute: {
+                    self.animating = false
+                })
+            }
+          //  self.alpha = hide ? 0 : 1
         }
     }
     
@@ -96,7 +122,7 @@ fileprivate extension PlayerEditingAttachmentView {
 extension PlayerEditingAttachmentView {
     static func configure(data:MovieAttachmentProtocol, dataChanged:@escaping DataChanged, videoSize:CGSize) -> PlayerEditingAttachmentView {
         let view = PlayerEditingAttachmentView.init()
-        view.videoSize = videoSize
+      //  view.videoSize = videoSize
         view.dataChanged = dataChanged
         view.data = data
         view.alpha = 0

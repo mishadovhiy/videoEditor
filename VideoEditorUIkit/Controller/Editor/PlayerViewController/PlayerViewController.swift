@@ -74,10 +74,14 @@ class PlayerViewController: PlayerSuperVC {
         
     func editorOverlayRemoved() {
         editingAttachmentView?.removeWithAnimation()
+//        if parentVC?.presentingOverlayVC != nil {
+//            parentVC?.presentingOverlayVC?.removeFromParent()
+//        }
     }
     
     override func playerTimeChanged(_ percent: CGFloat) {
         super.playerTimeChanged(percent)
+        self.editingAttachmentView?.playerTimeChanged(percent)
         if isPlaying {
             preseter?.playTimeChanged(percent)
         } else if percent == 0 {

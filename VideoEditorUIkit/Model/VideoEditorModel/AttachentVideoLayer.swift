@@ -22,7 +22,7 @@ struct AttachentVideoLayerModel {
     
     private func add(to layer: CALayer, videoSize: CGSize, image:ImageAttachmentDB, isPreview:Bool = false) -> CALayer {
         print("add image: ", image)
-        let vidSize = isPreview ? layer.frame.size : videoSize
+        let vidSize:CGSize = isPreview ? .init(width: videoSize.width / 4, height: videoSize.height / 1.2) : videoSize
         let layer = CALayer()
         layer.name = AttachentVideoLayerModel.textLayerName
         let x = (image.position.x * vidSize.width)
@@ -43,8 +43,8 @@ struct AttachentVideoLayerModel {
     }
     
     private func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false) -> CALayer {
-        let vidSize = isPreview ? layer.frame.size : videoSize
-        let font = UIFont.systemFont(ofSize: text.fontSize, weight: text.fontWeight)
+        let vidSize:CGSize = isPreview ? .init(width: videoSize.width / 4, height: videoSize.height / 1.2) : videoSize
+        let font = UIFont.systemFont(ofSize: text.fontSize * (isPreview ? 0.76 : 1), weight: text.fontWeight)
         let attributes:[NSAttributedString.Key : Any] = [
             .font: font,
             .foregroundColor: text.color,

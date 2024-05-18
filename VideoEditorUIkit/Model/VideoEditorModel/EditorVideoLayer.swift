@@ -17,7 +17,7 @@ struct EditorVideoLayer {
         self.attachmentLayer = .init()
         self.animation = .init()
     }
-    
+        
     func videoComposition(assetTrack:[AVAssetTrack], overlayLayer: CALayer?, composition:AVMutableComposition) async -> (AVMutableVideoComposition, CALayer, CALayer)? {
         let tracks:[AVMutableCompositionTrack] = composition.tracks(withMediaType: .video)
         

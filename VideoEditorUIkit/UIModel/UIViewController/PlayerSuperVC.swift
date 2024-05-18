@@ -11,6 +11,7 @@ import AVFoundation
 class PlayerSuperVC: SuperVC {
     fileprivate var timeChangeObserver:Any?
     var isPlaying:Bool = false
+    var playTimeHolder:TimeInterval? = nil
     var movieURL:URL?
     var movie:AVAsset? {
 //        if let vc = self as? PlayerViewController,
@@ -146,6 +147,9 @@ class PlayerSuperVC: SuperVC {
             if replacing {
                 player.replaceCurrentItem(with: item)
             }
+            if let playTimeHolder {
+                self.seek(seconds: playTimeHolder, manual: false)
+            }
             if player.currentItem?.duration != .zero {
                 preparePlayer()
                 player.play()
@@ -174,6 +178,7 @@ class PlayerSuperVC: SuperVC {
     
     private func playingTimeObserverChanged(_ sendond:TimeInterval) {
         print("Current Time: \(sendond)")
+        playTimeHolder = sendond
         if sendond == movie?.duration.seconds {
             let playing = self.playerLayer?.player?.rate != 0
             print("completed ", playing)
