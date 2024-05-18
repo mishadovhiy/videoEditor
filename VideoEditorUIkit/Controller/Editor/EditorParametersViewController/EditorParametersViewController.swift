@@ -45,7 +45,7 @@ class EditorParametersViewController: SuperVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewAppeared()        
+        viewAppeared()      
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -90,7 +90,7 @@ class EditorParametersViewController: SuperVC {
         let headerStacks = headersStack ?? .init()
         assetStackView.arrangedSubviews.forEach { view in
             if !(view is UICollectionView) {
-                setupUIAnimation.addAnimations {
+                let hide = {
                     if view.isHidden != isHidden {
                         view.isHidden = isHidden
                     }
@@ -100,6 +100,14 @@ class EditorParametersViewController: SuperVC {
                         }
                     }
                 }
+                if (parentVC?.movieURL != nil) && (parentVC?.viewModel?.firstVideoAdded ?? false) {
+                       setupUIAnimation.addAnimations {
+                           hide()
+                       }
+                } else {
+                    hide()
+                }
+             
             }
         }
         addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit/Export Video"

@@ -44,8 +44,8 @@ class EditorViewController: SuperVC {
     
     private let setupAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
     // MARK: - Life-cycle
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         loadUI()
     }
     
@@ -59,16 +59,24 @@ class EditorViewController: SuperVC {
     func setViewType(_ type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         self.viewModel?.viewType = type
         setupAnimation.stopAnimation(true)
-        setupAnimation.addAnimations {
+        if viewModel?.firstVideoAdded ?? false {
+            setupAnimation.addAnimations {
+                self.playerVC?.setUI(type: type)
+                self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
+            }
+        } else {
             self.playerVC?.setUI(type: type)
             self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
         }
+        
         setupAnimation.startAnimation()
         if view.superview == nil {
             return
         }
         if viewModel?.editorModel.movie != nil {
-            mainEditorVC?.canSetHidden = type != .addingVideos && viewModel?.editorModel.movie != nil
+            let hide = type != .addingVideos && viewModel?.editorModel.movie != nil
+            print(hide, " grvfecdx")
+            mainEditorVC?.canSetHidden = hide
         } else {
             mainEditorVC?.canSetHidden = true
         }

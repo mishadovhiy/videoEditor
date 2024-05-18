@@ -32,6 +32,8 @@ extension EditorParametersViewController {
         collectionView.backgroundColor = Constants.Color.trackColor
         scrollView.layer.masksToBounds = true
         scrollView.layer.cornerRadius = 18
+        scrollView.layer.borderColor = UIColor.white.withAlphaComponent(0.03).cgColor
+        scrollView.layer.borderWidth = 2
     }
     
     func viewAppeared() {

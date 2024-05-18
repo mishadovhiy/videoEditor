@@ -70,7 +70,7 @@ class PlayerEditingAttachmentView: UIView {
         if change && !animating {
             animating = true
             self.attachmentAnimation.appearenceAnimation(data, newLayer: layer, show: !hide)
-            Timer.scheduledTimer(withTimeInterval: data.animations.appeareAnimation.duration, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: data.animations.appeareAnimation.duration - 0.1, repeats: false) { _ in
                 self.alpha = hide ? 0 : 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(20), execute: {
                     self.animating = false
