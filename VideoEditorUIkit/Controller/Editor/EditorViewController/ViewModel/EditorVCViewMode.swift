@@ -77,9 +77,12 @@ extension EditorVCViewMode {
             .init(title: "Filter", image: "filterColored", toOverlay: .init(screenTitle: "Choose filter", collectionData: filterOptionsCollectionData(image: filterPreviewImage, {
                 pressed(.filterSelected)
             }), screenHeight: .big)),
-            .init(title: "Export", image: "export", toOverlay: exportOptionsList(exportPressed: {
+            /*.init(title: "Export", image: "export", toOverlay: exportOptionsList(exportPressed: {
                 pressed(.export)
-            }), buttonColor: .type(.darkBlue)),
+            }), buttonColor: .type(.darkBlue)),*/
+            .init(title: "Export", image: "export", didSelect: {
+                pressed(.export)
+            }),
             deleteCell(pressed: pressed),
 //            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
 //                let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"
