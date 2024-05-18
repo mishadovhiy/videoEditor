@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum InstuctionAttachmentType:String {
+enum InstuctionAttachmentType:String, CaseIterable {
     
     case song, text, media
     
@@ -19,11 +19,25 @@ enum InstuctionAttachmentType:String {
         }
     }
     
+    static func configure(_ n: Int) -> Self {
+        Self.allCases.first(where: {
+            $0.order == n
+        }) ?? .song
+    }
+    
     var title:String {
         switch self {
         case .media: return "Image"
         case .song: return "Audio"
         default: return rawValue.capitalized
+        }
+    }
+    
+    var colorName:String {
+        switch self {
+        case .media: return "#B620E0"
+        case .song: return "#6236FF"
+        default: return "#F7B500"
         }
     }
 }

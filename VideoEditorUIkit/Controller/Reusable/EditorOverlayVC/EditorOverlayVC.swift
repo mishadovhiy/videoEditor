@@ -42,6 +42,7 @@ class EditorOverlayVC: SuperVC {
         }
         set {
             attachmentDelegate?.attachmentData = newValue
+            dataChangedUI()
         }
     }
     var attachmentDelegate:EditorOverlayVCDelegate?
@@ -193,6 +194,20 @@ class EditorOverlayVC: SuperVC {
 }
 
 fileprivate extension EditorOverlayVC {
+    func dataChangedUI() {
+        self.actionButtons.forEach {
+            $0.layer.animationTransition()
+            $0.setTitleColor(self.textColor, for: .normal)
+            $0.tintColor = self.textColor
+        }
+        let plusButton = self.actionButtons.first(where: {$0.tag == 1})
+
+        UIView.animate(withDuration: 0.2) {
+            plusButton?.backgroundColor = (self.attachmentData?.trackColor ?? self.view.backgroundColor)?.darker().withAlphaComponent(0.2)
+            self.setBackground()
+        }
+    }
+    
     final func animateShow(show:Bool, completion:(()->())? = nil) {
         appearenceAnimation.stopAnimation(true)
         appearenceAnimation.addAnimations { [ weak self] in
@@ -205,15 +220,7 @@ fileprivate extension EditorOverlayVC {
         appearenceAnimation.addCompletion { _ in
             completion?()
             if show {
-                self.actionButtons.forEach {
-                    $0.layer.animationTransition()
-                    $0.setTitleColor(self.textColor, for: .normal)
-                    $0.tintColor = self.textColor
-                }
-                let plusButton = self.actionButtons.first(where: {$0.tag == 1})
-                UIView.animate(withDuration: 0.2) {
-                    plusButton?.backgroundColor = (self.attachmentData?.trackColor ?? self.view.backgroundColor)?.darker().withAlphaComponent(0.2)
-                }
+                self.dataChangedUI()
             }
         }
         appearenceAnimation.startAnimation()

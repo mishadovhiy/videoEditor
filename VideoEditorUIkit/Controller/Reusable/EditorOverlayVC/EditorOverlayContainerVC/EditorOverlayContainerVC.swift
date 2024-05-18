@@ -130,8 +130,7 @@ extension EditorOverlayContainerVC {
 // MARK: - setupUI
 extension EditorOverlayContainerVC {
     private func setupUI() {
-        view.backgroundColor = (parentVC?.view.backgroundColor ?? .clear)
-        navigationController?.navigationBar.backgroundColor = view.backgroundColor
+        setBackground()
         if let buttonData = screenType?.screenOverlayButton {
             additionalButton.setTitle(buttonData.title, for: .normal)
             additionalButton.isHidden = false
@@ -177,6 +176,15 @@ extension EditorOverlayContainerVC {
         reloadData()
     }
     
+    func setBackground() {
+        view.backgroundColor = (parentVC?.view.backgroundColor ?? .clear)
+        navigationController?.navigationBar.backgroundColor = view.backgroundColor
+        if parentVC?.isPopup ?? false {
+            navigationController?.navigationBar.tintColor = parentVC?.textColor
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: parentVC?.textColor ?? .red]
+        }
+    }
+    
     private func reloadData() {
         collectionView.superview?.isHidden = collectionData.count == 0
         collectionView.reloadData()
@@ -191,10 +199,7 @@ extension EditorOverlayContainerVC {
         parentVC?.toggleNavigationController(appeared: self, countVC: false)
         collectionView.reloadData()
         collectionView.reloadInputViews()
-        if parentVC?.isPopup ?? false {
-            navigationController?.navigationBar.tintColor = parentVC?.textColor
-            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: parentVC?.textColor ?? .red]
-        }
+        
     }
 }
 

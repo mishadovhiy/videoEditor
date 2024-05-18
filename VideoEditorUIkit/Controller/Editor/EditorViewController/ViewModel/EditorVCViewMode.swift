@@ -82,7 +82,7 @@ extension EditorVCViewMode {
             }), buttonColor: .type(.darkBlue)),*/
             .init(title: "Export", image: "export", didSelect: {
                 pressed(.export)
-            }),
+            }, textColor: .white),
             deleteCell(pressed: pressed),
 //            .init(title: (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url", didSelect: {
 //                let title = (DB.holder?.movieParameters.editingMovie?.isOriginalUrl ?? false) ? "Set edited url" : "Set original url"

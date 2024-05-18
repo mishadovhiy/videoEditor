@@ -255,18 +255,32 @@ fileprivate extension StackAssetAttachmentView {
     func loadLeftHeaderContent(toView:UIView) {
         let stack = UIStackView()
         toView.addSubview(stack)
-        
+        let view = UIView()
         let label:UILabel = .init()
-        stack.addArrangedSubview(label)
-        
+        //stack.addArrangedSubview(label)
+        stack.addSubview(view)
+        view.addSubview(label)
+       // stack.backgroundColor = .red.withAlphaComponent(0.4)
         stack.distribution = .fillProportionally
+        stack.alignment = .center
+        stack.axis = .vertical
         stack.spacing = 3
-        stack.axis = .horizontal
+        //stack.axis = .horizontal
         label.textAlignment = .center
         label.text = mediaType?.title
+        view.backgroundColor = .init(hex: mediaType?.colorName ?? "")?.withAlphaComponent(0.18)
+        view.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
+        view.layer.borderWidth = 0.2
+        view.layer.cornerRadius = 3
+        view.layer.masksToBounds = true
         label.font = .type(.smallMedium)
         label.textColor = .init(.greyText)
-        stack.addConstaits([.left:2, .right:-2, .bottom:-3])
+        stack.addConstaits([.left:2, .right:-2, .bottom:0])
+        label.addConstaits([.left:3, .right:-3, .top:1, .bottom:-1])
+        view.addConstaits([.centerX:0, .top:0, .bottom:0])
+        stack.widthAnchor.constraint(greaterThanOrEqualTo: view.widthAnchor, constant: 2).isActive = true
+        //  label.leadingAnchor.constraint(greaterThanOrEqualTo: label.superview!.trailingAnchor, constant: 0).isActive = true
+      //  label.trailingAnchor.constraint(greaterThanOrEqualTo: label.superview!.leadingAnchor, constant: 0).isActive = true
     }
     
     private func parformAddEmptyData(newData:AssetAttachmentProtocol) {

@@ -79,7 +79,7 @@ extension EditorParametersViewController {
     }
     
     func loadLeftHeader() {
-        let images = [0:"movies", 3:"addImage", 2:"addText", 1:"addSound"]
+        let images = [0:"movies", 1:"addSound", 2:"addText", 3:"addImage"]
         assetStackView.arrangedSubviews.forEach {
             let superView = UIView()
             headersStack.addArrangedSubview(superView)
@@ -96,7 +96,8 @@ extension EditorParametersViewController {
                 label.adjustsFontSizeToFitWidth = true
                 label.addConstaits([.left:0, .right:0, .bottom:2])
             }
-            imageView.tintColor = .type(.greyText)
+            imageView.tintColor = $0.tag == 0 ? .white : .init(hex: InstuctionAttachmentType.configure($0.tag).colorName)
+            imageView.tintColor = imageView.tintColor.withAlphaComponent(0.6)
             imageView.contentMode = .scaleAspectFill
             imageView.addConstaits([.centerX:0, .centerY:0, .width:13, .height:13])
         }

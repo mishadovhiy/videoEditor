@@ -274,7 +274,8 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     
     func overlayChangedAttachment(_ newData: AssetAttachmentProtocol?) {
         parentVC?.playerVC?.editingAttachmentView?.data = newData as? MovieAttachmentProtocol
-        (viewModel?.editingView as? AssetRawView)?.updateText(newData, totalVideoDuration: videoDuration)
+        (viewModel?.editingView as? AssetRawView)?.udpateData(data: newData, totalVideoDuration: videoDuration)
+        parentVC?.presentingOverlayVC?.attachmentData = newData
     }
     
     func overlayRemoved() {

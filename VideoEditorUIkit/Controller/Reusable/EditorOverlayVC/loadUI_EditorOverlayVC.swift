@@ -10,7 +10,6 @@ import UIKit
 // MARK: - loadUI
 extension EditorOverlayVC {
     func setupUI() {
-        let defaultColor = view.superview?.backgroundColor ?? .clear
         if isPopup {
             view.layer.cornerRadius = 12
             view.subviews.first(where: {$0 is UIStackView})?.layer.cornerRadius = 11
@@ -19,13 +18,34 @@ extension EditorOverlayVC {
             view.layer.shadowOpacity = 0.5
             view.layer.shadowOffset = .init(width: -1, height: 3)
             view.layer.shadowRadius = 5
-            let color = attachmentData?.trackColor ?? defaultColor
-            view.backgroundColor = color
+            view.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+            view.layer.borderWidth = 0.5
         } else {
-            view.backgroundColor = defaultColor
             actionButtons.first(where: {$0.style == 0})?.superview?.isHidden = hideDoneButton
             actionButtons.first(where: {$0.style == 1})?.superview?.isHidden = hideCloseButton
         }
+        setBackground()
+    }
+    
+    func setBackground() {
+        let defaultColor = view.superview?.backgroundColor ?? .clear
+        if isPopup {
+            let color = attachmentData?.trackColor ?? defaultColor
+            view.backgroundColor = color
+            (children.first as? UINavigationController)?.viewControllers.forEach({
+                if let vc = $0 as? EditorOverlayContainerVC {
+                    vc.setBackground()
+                }
+            })
+        } else {
+            view.backgroundColor = defaultColor
+        }
+        if let bottomIndicator = view.subviews.first(where: {
+            $0.layer.name == "SelectionIndicatorView"
+        })?.subviews.first(where: {$0 is UIImageView}) as? UIImageView {
+            bottomIndicator.tintColor = view.backgroundColor
+        }
+                    
     }
     
     var hideCloseButton:Bool {

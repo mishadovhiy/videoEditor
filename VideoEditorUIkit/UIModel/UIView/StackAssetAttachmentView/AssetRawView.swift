@@ -47,11 +47,16 @@ class AssetRawView:UIView {
                     panEnded:@escaping(_ view:AssetRawView)->()
     ) {
         self.panEnded = panEnded
-        self.data = data
         print(data.debugDescription, " data ")
         self.editRowPressed = editRowPressed
+        udpateData(data: data, updateConstraints: updateConstraints, totalVideoDuration: totalVideoDuration)
+    }
+    
+    func udpateData(data:AssetAttachmentProtocol?,
+                    updateConstraints:Bool = true, totalVideoDuration:Double) {
+        self.data = data
         updateText(data, totalVideoDuration: totalVideoDuration)
-        self.backgroundColor = data?.color
+        self.backgroundColor = data?.color.withAlphaComponent(0.4)
         if updateConstraints {
             self.updateConstraint()
         }
@@ -224,7 +229,9 @@ extension AssetRawView {
     
     private func createPan(isRight:Bool = false) {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = view.backgroundColor?.withAlphaComponent(0.2)
+        view.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        view.layer.borderWidth = 1
         view.alpha = panNormalAlpha
         view.tag = isRight ? 1 : 0
         view.isUserInteractionEnabled = true
