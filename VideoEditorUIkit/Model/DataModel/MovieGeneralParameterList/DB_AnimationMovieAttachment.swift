@@ -78,10 +78,10 @@ extension DB.DataBase.MovieParametersDB {
                 }
             }
             
-            var value:CGFloat {
+            var valueFloat:CGFloat {
                 get {
                     if let value = dict["value"] as? String {
-                        return .init(string: dict["value"] as? String)
+                        return .init(string: value)
                     } else {
                         return 0.8
                     }
@@ -91,9 +91,40 @@ extension DB.DataBase.MovieParametersDB {
                 }
             }
             
-            enum AppeareAnimationType:String {
+            enum AppeareAnimationType:String, CaseIterable {
                 case opacity = "opacity"
                 case scale = "transform.scale"
+                
+                var index: Int {
+                    var i = 0
+                    var result = 0
+                    Self.allCases.forEach {
+                        if $0.rawValue == self.rawValue {
+                            result = i
+                        }
+                        i += 1
+                    }
+                    return result
+                }
+                
+                static func configure(_ index:Int) -> Self {
+                    return Self.allCases.first(where: {$0.index == index}) ?? .opacity
+                }
+                
+                var resultType:ResultType {
+                    switch self {
+                    default: .float
+                    }
+                }
+                enum ResultType {
+                    case float
+                }
+                var title:String {
+                    switch self {
+                    case .scale: return "Scale"
+                    default: return rawValue.capitalized
+                    }
+                }
             }
         }
                 
@@ -106,3 +137,5 @@ extension DB.DataBase.MovieParametersDB {
         }
     }
 }
+
+typealias AppeareAnimationType = DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType

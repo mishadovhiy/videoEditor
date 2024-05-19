@@ -12,15 +12,18 @@ class PickerTableCell: UITableViewCell {
     @IBOutlet private weak var pickerView: UIPickerView!
     @IBOutlet private weak var titleLabel: UILabel!
     private var pickerData:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.StringListType?
+    private var isLightText:Bool = true
     
-    public func set(data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.StringListType) {
+    public func set(data:EditorOverlayVC.ToOverlayData.AttachmentOverlayType.StringListType, navigationColor:UIColor) {
         self.pickerData = data
         titleLabel.text = data.title
+        self.isLightText = !navigationColor.isLight
+        print(isLightText, " tgefrwdqsefrgr ")
+        titleLabel.textColor = isLightText ? .white : .black
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.reloadAllComponents()
         pickerView.selectRow(data.selectedAt, inComponent: 0, animated: false)
-
     }
     
 }
@@ -38,10 +41,20 @@ extension PickerTableCell:UIPickerViewDelegate, UIPickerViewDataSource {
         pickerData?.didSelect(row)
     }
     
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        NSAttributedString.init(string: pickerData?.list[row] ?? "-", attributes: [
-            .font:UIFont.systemFont(ofSize: 8)
-        ])
-    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+            var label: UILabel
+
+            if let view = view as? UILabel {
+                label = view
+            } else {
+                label = UILabel()
+            }
+
+            label.text = pickerData?.list[row] ?? "-"
+            label.textAlignment = .center
+        label.textColor = isLightText ? .white : .black// UIColor.red
+        label.font = .type(.regulatMedium)
+            return label
+        }
 }
 

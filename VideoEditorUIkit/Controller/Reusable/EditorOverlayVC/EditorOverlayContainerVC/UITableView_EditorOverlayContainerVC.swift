@@ -24,7 +24,7 @@ extension EditorOverlayContainerVC:UITableViewDelegate, UITableViewDataSource {
             return cell
         case .segmented(let data):
             let cell = tableView.dequeueReusableCell(withIdentifier: "PickerTableCell", for: indexPath) as! PickerTableCell
-            cell.set(data: data)
+            cell.set(data: data, navigationColor: view.backgroundColor ?? .red)
             return cell
         default:
             return UITableViewCell()

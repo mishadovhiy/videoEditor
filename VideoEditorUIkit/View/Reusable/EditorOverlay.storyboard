@@ -267,7 +267,7 @@
                                                 <color key="separatorColor" name="lightSeparetor"/>
                                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PickerTableCell" rowHeight="44" id="a1w-0E-oFW" customClass="PickerTableCell" customModule="VideoEditorUIkit" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PickerTableCell" id="a1w-0E-oFW" customClass="PickerTableCell" customModule="VideoEditorUIkit" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="289" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a1w-0E-oFW" id="cfj-WH-nDB">
@@ -285,13 +285,13 @@
                                                                         </label>
                                                                         <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1j-td-El1">
                                                                             <rect key="frame" x="-60" y="-53" width="320" height="216"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="60" id="KZ7-9u-9YJ"/>
-                                                                            </constraints>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="tintColor" name="white"/>
                                                                         </pickerView>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="I1j-td-El1" firstAttribute="width" secondItem="61l-2S-dGN" secondAttribute="width" multiplier="0.83" id="PJ2-q9-3kS"/>
+                                                                        <constraint firstAttribute="height" constant="60" id="w86-x7-CXz"/>
                                                                     </constraints>
                                                                 </stackView>
                                                             </subviews>
@@ -472,8 +472,11 @@
         <namedColor name="secondaryBackground">
             <color red="0.090000003576278687" green="0.090000003576278687" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <namedColor name="white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

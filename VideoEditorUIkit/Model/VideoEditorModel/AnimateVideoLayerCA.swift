@@ -26,9 +26,9 @@ struct AnimateVideoLayer {
     private func appeareAnimation(_ data:MovieAttachmentProtocol, type:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType, newLayer:CALayer, totalTime:CGFloat) {
         let duratioResult = data.time.duration * totalTime
         let startResult = data.time.start * totalTime
-        let show = basicAppeare(type, show: true, start: startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: data.opacity)
+        let show = basicAppeare(type, show: true, start: startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: type == .opacity ? data.opacity : 1)
         newLayer.add(show, forKey: "show")
-        let hide = basicAppeare(type, show: false, start: duratioResult + startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: data.opacity)
+        let hide = basicAppeare(type, show: false, start: duratioResult + startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: 0)
         newLayer.add(reapeatedState(show, hide, toAlpha: data.opacity), forKey: "visible")
         newLayer.add(hide, forKey: "hide")
     }
@@ -68,7 +68,33 @@ fileprivate extension AnimateVideoLayer {
     }
     
     func basicAppeare(_ key:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType, show:Bool, start:CFTimeInterval, animationDuration:CGFloat = 0.8, alpha:CGFloat = 1) -> CABasicAnimation {
-        
+        /**
+         borderColor
+         borderWidth
+         bounds
+         compositingFilter
+         contents
+         contentsRect
+         cornerRadius
+         doubleSided
+         filters
+         frame
+         hidden
+         mask
+         masksToBounds
+         + opacity
+         + transform.scale
+         position
+         shadowColor
+         shadowOffset
+         shadowOpacity
+         shadowPath
+         shadowRadius
+         sublayers
+         sublayerTransform
+         transform
+         zPosition
+         */
         let message = CABasicAnimation(keyPath: key.rawValue)
         if message.duration == 0 {
             message.duration = animationDuration

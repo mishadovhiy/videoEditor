@@ -240,6 +240,22 @@ fileprivate extension EditorOverlayContainerVCViewModel {
 
     private func animationCells(current:DB.DataBase.MovieParametersDB.AnimationMovieAttachment) -> EditorOverlayVC.OverlayCollectionData {
         let data: [EditorOverlayVC.ToOverlayData.AttachmentOverlayType] = [
+            .segmented(.init(title: "Type", list: AppeareAnimationType.allCases.compactMap({
+                $0.title
+            }), selectedAt: current.appeareAnimation.key.index, didSelect: { at in
+                self.didPress?(.assetChanged({oldValue in
+                    var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
+                    new.animations.appeareAnimation.key = .configure(at)
+                    return new
+                }))
+            })),
+            .floatRange(.init(title: "Duration", selected: current.appeareAnimation.duration, didSelect: { newValue in
+                self.didPress?(.assetChanged({oldValue in
+                    var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
+                    new.animations.appeareAnimation.duration = newValue
+                    return new
+                }))
+            })),
             .switch(.init(title: "Repeated scale", selected: current.needScale, didSselect: { newValue in
                 self.didPress?(.assetChanged({oldValue in
                     var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
@@ -257,6 +273,6 @@ fileprivate extension EditorOverlayContainerVCViewModel {
 //                }))
 //            })))
 //        }
-        return .init(title: "Animation", image: "animation", toOverlay: .init(screenTitle: "Set animation", tableData: data))
+        return .init(title: "Animation", image: "animation", toOverlay: .init(screenTitle: "Set animation", screenHeight: .big, tableData: data))
     }
 }
