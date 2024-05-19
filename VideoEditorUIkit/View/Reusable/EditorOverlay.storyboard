@@ -291,7 +291,7 @@
                                                                         </pickerView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="I1j-td-El1" firstAttribute="width" secondItem="61l-2S-dGN" secondAttribute="width" multiplier="0.75" id="PJ2-q9-3kS"/>
+                                                                        <constraint firstItem="I1j-td-El1" firstAttribute="width" secondItem="61l-2S-dGN" secondAttribute="width" multiplier="0.83" id="PJ2-q9-3kS"/>
                                                                     </constraints>
                                                                 </stackView>
                                                             </subviews>
