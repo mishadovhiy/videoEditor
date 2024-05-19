@@ -58,18 +58,8 @@ class EditorViewController: SuperVC {
     // MARK: - setup ui
     func setViewType(_ type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         self.viewModel?.viewType = type
-        setupAnimation.stopAnimation(true)
-        if viewModel?.firstVideoAdded ?? false {
-            setupAnimation.addAnimations {
-                self.playerVC?.setUI(type: type)
-                self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
-            }
-        } else {
-            self.playerVC?.setUI(type: type)
-            self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
-        }
-        
-        setupAnimation.startAnimation()
+        self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
+        self.playerVC?.setUI(type: type)
         if view.superview == nil {
             return
         }
@@ -333,6 +323,7 @@ extension EditorViewController:VideoEditorModelPresenter {
     }
     
     @MainActor func videoAdded() {
+        viewModel?.firstVideoAdded = true
         assetParametersVC?.assetChanged()
         previewImagesUpdated(image: nil)
         setViewType(viewModel?.viewType ?? .addingVideos)

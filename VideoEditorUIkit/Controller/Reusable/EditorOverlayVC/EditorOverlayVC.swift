@@ -62,8 +62,8 @@ class EditorOverlayVC: SuperVC {
     }
     
     private let isHiddenAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
-    private let appearenceAnimation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut)
-    let updateConstraintAnimation = UIViewPropertyAnimator(duration: 0.24, curve: .easeIn)
+    private let appearenceAnimation = UIViewPropertyAnimator(duration: 0.39, curve: .easeInOut)
+    let updateConstraintAnimation = UIViewPropertyAnimator(duration: 0.34, curve: .easeIn)
     
     // MARK: - Life-Cycle
     override func didMove(toParent parent: UIViewController?) {

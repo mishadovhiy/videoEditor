@@ -121,9 +121,6 @@ extension EditorVCViewMode {
                              didSelect: { at in
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 DB.db.settings.videoSize = qaulity.allowedSized[at]
-                DispatchQueue.main.async {
-                    reload()
-                }
             }}))
         ], screenOverlayButton: .init(title: "Export", pressed: exportPressed))
     }

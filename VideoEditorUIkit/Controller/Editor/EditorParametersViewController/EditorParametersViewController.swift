@@ -17,7 +17,7 @@ class EditorParametersViewController: SuperVC {
     private var addVideoLabel:UILabel? {
         headersStack.arrangedSubviews.first(where: {
             $0.tag == 0 })?.subviews.first(where: {
-            $0 is UILabel}) as? UILabel
+                $0 is UILabel}) as? UILabel
     }
     
     var viewModel:EditorParametersVCViewModel?
@@ -34,7 +34,7 @@ class EditorParametersViewController: SuperVC {
         return .init(x: frame.width / 2, y: 0)
     }
     
-    private let setupUIAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+    private let setupUIAnimation = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
     
     // MARK: - life-cycle
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class EditorParametersViewController: SuperVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewAppeared()      
+        viewAppeared()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,26 +88,30 @@ class EditorParametersViewController: SuperVC {
             isHidden = true
         }
         let headerStacks = headersStack ?? .init()
+        let canAnimate = (parentVC?.movieURL != nil) && (parentVC?.viewModel?.firstVideoAdded ?? false)
         assetStackView.arrangedSubviews.forEach { view in
             if !(view is UICollectionView) {
-                let hide = {
-                    if view.isHidden != isHidden {
+                if view.isHidden != isHidden {
+                    if canAnimate {
+                        setupUIAnimation.addAnimations {
+                            view.isHidden = isHidden
+                        }
+                    } else {
                         view.isHidden = isHidden
                     }
-                    if let headerView = headerStacks.arrangedSubviews.first(where: {$0.tag == view.tag}) {
-                        if headerView.isHidden != isHidden {
+                }
+                if let headerView = headerStacks.arrangedSubviews.first(where: {$0.tag == view.tag}) {
+                    if headerView.isHidden != isHidden {
+                        if canAnimate {
+                            setupUIAnimation.addAnimations {
+                                headerView.isHidden = isHidden
+                            }
+                        } else {
                             headerView.isHidden = isHidden
                         }
+                        
                     }
                 }
-                if (parentVC?.movieURL != nil) && (parentVC?.viewModel?.firstVideoAdded ?? false) {
-                       setupUIAnimation.addAnimations {
-                           hide()
-                       }
-                } else {
-                    hide()
-                }
-             
             }
         }
         addVideoLabel?.text = type == .addingVideos ? "Add video" : "Edit/Export Video"
@@ -165,7 +169,7 @@ class EditorParametersViewController: SuperVC {
             }
         }
         print("gterfesdfregt ")
-
+        
     }
     
     func changeDataWithoutReload(_ newData:AssetAttachmentProtocol?) {
@@ -279,9 +283,9 @@ extension EditorParametersViewController:EditorOverlayVCDelegate {
     }
     
     func overlayRemoved() {
-   //     if !isSavePressed {
-            parentVC?.playerVC?.editorOverlayRemoved()
-     //   }
+        //     if !isSavePressed {
+        parentVC?.playerVC?.editorOverlayRemoved()
+        //   }
         (viewModel?.editingView as? AssetRawView)?.updateText(viewModel?.editingAssetHolder, totalVideoDuration: videoDuration)
         viewModel?.editingView = nil
         assetStackView.subviews.forEach {
@@ -318,7 +322,7 @@ extension EditorParametersViewController:AssetAttachmentViewDelegate {
         if let view = viewModel?.editingView as? AssetRawView {
             view.updatePlayPercent(startPercent, totalDuration: videoDuration)
         }
-
+        
     }
     
     func attachmentSelected(_ data: AssetAttachmentProtocol?, view:UIView?) {
