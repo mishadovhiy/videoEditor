@@ -91,15 +91,9 @@ struct EditorOverlayContainerVCViewModel {
                     self.textAligmentChanged(.right)
                 })
             ])),
-            .init(title: "Text Color", image: "colors", toOverlay: .init(screenTitle: "Select text Color", attachmentType: .color(.init(selectedColor: assetDataHolder?.color, didSelect: { newColor in
-                self.didPress?(.assetChanged({ oldValue in
-                    var value = oldValue as? TextAttachmentDB ?? .init()
-                    value.color = newColor
-                    return value
-                }))
-            }))))
+            
         ]
-        layerSetupCells().forEach {
+        layerSetupCells(isText: true).forEach {
             data.append($0)
         }
         data.append(animationCells(current: textData.animations))
@@ -140,26 +134,49 @@ fileprivate extension EditorOverlayContainerVCViewModel {
         })
     }
     
-    private func layerSetupCells() -> [EditorOverlayVC.OverlayCollectionData] {
+    private func layerColorCells(isText: Bool = false) ->  EditorOverlayVC.OverlayCollectionData {
         let asset = self.assetDataHolder as? MovieAttachmentProtocol
-        return [
+        var cells:[EditorOverlayVC.OverlayCollectionData] = [
             .init(title: "Background color", image: "colors", toOverlay: .init(screenTitle: "Background color", attachmentType: .color(.init(title: "Background color", selectedColor: asset?.backgroundColor, didSelect: { newColor in
                 self.didPress?(.assetChanged({ oldValue in
                     var new = oldValue as? MovieAttachmentProtocol
                     new?.backgroundColor = newColor
                     return new ?? asset!
                 }))
-            })))),
-            borderCells(asset),
-            shadowCells(asset),
-            .init(title: "Opacity", image: "opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
-                .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
-                    self.didPress?(.assetChanged({
-                        var new = $0 as? MovieAttachmentProtocol
-                        new?.opacity = newValue
-                        return new ?? asset!
-                    }))
+            }))))
+        ]
+        if isText {
+            cells.append(.init(title: "Text Color", image: "colors", toOverlay: .init(screenTitle: "Select text Color", attachmentType: .color(.init(selectedColor: assetDataHolder?.color, didSelect: { newColor in
+                self.didPress?(.assetChanged({ oldValue in
+                    var value = oldValue as? TextAttachmentDB ?? .init()
+                    value.color = newColor
+                    return value
                 }))
+            })))))
+        }
+        if cells.count == 1 {
+            return cells.first!
+        } else {
+            return .init(title: "Colors", image: "colors", toOverlay: .init(screenTitle: "Colors", collectionData: cells))
+        }
+    }
+    
+    private func layerSetupCells(isText:Bool = false) -> [EditorOverlayVC.OverlayCollectionData] {
+        let asset = self.assetDataHolder as? MovieAttachmentProtocol
+        return [
+            layerColorCells(isText: isText),
+            .init(title: "Layer", image: "shadow", toOverlay: .init(screenTitle: "Layer", collectionData: [
+                borderCells(asset),
+                shadowCells(asset),
+                .init(title: "Opacity", image: "opacity", toOverlay: .init(screenTitle: "Opacity", tableData: [
+                    .floatRange(.init(selected: asset?.opacity, didSelect: { newValue in
+                        self.didPress?(.assetChanged({
+                            var new = $0 as? MovieAttachmentProtocol
+                            new?.opacity = newValue
+                            return new ?? asset!
+                        }))
+                    }))
+                ]))
             ]))
         ]
     }

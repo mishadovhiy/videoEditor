@@ -66,13 +66,13 @@ class PlayerEditingAttachmentView: UIView {
         }
         let to = data.time.start + data.time.duration
         let hide = data.time.start > percent || (to < percent && percent > data.time.start)
-        let change = self.alpha != (hide ? 0 : 1)
-        if change && !animating {
+        let opacity:CGFloat = hide ? 0 : 1
+        if (opacity != self.alpha) && !animating {
             animating = true
             self.attachmentAnimation.appearenceAnimation(data, newLayer: layer, show: !hide)
             Timer.scheduledTimer(withTimeInterval: data.animations.appeareAnimation.duration - 0.1, repeats: false) { _ in
-                self.alpha = hide ? 0 : 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(20), execute: {
+                self.alpha = opacity
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.animating = false
                 })
             }
