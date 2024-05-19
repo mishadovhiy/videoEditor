@@ -164,7 +164,8 @@ class EditorOverlayVC: SuperVC {
     func toggleNavigationController(appeared viewController:UIViewController?, countVC:Bool = true) {
         updateMainConstraints(viewController: viewController)
         let vcCount = (viewController?.navigationController?.viewControllers.count ?? 0) == 1
-        let hidden = countVC ? vcCount : viewController == childVC
+        let hidden = vcCount//countVC ? vcCount : viewController == childVC
+        print(hidden, " hefrde")
         viewController?.navigationController?.setNavigationBarHidden(hidden, animated: true)
     }
     

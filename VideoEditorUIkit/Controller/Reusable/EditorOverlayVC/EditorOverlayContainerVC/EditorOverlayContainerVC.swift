@@ -79,9 +79,12 @@ class EditorOverlayContainerVC: SuperVC {
         updateUI()
     }
     
-    func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]?) {
+    func updateData(_ collectionData:[EditorOverlayVC.OverlayCollectionData]?, type:EditorOverlayVC.ToOverlayData? = nil) {
         if view.superview == nil {
             return
+        }
+        if let type {
+            self.screenType = type
         }
         viewModel?.assetDataHolder = parentVCOptional?.attachmentData
         self.collectionData = collectionData ?? viewModel?.getCollectionData ?? []
@@ -199,7 +202,6 @@ extension EditorOverlayContainerVC {
         parentVC?.toggleNavigationController(appeared: self, countVC: false)
         collectionView.reloadData()
         collectionView.reloadInputViews()
-        
     }
 }
 
@@ -223,7 +225,7 @@ extension EditorOverlayContainerVC:UITextFieldDelegate {
 }
 
 extension EditorOverlayContainerVC {
-    static func configure(type:EditorOverlayVC.ToOverlayData?, collectionData:[EditorOverlayVC.OverlayCollectionData]) -> EditorOverlayContainerVC {
+    static func configure(type:EditorOverlayVC.ToOverlayData?, collectionData:[EditorOverlayVC.OverlayCollectionData] = []) -> EditorOverlayContainerVC {
         let vc = UIStoryboard(name: "EditorOverlay", bundle: nil).instantiateViewController(identifier: "EditorOverlayContainerVC") as? EditorOverlayContainerVC
         vc?.screenType = type
         vc?.collectionData = collectionData

@@ -117,13 +117,20 @@ class EditorViewController: SuperVC {
         if viewModel?.viewType == .addingVideos {
             self.mainEditorVC?.updateData(viewModel?.addingVideosEditorData(pressed: self.viewModelPrimaryPressed(_:)))
         } else {
-            DispatchQueue(label: "db", qos: .userInitiated).async {
-                let data = DB.db.movieParameters.editingMovie?.preview
-                DispatchQueue.main.async {
-                    self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(pressed: self.viewModelPrimaryPressed(_:), filterPreviewImage: data) ?? [])
+            performUpdateEditorAssets()
+        }
+    }
+    
+    private func performUpdateEditorAssets() {
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let data = DB.db.movieParameters.editingMovie?.preview
+            DispatchQueue.main.async {
+                if let nav = self.mainEditorVC?.childVC?.navigationController {
+                    self.mainEditorVC?.updateData(self.viewModel?.mainEditorCollectionData(pressed: self.viewModelPrimaryPressed(_:), filterPreviewImage: data, navigation: nav) ?? [])
                 }
             }
         }
+        
     }
     
     func playerChangedAttachment(_ newData:AssetAttachmentProtocol?) {
@@ -153,6 +160,8 @@ class EditorViewController: SuperVC {
             })
         case .startAnimating(completed: let completed):
             startRefreshing(completion: completed)
+        case .reloadTableData:
+            performUpdateEditorAssets()
         }
     }
     
@@ -161,7 +170,7 @@ class EditorViewController: SuperVC {
     }
     
     public func addAttachmentPressed(_ data:AssetAttachmentProtocol?) {
-    //    self.presentingOverlayVC?.removeFromParent()
+        //    self.presentingOverlayVC?.removeFromParent()
         startRefreshing(canReturn: true, completion: {
             self.viewModel?.editorModel.addAttachmentPressed(data)
         })
@@ -192,6 +201,7 @@ class EditorViewController: SuperVC {
             coordinator?.toPhotoLibrary(delegate: self, isVideo: true)
         } else {
             mainEditorVC?.isHidden = false
+            performUpdateEditorAssets()
         }
     }
     
@@ -259,24 +269,24 @@ extension EditorViewController: MPMediaPickerControllerDelegate {
 
 extension EditorViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-      let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL
         let mediaType = info[UIImagePickerController.InfoKey.mediaType]
-            print("didFinishPickingMediaWithInfo ", info)
-            var asset = assetParametersVC?.viewModel?.editingAsset as? ImageAttachmentDB
-            if asset != nil, 
-                let assetView = assetParametersVC?.viewModel?.editingView as? AssetRawView,
-               let pickedImage
+        print("didFinishPickingMediaWithInfo ", info)
+        var asset = assetParametersVC?.viewModel?.editingAsset as? ImageAttachmentDB
+        if asset != nil,
+            let assetView = assetParametersVC?.viewModel?.editingView as? AssetRawView,
+           let pickedImage
         {
-                picker.dismiss(animated: true) {
-                    asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
-                    self.presentingOverlayVC?.updateData(nil)
-                    assetView.updateText(asset, totalVideoDuration: self.viewModel?.editorModel.movieDuration ?? 0)
-                    self.playerVC?.editingAttachmentView?.data = asset
-                }
-            } else if let videoURL = url {
-                videoSelectedFrom(url: videoURL, controller: picker)
+            picker.dismiss(animated: true) {
+                asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
+                self.presentingOverlayVC?.updateData(nil)
+                assetView.updateText(asset, totalVideoDuration: self.viewModel?.editorModel.movieDuration ?? 0)
+                self.playerVC?.editingAttachmentView?.data = asset
             }
+        } else if let videoURL = url {
+            videoSelectedFrom(url: videoURL, controller: picker)
+        }
     }
 }
 
@@ -332,7 +342,7 @@ extension EditorViewController:VideoEditorModelPresenter {
             } else {
                 self.playerVC?.play(replacing: true)
             }
-     //       self.playerVC?.editorOverlayRemoved()
+            //       self.playerVC?.editorOverlayRemoved()
         })
     }
     

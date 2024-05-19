@@ -274,7 +274,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="289" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61l-2S-dGN">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="61l-2S-dGN">
                                                                     <rect key="frame" x="44" y="-33" width="200" height="110"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="NRU-fb-rhh">
@@ -285,11 +285,13 @@
                                                                         </label>
                                                                         <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1j-td-El1">
                                                                             <rect key="frame" x="-60" y="-53" width="320" height="216"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="60" id="KZ7-9u-9YJ"/>
+                                                                            </constraints>
                                                                         </pickerView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="I1j-td-El1" firstAttribute="width" secondItem="61l-2S-dGN" secondAttribute="width" multiplier="0.7" id="F0b-cX-OaB"/>
-                                                                        <constraint firstAttribute="height" constant="44" id="HTc-dh-1JW"/>
+                                                                        <constraint firstItem="I1j-td-El1" firstAttribute="width" secondItem="61l-2S-dGN" secondAttribute="width" multiplier="0.75" id="PJ2-q9-3kS"/>
                                                                     </constraints>
                                                                 </stackView>
                                                             </subviews>
@@ -471,7 +473,7 @@
             <color red="0.090000003576278687" green="0.090000003576278687" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
