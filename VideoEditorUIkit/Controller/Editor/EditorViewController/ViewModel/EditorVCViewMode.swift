@@ -104,21 +104,23 @@ extension EditorVCViewMode {
     }
     
     private func exportOptionsList(exportPressed:@escaping ()->(), reload:@escaping()->(), navigation:UINavigationController) -> EditorOverlayVC.ToOverlayData {
-        let qaulity = DB.holder!.settings.videoQualityIndex
+        let qaulity = DB.holder!.settings.videoQuality
+        let size = DB.holder!.settings.videoSize
         return .init(screenTitle: "Export", screenHeight:.big, tableData: [
-            .segmented(.init(title:"Video quality", list: Constants.videoQualities, selectedAt: qaulity, didSelect: { at in
+            .segmented(.init(title:"Video quality", list: Constants.VideoQuality.allCases.compactMap({$0.title}), selectedAt: qaulity.number, didSelect: { at in
                 DispatchQueue(label: "db", qos: .userInitiated).async {
-                    DB.db.settings.videoQuality = Constants.videoQualities[at]
+                    DB.db.settings.videoQuality = Constants.VideoQuality.allCases[at]
                     //update table data in visible vc of nav
                     DispatchQueue.main.async {
                         (navigation.visibleViewController as? EditorOverlayContainerVC)?.updateData(nil, type: exportOptionsList(exportPressed: exportPressed, reload: reload, navigation: navigation))
                     }
                 }})),
-            .segmented(.init(title:"\(qaulity) Video size", list: Constants.videoQalitySizes.compactMap({
-                return "\(Int($0.width))" + "/ \(Int($0.height))"
-            }), selectedAt: DB.holder!.settings.videoSizeQualityIndex, didSelect: { at in
+            .segmented(.init(title:"\(qaulity.number) Video size", list: qaulity.allowedSized.compactMap({
+                return $0.title
+            }), selectedAt:(qaulity.exceptions?.contains(where: {$0 == size}) ?? false) ? 0 : size.rawValue,
+                             didSelect: { at in
             DispatchQueue(label: "db", qos: .userInitiated).async {
-                DB.db.settings.videoSize = Constants.videoQalitySizes[at]
+                DB.db.settings.videoSize = qaulity.allowedSized[at]
                 DispatchQueue.main.async {
                     reload()
                 }

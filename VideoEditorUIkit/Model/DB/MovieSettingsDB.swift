@@ -14,54 +14,32 @@ extension DB.DataBase {
             self.dict = dict
         }
         
-        var videoQuality:String {
+        var videoQuality:Constants.VideoQuality {
             get {
-                dict["videoQuality"] as? String ?? Constants.videoQualities[Constants.defaultQualityIndex]
-            }
-            set {
-                dict.updateValue(newValue, forKey: "videoQuality")
-            }
-        }
-        var videoSize:CGSize {
-            get {
-                if let dict = dict["videoSize"] as? [String:Any] {
-                    return .init(width: .init(string: dict["width"] as? String), height: .init(string: dict["height"] as? String))
+                if let dict = dict["videoQuality"] as? String
+                {
+                    return .init(rawValue: dict) ?? .default
                 } else {
-                    return Constants.videoQalitySizes[Constants.defaulQalitySizeIndex]
+                    return Constants.VideoQuality.default
                 }
             }
             set {
-                dict.updateValue([
-                    "width":String.init(value: newValue.width),
-                    "height":String.init(value: newValue.height)
-                ], forKey: "videoSize")
+                dict.updateValue("\(newValue.rawValue)", forKey: "videoQuality")
             }
         }
-        
-        var videoSizeQualityIndex:Int {
-            var i = 0
-            let size = videoSize
-            var selectedAt:Int?
-            Constants.videoQalitySizes.forEach {
-                if size == $0 {
-                    selectedAt = i
+        var videoSize:Constants.VideoQualitySizes {
+            get {
+                if let dict = dict["videoSize"] as? String,
+                   let number = Int(dict)
+                {
+                    return .init(rawValue: number) ?? .default
+                } else {
+                    return Constants.VideoQualitySizes.default
                 }
-                i += 1
             }
-            return selectedAt ?? Constants.defaulQalitySizeIndex
-        }
-        
-        var videoQualityIndex:Int {
-            var i = 0
-            let size = videoQuality
-            var selectedAt:Int?
-            Constants.videoQualities.forEach {
-                if size == $0 {
-                    selectedAt = i
-                }
-                i += 1
+            set {
+                dict.updateValue("\(newValue.rawValue)", forKey: "videoSize")
             }
-            return selectedAt ?? Constants.defaultQualityIndex
         }
         
         var defaultText:TextAttachmentDB {

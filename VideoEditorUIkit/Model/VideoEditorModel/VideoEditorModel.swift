@@ -32,10 +32,10 @@ class VideoEditorModel {
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
     static var renderSize:CGSize {
-        return DB.holder!.settings.videoSize
+        return DB.holder!.settings.videoSize.size
     }
     static var exportPresetName: String {
-        return "AVAssetExportPreset" +  DB.holder!.settings.videoQuality
+        return "AVAssetExportPreset" +  DB.holder!.settings.videoQuality.rowValueResult
     }
     //AVAssetExportPresetHEVC1920x1080
     //AVAssetExportPresetHighestQuality

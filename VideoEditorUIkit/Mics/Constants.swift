@@ -72,50 +72,109 @@ struct Constants {
 
 extension Constants {
     struct Keys {
-        enum Filter:String {
-        case invert
-        }
     }
 }
 
 extension Constants {
-    static let defaulQalitySizeIndex = 5
     
-    static let videoQalitySizes:[CGSize] = [
-        .init(width: 480, height: 480),
-        .init(width: 640, height: 480),
-        .init(width: 640, height: 640),
-        .init(width: 960, height: 540),
-        .init(width: 960, height: 960),
-        .init(width: 1080, height: 1080),
-        .init(width: 1280, height: 1280),
-        .init(width: 1440, height: 1440),
-        .init(width: 1920, height: 1080),
-        .init(width: 3840, height: 2160),
-    ]
+    enum VideoQualitySizes: Int, CaseIterable {
+        case s480, s640x480, s640, s960x540, s1080, s1280, s1440, s1920, s3840
+        
+        var size: CGSize {
+            return switch self {
+            case .s480: .init(width: 480, height: 480)
+            case .s640x480: .init(width: 640, height: 480)
+            case .s640: .init(width: 640, height: 640)
+            case .s960x540: .init(width: 960, height: 540)
+            case .s1080: .init(width: 1080, height: 1080)
+            case .s1280: .init(width: 1280, height: 1280)
+            case .s1440: .init(width: 1440, height: 1440)
+            case .s1920: .init(width: 1920, height: 1080)
+            case .s3840: .init(width: 3840, height: 2160)
+            }
+        }
+        
+        var title: String {
+            return "\(Int(size.width))x\(Int(size.height))"
+        }
+        
+        static var `default`: Self {
+            .s1080
+        }
+        
+    }
     
-    static let defaultQualityIndex = 3
+        
+    enum VideoQuality:String, CaseIterable {
+        case LowQuality
+        case MediumQuality
+        case HighestQuality
+        case HEVCHighestQualityWithAlpha
+        case s640x480
+        case s960x540
+        case s1080x1080
+        case s1280x720
+        case s1920x1080
+        case s3840x2160
+        case HEVC1920x1080
+        case HEVC1920x1080WithAlpha
+        case HEVC3840x2160
+        case HEVC3840x2160WithAlpha
+        case MVHEVC960x960
+        case MVHEVC1440x1440
+        case AppleM4A
+        case Passthrough
+        case AppleProRes422LPCM
+        case AppleProRes4444LPCM
+        
+        var rowValueResult: String {
+            switch self {
+            case .s640x480, .s960x540, .s1080x1080, .s1280x720, .s3840x2160:
+                return rawValue.replacingOccurrences(of: "s", with: "")
+            default: return rawValue
+            }
+        }
+        
+        var title:String {
+            return rowValueResult.addingSpaceBeforeUppercase
+        }
+        
+        var allowedSized: [VideoQualitySizes] {
+            let exceptions = self.exceptions
+            var sizes = VideoQualitySizes.allCases
+            exceptions?.forEach({ exp in
+                sizes.removeAll(where: {
+                    $0 == exp
+                })
+            })
+            return sizes
+        }
+        
+        var exceptions: [VideoQualitySizes]? {
+            return switch self {
+            case .AppleProRes4444LPCM: [
+                    .s640, .s480, .s640x480, .s960x540
+            ]
+            default: nil
+            }
+        }
+        
+        var number:Int {
+            var i = 0
+            let size = self
+            var selectedAt:Int?
+            Constants.VideoQuality.allCases.forEach {
+                if size == $0 {
+                    selectedAt = i
+                }
+                i += 1
+            }
+            return selectedAt ?? Self.default.number
+        }
+        
+        static var `default`: Self {
+            return .HighestQuality
+        }
+    }
     
-    static let videoQualities:[String] = [
-        "LowQuality",
-        "MediumQuality",
-        "HighestQuality",
-        "HEVCHighestQuality",
-        "HEVCHighestQualityWithAlpha",
-        "640x480",
-        "960x540",
-        "1280x720",
-        "1920x1080",
-        "3840x2160",
-        "HEVC1920x1080",
-        "HEVC1920x1080WithAlpha",
-        "HEVC3840x2160",
-        "HEVC3840x2160WithAlpha",
-        "MVHEVC960x960",
-        "MVHEVC1440x1440",
-        "AppleM4A",
-        "Passthrough",
-        "AppleProRes422LPCM",
-        "AppleProRes4444LPCM"
-    ]
 }
