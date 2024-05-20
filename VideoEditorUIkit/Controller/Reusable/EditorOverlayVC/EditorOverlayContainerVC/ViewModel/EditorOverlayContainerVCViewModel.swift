@@ -239,40 +239,44 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     
 
     private func animationCells(current:DB.DataBase.MovieParametersDB.AnimationMovieAttachment) -> EditorOverlayVC.OverlayCollectionData {
+        var repeatedTypes = AppeareAnimationType.allCases.compactMap({
+            $0.title
+        })
+        repeatedTypes.append("None")
+        print(current.appeareAnimation.duration, " thefrdw")
         let data: [EditorOverlayVC.ToOverlayData.AttachmentOverlayType] = [
-            .segmented(.init(title: "Type", list: AppeareAnimationType.allCases.compactMap({
+            .segmented(.init(title: "Appeare\nType", list: AppeareAnimationType.allCases.compactMap({
                 $0.title
-            }), selectedAt: current.appeareAnimation.key.index, didSelect: { at in
+            }), selectedAt: current.appeareAnimation.key.rawValue, didSelect: { at in
                 self.didPress?(.assetChanged({oldValue in
                     var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
-                    new.animations.appeareAnimation.key = .configure(at)
+                    new.animations.appeareAnimation.key = .init(rawValue: at) ?? .opacity
                     return new
                 }))
             })),
-            .floatRange(.init(title: "Duration", selected: current.appeareAnimation.duration, didSelect: { newValue in
+            .floatRange(.init(title: "Appeare\nDuration", selected: current.appeareAnimation.duration, didSelect: { newValue in
                 self.didPress?(.assetChanged({oldValue in
                     var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
                     new.animations.appeareAnimation.duration = newValue
                     return new
                 }))
             })),
-            .switch(.init(title: "Repeated scale", selected: current.needScale, didSselect: { newValue in
+            .segmented(.init(title: "Repeated\nType", list: repeatedTypes, selectedAt: current.repeatedAnimations?.key.rawValue ?? AppeareAnimationType.allCases.count, didSelect: { at in
                 self.didPress?(.assetChanged({oldValue in
                     var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
-                    new.animations.needScale = newValue
+                    if new.animations.repeatedAnimations == nil {
+                        new.animations.repeatedAnimations = .init()
+                    }
+                    if let newValue = AppeareAnimationType.init(rawValue: at) {
+                        new.animations.repeatedAnimations?.key = newValue
+                    } else {
+                        new.animations.repeatedAnimations = nil
+                    }
+                    print(at, " thefrd ", new.animations.repeatedAnimations?.key)
                     return new
                 }))
             }))
         ]
-//        if current.needScale {
-//            data.append(.floatRange(.init(title: "Scale range", selected: current.scaleDuration, didSelect: { newValue in
-//                self.didPress?(.assetChanged({oldValue in
-//                    var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
-//                    new.animations.scaleDuration = newValue
-//                    return new
-//                }))
-//            })))
-//        }
         return .init(title: "Animation", image: "animation", toOverlay: .init(screenTitle: "Set animation", screenHeight: .big, tableData: data))
     }
 }

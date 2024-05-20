@@ -49,6 +49,7 @@ class PlayerEditingAttachmentView: UIView {
             })
             if let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, data: text, isPreview: true) {
                 layer.addSublayer(newLayer)
+                self.attachmentAnimation.add(to: newLayer, data: text)
             }
             if !force {
                 dataChanged?(text)

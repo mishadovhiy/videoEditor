@@ -39,16 +39,20 @@ extension DB.DataBase.MovieParametersDB {
             }
         }
         
-        var repeatedAnimations:[AnimationData] {
+        var repeatedAnimations:AnimationData? {
             get {
-                return (dict["repeatedAnimations"] as? [[String:Any]] ?? []).compactMap {
-                    .init(dict: $0)
+                if let dict = dict["repeatedAnimations"] as? [String:Any] {
+                    return .init(dict: dict)
+                } else {
+                    return nil
                 }
             }
             set {
-                dict.updateValue(newValue.compactMap({
-                    $0.dict
-                }), forKey: "repeatedAnimations")
+                if let newValue {
+                    dict.updateValue(newValue.dict, forKey: "repeatedAnimations")
+                } else {
+                    dict.removeValue(forKey: "repeatedAnimations")
+                }
             }
         }
         
@@ -58,10 +62,10 @@ extension DB.DataBase.MovieParametersDB {
             
             var key:AppeareAnimationType {
                 get {
-                    return .init(rawValue: dict["AppeareAnimationType"] as? String ?? "") ?? .opacity
+                    return .configure(dict["AppeareAnimationType"] as? String ?? "")
                 }
                 set {
-                    dict.updateValue(newValue.rawValue, forKey: "AppeareAnimationType")
+                    dict.updateValue(newValue.stringValue, forKey: "AppeareAnimationType")
                 }
             }
             
@@ -91,24 +95,19 @@ extension DB.DataBase.MovieParametersDB {
                 }
             }
             
-            enum AppeareAnimationType:String, CaseIterable {
-                case opacity = "opacity"
-                case scale = "transform.scale"
+            enum AppeareAnimationType:Int, CaseIterable {
+                case opacity
+                case scale
                 
-                var index: Int {
-                    var i = 0
-                    var result = 0
-                    Self.allCases.forEach {
-                        if $0.rawValue == self.rawValue {
-                            result = i
-                        }
-                        i += 1
+                var stringValue:String {
+                    return switch self {
+                    case .opacity: "opacity"
+                    case .scale:"transform.scale"
                     }
-                    return result
                 }
                 
-                static func configure(_ index:Int) -> Self {
-                    return Self.allCases.first(where: {$0.index == index}) ?? .opacity
+                static func configure(_ string:String) -> Self {
+                    return Self.allCases.first(where: {$0.stringValue == string}) ?? .opacity
                 }
                 
                 var resultType:ResultType {
@@ -122,7 +121,7 @@ extension DB.DataBase.MovieParametersDB {
                 var title:String {
                     switch self {
                     case .scale: return "Scale"
-                    default: return rawValue.capitalized
+                    default: return stringValue.capitalized
                     }
                 }
             }

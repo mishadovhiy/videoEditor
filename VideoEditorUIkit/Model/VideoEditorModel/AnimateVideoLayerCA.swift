@@ -9,13 +9,20 @@ import Foundation
 import AVFoundation
 
 struct AnimateVideoLayer {
-    func add(_ newLayer:CALayer, to layer: CALayer, data:MovieAttachmentProtocol, totalTime:CGFloat) {
-        newLayer.opacity = 0
-        appeareAnimation(data, type: .opacity, newLayer: newLayer, totalTime: totalTime)
-        if data.animations.needScale {
-            layer.add(repeated(key: "transform.scale", data: data), forKey: "scale")
+    func add(_ newLayer:CALayer? = nil, to layer: CALayer, data:MovieAttachmentProtocol, totalTime:CGFloat? = nil) {
+        if let totalTime, let newLayer {
+            newLayer.opacity = 0
+            appeareAnimation(data, type: .opacity, newLayer: newLayer, totalTime: totalTime)
         }
-        layer.addSublayer(newLayer)
+        if let animation = data.animations.repeatedAnimations
+        {
+            print(animation, " hyfgdfsd")
+            layer.add(repeated(key: animation.key, data: data), forKey: "scale")
+        }
+        if let newLayer {
+            layer.addSublayer(newLayer)
+        }
+
     }
     
     func appearenceAnimation(_ data:MovieAttachmentProtocol, type:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType? = nil, newLayer:CALayer, show:Bool) {
@@ -37,10 +44,10 @@ struct AnimateVideoLayer {
 
 
 fileprivate extension AnimateVideoLayer {
-    private func repeated(key:String, data:MovieAttachmentProtocol) -> CABasicAnimation {
-        let scaleAnimation = CABasicAnimation(keyPath: key)
-        let difference:CGFloat = 0.05
-        let max:CGFloat = 1
+    private func repeated(key:AppeareAnimationType, data:MovieAttachmentProtocol) -> CABasicAnimation {
+        let scaleAnimation = CABasicAnimation(keyPath: key.stringValue)
+        let max:CGFloat = data.opacity
+        let difference:CGFloat = key == .scale ? 0.05 : (max - 0.3)
         scaleAnimation.fromValue = max - difference
         scaleAnimation.toValue = max
         scaleAnimation.duration = 0.34
@@ -56,7 +63,7 @@ fileprivate extension AnimateVideoLayer {
                                 type:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType = .opacity,
                                 toAlpha:CGFloat = 1
     ) -> CABasicAnimation {
-        let vidible = CABasicAnimation(keyPath: type.rawValue)
+        let vidible = CABasicAnimation(keyPath: type.stringValue)
         vidible.fromValue = toAlpha
         vidible.toValue = toAlpha - 0.01
         vidible.duration = 0.1
@@ -95,7 +102,7 @@ fileprivate extension AnimateVideoLayer {
          transform
          zPosition
          */
-        let message = CABasicAnimation(keyPath: key.rawValue)
+        let message = CABasicAnimation(keyPath: key.stringValue)
         if message.duration == 0 {
             message.duration = animationDuration
         }
