@@ -16,8 +16,7 @@ struct AnimateVideoLayer {
         }
         if let animation = data.animations.repeatedAnimations
         {
-            print(animation, " hyfgdfsd")
-            layer.add(repeated(key: animation.key, data: data), forKey: "scale")
+            (newLayer ?? layer).add(repeated(key: animation.key, data: data), forKey: "scale")
         }
         if let newLayer {
             layer.addSublayer(newLayer)
