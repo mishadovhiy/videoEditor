@@ -211,7 +211,7 @@
                                                                                 <constraint firstItem="RNn-Xy-KyA" firstAttribute="top" secondItem="Xyv-fV-g7v" secondAttribute="top" constant="-2" id="n5W-Hx-U8a"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="start editing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="start editing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="MuI-Q6-YEg">
                                                                             <rect key="frame" x="4" y="68" width="80" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Mqi-m7-3Ut"/>

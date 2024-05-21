@@ -45,7 +45,7 @@ struct EditorOverlayContainerVCViewModel {
             data.insert(trashCell, at: 0)
             data.insert(trashCell(removeImage: true), at: 1)
         } else {
-            data.insert(.init(title: "Galary\nChoose Image", image: "addImage", didSelect: {
+            data.insert(.init(title: "Galary\nChoose Image", didSelect: {
                 self.didPress?(.upload(.photoLibrary))
             }), at: 0)
             data.insert(.init(title: "Document\nChoose Image", didSelect: {
