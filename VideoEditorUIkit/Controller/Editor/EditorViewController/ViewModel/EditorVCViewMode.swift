@@ -12,6 +12,7 @@ struct EditorVCViewMode {
     var editorModel:VideoEditorModel!
     var viewType:EditorViewType = .addingVideos
     var firstVideoAdded = false
+    var selectingFileFor:EditorOverlayContainerVCViewModel.UploadPressedType? = nil
     var canAnimate:Bool {
         return firstVideoAdded
     }

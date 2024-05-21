@@ -113,6 +113,7 @@ extension EditorOverlayContainerVCViewModel {
         case files
         case photoLibrary
         case filePhotots
+        case audioFile
     }
     
     enum PressedType {

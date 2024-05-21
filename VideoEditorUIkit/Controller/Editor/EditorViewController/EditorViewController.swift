@@ -213,6 +213,7 @@ class EditorViewController: SuperVC {
     }
     
     func uploadFromPressed(type: EditorOverlayContainerVCViewModel.UploadPressedType) {
+        viewModel?.selectingFileFor = type
         switch type {
         case .appleMusic:
             coordinator?.toAppleMusicList(delegate: self)
@@ -222,6 +223,8 @@ class EditorViewController: SuperVC {
             coordinator?.toPhotoLibrary(delegate: self)
         case .filePhotots:
             coordinator?.toDocumentPicker(delegate: self, isVideo: false)
+        case .audioFile:
+            coordinator?.toDocumentPicker(delegate: self)
         }
     }
     
@@ -234,11 +237,9 @@ class EditorViewController: SuperVC {
     }
     
     private func soundToVideoSelected(_ url:URL, controller:UIViewController) {
-        startRefreshing(canReturn: true, completion: {
-            controller.dismiss(animated: true) {
-                self.performSongToVideoSelected(url)
-            }
-        })
+        controller.dismiss(animated: true) {
+            self.performSongToVideoSelected(url)
+        }
     }
 }
 
