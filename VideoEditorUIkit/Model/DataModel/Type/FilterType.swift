@@ -10,8 +10,8 @@ import Foundation
 enum FilterType:String, CaseIterable {
     case none = "none"
     case invert = "CIColorInvert"
-  //  case CIXRay = "CIXRay"
-   // case CIVignetteEffect = "CIVignetteEffect"
+    case CIXRay = "CIXRay"
+    case CIVignetteEffect = "CIVignetteEffect"
     case CIVignette = "CIVignette"
     case CIThermal = "CIThermal"
     case CISepiaTone = "CISepiaTone"
@@ -35,6 +35,6 @@ enum FilterType:String, CaseIterable {
     case CIColorCrossPolynomial = "CIColorCrossPolynomial"
     
     var title:String {
-        return rawValue
+        return rawValue.replacingOccurrences(of: "CI", with: "").addingSpaceBeforeUppercase
     }
 }

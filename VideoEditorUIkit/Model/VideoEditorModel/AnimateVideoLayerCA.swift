@@ -33,10 +33,12 @@ struct AnimateVideoLayer {
         let duratioResult = data.time.duration * totalTime
         let startResult = data.time.start * totalTime
         let show = basicAppeare(type, show: true, start: startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: type == .opacity ? data.opacity : 1)
+      //  newLayer.add(basicAppeare(.hidden, show: true, start: startResult, animationDuration: 0.01), forKey: "show1")
         newLayer.add(show, forKey: "show")
         let hide = basicAppeare(type, show: false, start: duratioResult + startResult, animationDuration: data.animations.appeareAnimation.duration, alpha: 0)
         newLayer.add(reapeatedState(show, hide, toAlpha: data.opacity), forKey: "visible")
         newLayer.add(hide, forKey: "hide")
+      //  newLayer.add(basicAppeare(.hidden, show: false, start: duratioResult + startResult, animationDuration: 0.01), forKey: "hide1")
     }
 }
 
@@ -74,39 +76,18 @@ fileprivate extension AnimateVideoLayer {
     }
     
     func basicAppeare(_ key:DB.DataBase.MovieParametersDB.AnimationMovieAttachment.AnimationData.AppeareAnimationType, show:Bool, start:CFTimeInterval, animationDuration:CGFloat = 0.8, alpha:CGFloat = 1) -> CABasicAnimation {
-        /**
-         borderColor
-         borderWidth
-         bounds
-         compositingFilter
-         contents
-         contentsRect
-         cornerRadius
-         doubleSided
-         filters
-         frame
-         hidden
-         mask
-         masksToBounds
-         + opacity
-         + transform.scale
-         position
-         shadowColor
-         shadowOffset
-         shadowOpacity
-         shadowPath
-         shadowRadius
-         sublayers
-         sublayerTransform
-         transform
-         zPosition
-         */
         let message = CABasicAnimation(keyPath: key.stringValue)
         if message.duration == 0 {
             message.duration = animationDuration
         }
-        message.fromValue = show ? 0 : alpha
-        message.toValue = show ? alpha : 0
+   /*     if key == .hidden {
+            message.fromValue = !show
+            message.toValue = show
+        } else {*/
+            message.fromValue = show ? 0 : alpha
+            message.toValue = show ? alpha : 0
+ //       }
+        
         message.autoreverses = false
         message.isRemovedOnCompletion = false
         message.beginTime = start

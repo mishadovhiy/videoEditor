@@ -156,6 +156,9 @@ class EditorOverlayVC: SuperVC {
                 if !hide {
                     self.childVC?.updateUI()
                 }
+                if self.isHidden {
+                    self.childVC?.navigationController?.popToRootViewController(animated: true)
+                }
             }
             isHiddenAnimation.startAnimation()
         }

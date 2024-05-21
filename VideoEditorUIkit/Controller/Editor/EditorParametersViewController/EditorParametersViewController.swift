@@ -189,6 +189,7 @@ class EditorParametersViewController: SuperVC {
     }
     
     private func removeOverlays() {
+        parentVC?.mainEditorVC?.isHidden = true
         parentVC?.presentingOverlayVC?.removeFromParent()
     }
     

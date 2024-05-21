@@ -186,11 +186,29 @@ class EditorViewController: SuperVC {
         }
     }
     
+    private func imageSelected(_ pickedImage:UIImage?) -> Bool {
+        var asset = assetParametersVC?.viewModel?.editingAsset as? ImageAttachmentDB
+        if asset != nil,
+            let assetView = assetParametersVC?.viewModel?.editingView as? AssetRawView,
+           let pickedImage
+        {
+            asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
+            assetParametersVC?.viewModel?.editingAsset = asset
+            self.presentingOverlayVC?.updateData(nil)
+            assetView.updateText(asset, totalVideoDuration: self.viewModel?.editorModel.movieDuration ?? 0)
+            self.playerVC?.editingAttachmentView?.data = asset
+            return true
+        } else {
+            return false
+        }
+    }
+
+    
     func addTrackPressed() {
         if viewModel?.viewType == .addingVideos {
             coordinator?.toPhotoLibrary(delegate: self, isVideo: true)
         } else {
-            mainEditorVC?.isHidden = false
+            mainEditorVC?.isHidden = !(mainEditorVC?.isHidden ?? false)
             performUpdateEditorAssets()
         }
     }
@@ -211,6 +229,8 @@ class EditorViewController: SuperVC {
             coordinator?.toDocumentPicker(delegate: self)
         case .photoLibrary:
             coordinator?.toPhotoLibrary(delegate: self)
+        case .filePhotots:
+            coordinator?.toDocumentPicker(delegate: self, isVideo: false)
         }
     }
     
@@ -237,7 +257,21 @@ extension EditorViewController: UIDocumentPickerDelegate {
             coordinator?.showErrorAlert(title: "Invalid file URL", description: "Check if file is downloaded")
             return
         }
-        soundToVideoSelected(selectedURL, controller: controller)
+        let asset:AVURLAsset = .init(url: selectedURL)
+        if asset.duration != .zero {
+            soundToVideoSelected(selectedURL, controller: controller)
+        } else {
+            do {
+                let data = try Data(contentsOf: selectedURL)
+                if let image = UIImage(data: data),
+                   self.imageSelected(image)
+                {
+                    controller.dismiss(animated: true)
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
@@ -261,21 +295,11 @@ extension EditorViewController:UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL
-        let mediaType = info[UIImagePickerController.InfoKey.mediaType]
-        print("didFinishPickingMediaWithInfo ", info)
-        var asset = assetParametersVC?.viewModel?.editingAsset as? ImageAttachmentDB
-        if asset != nil,
-            let assetView = assetParametersVC?.viewModel?.editingView as? AssetRawView,
-           let pickedImage
-        {
-            picker.dismiss(animated: true) {
-                asset?.image = pickedImage.jpegData(compressionQuality: 0.5)
-                self.presentingOverlayVC?.updateData(nil)
-                assetView.updateText(asset, totalVideoDuration: self.viewModel?.editorModel.movieDuration ?? 0)
-                self.playerVC?.editingAttachmentView?.data = asset
-            }
-        } else if let videoURL = url {
-            videoSelectedFrom(url: videoURL, controller: picker)
+
+        if imageSelected(pickedImage) {
+            picker.dismiss(animated: true)
+        } else if let url {
+            videoSelectedFrom(url: url, controller: picker)
         }
     }
 }

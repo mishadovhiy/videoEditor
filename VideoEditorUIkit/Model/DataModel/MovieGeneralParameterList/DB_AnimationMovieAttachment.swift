@@ -96,14 +96,23 @@ extension DB.DataBase.MovieParametersDB {
             }
             
             enum AppeareAnimationType:Int, CaseIterable {
-                case opacity
                 case scale
+                case opacity
+                //case hidden
                 
                 var stringValue:String {
                     return switch self {
-                    case .opacity: "opacity"
                     case .scale:"transform.scale"
+                    case .opacity: "opacity"
+                 //   case .hidden:"hidden"
                     }
+                }
+                
+                static var repeatedTypes:[Self] {
+                    let igonre:[Self] = [.opacity]
+                    return allCases.filter({
+                        !igonre.contains($0)
+                    })
                 }
                 
                 static func configure(_ string:String) -> Self {

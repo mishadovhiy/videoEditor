@@ -140,6 +140,9 @@ class PlayerSuperVC: SuperVC {
     }
     
     func play(replacing:Bool = true) {
+        if playTimeHolder == movie?.duration.seconds {
+            playTimeHolder = nil
+        }
         guard let item = playerItem else { return}
         if let playerLayer = self.playerLayer,
            let player = playerLayer.player
@@ -149,6 +152,8 @@ class PlayerSuperVC: SuperVC {
             }
             if let playTimeHolder {
                 self.seek(seconds: playTimeHolder, manual: false)
+            } else {
+                self.seek(seconds: .zero, manual: false)
             }
             if player.currentItem?.duration != .zero {
                 preparePlayer()

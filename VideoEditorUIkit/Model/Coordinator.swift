@@ -34,6 +34,16 @@ struct Coordinator {
             return ["aiff", "aliasFile", "appleProtectedMPEG4Audio", "audio", "avi", "audiovisualContent", "video", "mpeg2Video", "appleProtectedMPEG4Video", "mp3", "mpeg", "mpeg4Audio", "movie", "m3uPlaylist", "quickTimeMovie"]
         }
     }
+    
+    var photoDocumentTypeList:[Any] {
+        if #available(iOS 14.0, *) {
+            let results:[UTType] = [.jpeg, .png, .svg, .ico, .icns, .image, .rawImage, .diskImage, .pdf, .gif, .heif, .mpeg, .livePhoto, .heic, .bmp, .webP, .realityFile, .sceneKitScene]
+            return results
+        } else {
+            return ["jpeg", "png", "svg", "ico", "icns", "image", "rawImage", "diskImage", "pdf", "gif", "heif", "mpeg", "livePhoto", "heic", "bmp", "webP", "realityFile", "sceneKitScene"]
+        }
+        
+    }
 }
 
 fileprivate extension Coordinator {
@@ -58,12 +68,13 @@ fileprivate extension Coordinator {
 
 // MARK: Reusable
 extension Coordinator {
-    func toDocumentPicker(delegate:UIDocumentPickerDelegate?) {
+    func toDocumentPicker(delegate:UIDocumentPickerDelegate?, isVideo:Bool = true) {
         let documentPicker:UIDocumentPickerViewController!
+        let data = isVideo ? videoDocumentTypeList : photoDocumentTypeList
         if #available(iOS 14.0, *) {
-            documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: videoDocumentTypeList.compactMap({$0 as? UTType}), asCopy: true)
+            documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: data.compactMap({$0 as? UTType}), asCopy: true)
         } else {
-            documentPicker = UIDocumentPickerViewController(documentTypes: ["mp3", "audio", "movie", "quickTimeMovie"], in: .import)
+            documentPicker = UIDocumentPickerViewController(documentTypes: data.compactMap({$0 as? String}), in: .import)
         }
         documentPicker.delegate = delegate
         documentPicker.allowsMultipleSelection = false

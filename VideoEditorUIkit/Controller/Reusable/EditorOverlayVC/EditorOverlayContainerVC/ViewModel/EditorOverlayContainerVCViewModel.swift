@@ -13,7 +13,9 @@ struct EditorOverlayContainerVCViewModel {
     var type:InstuctionAttachmentType?
     var didPress:((PressedType)->())?
     var assetDataHolder:AssetAttachmentProtocol?
-    var isEditing:Bool = false
+    var isEditing:Bool {
+        return (assetDataHolder as? ImageAttachmentDB)?.image?.isEmpty ?? false == false
+    }
     var getCollectionData:[EditorOverlayVC.OverlayCollectionData]? {
         guard let type else {
             return nil
@@ -40,14 +42,15 @@ struct EditorOverlayContainerVCViewModel {
             data.append($0)
         }
         if isEditing {
-            data.insert(.init(title: "Change", image: "addImage", didSelect: {
-                self.didPress?(.upload(.photoLibrary))
-            }), at: 0)
             data.insert(trashCell, at: 0)
+            data.insert(trashCell(removeImage: true), at: 1)
         } else {
-            data.insert(.init(title: "Choose Image", image: "addImage", didSelect: {
+            data.insert(.init(title: "Galary\nChoose Image", image: "addImage", didSelect: {
                 self.didPress?(.upload(.photoLibrary))
             }), at: 0)
+            data.insert(.init(title: "Document\nChoose Image", didSelect: {
+                self.didPress?(.upload(.filePhotots))
+            }), at: 1)
         }
         data.append(self.animationCells(current: imageAsset.animations))
         return data
@@ -109,6 +112,7 @@ extension EditorOverlayContainerVCViewModel {
         case appleMusic
         case files
         case photoLibrary
+        case filePhotots
     }
     
     enum PressedType {
@@ -129,8 +133,24 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     }
     
     private var trashCell:EditorOverlayVC.OverlayCollectionData {
-        return .init(title: "Delete", image: "trash", didSelect:{
-            self.didPress?(.delete)
+        return trashCell()
+    }
+    
+    private func trashCell(removeImage:Bool = false) -> EditorOverlayVC.OverlayCollectionData {
+        return .init(title: removeImage ? "Remove Image" : "Delete", image: "trash", didSelect:{
+            if removeImage {
+                self.didPress?(.assetChanged({ oldValue in
+                    var new = oldValue as? ImageAttachmentDB
+                    if new == nil {
+                        new = .init()
+                    }
+                    new?.image = nil
+                    return new!
+                }))
+                self.didPress?(.reload)
+            } else {
+                self.didPress?(.delete)
+            }
         })
     }
     
@@ -239,13 +259,13 @@ fileprivate extension EditorOverlayContainerVCViewModel {
     
 
     private func animationCells(current:DB.DataBase.MovieParametersDB.AnimationMovieAttachment) -> EditorOverlayVC.OverlayCollectionData {
-        var repeatedTypes = AppeareAnimationType.allCases.compactMap({
+        var repeatedTypes = AppeareAnimationType.repeatedTypes.compactMap({
             $0.title
         })
         repeatedTypes.append("None")
         print(current.appeareAnimation.duration, " thefrdw")
         let data: [EditorOverlayVC.ToOverlayData.AttachmentOverlayType] = [
-            .segmented(.init(title: "Appeare\nType", list: AppeareAnimationType.allCases.compactMap({
+            .segmented(.init(title: "Appeare\nAnimation", list: AppeareAnimationType.allCases.compactMap({
                 $0.title
             }), selectedAt: current.appeareAnimation.key.rawValue, didSelect: { at in
                 self.didPress?(.assetChanged({oldValue in
@@ -261,18 +281,20 @@ fileprivate extension EditorOverlayContainerVCViewModel {
                     return new
                 }))
             })),
-            .segmented(.init(title: "Repeated\nType", list: repeatedTypes, selectedAt: current.repeatedAnimations?.key.rawValue ?? AppeareAnimationType.allCases.count, didSelect: { at in
+            .segmented(.init(title: "Repeated\nAnimation", list: repeatedTypes, selectedAt: current.repeatedAnimations?.key.rawValue ?? (repeatedTypes.count - 1), didSelect: { at in
                 self.didPress?(.assetChanged({oldValue in
                     var new = oldValue as? MovieAttachmentProtocol ?? TextAttachmentDB.demo
                     if new.animations.repeatedAnimations == nil {
                         new.animations.repeatedAnimations = .init()
                     }
-                    if let newValue = AppeareAnimationType.init(rawValue: at) {
+                    if let newValue = AppeareAnimationType.init(rawValue: at),
+                       AppeareAnimationType.repeatedTypes.contains(newValue)
+                    {
                         new.animations.repeatedAnimations?.key = newValue
+                        print(newValue, " yhgerfwds")
                     } else {
                         new.animations.repeatedAnimations = nil
                     }
-                    print(at, " thefrd ", new.animations.repeatedAnimations?.key)
                     return new
                 }))
             }))

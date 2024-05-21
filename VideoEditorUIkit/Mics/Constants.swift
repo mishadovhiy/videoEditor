@@ -95,7 +95,11 @@ extension Constants {
         }
         
         var title: String {
-            return "\(Int(size.width))x\(Int(size.height))"
+            var result = "\(Int(size.width))x\(Int(size.height))"
+            if self == .default {
+                result.append(" (Default)")
+            }
+            return result
         }
         
         static var `default`: Self {
@@ -110,12 +114,12 @@ extension Constants {
         case MediumQuality
         case HighestQuality
         case HEVCHighestQualityWithAlpha
-        case s640x480
-        case s960x540
-        case s1080x1080
-        case s1280x720
-        case s1920x1080
-        case s3840x2160
+        case s_640x480
+        case s_960x540
+        case s_1080x1080
+        case s_1280x720
+        case s_1920x1080
+        case s_3840x2160
         case HEVC1920x1080
         case HEVC1920x1080WithAlpha
         case HEVC3840x2160
@@ -128,15 +132,23 @@ extension Constants {
         case AppleProRes4444LPCM
         
         var rowValueResult: String {
-            switch self {
-            case .s640x480, .s960x540, .s1080x1080, .s1280x720, .s3840x2160:
-                return rawValue.replacingOccurrences(of: "s", with: "")
-            default: return rawValue
+            var results = rawValue
+            if rawValue.contains("s_") {
+                results = results.replacingOccurrences(of: "s_", with: "")
             }
+            return results
         }
         
         var title:String {
-            return rowValueResult.addingSpaceBeforeUppercase
+            let extensions = ["HEVC", "LPCM", "MVHEVC", "M4A"]
+            var results = rowValueResult.addingSpaceBeforeUppercase
+            extensions.forEach {
+                results = results.replacingOccurrences(of: $0.addingSpaceBeforeUppercase, with: $0)
+            }
+            if self == .default {
+                results.append(" (Default)")
+            }
+            return results
         }
         
         var allowedSized: [VideoQualitySizes] {

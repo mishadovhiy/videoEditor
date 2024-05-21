@@ -162,7 +162,7 @@ extension EditorOverlayContainerVC {
             }
             
             if parentVCOptional?.attachmentData?.attachmentType != nil && collectionData.count == 0 {
-                viewModel?.isEditing = parentVC?.isEditingAttachment ?? false
+            //    viewModel?.isEditing = parentVC?.isEditingAttachment ?? false
                 viewModel?.assetDataHolder = parentVC?.attachmentData
                 collectionData = viewModel?.getCollectionData ?? []
             } else if collectionData.count == 0 {
