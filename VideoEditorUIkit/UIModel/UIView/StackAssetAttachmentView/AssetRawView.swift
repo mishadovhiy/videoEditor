@@ -31,7 +31,9 @@ class AssetRawView:UIView {
         constraints.first(where: {$0.firstAttribute == .width && ($0.firstItem as? UIView) == self})
     }//$0.identifier == self.layer.name
     private let gesturesBegunAnimation = UIViewPropertyAnimator(duration: 0.19, curve: .easeInOut)
-    private let clickService = AudioToolboxService()
+    private var audioBox:AudioToolboxService? {
+        return AppDelegate.shared?.audioBox
+    }
     private let panNormalAlpha:CGFloat = 0.1
     var canSelect = true
     var isSelected:Bool = false

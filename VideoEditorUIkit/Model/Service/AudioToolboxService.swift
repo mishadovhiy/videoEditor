@@ -25,9 +25,9 @@ class AudioToolboxService {
         engine = nil
     }
     
-    func vibrate(style:VibrationStyle = .default) {
-        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.5)
-        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.1)
+    func vibrate(_ style:VibrationStyle = .default) {
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: style == .error ? 0.9 : (style == .default ? 0.4 : 0.2))
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: style == .error ? 0.3 : 0.1)
         let event = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: 0.1)
         guard let pattern = try? CHHapticPattern(events: [event], parameters: []) else {
             print("cantvibrate")
@@ -45,6 +45,7 @@ class AudioToolboxService {
     enum VibrationStyle {
         case error
         case `default`
+        case short
     }
     
     func click() {

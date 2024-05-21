@@ -11,6 +11,9 @@ import MediaPlayer
 import AlertViewLibrary
 
 struct Coordinator {
+    private var appDelegate:AppDelegate? {
+        AppDelegate.shared
+    }
     private var viewController:UIViewController? {
         return UIApplication.shared.keyWindow?.rootViewController
     }
@@ -93,7 +96,7 @@ extension Coordinator {
     func toPhotoLibrary(delegate:(UIImagePickerControllerDelegate & UINavigationControllerDelegate)?, canVibrate:Bool = true, isVideo:Bool = false) {
         if let loaderVC = delegate as? LoaderVC,
            canVibrate {
-            loaderVC.audioToolBox?.vibrate()
+            appDelegate?.audioBox.vibrate()
         }
         let vc = UIImagePickerController()
         vc.delegate = delegate
@@ -140,6 +143,10 @@ extension Coordinator {
 // MARK: - AlertView
 extension Coordinator {
     func showAlert(title:String, description:String? = nil, appearence:AlertViewLibrary.AlertShowMetadata? = .type(.standard)) {
+        let error = appearence?.type
+        if error == .error || error == .internetError || error == .standardError {
+            appDelegate?.audioBox.vibrate(.error)
+        }
         AppDelegate.shared?.ai.showAlert(title: title, description: description, appearence: appearence)
     }
     

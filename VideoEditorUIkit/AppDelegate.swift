@@ -12,6 +12,7 @@ import AlertViewLibrary
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var coordinator:Coordinator?
+    lazy var audioBox:AudioToolboxService = .init()
     
     static var shared:AppDelegate? {
         return UIApplication.shared.delegate as? AppDelegate

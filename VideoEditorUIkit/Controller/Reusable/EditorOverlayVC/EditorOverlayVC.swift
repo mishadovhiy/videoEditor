@@ -141,6 +141,7 @@ class EditorOverlayVC: SuperVC {
  //           isHiddenAnimation.stopAnimation(true)
             let hide = canSetHidden ? newValue : false
             if view.superview?.isHidden ?? false != hide {
+                self.audioBox?.vibrate()
                 print("isHiddenAnimation tgerfwd")
            //     isHiddenAnimation.addAnimations {
                 UIView.animate(withDuration: 0.3, animations: {
@@ -289,5 +290,6 @@ extension EditorOverlayVC {
         vc.view.bottomAnchor.constraint(lessThanOrEqualTo: bottomView.bottomAnchor, constant: attachmentData?.attachmentType == .text ? -26 : -20).isActive = true
         vc.loadSeectionIndocator(bottomView: bottomView, parent: parent)
         vc.animateShow(show: true)
+        AppDelegate.shared?.audioBox.vibrate()
     }
 }

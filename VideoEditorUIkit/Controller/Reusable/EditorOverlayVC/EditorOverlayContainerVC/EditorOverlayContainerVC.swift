@@ -100,6 +100,7 @@ class EditorOverlayContainerVC: SuperVC {
     }
     
     func primaryPressed(_ pressType: EditorOverlayContainerVCViewModel.PressedType) {
+        self.audioBox?.vibrate(.short)
         switch pressType {
         case .delete:
             print("parent delete not implemented")

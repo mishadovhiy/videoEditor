@@ -29,7 +29,9 @@ class StackAssetAttachmentView:UIView {
     }
     private var viewModel:ViewModelStackAssetAttachmentView?
     private var isSelected = false
-    private let audioBox = AudioToolboxService()
+    private var audioBox:AudioToolboxService? {
+        return AppDelegate.shared?.audioBox
+    }
     private var canAddNew:Bool {
         if attachmentType == .song && data.count == 2 {
             return false
@@ -129,7 +131,7 @@ class StackAssetAttachmentView:UIView {
         }
         if isSelected {return}
         if !canAddNew {
-            audioBox.vibrate(style: .error)
+            audioBox?.vibrate(.error)
             return
         }
         addEmptyPressed()

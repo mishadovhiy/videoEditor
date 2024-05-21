@@ -8,6 +8,10 @@
 import UIKit
 
 extension UIViewController {
+    var audioBox:AudioToolboxService? {
+        return AppDelegate.shared?.audioBox
+    }
+    
     func addChild(child:UIViewController, toView:UIView? = nil, constaits:[NSLayoutConstraint.Attribute:(CGFloat, String)]? = nil, name:String? = nil, toSafeArea:Bool = true) {
         self.addChild(child)
         

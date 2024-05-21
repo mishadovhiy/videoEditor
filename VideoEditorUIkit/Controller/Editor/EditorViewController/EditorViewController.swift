@@ -134,6 +134,7 @@ class EditorViewController: SuperVC {
     
     // MARK: - IBAction
     func viewModelPrimaryPressed(_ action:EditorVCViewMode.OverlayPressedModel) {
+        var canAnimate = true
         switch action {
         case .reload:
             reloadUI()
@@ -148,9 +149,13 @@ class EditorViewController: SuperVC {
                 self.viewModel?.editorModel.exportToLibraryPressed()
             })
         case .startAnimating(completed: let completed):
+            canAnimate = false
             startRefreshing(completion: completed)
         case .reloadTableData:
             performUpdateEditorAssets()
+        }
+        if canAnimate {
+            self.audioBox?.vibrate()
         }
     }
     
@@ -181,7 +186,7 @@ class EditorViewController: SuperVC {
             })
         } else {
             print("no video urlss")
-            audioToolBox?.vibrate(style: .error)
+            audioBox?.vibrate(.error)
         }
     }
     
