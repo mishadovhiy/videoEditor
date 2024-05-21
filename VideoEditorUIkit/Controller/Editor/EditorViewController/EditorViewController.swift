@@ -58,18 +58,17 @@ class EditorViewController: SuperVC {
     // MARK: - setup ui
     func setViewType(_ type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         self.viewModel?.viewType = type
-        self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
-        self.playerVC?.setUI(type: type)
         if view.superview == nil {
             return
         }
         if viewModel?.editorModel.movie != nil {
             let hide = type != .addingVideos && viewModel?.editorModel.movie != nil
-            print(hide, " grvfecdx")
             mainEditorVC?.canSetHidden = hide
         } else {
             mainEditorVC?.canSetHidden = true
         }
+        self.assetParametersVC?.setUI(type: type, overlaySize: overlaySize)
+        self.playerVC?.setUI(type: type)
     }
     
     private func loadVideo(movieUrl:URL? = nil) {
@@ -211,14 +210,6 @@ class EditorViewController: SuperVC {
             mainEditorVC?.isHidden = !(mainEditorVC?.isHidden ?? false)
             performUpdateEditorAssets()
         }
-    }
-    
-    @IBAction func startEditingPressed(_ sender: Any) {
-        audioToolBox?.vibrate()
-        mainEditorVC?.isHidden = true
-        startRefreshing(completion: {
-            self.reloadUI()
-        })
     }
     
     func uploadFromPressed(type: EditorOverlayContainerVCViewModel.UploadPressedType) {

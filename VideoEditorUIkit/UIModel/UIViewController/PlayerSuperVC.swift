@@ -237,6 +237,7 @@ fileprivate extension PlayerSuperVC {
         button?.setImage(.init(named: !pause ? "pause" : "play"), for: .normal)
         isPlaying = !pause
         if !pause {
+            print("playTimeChangedAnimation tgerfwd")
             playTimeChangedAnimation?.addAnimations {
                 button?.alpha = !pause ? 0 : 1
             }
@@ -334,6 +335,7 @@ fileprivate extension PlayerSuperVC {
     
     private func showNoDataView(show:Bool, completion:(()->())? = nil) {
         noDataAnimation.stopAnimation(true)
+        print("noDataAnimation tgerfwd")
         noDataAnimation.addAnimations({
             self.noDataView?.alpha = show ? 1 : 0
         })

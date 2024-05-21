@@ -12,6 +12,9 @@ struct EditorVCViewMode {
     var editorModel:VideoEditorModel!
     var viewType:EditorViewType = .addingVideos
     var firstVideoAdded = false
+    var canAnimate:Bool {
+        return firstVideoAdded
+    }
     init(editorPresenter:VideoEditorModelPresenter) {
         editorModel = .init(presenter:editorPresenter)
     }
@@ -115,7 +118,7 @@ extension EditorVCViewMode {
                         (navigation.visibleViewController as? EditorOverlayContainerVC)?.updateData(nil, type: exportOptionsList(exportPressed: exportPressed, reload: reload, navigation: navigation))
                     }
                 }})),
-            .segmented(.init(title:"\(qaulity.number) Video size", list: qaulity.allowedSized.compactMap({
+            .segmented(.init(title:"Video size", list: qaulity.allowedSized.compactMap({
                 return $0.title
             }), selectedAt:(qaulity.exceptions?.contains(where: {$0 == size}) ?? false) ? 0 : size.rawValue,
                              didSelect: { at in

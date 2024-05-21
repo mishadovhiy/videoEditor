@@ -138,29 +138,45 @@ class EditorOverlayVC: SuperVC {
             self.view.superview?.isHidden ?? false
         }
         set {
-            isHiddenAnimation.stopAnimation(true)
+ //           isHiddenAnimation.stopAnimation(true)
             let hide = canSetHidden ? newValue : false
-            isHiddenAnimation.addAnimations {
-                self.view.superview?.isHidden = hide
+            if view.superview?.isHidden ?? false != hide {
+                print("isHiddenAnimation tgerfwd")
+           //     isHiddenAnimation.addAnimations {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.superview?.isHidden = hide
+                }) { _ in
+                    if !hide {
+                        self.childVC?.updateUI(force: true)
+                    }
+                    if hide {
+                        self.childVC?.navigationController?.popToRootViewController(animated: true)
+                        
+                    }
+                    //        self.childVC?.view.layoutIfNeeded()
+
+                }
+           //     }
             }
             if hide {
-                isHiddenAnimation.addAnimations({
+                print("isHiddenAnimation tgerfwd")
+
+        //        isHiddenAnimation.addAnimations({
+                UIView.animate(withDuration: 0.3, animations: {
                     self.view.alpha = 0
-                }, delayFactor: 0.18)
-                isHiddenAnimation.addCompletion {_ in
+                }) { _ in
                     self.view.alpha = 1
                 }
+          //      })
+          //      isHiddenAnimation.addCompletion {_ in
+             //       self.view.alpha = 1
+            //    }
             }
-            isHiddenAnimation.addCompletion {_ in
-                self.childVC?.view.layoutIfNeeded()
-                if !hide {
-                    self.childVC?.updateUI()
-                }
-                if self.isHidden {
-                    self.childVC?.navigationController?.popToRootViewController(animated: true)
-                }
-            }
-            isHiddenAnimation.startAnimation()
+            
+       //     isHiddenAnimation.addCompletion {_ in
+                
+        //    }
+        //    isHiddenAnimation.startAnimation()
         }
     }
     
@@ -200,7 +216,7 @@ class EditorOverlayVC: SuperVC {
 fileprivate extension EditorOverlayVC {
     func dataChangedUI() {
         self.actionButtons.forEach {
-            $0.layer.animationTransition()
+            $0.layer.animationTransition(0.17)
             $0.setTitleColor(self.textColor, for: .normal)
             $0.tintColor = self.textColor
         }

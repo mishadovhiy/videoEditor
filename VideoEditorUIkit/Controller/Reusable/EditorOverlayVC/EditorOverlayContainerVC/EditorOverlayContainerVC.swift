@@ -195,8 +195,8 @@ extension EditorOverlayContainerVC {
         tableView.reloadData()
     }
     
-    func updateUI() {
-        if needTextField {
+    func updateUI(force:Bool = false) {
+        if needTextField && !force {
             parentVC?.view.textFieldBottomConstraint(stickyView: self.view, constant: 10)
         }
         parentVC?.toggleNavigationController(appeared: self, countVC: false)

@@ -140,14 +140,17 @@ class AssetRawView:UIView {
     }
 
     private func gestureBegun(_ begun:Bool, senderView:UIView?) {
-        gesturesBegunAnimation.stopAnimation(true)
-        gesturesBegunAnimation.addAnimations {
+      //  gesturesBegunAnimation.stopAnimation(true)
+        print("gesturesBegunAnimation tgerfwd")
+     //   gesturesBegunAnimation.addAnimations {
+        UIView.animate(withDuration: 0.3) {
             senderView?.alpha = begun ? 0.5 : self.panNormalAlpha
             if (senderView?.tag ?? 0) != 0 {
                 self.layer.move(.top, value: begun ? -5 : 0)
             }
         }
-        gesturesBegunAnimation.startAnimation()
+        //}
+        //gesturesBegunAnimation.startAnimation()
     }
     
     func updateText(_ text:AssetAttachmentProtocol?, totalVideoDuration:Double) {

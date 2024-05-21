@@ -93,9 +93,12 @@ class EditorParametersViewController: SuperVC {
             if !(view is UICollectionView) {
                 if view.isHidden != isHidden {
                     if canAnimate {
-                        setupUIAnimation.addAnimations {
+                        print("setupUIAnimation tgerfwd")
+                        UIView.animate(withDuration: 0.3) {
                             view.isHidden = isHidden
                         }
+                    //    setupUIAnimation.addAnimations {
+                    //    }
                     } else {
                         view.isHidden = isHidden
                     }
@@ -103,9 +106,12 @@ class EditorParametersViewController: SuperVC {
                 if let headerView = headerStacks.arrangedSubviews.first(where: {$0.tag == view.tag}) {
                     if headerView.isHidden != isHidden {
                         if canAnimate {
-                            setupUIAnimation.addAnimations {
+                            print("setupUIAnimation tgerfwd")
+                         //   setupUIAnimation.addAnimations {
+                            UIView.animate(withDuration: 0.3) {
                                 headerView.isHidden = isHidden
                             }
+                         //   }
                         } else {
                             headerView.isHidden = isHidden
                         }
