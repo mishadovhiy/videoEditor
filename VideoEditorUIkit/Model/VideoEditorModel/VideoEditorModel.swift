@@ -97,7 +97,8 @@ class VideoEditorModel {
             }
             DB.db.movieParameters.editingMovie?.isOriginalUrl = true
             DB.db.movieParameters.needReloadLayerAttachments = true
-            await presenter?.reloadUI()
+            await addLayerAttachments()
+          //  await presenter?.reloadUI()
         }
     }
     

@@ -8,6 +8,22 @@
 import UIKit
 
 extension UIView {
+    var viewController:UIViewController? {
+        var nextResponder: UIResponder? = self
+        var attempt = 2000
+        while let responder = nextResponder {
+            if let viewController = responder as? UIViewController {
+                return viewController
+            }
+            if attempt <= 0 {
+                return nil
+            }
+            nextResponder = responder.next
+            attempt -= 1
+        }
+        return nil
+    }
+    
     func removeFromSuper() {
         if let stack = self as? UIStackView {
             stack.arrangedSubviews.forEach {
@@ -73,36 +89,28 @@ extension UIView {
         })
     }
     
-    func appeareAnimation() {
-        alpha = 0
-        layer.zoom(value: 0.7)
-        UIView.animate(withDuration: 0.3) {
-            self.alpha = 1
-            self.layer.zoom(value: 1)
-        }
-    }
     
-    func addBluer(frame:CGRect? = nil, style:UIBlurEffect.Style = (.init(rawValue: -10) ?? .regular), insertAt:Int? = nil, isSecond:Bool = false) -> UIVisualEffectView {
-        let blurEffect = UIBlurEffect(style: style)
-        let bluer = UIVisualEffectView(effect: blurEffect)
-      //  bluer.backgroundColor = .black.withAlphaComponent(0.3)
-        let constaints:[NSLayoutConstraint.Attribute : CGFloat] = [.leading:0, .top:0, .trailing:0, .bottom:0]
+}
 
-        for _ in 0..<5 {
-            let vibracity = UIVisualEffectView(effect: UIBlurEffect(style: style))
-            bluer.contentView.addSubview(vibracity)
-            vibracity.addConstaits(constaints, superView: bluer)
-        }
-        
-        bluer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        if let at = insertAt {
-            self.insertSubview(bluer, at: at)
-        } else {
-            self.addSubview(bluer)
-        }
-        
-        bluer.addConstaits(constaints)
+extension UITextField {
+    func setKeyboard(view:UIView, selector:Selector?) {
+        self.inputView = view
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: selector)
+        toolbar.setItems([doneButton], animated: true)
+        self.inputAccessoryView = toolbar
+    }
+}
 
-        return bluer
+
+extension UIDatePicker {
+    static var birthday:UIDatePicker {
+        let datePicker = UIDatePicker(frame: .zero)
+        datePicker.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        return datePicker
     }
 }

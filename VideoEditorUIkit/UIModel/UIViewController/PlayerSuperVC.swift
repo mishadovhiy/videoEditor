@@ -14,14 +14,14 @@ class PlayerSuperVC: SuperVC {
     var playTimeHolder:TimeInterval? = nil
     var movieURL:URL?
     var movie:AVAsset? {
-//        if let vc = self as? PlayerViewController,
-//           let editor = vc.parentVC?.viewModel?.editorModel,
-//           let movie = editor.movieHolder
-//        {
-//            return movie
-//        } else {
+        if let vc = self as? PlayerViewController,
+           let editor = vc.parentVC?.viewModel?.editorModel,
+           let movie = editor.movieHolder
+        {
+            return movie
+        } else {
             return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
-//        }
+        }
         
     }
     
@@ -37,19 +37,19 @@ class PlayerSuperVC: SuperVC {
     }
     
     fileprivate var playerItem:AVPlayerItem? {
-//        if let vc = self as? PlayerViewController,
-//           let editor = vc.parentVC?.viewModel?.editorModel,
-//           let movie = editor.movieHolder
-//        {
-//            let item:AVPlayerItem = .init(asset: movie)
-//            item.videoComposition = editor.prepare.videoCompositionHolder
-//            return item
-//        } else {
+        if let vc = self as? PlayerViewController,
+           let editor = vc.parentVC?.viewModel?.editorModel,
+           let movie = editor.movieHolder
+        {
+            let item:AVPlayerItem = .init(asset: movie)
+            item.videoComposition = editor.prepare.videoCompositionHolder
+            return item
+        } else {
             guard let movieURL else {
                 return nil
             }
             return .init(url: movieURL)
-//        }
+        }
     }
     
     private var durationLabel:UILabel? {
