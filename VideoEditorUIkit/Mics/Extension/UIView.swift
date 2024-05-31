@@ -8,6 +8,17 @@
 import UIKit
 
 extension UIView {
+    static var nibName:String {
+        return String(describing: Self.self)
+    }
+    
+    static func loadFromNib() -> Self? {
+        let nib = UINib(nibName: nibName, bundle: nil)
+        let view = nib.instantiate(withOwner: nil).first as? Self
+        view?.layer.name = nibName
+        return view
+    }
+    
     func convertedToImage(bounds:CGRect? = nil) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(bounds: bounds ?? self.bounds)
         return renderer.image { rendererContext in
