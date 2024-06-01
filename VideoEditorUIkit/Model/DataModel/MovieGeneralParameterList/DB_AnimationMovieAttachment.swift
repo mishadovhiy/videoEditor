@@ -99,7 +99,7 @@ extension DB.DataBase.MovieParametersDB {
                 case scale
                 case opacity
                 //case hidden
-                
+            
                 var stringValue:String {
                     return switch self {
                     case .scale:"transform.scale"
