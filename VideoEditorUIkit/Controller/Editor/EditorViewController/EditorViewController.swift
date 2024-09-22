@@ -49,6 +49,11 @@ class EditorViewController: SuperVC {
         loadUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //self.present(SinhronizedLayerVC.configure(), animated: true)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel?.deinit()
@@ -74,6 +79,7 @@ class EditorViewController: SuperVC {
     private func loadVideo(movieUrl:URL? = nil) {
         let url = movieUrl ?? self.movieURL
         if let url {
+            print("loadVideoloadVideoloadVideo")
             setViewType(.editing)
             startRefreshing {
                 self.viewModel?.editorModel.loadVideo(url, canShowError: false)
@@ -354,6 +360,7 @@ extension EditorViewController:VideoEditorModelPresenter {
             } else {
                 self.playerVC?.play(replacing: true)
             }
+            self.playerVC?.videoAdded()
             //       self.playerVC?.editorOverlayRemoved()
         })
     }

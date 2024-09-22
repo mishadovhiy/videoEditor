@@ -51,17 +51,62 @@ class PlayerViewController: PlayerSuperVC {
     }
     
     //MARK: - setup ui
-    func setUI(type:EditorViewType) {  }
+    func setUI(type:EditorViewType) { }
+    
+    private func updateAttachments() {
+
+        print("hgjbknbh")
+       // synchronizedLayer?.playerItem = self.playerItem
+        
+        self.synchronizedLayer?.removeFromSuperlayer()
+
+        DispatchQueue(label: "db", qos: .userInitiated).async(execute: {
+            let db = DB.db.movieParameters.editingMovie
+            DispatchQueue.main.async {
+                let syncLayer = AVSynchronizedLayer(playerItem: self.playerItem ?? .init(asset: .init()))
+
+                let duration = self.movie?.duration.seconds ?? .zero
+              //  syncLayer.playerItem = self.playerItem
+                
+
+                print(duration, " fsdafsfdsdf ")
+                db?.images.forEach({
+                    self.performAddAttachment($0, videoDuration: duration, syncLayer: syncLayer)
+                })
+                db?.texts.forEach({
+                    self.performAddAttachment($0, videoDuration: duration, syncLayer: syncLayer)
+                })
+                self.view.layer.addSublayer(syncLayer)
+            }
+        })
+    }
+    
+    private func performAddAttachment(_ dbItem:MovieAttachmentProtocol, videoDuration:CGFloat, syncLayer:AVSynchronizedLayer) {
+        print(playerItem?.presentationSize)
+        let redLayer = AttachentVideoLayerModel().add(to: syncLayer, videoSize: .init(width: view.frame.size.width / 2, height: view.frame.size.height / 2), data: dbItem)
+        redLayer?.name = dbItem.id.uuidString
+        print(videoDuration, " refwdsa")
+        let animationModel =  AnimateVideoLayer()
+        animationModel.add(redLayer!,to: syncLayer, data: dbItem, totalTime: videoDuration)
+    }
     
     private func overlayEdited(_ newData:AssetAttachmentProtocol?) {
         self.parentVC?.playerChangedAttachment(newData)
     }
     
     override func play(replacing: Bool = true) {
-        super.play(replacing: replacing)
+        if replacing {
+            print(self.synchronizedLayer?.sublayers?.count, " refwedas ", synchronizedLayer)
+        }
+        super.play(replacing: false)
         if movieURL == nil {
             parentVC?.addTrackPressed()
         }
+    }
+    
+    func videoAdded() {
+        super.play(replacing: true)
+        updateAttachments()
     }
     
     // MARK: - IBAction

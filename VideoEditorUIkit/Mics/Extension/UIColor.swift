@@ -105,7 +105,6 @@ extension UIColor {
     var isLight:Bool {
         var white: CGFloat = 0.0
         self.getWhite(&white, alpha: nil)
-        print(white, " ujyrfecdwxs")
         return white > 0.65
     }
     

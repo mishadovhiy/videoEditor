@@ -21,7 +21,7 @@ struct Coordinator {
     func start() {
         UIApplication.shared.keyWindow?.rootViewController = EditorViewController.configure()
         UIApplication.shared.keyWindow?.makeKeyAndVisible()
-    }    
+    }
     
     public var rootVC:EditorViewController? {
         viewController as? EditorViewController

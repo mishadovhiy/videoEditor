@@ -83,6 +83,7 @@ extension DB.DataBase.MovieParametersDB {
             get {
                 let original = dict["isOriginalUrl"] as? Bool ?? true
                 print("isoriginalurl: ", original)
+#warning("test")
                 return original
             }
             set {

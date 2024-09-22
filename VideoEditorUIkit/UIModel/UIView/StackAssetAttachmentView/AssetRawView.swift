@@ -171,7 +171,7 @@ class AssetRawView:UIView {
 }
 
 extension AssetRawView {
-    static func create(superView:UIView?, 
+    static func create(superView:UIView?,
                        data:AssetAttachmentProtocol?,
                        vcSuperView:UIView,
                        totalVideoDuration:Double,

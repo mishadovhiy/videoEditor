@@ -19,7 +19,7 @@ class PlayerEditingAttachmentView: UIView {
     }
     
     var data:MovieAttachmentProtocol? {
-        didSet { 
+        didSet {
             print("attachmenmtDidSetdsa")
             dataUpdated() }
     }

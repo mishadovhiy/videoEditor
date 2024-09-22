@@ -12,10 +12,12 @@ struct AnimateVideoLayer {
     func add(_ newLayer:CALayer? = nil, to layer: CALayer, data:MovieAttachmentProtocol, totalTime:CGFloat? = nil) {
         if let totalTime, let newLayer {
             newLayer.opacity = 0
+            print("adding appeare animation")
             appeareAnimation(data, type: .opacity, newLayer: newLayer, totalTime: totalTime)
         }
         if let animation = data.animations.repeatedAnimations
         {
+            print("adding repeatedAnimations animation")
             (newLayer ?? layer).add(repeated(key: animation.key, data: data), forKey: "scale")
         }
         if let newLayer {
@@ -47,6 +49,7 @@ struct AnimateVideoLayer {
 fileprivate extension AnimateVideoLayer {
     private func repeated(key:AppeareAnimationType, data:MovieAttachmentProtocol) -> CABasicAnimation {
         let scaleAnimation = CABasicAnimation(keyPath: key.stringValue)
+        print("repeatedrepeated")
         let max:CGFloat = data.opacity
         let difference:CGFloat = key == .scale ? 0.05 : (max - 0.3)
         scaleAnimation.fromValue = max - difference

@@ -42,7 +42,7 @@ class PrepareEditorModel {
     func addAttachments() async -> Response {
         let asset = delegate.movie ?? .init()
         print(asset.duration, " video duration")
-        guard let composition = delegate.movieHolder ?? delegate.movie
+        guard let composition = delegate.movieHolder
         else {
             return .error("Error adding text to the video")
         }
@@ -57,15 +57,15 @@ class PrepareEditorModel {
         isExporting = true
         videoCompositionHolder = videoComposition
         delegate.movieHolder = composition
-        await self.movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
-//        let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
-//        if let url = localUrl.videoExportResponse?.url {
-//            DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
-//            self.videoCompositionHolder = videoComposition
-//            isExporting = false
-//            await self.movieUpdated(movie: nil, movieURL: url, canSetNil: false)
-//        }
-        return .success(Response.VideoExport.init())//localUrl
+     //   await self.movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
+        let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
+        if let url = localUrl.videoExportResponse?.url {
+            DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
+            self.videoCompositionHolder = videoComposition
+            isExporting = false
+            await self.movieUpdated(movie: nil, movieURL: url, canSetNil: false)
+        }
+        return localUrl
     }
 
     func createVideo(_ url:URL?, needExport:Bool = true, setGeneralAudio:Bool = false, addingVideo:Bool = false) async -> Response {
@@ -73,27 +73,21 @@ class PrepareEditorModel {
         guard let url else {
             return .error("File not found")
         }
-        let createdMovieResponse:PrepareEditorModel.insertMovieResponse
-        if let movie = delegate.movie {
-            createdMovieResponse = (resultMovie:movie, error:nil)
-        } else {
-            let newMovie = await createComposition(AVURLAsset(url: url))
-            createdMovieResponse = await insertMovie(movie: newMovie.composition, composition: movie)
-        }
+        let newMovie = await createComposition(AVURLAsset(url: url))
+        let createdMovieResponse = await insertMovie(movie: newMovie.composition, composition: movie)
         if let error = createdMovieResponse.error {
             return .init(error: error)
         }
         delegate.movieHolder = createdMovieResponse.resultMovie
         if needExport {
-            await movieUpdated(movie: createdMovieResponse.resultMovie, movieURL: nil, canSetNil: false)
-//            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
-//            if let url = localUrl.videoExportResponse?.url {
-//                if addingVideo {
-//                    DB.db.movieParameters.editingMovie?.originalURL = url.lastPathComponent
-//                }
-                await self.movieUpdated(movie: movie, movieURL: nil)///localUrl.videoExportResponse?.url ?? delegate.movieURL)
-//            }
-            return .success()//localUrl
+            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
+            if let url = localUrl.videoExportResponse?.url {
+                if addingVideo {
+                    DB.db.movieParameters.editingMovie?.originalURL = url.lastPathComponent
+                }
+                await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url ?? delegate.movieURL)
+            }
+            return localUrl
         } else {
             return .success()
         }
@@ -205,7 +199,7 @@ extension PrepareEditorModel {
             let audioMutable = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
             try await audioMutable?.insertTimeRange(CMTimeRange(start: .zero, duration: composition.duration()), of: newAudio, at: .zero)
             isExporting = true
-            await movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
+        //    await movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
             let response = await export(asset: composition, videoComposition: nil, isVideo: false)
             if let url = response.videoExportResponse?.url {
                 DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent

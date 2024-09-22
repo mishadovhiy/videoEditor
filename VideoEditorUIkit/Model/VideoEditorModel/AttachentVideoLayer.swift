@@ -21,13 +21,15 @@ struct AttachentVideoLayerModel {
     }
     
     private func add(to layer: CALayer, videoSize: CGSize, image:ImageAttachmentDB, isPreview:Bool = false) -> CALayer {
-        print("add image: ", image)
+        print("addimage: ", image)
         let vidSize:CGSize = isPreview ? .init(width: videoSize.width / 4, height: videoSize.height / 1.2) : videoSize
         let layer = CALayer()
         layer.name = AttachentVideoLayerModel.textLayerName
         let x = (image.position.x * vidSize.width)
         let y = (image.position.y * vidSize.height)
-        layer.frame = .init(origin: .init(x: x, y: y), size: .init(width: (videoSize.width / 2) * image.zoom, height: (videoSize.height / 2) * image.zoom))
+        let itemWidth = (videoSize.width / 2) * image.zoom
+        layer.frame = .init(origin: .init(x: x + (itemWidth / 2), y: y + (itemWidth / 2)), size: .init(width: itemWidth, height: itemWidth))
+        print("onvidframe ", layer.frame)
         let imageData = image.image != nil ? UIImage(data: image.image!) : nil
         guard let imageData = (imageData ?? UIImage(named: "addImage"))?.withTintColor(image.color, renderingMode: .alwaysTemplate) else {
             layer.backgroundColor = UIColor.red.cgColor
@@ -43,6 +45,7 @@ struct AttachentVideoLayerModel {
     }
     
     private func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false) -> CALayer {
+        print(videoSize, " addtexttext: ", text)
         let vidSize:CGSize = isPreview ? .init(width: videoSize.width / 4, height: videoSize.height / 1.2) : videoSize
         let font = UIFont.systemFont(ofSize: text.fontSize * (isPreview ? 0.76 : 1), weight: text.fontWeight)
         let attributes:[NSAttributedString.Key : Any] = [
@@ -66,8 +69,8 @@ struct AttachentVideoLayerModel {
        // size.height *= text.zoom
         let x = (text.position.x * vidSize.width)
         let y = (text.position.y * vidSize.height)
-        print("textPosition: ", text.position)
-        textLayer.frame = .init(origin: .init(x: x, y: y), size: .init(width: size.width, height: size.height))
+        print(vidSize, " textPosition: ", text.position)
+        textLayer.frame = .init(origin: .init(x: x - (size.width / 2), y: y - (size.height / 2)), size: .init(width: size.width, height: size.height))
         textLayer.zoom(value: text.zoom)
         setupLayer(layer: textLayer, data: text, isPreview: isPreview, videoSize: vidSize, layerSize: size)
         return textLayer

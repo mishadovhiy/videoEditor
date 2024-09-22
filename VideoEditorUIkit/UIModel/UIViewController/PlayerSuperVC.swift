@@ -14,15 +14,16 @@ class PlayerSuperVC: SuperVC {
     var playTimeHolder:TimeInterval? = nil
     var movieURL:URL?
     var movie:AVAsset? {
-        if let vc = self as? PlayerViewController,
-           let editor = vc.parentVC?.viewModel?.editorModel,
-           let movie = editor.movieHolder
-        {
-            return movie
-        } else {
-            return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
-        }
-        
+//        if let vc = self as? PlayerViewController,
+//           let editor = vc.parentVC?.viewModel?.editorModel,
+//           let movie = editor.movieHolder
+//        {
+//            return movie
+//        } else {
+//            return playerLayer?.player?.currentItem?.asset ?? (movieURL != nil ? .init(url: movieURL!) : nil)
+//        }
+//
+        return playerItem?.asset
     }
     
     private var timeObserverIgonre = false
@@ -36,21 +37,22 @@ class PlayerSuperVC: SuperVC {
         return view.subviews.first(where: {$0.layer.name == "noDataView"}) as? UIStackView
     }
     
-    fileprivate var playerItem:AVPlayerItem? {
-        if let vc = self as? PlayerViewController,
-           let editor = vc.parentVC?.viewModel?.editorModel,
-           let movie = editor.movieHolder
-        {
-            let item:AVPlayerItem = .init(asset: movie)
-            item.videoComposition = editor.prepare.videoCompositionHolder
-            return item
-        } else {
-            guard let movieURL else {
-                return nil
-            }
-            return .init(url: movieURL)
-        }
-    }
+    var playerItem:AVPlayerItem?
+//    {
+//        if let vc = self as? PlayerViewController,
+//           let editor = vc.parentVC?.viewModel?.editorModel,
+//           let movie = editor.movieHolder
+//        {
+//            let item:AVPlayerItem = .init(asset: movie)
+//          //  item.videoComposition = editor.prepare.videoCompositionHolder
+//            return item
+//        } else {
+//            guard let movieURL else {
+//                return nil
+//            }
+//            return .init(url: movieURL)
+//        }
+//    }
     
     private var durationLabel:UILabel? {
         return view.subviews.first(where: {$0.layer.name == "durationLabel"}) as? UILabel
@@ -58,6 +60,10 @@ class PlayerSuperVC: SuperVC {
     
     private var playerLayer:AVPlayerLayer? {
         return self.view.layer.sublayers?.first(where: {$0.name == "PrimaryPlayer"}) as? AVPlayerLayer
+    }
+    
+    var synchronizedLayer:AVSynchronizedLayer? {
+        view.layer.sublayers?.first(where: {$0 is AVSynchronizedLayer}) as? AVSynchronizedLayer
     }
     
     // MARK: Life cycle
@@ -87,6 +93,7 @@ class PlayerSuperVC: SuperVC {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         playerLayer?.frame = view.layer.bounds
+        synchronizedLayer?.frame = view.layer.bounds
     }
     
     override func removeFromParent() {
@@ -119,7 +126,6 @@ class PlayerSuperVC: SuperVC {
     }
     
     func seek(seconds:TimeInterval, manual:Bool = false) {
-        print("seeking: ", seconds)
         if playerLayer?.player?.currentItem == nil {
             return
         }
@@ -139,15 +145,38 @@ class PlayerSuperVC: SuperVC {
         })
     }
     
+    private func updatePlayerItem() {
+        var item:AVPlayerItem? {
+            if let vc = self as? PlayerViewController,
+               let editor = vc.parentVC?.viewModel?.editorModel,
+               let movie = editor.movieHolder
+            {
+                let item:AVPlayerItem = .init(asset: movie)
+              //  item.videoComposition = editor.prepare.videoCompositionHolder
+                return item
+            } else {
+                guard let movieURL else {
+                    return nil
+                }
+                return .init(url: movieURL)
+            }
+        }
+        self.playerItem = item
+    }
+    
     func play(replacing:Bool = true) {
         if playTimeHolder == movie?.duration.seconds {
             playTimeHolder = nil
+        }
+        if replacing {
+            updatePlayerItem()
         }
         guard let item = playerItem else { return}
         if let playerLayer = self.playerLayer,
            let player = playerLayer.player
         {
             if replacing {
+                print("itemreplaced")
                 player.replaceCurrentItem(with: item)
             }
             if let playTimeHolder {
@@ -182,11 +211,9 @@ class PlayerSuperVC: SuperVC {
     }
     
     private func playingTimeObserverChanged(_ sendond:TimeInterval) {
-        print("Current Time: \(sendond)")
         playTimeHolder = sendond
         if sendond == movie?.duration.seconds {
             let playing = self.playerLayer?.player?.rate != 0
-            print("completed ", playing)
             self.pause()
         }
         let percent = sendond / (movie?.duration.seconds ?? 0)
@@ -331,6 +358,9 @@ fileprivate extension PlayerSuperVC {
         progressView.layer.name = "playProgressView"
         view.addSubview(progressView)
         progressView.addConstaits([.left:0, .right:0, .bottom:0, .height:3], safeArea: true)
+        print("layeradded")
+        let syncLayer = AVSynchronizedLayer()
+        view.layer.addSublayer(syncLayer)
     }
     
     private func showNoDataView(show:Bool, completion:(()->())? = nil) {

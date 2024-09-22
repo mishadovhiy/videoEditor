@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8274F8D72CA07C0900E747C9 /* SinhronizedLayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8274F8D62CA07C0900E747C9 /* SinhronizedLayerVC.swift */; };
 		8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12C2B9F455E00194F34 /* VideoFilter.swift */; };
 		8D18F1332B9F455E00194F34 /* AttachentVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */; };
 		8D18F1342B9F455E00194F34 /* VideoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12E2B9F455E00194F34 /* VideoEditorModel.swift */; };
@@ -101,6 +102,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8274F8D62CA07C0900E747C9 /* SinhronizedLayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinhronizedLayerVC.swift; sourceTree = "<group>"; };
 		8D18F12C2B9F455E00194F34 /* VideoFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFilter.swift; sourceTree = "<group>"; };
 		8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachentVideoLayer.swift; sourceTree = "<group>"; };
 		8D18F12E2B9F455E00194F34 /* VideoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditorModel.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				8D26ADCA2BA3933C009CEEB4 /* SelectionTableViewController.swift */,
+				8274F8D62CA07C0900E747C9 /* SinhronizedLayerVC.swift */,
 				8D18F1582B9F460000194F34 /* EditorOverlayVC */,
 			);
 			path = Reusable;
@@ -716,6 +719,7 @@
 				8DA694A92BA6E9540086AAEC /* NSTextAlignment.swift in Sources */,
 				8D75E3902BA1041E00ED75C0 /* CIFilter.swift in Sources */,
 				8D9A35372BE17A5600650A3D /* PickerTableCell.swift in Sources */,
+				8274F8D72CA07C0900E747C9 /* SinhronizedLayerVC.swift in Sources */,
 				8D18F1982B9F466A00194F34 /* CGFloat+Double.swift in Sources */,
 				8D18F1972B9F466A00194F34 /* UIImage.swift in Sources */,
 				8DF00BE22BE2B45E00D6FB07 /* OverlayTextFieldCell.swift in Sources */,

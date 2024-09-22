@@ -37,23 +37,18 @@ class VideoEditorModel {
     static var exportPresetName: String {
         return "AVAssetExportPreset" +  DB.holder!.settings.videoQuality.rowValueResult
     }
-    //AVAssetExportPresetHEVC1920x1080
-    //AVAssetExportPresetHighestQuality
-    //AVAssetExportPresetMediumQuality
-    //AVAssetExportPreset640x480
-    //AVAssetExportPresetHEVCHighestQuality
-    
-    
+
     func loadVideo(_ url:URL?, canShowError:Bool = true, videoAddedAction:Bool = true, needExport:Bool = false, canReload:Bool = false) {
         Task {
             print("loadVideoerfedw ", Date())
-            let loadedMovie = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
+            let _ = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
             let db = DB.db.movieParameters
             self.dbParametersHolder = db.editingMovie
-            if let url, videoAddedAction {
+        //    if let url, videoAddedAction {
                 await prepare.movieUpdated(movie: movieHolder, movieURL: url)
-            }
-            await checkVideoInstructions(videoAddedAction: videoAddedAction, canReload: canReload)
+          //  }
+            print(needExport, " needExportneedExportneedExport")
+            await checkVideoInstructions(videoAddedAction: videoAddedAction, canReload: canReload, isExporting: needExport)
         }
     }
     
@@ -76,6 +71,7 @@ class VideoEditorModel {
             }
             print("addingattachment: ", data)
             var added = false
+            var isSong = false
             if let text = data as? TextAttachmentDB {
                 DB.db.movieParameters.editingMovie?.texts.append(text)
                 added = true
@@ -84,6 +80,7 @@ class VideoEditorModel {
                 added = true
             } else if let song = data as? SongAttachmentDB {
                 added = true
+                isSong = true
                 let wasUrl = DB.db.movieParameters.editingMovie?.songs
                 DB.db.movieParameters.editingMovie?.songs = song
                 await MainActor.run {
@@ -95,10 +92,13 @@ class VideoEditorModel {
                     return
                 }
             }
-            DB.db.movieParameters.editingMovie?.isOriginalUrl = true
+            DB.db.movieParameters.editingMovie?.isOriginalUrl = isSong ? true : false
             DB.db.movieParameters.needReloadLayerAttachments = true
-            await addLayerAttachments()
-          //  await presenter?.reloadUI()
+            if isSong {
+                await presenter?.reloadUI()
+            } else {
+                await self.videoAdded()
+            }
         }
     }
     
@@ -114,6 +114,8 @@ class VideoEditorModel {
     func exportToLibraryPressed() {
         Task {
             self.movieHolder = self.movie
+            let ok = await self.prepare.addAttachments()
+            print(ok, " gdfsd")
             let export = await prepare.export(asset:movie,videoComposition:prepare.videoCompositionHolder, isVideo: false)
             guard let url = export.videoExportResponse?.url else {
                 await presenter?.errorAddingVideo(.init(title: "Video not exported", description: export.error?.messageContent?.title))
@@ -182,6 +184,7 @@ fileprivate extension VideoEditorModel {
         }
     }
     
+    /// deprecated
     private func addLayerAttachments(canReload:Bool = false) {
         print(movie?.duration ?? -3, " addText movie duration")
         Task {
@@ -216,7 +219,8 @@ fileprivate extension VideoEditorModel {
         movieHolder = nil
     }
     
-    private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false) async {
+    /// deprecated
+    private func checkVideoInstructions(videoAddedAction:Bool = true, canReload:Bool = false, isExporting:Bool = false) async {
         /// FA-956
         let needFilter = DB.db.movieParameters.needReloadFilter && (DB.db.movieParameters.editingMovie?.filter ?? .none) != FilterType.none
         if DB.db.movieParameters.needReloadLayerAttachments {
@@ -228,7 +232,11 @@ fileprivate extension VideoEditorModel {
                     DB.db.movieParameters.editingMovie?.songs = .init()
                 }
                 print("addingLayersasdsd ", Date())
-                addLayerAttachments()
+                if isExporting {
+                    addLayerAttachments()
+                } else if songUrl == nil && !needFilter {
+                    await videoAdded(canReload: canReload)
+                }
                 print("layersAddeddfsadsa ", Date())
                 if let song = DB.db.movieParameters.editingMovie?.songs,
                    song.attachmentURL != "",

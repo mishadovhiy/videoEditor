@@ -99,12 +99,12 @@ extension DB.DataBase.MovieParametersDB {
                 case scale
                 case opacity
                 //case hidden
-            
+                
                 var stringValue:String {
                     return switch self {
                     case .scale:"transform.scale"
                     case .opacity: "opacity"
-                 //   case .hidden:"hidden"
+                        //   case .hidden:"hidden"
                     }
                 }
                 
@@ -133,6 +133,14 @@ extension DB.DataBase.MovieParametersDB {
                     default: return stringValue.capitalized
                     }
                 }
+            }
+            
+            public static func with(
+                _ populator: (inout Self) throws -> ()
+            ) rethrows -> Self {
+                var message = Self(dict: [:])
+                try populator(&message)
+                return message
             }
         }
                 
