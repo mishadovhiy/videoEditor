@@ -74,13 +74,24 @@ class PrepareEditorModel {
             return .error("File not found")
         }
         let newMovie = await createComposition(AVURLAsset(url: url))
+        let assetTrack = newMovie.composition?.tracks(withMediaType: .video)
+        
+        guard let firstTrack = assetTrack?.first(where: {$0.naturalSize.width != 0}) else {
+            return .error("Video frames are to small")
+        }
+        let videoSize = layerEditor.videoSize(assetTrack: firstTrack)
+        delegate.videoSize = videoSize
+        
         let createdMovieResponse = await insertMovie(movie: newMovie.composition, composition: movie)
         if let error = createdMovieResponse.error {
             return .init(error: error)
         }
+        print("fsds")
+
         delegate.movieHolder = createdMovieResponse.resultMovie
-        if needExport {
-            let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
+    if needExport {
+            
+        let localUrl = await export(asset: movie, videoComposition: nil, isVideo: true)
             if let url = localUrl.videoExportResponse?.url {
                 if addingVideo {
                     DB.db.movieParameters.editingMovie?.originalURL = url.lastPathComponent
@@ -88,7 +99,7 @@ class PrepareEditorModel {
                 await self.movieUpdated(movie: movie, movieURL: localUrl.videoExportResponse?.url ?? delegate.movieURL)
             }
             return localUrl
-        } else {
+       } else {
             return .success()
         }
     }
@@ -127,6 +138,8 @@ extension PrepareEditorModel {
         }
         print(duration, " total coposition duration before inserting")
         let currentMovieSize = composition.naturalSize
+        print(currentMovieSize, " tgerfsec")
+
         if composition.naturalSize != .zero && composition.naturalSize != movie.naturalSize {
             let text1 = "width: \(Int(movie.naturalSize.width)), height: \(Int(movie.naturalSize.height))"
             let text2 = "width: \(Int(currentMovieSize.width)), height: \(Int(currentMovieSize.height))"
@@ -134,6 +147,7 @@ extension PrepareEditorModel {
         }
         do {
             try composition.insertTimeRange(CMTimeRangeMake(start: .zero, duration: duration), of: movie, at: .zero)
+            //here rotate
             return (composition, nil)
         } catch {
             print(error.localizedDescription)
@@ -220,7 +234,7 @@ extension PrepareEditorModel {
     
     final private func createComposition(_ urlAsset:AVURLAsset) async -> compositionReponse {
         let composition = AVMutableComposition()
-        let segments = await loadSegments(asset: urlAsset)
+    //    let segments = await loadSegments(asset: urlAsset)
         do {
             let firstAudio:AVAssetTrack!
             let firstOpt:AVAssetTrack!
@@ -348,7 +362,7 @@ extension PrepareEditorModel {
                 }
             }
         }
-        
+        print("svdcasdsc")
         let mainInstruction = AVMutableVideoCompositionInstruction()
         mainInstruction.timeRange = CMTimeRangeMake(start: .zero, duration: videoDuration ?? .zero)
         mainInstruction.layerInstructions = layerInstructions
@@ -398,5 +412,6 @@ protocol PrepareEditorModelDelegate {
     var movie:AVMutableComposition? { get set }
     var movieHolder:AVMutableComposition?{ get set}
     var movieURL:URL? {get set}
+    var videoSize:CGSize {get set}
 }
 

@@ -90,7 +90,8 @@ fileprivate extension EditorVideoLayer {
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(
             postProcessingAsVideoLayer: videoLayer,
             in: outputLayer)
-        
+        print("rbgdfvsdcz")
+
         let instruction = AVMutableVideoCompositionInstruction()
         print("instractions dusration: ", track.asset?.duration ?? .zero)
         instruction.timeRange = await CMTimeRange(

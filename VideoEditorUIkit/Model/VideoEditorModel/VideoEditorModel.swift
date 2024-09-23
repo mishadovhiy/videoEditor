@@ -23,6 +23,7 @@ class VideoEditorModel {
     var _movie:AVMutableComposition?
     private var dbParametersHolder:DB.DataBase.MovieParametersDB.MovieDB?
     var movieHolder:AVMutableComposition?
+    var videoSize:CGSize = .zero
     init(presenter:VideoEditorModelPresenter) {
         self.presenter = presenter
         self.prepare = .init(delegate: self)

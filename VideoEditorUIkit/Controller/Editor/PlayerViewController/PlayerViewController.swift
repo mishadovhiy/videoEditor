@@ -57,7 +57,9 @@ class PlayerViewController: PlayerSuperVC {
 
         print("hgjbknbh")
        // synchronizedLayer?.playerItem = self.playerItem
-        
+        guard let playerItem else {
+            return
+        }
         self.synchronizedLayer?.removeFromSuperlayer()
 
         DispatchQueue(label: "db", qos: .userInitiated).async(execute: {
@@ -82,8 +84,9 @@ class PlayerViewController: PlayerSuperVC {
     }
     
     private func performAddAttachment(_ dbItem:MovieAttachmentProtocol, videoDuration:CGFloat, syncLayer:AVSynchronizedLayer) {
-        print(playerItem?.presentationSize)
-        let redLayer = AttachentVideoLayerModel().add(to: syncLayer, videoSize: .init(width: view.frame.size.width / 2, height: view.frame.size.height / 2), data: dbItem)
+        print(parentVC?.viewModel?.editorModel.videoSize, " rfsedas")
+        let videoSize = view.frame.size//parentVC?.viewModel?.editorModel.videoSize ?? .zero
+        let redLayer = AttachentVideoLayerModel().add(to: syncLayer, videoSize: videoSize, data: dbItem, isPreview: false)
         redLayer?.name = dbItem.id.uuidString
         print(videoDuration, " refwdsa")
         let animationModel =  AnimateVideoLayer()
@@ -119,9 +122,6 @@ class PlayerViewController: PlayerSuperVC {
         
     func editorOverlayRemoved() {
         editingAttachmentView?.removeWithAnimation()
-//        if parentVC?.presentingOverlayVC != nil {
-//            parentVC?.presentingOverlayVC?.removeFromParent()
-//        }
     }
     
     override func playerTimeChanged(_ percent: CGFloat) {
@@ -139,6 +139,7 @@ class PlayerViewController: PlayerSuperVC {
 // MARK: loadUI
 fileprivate extension PlayerViewController {
     private func loadEditingView(_ textDB:MovieAttachmentProtocol) {
+        print("newViewnewViewnewViewnewView")
         let newView = PlayerEditingAttachmentView.configure(data: textDB, dataChanged: overlayEdited(_:), videoSize: movie?.tracks(withMediaType: .video).first?.naturalSize ?? VideoEditorModel.renderSize)
         view.addSubview(newView)
     }

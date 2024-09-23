@@ -47,7 +47,8 @@ class PlayerEditingAttachmentView: UIView {
                     $0.removeFromSuperlayer()
                 }
             })
-            if let newLayer = model.add(to: layer, videoSize: videoSize ?? .zero, data: text, isPreview: true) {
+            let size = self.frame.size //videosize
+            if let newLayer = model.add(to: layer, videoSize: size, data: text, isPreview: false) {
                 layer.addSublayer(newLayer)
                 self.attachmentAnimation.add(to: newLayer, data: text)
             }
@@ -62,23 +63,23 @@ class PlayerEditingAttachmentView: UIView {
     private var animating:Bool = false
     
     func playerTimeChanged(_ percent:CGFloat) {
-        guard let data else {
-            return
-        }
-        let to = data.time.start + data.time.duration
-        let hide = data.time.start > percent || (to < percent && percent > data.time.start)
-        let opacity:CGFloat = hide ? 0 : 1
-        if (opacity != self.alpha) && !animating {
-            animating = true
-            self.attachmentAnimation.appearenceAnimation(data, newLayer: layer, show: !hide)
-            Timer.scheduledTimer(withTimeInterval: data.animations.appeareAnimation.duration - 0.1, repeats: false) { _ in
-                self.alpha = opacity
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                    self.animating = false
-                })
-            }
-          //  self.alpha = hide ? 0 : 1
-        }
+//        guard let data else {
+//            return
+//        }
+//        let to = data.time.start + data.time.duration
+//        let hide = data.time.start > percent || (to < percent && percent > data.time.start)
+//        let opacity:CGFloat = hide ? 0 : 1
+//        if (opacity != self.alpha) && !animating {
+//            animating = true
+//            self.attachmentAnimation.appearenceAnimation(data, newLayer: layer, show: !hide)
+//            Timer.scheduledTimer(withTimeInterval: data.animations.appeareAnimation.duration - 0.1, repeats: false) { _ in
+//                self.alpha = opacity
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//                    self.animating = false
+//                })
+//            }
+//          //  self.alpha = hide ? 0 : 1
+//        }
     }
     
     @objc private func panGesture(_ sender:UIPanGestureRecognizer) {
@@ -111,6 +112,7 @@ class PlayerEditingAttachmentView: UIView {
 // MARK: - loadUI
 fileprivate extension PlayerEditingAttachmentView {
     func loadUI() {
+        layer.backgroundColor = UIColor.red.withAlphaComponent(0.1).cgColor
         layer.name = PlayerEditingAttachmentView.layerName
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
         addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(pinchGesture(_:))))
