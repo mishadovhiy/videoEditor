@@ -136,7 +136,9 @@ class VideoEditorModel {
 
                             }
                             //bug: after export ads dublicated layer
-                            await self.videoAdded(canReload:true)
+                            //await self.videoAdded(canReload:true)
+                            self.presenter?.reloadUI()
+                          //  self.loadVideo(.init(string: DB.db.movieParameters.editingMovie?.originalURL ?? ""))
                         }
                     } else {
                         print("Failed to save video to photo library:", error?.localizedDescription ?? "Unknown error")

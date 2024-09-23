@@ -34,7 +34,7 @@ class PrepareEditorModel {
         let export = AVAssetExportSession(asset: composition, presetName: VideoEditorModel.exportPresetName)
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
         if let url = results?.videoExportResponse?.url?.lastPathComponent {
-            DB.db.movieParameters.editingMovie?.exportEditingURL = url
+          //  DB.db.movieParameters.editingMovie?.exportEditingURL = url
         }
         return results ?? .error("Unknown Error")
     }
@@ -60,7 +60,7 @@ class PrepareEditorModel {
      //   await self.movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
         let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
         if let url = localUrl.videoExportResponse?.url {
-            DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
+  //    DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
             self.videoCompositionHolder = videoComposition
             isExporting = false
             await self.movieUpdated(movie: nil, movieURL: url, canSetNil: false)
