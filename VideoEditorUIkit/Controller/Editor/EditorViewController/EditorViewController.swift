@@ -60,6 +60,11 @@ class EditorViewController: SuperVC {
         viewModel = nil
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        viewModel?.editorModel.videoViewSize = playerVC?.view.frame.size ?? .zero
+    }
+    
     // MARK: - setup ui
     func setViewType(_ type:EditorViewType, overlaySize:EditorOverlayContainerVC.OverlaySize = .small) {
         self.viewModel?.viewType = type
@@ -376,7 +381,7 @@ extension EditorViewController:VideoEditorModelPresenter {
 fileprivate extension EditorViewController {
     func loadUI() {
         if viewModel == nil {
-            viewModel = .init(editorPresenter: self)
+            viewModel = .init(editorPresenter: self, videoViewSize: playerVC?.view.frame.size ?? .zero)
         }
         loadChildrens()
         loadVideoDB()

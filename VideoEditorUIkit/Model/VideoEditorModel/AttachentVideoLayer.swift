@@ -10,17 +10,18 @@ import UIKit
 struct AttachentVideoLayerModel {
     static let textLayerName:String = "CATextLayer"
     
-    func add(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol, isPreview:Bool = false) -> CALayer? {
+    func add(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol, isPreview:Bool = false, videoViewSize:CGSize? = nil) -> CALayer? {
+        print(videoViewSize, " tgerfwdas ")
         if let text = data as? TextAttachmentDB {
-            return self.add(to: layer, videoSize: videoSize, text: text, isPreview: isPreview)
+            return self.add(to: layer, videoSize: videoSize, text: text, isPreview: isPreview, videoViewSize:videoViewSize)
         } else if let image = data as? ImageAttachmentDB {
-            return self.add(to: layer, videoSize: videoSize, image: image, isPreview: isPreview)
+            return self.add(to: layer, videoSize: videoSize, image: image, isPreview: isPreview, videoViewSize:videoViewSize)
         } else {
             return nil
         }
     }
     
-    private func add(to layer: CALayer, videoSize: CGSize, image:ImageAttachmentDB, isPreview:Bool = false) -> CALayer {
+    private func add(to layer: CALayer, videoSize: CGSize, image:ImageAttachmentDB, isPreview:Bool = false, videoViewSize:CGSize? = nil) -> CALayer {
         print("addimage: ", image)
         let vidSize:CGSize = isPreview ? .init(width: videoSize.width / 4, height: videoSize.height / 1.2) : videoSize
         let layer = CALayer()
@@ -44,7 +45,7 @@ struct AttachentVideoLayerModel {
         return layer
     }
     
-    private func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false) -> CALayer {
+    private func add(to layer: CALayer, videoSize: CGSize, text:TextAttachmentDB, isPreview:Bool = false, videoViewSize:CGSize? = nil) -> CALayer {
         print(videoSize, " addtexttext: ", text)
         let vidSize:CGSize = isPreview ? .init(width: videoSize.width / 4, height: videoSize.height / 1.2) : videoSize
         let font = UIFont.systemFont(ofSize: text.fontSize * (isPreview ? 0.76 : 1), weight: text.fontWeight)

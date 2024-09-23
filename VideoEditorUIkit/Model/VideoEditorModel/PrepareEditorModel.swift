@@ -391,9 +391,10 @@ extension PrepareEditorModel {
     
 
     private func addLayerComposition(composition: AVMutableComposition, assetTrack: [AVMutableCompositionTrack], layer:CALayer, data:MovieAttachmentProtocol?, videoSize: CGSize) async -> (AVMutableVideoComposition?, CALayer, CALayer)? {
+        print((delegate as! VideoEditorModel).videoViewSize, "layersizeee")
         let ok = await layerEditor.addLayer(to: layer,
                                    videoSize: videoSize,
-                                   data: data, videoTotalTime: composition.duration().seconds)
+                                            data: data, videoTotalTime: composition.duration().seconds, videoViewSize: (delegate as? VideoEditorModel)?.videoViewSize)
         if !ok {
             return nil
         }

@@ -16,8 +16,8 @@ struct EditorVCViewMode {
     var canAnimate:Bool {
         return firstVideoAdded
     }
-    init(editorPresenter:VideoEditorModelPresenter) {
-        editorModel = .init(presenter:editorPresenter)
+    init(editorPresenter:VideoEditorModelPresenter, videoViewSize:CGSize) {
+        editorModel = .init(presenter:editorPresenter, videoViewSize: videoViewSize)
     }
     
     private var coordinator:Coordinator? {

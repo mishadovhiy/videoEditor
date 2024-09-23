@@ -24,11 +24,12 @@ class VideoEditorModel {
     private var dbParametersHolder:DB.DataBase.MovieParametersDB.MovieDB?
     var movieHolder:AVMutableComposition?
     var videoSize:CGSize = .zero
-    init(presenter:VideoEditorModelPresenter) {
+    init(presenter:VideoEditorModelPresenter, videoViewSize:CGSize) {
         self.presenter = presenter
+        self.videoViewSize = videoViewSize
         self.prepare = .init(delegate: self)
     }
-    
+    var videoViewSize:CGSize
     var movieDuration:Double = 0
     static let timeScale = CMTimeScale(NSEC_PER_SEC)
     static let fmp30 = CMTime(value: 1, timescale: 30)
@@ -45,7 +46,7 @@ class VideoEditorModel {
             let _ = await prepare.createVideo(url, needExport: needExport, setGeneralAudio: true)
             let db = DB.db.movieParameters
             self.dbParametersHolder = db.editingMovie
-        //    if let url, videoAddedAction {
+        //    if let url, videoAddedAction {test filter
                 await prepare.movieUpdated(movie: movieHolder, movieURL: url)
           //  }
             print(needExport, " needExportneedExportneedExport")
@@ -134,6 +135,7 @@ class VideoEditorModel {
                                 AppDelegate.shared?.coordinator?.showAlert(title: "Video has been exported\nSuccessfully", appearence: .type(.succsess))
 
                             }
+                            //bug: after export ads dublicated layer
                             await self.videoAdded(canReload:true)
                         }
                     } else {

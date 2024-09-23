@@ -46,11 +46,11 @@ struct EditorVideoLayer {
         }
     }
     
-    func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol?, videoTotalTime:CGFloat) -> Bool {
+    func addLayer(to layer: CALayer, videoSize: CGSize, data:MovieAttachmentProtocol?, videoTotalTime:CGFloat, videoViewSize:CGSize? = nil) -> Bool {
         guard let data else {
             return true
         }
-        if let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, data: data) {
+        if let newValue = attachmentLayer.add(to: layer, videoSize: videoSize, data: data, videoViewSize: videoViewSize) {
             animation.add(newValue, to: layer, data:data, totalTime: videoTotalTime)
             return true
         } else {
@@ -90,7 +90,6 @@ fileprivate extension EditorVideoLayer {
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(
             postProcessingAsVideoLayer: videoLayer,
             in: outputLayer)
-        print("rbgdfvsdcz")
 
         let instruction = AVMutableVideoCompositionInstruction()
         print("instractions dusration: ", track.asset?.duration ?? .zero)

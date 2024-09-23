@@ -39,7 +39,7 @@ class LoaderVC:BaseVC {
             completion?()
             return
         }
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.19, animations: {
             view.alpha = animating ? 1 : 0
         }, completion: { _ in
             if animating {
