@@ -24,7 +24,7 @@ class PrepareEditorModel {
         delegate = nil
     }
     
-    @MainActor func export(asset:AVAsset?, videoComposition:AVMutableVideoComposition?, isVideo:Bool = false, isQuery:Bool = false, voluem:Float? = nil) async -> Response {
+    @MainActor func export(asset:AVAsset?, videoComposition:AVMutableVideoComposition?, isVideo:Bool = false, isQuery:Bool = false, voluem:Float? = nil, exportToLibPressed:Bool = false) async -> Response {
         print(asset?.duration, " export duration")
         guard let composition = delegate.movieHolder ?? delegate.movie
         else {
@@ -33,8 +33,8 @@ class PrepareEditorModel {
         }
         let export = AVAssetExportSession(asset: composition, presetName: VideoEditorModel.exportPresetName)
         let results = await export?.exportVideo(videoComposition: videoComposition, isVideoAdded: isVideo, volume: voluem ?? 1 == 1 ? nil : voluem)
-        if let url = results?.videoExportResponse?.url?.lastPathComponent {
-          //  DB.db.movieParameters.editingMovie?.exportEditingURL = url
+        if let url = results?.videoExportResponse?.url?.lastPathComponent, !exportToLibPressed {
+            DB.db.movieParameters.editingMovie?.exportEditingURL = url
         }
         return results ?? .error("Unknown Error")
     }

@@ -118,7 +118,7 @@ class VideoEditorModel {
             self.movieHolder = self.movie
             let ok = await self.prepare.addAttachments()
             print(ok, " gdfsd")
-            let export = await prepare.export(asset:movie,videoComposition:prepare.videoCompositionHolder, isVideo: false)
+            let export = await prepare.export(asset:movie,videoComposition:prepare.videoCompositionHolder, isVideo: false, exportToLibPressed: true)
             guard let url = export.videoExportResponse?.url else {
                 await presenter?.errorAddingVideo(.init(title: "Video not exported", description: export.error?.messageContent?.title))
                 return
