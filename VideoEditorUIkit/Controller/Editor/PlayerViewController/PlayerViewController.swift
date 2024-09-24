@@ -64,6 +64,9 @@ class PlayerViewController: PlayerSuperVC {
 
         DispatchQueue(label: "db", qos: .userInitiated).async(execute: {
             let db = DB.db.movieParameters.editingMovie
+            if DB.db.movieParameters.isOfflineRendering {
+                return
+            }
             DispatchQueue.main.async {
                 let syncLayer = AVSynchronizedLayer(playerItem: self.playerItem ?? .init(asset: .init()))
 

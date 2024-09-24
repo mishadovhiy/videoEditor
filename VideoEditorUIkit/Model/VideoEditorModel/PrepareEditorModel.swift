@@ -60,6 +60,9 @@ class PrepareEditorModel {
      //   await self.movieUpdated(movie: composition, movieURL: nil, canSetNil: false)
         let localUrl = await export(asset: composition, videoComposition: videoComposition, isVideo: false)
         if let url = localUrl.videoExportResponse?.url {
+            if DB.db.movieParameters.isOfflineRendering {
+                DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
+            }
   //    DB.db.movieParameters.editingMovie?.notFilteredURL = url.lastPathComponent
             self.videoCompositionHolder = videoComposition
             isExporting = false

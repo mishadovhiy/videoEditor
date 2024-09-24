@@ -14,6 +14,15 @@ extension DB.DataBase {
             self.dict = dict
         }
         
+        var isOfflineRendering:Bool {
+            get {
+                return dict["isOfflineRendering"] as? Bool ?? true
+            }
+            set {
+                dict.updateValue(newValue, forKey: "isOfflineRendering")
+            }
+        }
+        
         var needReloadLayerAttachments:Bool {
             get {
                 return dict["needReloadText"] as? Bool ?? false

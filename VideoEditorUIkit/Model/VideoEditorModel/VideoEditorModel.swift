@@ -96,7 +96,7 @@ class VideoEditorModel {
             }
             DB.db.movieParameters.editingMovie?.isOriginalUrl = isSong ? true : false
             DB.db.movieParameters.needReloadLayerAttachments = true
-            if isSong {
+            if isSong || DB.db.movieParameters.isOfflineRendering {
                 await presenter?.reloadUI()
             } else {
                 await self.videoAdded()
@@ -237,7 +237,7 @@ fileprivate extension VideoEditorModel {
                     DB.db.movieParameters.editingMovie?.songs = .init()
                 }
                 print("addingLayersasdsd ", Date())
-                if isExporting {
+                if isExporting || DB.db.movieParameters.isOfflineRendering {
                     addLayerAttachments()
                 } else if songUrl == nil && !needFilter {
                     await videoAdded(canReload: canReload)

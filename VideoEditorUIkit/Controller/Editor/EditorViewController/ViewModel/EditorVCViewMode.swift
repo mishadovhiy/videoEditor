@@ -89,6 +89,14 @@ extension EditorVCViewMode {
                     pressed(.reload)
                 }, navigation: navigation), collectionData: []), animated: true)
             }, buttonColor: .type(.darkBlue)),
+            .init(title: DB.db.movieParameters.isOfflineRendering ? "Offline rendering" : "Fast editing", didSelect: {
+                Task {
+                    DB.db.movieParameters.isOfflineRendering.toggle()
+                    await MainActor.run {
+                        pressed(.reload)
+                    }
+                }
+            }),
 //            .init(title: "Export", image: "export", didSelect: {
 //                pressed(.export)
 //            }, textColor: .white),
