@@ -16,7 +16,7 @@ extension DB.DataBase {
         
         var isOfflineRendering:Bool {
             get {
-                return dict["isOfflineRendering"] as? Bool ?? true
+                return dict["isOfflineRendering"] as? Bool ?? false
             }
             set {
                 dict.updateValue(newValue, forKey: "isOfflineRendering")
