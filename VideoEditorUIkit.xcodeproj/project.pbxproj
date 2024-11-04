@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820E9E002CD93B230083A6B0 /* 1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 820E9DFF2CD93B230083A6B0 /* 1.mov */; };
 		8274F8D72CA07C0900E747C9 /* SinhronizedLayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8274F8D62CA07C0900E747C9 /* SinhronizedLayerVC.swift */; };
 		8D18F1322B9F455E00194F34 /* VideoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12C2B9F455E00194F34 /* VideoFilter.swift */; };
 		8D18F1332B9F455E00194F34 /* AttachentVideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */; };
@@ -69,7 +70,6 @@
 		8D5A247F2BBE028A00ABEBA7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A247E2BBE028A00ABEBA7 /* UIImageView.swift */; };
 		8D5A24812BBE029F00ABEBA7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A24802BBE029F00ABEBA7 /* UIView.swift */; };
 		8D5A24832BBE032A00ABEBA7 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A24822BBE032A00ABEBA7 /* UIGestureRecognizer.swift */; };
-		8D6CE22A2BA1230800D33A3D /* 1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8D6CE2292BA1230800D33A3D /* 1.mov */; };
 		8D75C0FE2BA92B2C00DD9B89 /* SliderTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */; };
 		8D75C1002BA92B3700DD9B89 /* SwitchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */; };
 		8D75C1022BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */; };
@@ -102,6 +102,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		820E9DFF2CD93B230083A6B0 /* 1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 1.mov; sourceTree = "<group>"; };
 		8274F8D62CA07C0900E747C9 /* SinhronizedLayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinhronizedLayerVC.swift; sourceTree = "<group>"; };
 		8D18F12C2B9F455E00194F34 /* VideoFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFilter.swift; sourceTree = "<group>"; };
 		8D18F12D2B9F455E00194F34 /* AttachentVideoLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachentVideoLayer.swift; sourceTree = "<group>"; };
@@ -165,7 +166,6 @@
 		8D5A247E2BBE028A00ABEBA7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		8D5A24802BBE029F00ABEBA7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8D5A24822BBE032A00ABEBA7 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
-		8D6CE2292BA1230800D33A3D /* 1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 1.mov; sourceTree = "<group>"; };
 		8D75C0FD2BA92B2C00DD9B89 /* SliderTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableCell.swift; sourceTree = "<group>"; };
 		8D75C0FF2BA92B3700DD9B89 /* SwitchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableCell.swift; sourceTree = "<group>"; };
 		8D75C1012BA92F6B00DD9B89 /* UITableView_EditorOverlayContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView_EditorOverlayContainerVC.swift; sourceTree = "<group>"; };
@@ -495,7 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1BEE912BA63C9000EB9246 /* audio1.m4a */,
-				8D6CE2292BA1230800D33A3D /* 1.mov */,
+				820E9DFF2CD93B230083A6B0 /* 1.mov */,
 			);
 			path = video;
 			sourceTree = "<group>";
@@ -655,9 +655,9 @@
 				8D1BEE922BA642F300EB9246 /* audio1.m4a in Resources */,
 				8D18F1712B9F462A00194F34 /* EditorParameters.storyboard in Resources */,
 				8D18F1722B9F462A00194F34 /* EditorOverlay.storyboard in Resources */,
+				820E9E002CD93B230083A6B0 /* 1.mov in Resources */,
 				8D18F1992B9F466A00194F34 /* Assets.xcassets in Resources */,
 				8DF171BD2B9F48A700F71D03 /* LaunchScreen.storyboard in Resources */,
-				8D6CE22A2BA1230800D33A3D /* 1.mov in Resources */,
 				8D18F1702B9F462A00194F34 /* Editor.storyboard in Resources */,
 				8D26ADC92BA39317009CEEB4 /* SelectionTable.storyboard in Resources */,
 				8D18F16F2B9F462A00194F34 /* Player.storyboard in Resources */,
